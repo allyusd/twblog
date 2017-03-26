@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
-<loc>https://allyusd.github.io/jekyll/welcome-to-jekyll/</loc>
-<lastmod>2016-02-24T00:00:00+08:00</lastmod>
-</url>
-<url>
-<loc>https://allyusd.github.io/jekyll/update/jekyll-markdown-example/</loc>
-<lastmod>2017-03-25T02:03:52+08:00</lastmod>
+<loc>https://allyusd.github.io/2017/03/26/new-blog-online/</loc>
+<lastmod>2017-03-26T00:00:00+08:00</lastmod>
 </url>
 <url>
 <loc>https://allyusd.github.io/categories/</loc>
 </url>
 <url>
 <loc>https://allyusd.github.io/</loc>
+</url>
+<url>
+<loc>https://allyusd.github.io/tags/</loc>
 </url>
 </urlset>

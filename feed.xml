@@ -1,4 +1,72 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://allyusd.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://allyusd.github.io/" rel="alternate" type="text/html" /><updated>2017-03-26T21:08:28+08:00</updated><id>https://allyusd.github.io/</id><title type="html">Jian-Ching’s Notebook</title><subtitle>An notebook website.</subtitle><author><name>Hong, Jian-Ching</name><email>allyusd yahoo com tw</email><uri>https://allyusd.github.io/</uri></author><entry><title type="html">New blog online!</title><link href="https://allyusd.github.io/2017/03/26/new-blog-online/" rel="alternate" type="text/html" title="New blog online!" /><published>2017-03-26T00:00:00+08:00</published><updated>2017-03-26T00:00:00+08:00</updated><id>https://allyusd.github.io/2017/03/26/new-blog-online</id><content type="html" xml:base="https://allyusd.github.io/2017/03/26/new-blog-online/">&lt;p&gt;I have a Chinese blog &lt;a href=&quot;//jian-ching.blogspot.com&quot;&gt;Jian-Ching 學習筆記&lt;/a&gt; at blogger since 2014-02-20.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://allyusd.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://allyusd.github.io/" rel="alternate" type="text/html" /><updated>2017-04-03T20:11:51+08:00</updated><id>https://allyusd.github.io/</id><title type="html">Jian-Ching’s Notebook</title><subtitle>An notebook website.</subtitle><author><name>Hong, Jian-Ching</name><email>allyusd yahoo com tw</email><uri>https://allyusd.github.io/</uri></author><entry><title type="html">Install SDL2 and build exmaple with C++ on Ubuntu</title><link href="https://allyusd.github.io/2017/04/03/install-sdl2-and-build-exmaple-with-c++-on-ubuntu/" rel="alternate" type="text/html" title="Install SDL2 and build exmaple with C++ on Ubuntu" /><published>2017-04-03T00:00:00+08:00</published><updated>2017-04-03T00:00:00+08:00</updated><id>https://allyusd.github.io/2017/04/03/install-sdl2-and-build-exmaple-with-c++-on-ubuntu</id><content type="html" xml:base="https://allyusd.github.io/2017/04/03/install-sdl2-and-build-exmaple-with-c++-on-ubuntu/">&lt;h1 id=&quot;install-sdl2-on-ubuntu&quot;&gt;Install SDL2 on Ubuntu&lt;/h1&gt;
+
+&lt;p&gt;You can easy install from package or build self&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt-get install libsdl2-dev
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&quot;sdl2-example-code-with-c&quot;&gt;SDL2 example code with C++&lt;/h1&gt;
+
+&lt;p&gt;The example code base on SDL2 document&lt;sup id=&quot;fnref:2&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;, add C++ libary.&lt;/p&gt;
+
+&lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;#include &quot;SDL.h&quot;
+#include &amp;lt;iostream&amp;gt;
+&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;argc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;argv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[])&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SDL_Init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SDL_INIT_VIDEO&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SDL_INIT_AUDIO&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;SDL_Log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Unable to initialize SDL: %s&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SDL_GetError&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cout&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Hello SDL2 with C++&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;endl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;SDL_Quit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&quot;build-example-code&quot;&gt;Build example code&lt;/h1&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;g++ -I /usr/include/SDL2 main.cpp -o sdl-test -lSDL2 -lSDL2main
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Note: &lt;a href=&quot;https://www.howtogeek.com/howto/ubuntu/see-where-a-package-is-installed-on-ubuntu/&quot;&gt;See Where a Package is Installed on Ubuntu&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;run-the-exmaple&quot;&gt;Run the exmaple&lt;/h1&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;./sdl-test
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;If the process is correct, you will see that:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Hello SDL2 with C++
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&quot;other&quot;&gt;Other&lt;/h1&gt;
+
+&lt;p&gt;If you running it on ubuntu server, maybe show error:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Unable to initialize SDL: Failed to connect to the Mir Server
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Because example have init SDL_INIT_VIDEO subsystem, you can remove it if you don’t need it.&lt;/p&gt;
+&lt;div class=&quot;footnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;http://gigi.nullneuron.net/gigilabs/how-to-set-up-sdl2-on-linux/&quot;&gt;HOW TO SET UP SDL2 ON LINUX&lt;/a&gt;&amp;nbsp;&lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:2&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://wiki.libsdl.org/SDL_Init&quot;&gt;SDL2 document - SDL_Init&lt;/a&gt;&amp;nbsp;&lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;</content><author><name>Hong, Jian-Ching</name><email>allyusd yahoo com tw</email><uri>https://allyusd.github.io/</uri></author><category term="post" /><summary type="html">Install SDL2 on Ubuntu</summary></entry><entry><title type="html">New blog online!</title><link href="https://allyusd.github.io/2017/03/26/new-blog-online/" rel="alternate" type="text/html" title="New blog online!" /><published>2017-03-26T00:00:00+08:00</published><updated>2017-03-26T00:00:00+08:00</updated><id>https://allyusd.github.io/2017/03/26/new-blog-online</id><content type="html" xml:base="https://allyusd.github.io/2017/03/26/new-blog-online/">&lt;p&gt;I have a Chinese blog &lt;a href=&quot;//jian-ching.blogspot.com&quot;&gt;Jian-Ching 學習筆記&lt;/a&gt; at blogger since 2014-02-20.
 First, it’s fine, but I found that need spends much time to modify HTML and CSS style for programming code highlight,
 font size…etc. It’s sad, so I stop continue write post.&lt;/p&gt;
 
@@ -16,4 +84,4 @@ Actually, it’s also spending more time, but I learning much from the process, 
 
 &lt;p&gt;Finally, the new blog is online.
 I went to improve my English skill, so the blog will write English.
-If you find any worse, tell me please, I would be very grateful.&lt;/p&gt;</content><author><name>Hong, Jian-Ching</name><email>allyusd yahoo com tw</email><uri>https://allyusd.github.io/</uri></author><category term="jekyll" /><summary type="html">I have a Chinese blog Jian-Ching 學習筆記 at blogger since 2014-02-20. First, it’s fine, but I found that need spends much time to modify HTML and CSS style for programming code highlight, font size…etc. It’s sad, so I stop continue write post.</summary></entry></feed>
+If you find any worse, tell me please, I would be very grateful.&lt;/p&gt;</content><author><name>Hong, Jian-Ching</name><email>allyusd yahoo com tw</email><uri>https://allyusd.github.io/</uri></author><category term="post" /><summary type="html">I have a Chinese blog Jian-Ching 學習筆記 at blogger since 2014-02-20. First, it’s fine, but I found that need spends much time to modify HTML and CSS style for programming code highlight, font size…etc. It’s sad, so I stop continue write post.</summary></entry></feed>

@@ -1,1 +1,193 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2017-04-16T14:45:12+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author></feed>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2017-04-21T23:07:24+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">Google Cloud OnBoard 2017 Taipei</title><link href="https://twblog.hongjianching.com/2017/04/19/google-cloud-onboard-2017-taipei/" rel="alternate" type="text/html" title="Google Cloud OnBoard 2017 Taipei" /><published>2017-04-19T00:00:00+08:00</published><updated>2017-04-19T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2017/04/19/google-cloud-onboard-2017-taipei</id><content type="html" xml:base="https://twblog.hongjianching.com/2017/04/19/google-cloud-onboard-2017-taipei/">&lt;p&gt;2017-04-19 Google Cloud OnBoard 活動在台北國際會議中心舉行。&lt;/p&gt;
+
+&lt;h1 id=&quot;活動心得&quot;&gt;活動心得&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/2017-04-19-google-cloud-onboard-2017-taipei/IMG_0291-800.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;前言&quot;&gt;前言&lt;/h2&gt;
+&lt;p&gt;這次從台中出發，遇到交流道車禍塞車，到會場時已經十點了。&lt;/p&gt;
+
+&lt;p&gt;會場人超多超滿的，比想像中還要多很多啊！&lt;/p&gt;
+
+&lt;p&gt;唯一可惜的是會場是大會堂，非預期中可以使用筆電的桌子。&lt;/p&gt;
+
+&lt;p&gt;預期是因為之前參加 AWSome Day 2014 Taipei 印象所致。&lt;/p&gt;
+
+&lt;p&gt;虧我還建議同事帶筆電跟事前申請帳號，方便現場操作，對他們真不好意思。&lt;/p&gt;
+
+&lt;h2 id=&quot;資訊&quot;&gt;資訊&lt;/h2&gt;
+&lt;p&gt;Google Cloud 在亞洲機房有：日本、&lt;strong&gt;台灣&lt;/strong&gt;、新加坡。&lt;/p&gt;
+
+&lt;p&gt;台灣的機房在&lt;a href=&quot;https://www.google.com/about/datacenters/inside/locations/changhua-county/&quot;&gt;彰化&lt;/a&gt;，是目前全球四大雲端平台唯一有台灣機房的平台。&lt;/p&gt;
+
+&lt;p&gt;這是網路找到的 ping 值查詢：&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.gcping.com/&quot;&gt;Measure your latency to GCP regions&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;講者介紹的中文說明 GitBook，是由 GCPUG.TW 社群提供：&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.gitbook.com/book/gcpug-tw/google-cloud-platform-in-practice&quot;&gt;Google Cloud Platform in Practice&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;活動紀錄照片&quot;&gt;活動紀錄照片&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;本次活動手冊&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;廠商紀念品&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;img src=&quot;/assets/images/2017-04-19-google-cloud-onboard-2017-taipei/IMG_0301-400.jpg&quot; alt=&quot;&quot; /&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;img src=&quot;/assets/images/2017-04-19-google-cloud-onboard-2017-taipei/IMG_0304-400.jpg&quot; alt=&quot;&quot; /&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;活動紀念T (正面)&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;活動紀念T (背面)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;img src=&quot;/assets/images/2017-04-19-google-cloud-onboard-2017-taipei/IMG_0308-400.jpg&quot; alt=&quot;&quot; /&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;img src=&quot;/assets/images/2017-04-19-google-cloud-onboard-2017-taipei/IMG_0310-400.jpg&quot; alt=&quot;&quot; /&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;活動證書&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2017-04-19-google-cloud-onboard-2017-taipei/IMG_0303-400.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;free-resouce&quot;&gt;Free Resouce&lt;/h2&gt;
+&lt;h3 id=&quot;cloud-source-repositories&quot;&gt;Cloud Source Repositories&lt;/h3&gt;
+&lt;p&gt;This Beta release of Cloud Source Repositories is free and can be used to store up to 1 GB of source files.&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;p&gt;跟 GitHub、Bitbucket、GitLab 一樣的 Git 倉庫服務，目前 Beta，免費提供 1 GB 的空間。&lt;/p&gt;
+
+&lt;h3 id=&quot;cloud-shell&quot;&gt;Cloud Shell&lt;/h3&gt;
+&lt;p&gt;Google Cloud Shell is free for customers of Google Cloud Platform.&lt;sup id=&quot;fnref:2&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;p&gt;Cloud Shell 其實是一台已經預裝很多程式套件的 Linux 虛擬機，可以用來進行 Cloud API 測試，還提供網頁檢視，拿來寫個簡單程式也可以。重點是，免費，而且有 5 G 的持久性硬碟儲存空間，限制是 20 分鐘沒有動作就會關閉此環境，不能拿來當服務端使用。&lt;/p&gt;
+
+&lt;p&gt;註：如果要一個真正免費 Linux VM，Google 也有提供：&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://cloud.google.com/free/docs/always-free-usage-limits&quot;&gt;Always Free Usage Limits&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;google-cloud-platform-介紹&quot;&gt;Google Cloud Platform 介紹&lt;/h1&gt;
+&lt;p&gt;接下來依自己關注的部份進行筆記，非完整列表。大部份是簡報內容。&lt;/p&gt;
+
+&lt;h2 id=&quot;iam&quot;&gt;IAM&lt;/h2&gt;
+&lt;p&gt;關於權限控管的部份，因為遲到，這部份沒有聽到。&lt;/p&gt;
+
+&lt;h2 id=&quot;google-cloud-sdk&quot;&gt;Google Cloud SDK&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;CLI tool&lt;/li&gt;
+  &lt;li&gt;Docker Image: google/clound-sdk&lt;/li&gt;
+  &lt;li&gt;Cloud Shell 使用&lt;/li&gt;
+  &lt;li&gt;RESTful APIs&lt;/li&gt;
+  &lt;li&gt;APIs Explorer&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;完整的工具，完全符合開發者的需求。&lt;/p&gt;
+
+&lt;h2 id=&quot;app-engine&quot;&gt;App Engine&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;建構可擴充的 Web 應用程式或行動通訊後端平台 (Platform as a Service)&lt;/li&gt;
+  &lt;li&gt;簡化開發、維護及擴充等作業，專注於應用程式的開發&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;App Engine is PaaS (完全受管理的服務 NoOps)
+Compute Engine is IaaS (受管理的基礎架構 DevOps)&lt;/p&gt;
+
+&lt;h2 id=&quot;儲存裝置&quot;&gt;儲存裝置&lt;/h2&gt;
+
+&lt;h3 id=&quot;cloud-datastore&quot;&gt;Cloud Datastore&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;NoSQL&lt;/li&gt;
+  &lt;li&gt;自動擴充並提供完全的管理&lt;/li&gt;
+  &lt;li&gt;內建備援能力&lt;/li&gt;
+  &lt;li&gt;支援 ACID 交易&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;cloud-storage&quot;&gt;Cloud Storage&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;BLOB (Binary Large Object)&lt;/li&gt;
+  &lt;li&gt;Not filesystem, but can use tool access like filesystem&lt;/li&gt;
+  &lt;li&gt;Object, Not Block, No space limit&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;cloud-bigtable&quot;&gt;Cloud BigTable&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;???&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;cloud-sql&quot;&gt;Cloud SQL&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;MySQL 5.5, 5.6&lt;/li&gt;
+  &lt;li&gt;PostgreSQL BETA&lt;/li&gt;
+  &lt;li&gt;垂直擴充、水平擴充&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;cloud-spanner&quot;&gt;Cloud Spanner&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;新服務&lt;/li&gt;
+  &lt;li&gt;看起來結合所有資料庫的優勢&lt;/li&gt;
+  &lt;li&gt;???&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;google-container-engine&quot;&gt;Google Container Engine&lt;/h2&gt;
+&lt;p&gt;Kubernetes，容器管理叢集系統。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;透過 Deployment 與 Service 提供行型服務管理&lt;/li&gt;
+  &lt;li&gt;Blue Green Deployment&lt;/li&gt;
+  &lt;li&gt;Rolling Update&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;google-compute-engine&quot;&gt;Google Compute Engine&lt;/h2&gt;
+&lt;p&gt;就是 VM，虛擬機，擁有完整 OS 的控制權&lt;/p&gt;
+
+&lt;h2 id=&quot;網路&quot;&gt;網路&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;負載平衡 Load balancing&lt;/li&gt;
+  &lt;li&gt;Clound CDN&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;運用與工具&quot;&gt;運用與工具&lt;/h2&gt;
+
+&lt;h3 id=&quot;google-stackdrive&quot;&gt;Google Stackdrive&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;整合監控、登入、診斷&lt;/li&gt;
+  &lt;li&gt;橫跨 Google Clound Platform 與 Amazone Web Srvices 提供服務&lt;/li&gt;
+  &lt;li&gt;Open source agent 的整合&lt;/li&gt;
+  &lt;li&gt;強大的資料蒐集、分析工具&lt;/li&gt;
+  &lt;li&gt;與 PagerDuty、BMC、Splunk 等的協同合作&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;deployment-manager&quot;&gt;Deployment Manager&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;基礎架構管理服務&lt;/li&gt;
+  &lt;li&gt;產生記載環境的 .yaml 範本，為了建立資源而使用 Deployment Manager&lt;/li&gt;
+  &lt;li&gt;提供可重複執行的部署&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;big-data&quot;&gt;Big Data&lt;/h2&gt;
+&lt;p&gt;???&lt;/p&gt;
+
+&lt;h2 id=&quot;machine-learning&quot;&gt;Machine Learning&lt;/h2&gt;
+&lt;p&gt;???&lt;/p&gt;
+
+&lt;p&gt;最後兩個 Big Data 跟 Machine Learning 已經脫離學習的範圍。&lt;/p&gt;
+
+&lt;h1 id=&quot;結語&quot;&gt;結語&lt;/h1&gt;
+&lt;p&gt;這次活動讓我下定決心申請 Google Cloud Platform 帳號，之後應該會好好利用一下免費測試的機會。&lt;/p&gt;
+&lt;div class=&quot;footnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot;&gt;
+      &lt;p&gt;https://cloud.google.com/source-repositories/pricing&amp;nbsp;&lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:2&quot;&gt;
+      &lt;p&gt;https://cloud.google.com/shell/pricing&amp;nbsp;&lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="post" /><summary type="html">2017-04-19 Google Cloud OnBoard 活動在台北國際會議中心舉行。</summary></entry></feed>

@@ -1,4 +1,24 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2017-05-08T19:45:12+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">Linux command netcat</title><link href="https://twblog.hongjianching.com/2017/05/04/linux-command-netcat/" rel="alternate" type="text/html" title="Linux command netcat" /><published>2017-05-04T00:00:00+08:00</published><updated>2017-05-04T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2017/05/04/linux-command-netcat</id><content type="html" xml:base="https://twblog.hongjianching.com/2017/05/04/linux-command-netcat/">&lt;p&gt;Netcat 是 Linux 下的網路工具，這裡用來進行網路頻寬測試。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2017-05-12T00:33:16+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">Chrome 58 https error missing_subjectAltName</title><link href="https://twblog.hongjianching.com/2017/05/12/chrome-https-error-missing_subjectaltname/" rel="alternate" type="text/html" title="Chrome 58 https error missing_subjectAltName" /><published>2017-05-12T00:00:00+08:00</published><updated>2017-05-12T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2017/05/12/chrome-https-error-missing_subjectaltname</id><content type="html" xml:base="https://twblog.hongjianching.com/2017/05/12/chrome-https-error-missing_subjectaltname/">&lt;p&gt;Chrome 58 版之後 https 網站出現錯誤 missing_subjectAltName&lt;/p&gt;
+
+&lt;p&gt;最近突然遇到 Chrome 瀏覽內部網站 https 時出現錯誤，「您的連線不是私人連線」，本來以前是個人電腦憑證出了狀況，後來才知道這個情況原因是 Chrome 58 版之後不再支援沒有 Subject Alternative Names 的憑證。&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;p&gt;Since version 58, Chrome requires SSL certificates to use SAN (Subject Alternative Name) instead of the popular Common Name (CN)&lt;sup id=&quot;fnref:2&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;p&gt;測試 Firefox 53 同樣有此現象，可能從 48 開始就不支援 commonName maching
+同步測試發現 IE 11 不受影響&lt;/p&gt;
+
+&lt;h3 id=&quot;other-ref&quot;&gt;Other Ref&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;http://stackoverflow.com/questions/27294589/creating-self-signed-certificate-for-domain-and-subdomains-neterr-cert-commo&quot;&gt;Creating self signed certificate for domain and subdomains - NET::ERR_CERT_COMMON_NAME_INVALID&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&quot;footnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://www.chromestatus.com/feature/4981025180483584&quot;&gt;Support for commonName matching in Certificates (removed)&lt;/a&gt;&amp;nbsp;&lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:2&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://alexanderzeitler.com/articles/Fixing-Chrome-missing_subjectAltName-selfsigned-cert-openssl/&quot;&gt;Fixing Chrome 58+ [missing_subjectAltName] with openssl when using self signed certificates&lt;/a&gt;&amp;nbsp;&lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="post" /><summary type="html">Chrome 58 版之後 https 網站出現錯誤 missing_subjectAltName</summary></entry><entry><title type="html">Linux command netcat</title><link href="https://twblog.hongjianching.com/2017/05/04/linux-command-netcat/" rel="alternate" type="text/html" title="Linux command netcat" /><published>2017-05-04T00:00:00+08:00</published><updated>2017-05-04T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2017/05/04/linux-command-netcat</id><content type="html" xml:base="https://twblog.hongjianching.com/2017/05/04/linux-command-netcat/">&lt;p&gt;Netcat 是 Linux 下的網路工具，這裡用來進行網路頻寬測試。&lt;/p&gt;
 
 &lt;h1 id=&quot;ubuntu-install&quot;&gt;Ubuntu Install&lt;/h1&gt;
 

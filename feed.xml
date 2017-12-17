@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2017-12-17T22:29:42+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">wget 下載檔案遇到網頁亂碼問題</title><link href="https://twblog.hongjianching.com/2017/12/12/wget-download-files-with-page-encoding-problem/" rel="alternate" type="text/html" title="wget 下載檔案遇到網頁亂碼問題" /><published>2017-12-12T00:00:00+08:00</published><updated>2017-12-12T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2017/12/12/wget-download-files-with-page-encoding-problem</id><content type="html" xml:base="https://twblog.hongjianching.com/2017/12/12/wget-download-files-with-page-encoding-problem/">&lt;p&gt;今天在 FB 看到這個問題，試著解決後紀錄下來。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2017-12-17T23:41:43+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">Wget 下載檔案遇到網頁亂碼問題</title><link href="https://twblog.hongjianching.com/2017/12/12/wget-download-files-with-page-encoding-problem/" rel="alternate" type="text/html" title="Wget 下載檔案遇到網頁亂碼問題" /><published>2017-12-12T00:00:00+08:00</published><updated>2017-12-12T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2017/12/12/wget-download-files-with-page-encoding-problem</id><content type="html" xml:base="https://twblog.hongjianching.com/2017/12/12/wget-download-files-with-page-encoding-problem/">&lt;p&gt;今天在 FB 看到這個問題，試著解決後紀錄下來。&lt;/p&gt;
 
 &lt;p&gt;原指令&lt;/p&gt;
 
@@ -22,7 +22,94 @@
       &lt;p&gt;&lt;a href=&quot;https://stackoverflow.com/questions/11350310/wget-and-special-characters&quot;&gt;Stack Overflow - wget and special characters&lt;/a&gt;&amp;nbsp;&lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
   &lt;/ol&gt;
-&lt;/div&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="post" /><summary type="html">今天在 FB 看到這個問題，試著解決後紀錄下來。</summary></entry><entry><title type="html">Chrome 58 https error missing_subjectAltName</title><link href="https://twblog.hongjianching.com/2017/05/12/chrome-https-error-missing_subjectaltname/" rel="alternate" type="text/html" title="Chrome 58 https error missing_subjectAltName" /><published>2017-05-12T00:00:00+08:00</published><updated>2017-05-12T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2017/05/12/chrome-https-error-missing_subjectaltname</id><content type="html" xml:base="https://twblog.hongjianching.com/2017/05/12/chrome-https-error-missing_subjectaltname/">&lt;p&gt;Chrome 58 版之後 https 網站出現錯誤 missing_subjectAltName&lt;/p&gt;
+&lt;/div&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="Command-Line-Tools" /><category term="Wget" /><summary type="html">今天在 FB 看到這個問題，試著解決後紀錄下來。</summary></entry><entry><title type="html">使用 Google Analytics 追蹤文章標籤 (Tags) 在 Minimal Mistakes Jekyll Theme</title><link href="https://twblog.hongjianching.com/2017/12/05/tracking-blog-post-tags-in-google-analytics-with-minimal-mistakes-jekyll-theme/" rel="alternate" type="text/html" title="使用 Google Analytics 追蹤文章標籤 (Tags) 在 Minimal Mistakes Jekyll Theme" /><published>2017-12-05T00:00:00+08:00</published><updated>2017-12-05T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2017/12/05/tracking-blog-post-tags-in-google-analytics-with-minimal-mistakes-jekyll-theme</id><content type="html" xml:base="https://twblog.hongjianching.com/2017/12/05/tracking-blog-post-tags-in-google-analytics-with-minimal-mistakes-jekyll-theme/">&lt;p&gt;想要分析部落格哪些文章類型最受歡迎，在網路上找到方法&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;，實際操作在 Minimal Mistakes 蠻簡單的。&lt;/p&gt;
+
+&lt;p&gt;一般來說 analytics 會是使用 google-universal 設定，修改 _includes/analytics-providers/google-universal.html&lt;/p&gt;
+
+&lt;p&gt;修改前&lt;/p&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;script&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
+
+  &lt;span class=&quot;nx&quot;&gt;ga&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'create'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'UA-9431648-15'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'auto'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;ga&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'send'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'pageview'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;修改後&lt;/p&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;script&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
+
+  &lt;span class=&quot;nx&quot;&gt;ga&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'create'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'{{ site.analytics.google.tracking_id }}'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'auto'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;ga&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'send'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'pageview'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;page&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;tags&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;size&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;tag&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;page&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;tags&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;ga&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'send'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'event'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'taggedPost'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'view'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'{{ tag }}'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;endfor&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;endif&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;footnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://maxchadwick.xyz/blog/tracking-your-most-popular-blog-post-tags-in-google-analytics-with-jekyll&quot;&gt;Tracking Your Most Popular Blog Post Tags in Google Analytics with Jekyll&lt;/a&gt;&amp;nbsp;&lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="Google-Analytics" /><category term="Jekyll" /><category term="Minimal-Mistakes" /><summary type="html">想要分析部落格哪些文章類型最受歡迎，在網路上找到方法1，實際操作在 Minimal Mistakes 蠻簡單的。 Tracking Your Most Popular Blog Post Tags in Google Analytics with Jekyll&amp;nbsp;&amp;#8617;</summary></entry><entry><title type="html">修改 Minimal Mistakes Jekyll Theme 網站字型大小</title><link href="https://twblog.hongjianching.com/2017/11/25/change-minimal-mistakes-jekyll-theme-site-font-size/" rel="alternate" type="text/html" title="修改 Minimal Mistakes Jekyll Theme 網站字型大小" /><published>2017-11-25T00:00:00+08:00</published><updated>2017-11-25T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2017/11/25/change-minimal-mistakes-jekyll-theme-site-font-size</id><content type="html" xml:base="https://twblog.hongjianching.com/2017/11/25/change-minimal-mistakes-jekyll-theme-site-font-size/">&lt;p&gt;覺得 Minimal Mistakes 預設的字型大小實在是太大了，對於 Blog 來說很不習慣，幸好可以透過修改 sass 檔來調整全站設定，雖然作者不建議直接修改他。&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;p&gt;原本的 _reset.scss 片段&lt;/p&gt;
+
+&lt;div class=&quot;language-scss highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;html&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;cm&quot;&gt;/* apply a natural box layout model to all elements */&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;box-sizing&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;border-box&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;background-color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$background-color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;font-size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;16px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;@include&lt;/span&gt; &lt;span class=&quot;nd&quot;&gt;breakpoint&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$medium&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;font-size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;18px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;@include&lt;/span&gt; &lt;span class=&quot;nd&quot;&gt;breakpoint&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$large&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;font-size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;20px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;@include&lt;/span&gt; &lt;span class=&quot;nd&quot;&gt;breakpoint&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$x-large&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;font-size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;22px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;na&quot;&gt;-webkit-text-size-adjust&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;100%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;-ms-text-size-adjust&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;100%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;修改為&lt;/p&gt;
+
+&lt;div class=&quot;language-sass highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;html&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;cm&quot;&gt;/* apply a natural box layout model to all elements */
+&lt;/span&gt;  &lt;span class=&quot;nl&quot;&gt;box-sizing&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;border-box&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;background-color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$background-color&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;font-size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;16px&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;na&quot;&gt;-webkit-text-size-adjust&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;100%&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;-ms-text-size-adjust&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;100%&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;footnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://github.com/mmistakes/minimal-mistakes/issues/1219&quot;&gt;Upgrade-friendly way of adjusting font sizes globally&lt;/a&gt;&amp;nbsp;&lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="Jekyll" /><category term="Minimal-Mistakes" /><summary type="html">覺得 Minimal Mistakes 預設的字型大小實在是太大了，對於 Blog 來說很不習慣，幸好可以透過修改 sass 檔來調整全站設定，雖然作者不建議直接修改他。1 Upgrade-friendly way of adjusting font sizes globally&amp;nbsp;&amp;#8617;</summary></entry><entry><title type="html">Chrome 58 https error missing_subjectAltName</title><link href="https://twblog.hongjianching.com/2017/05/12/chrome-https-error-missing_subjectaltname/" rel="alternate" type="text/html" title="Chrome 58 https error missing_subjectAltName" /><published>2017-05-12T00:00:00+08:00</published><updated>2017-05-12T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2017/05/12/chrome-https-error-missing_subjectaltname</id><content type="html" xml:base="https://twblog.hongjianching.com/2017/05/12/chrome-https-error-missing_subjectaltname/">&lt;p&gt;Chrome 58 版之後 https 網站出現錯誤 missing_subjectAltName&lt;/p&gt;
 
 &lt;p&gt;最近突然遇到 Chrome 瀏覽內部網站 https 時出現錯誤，「您的連線不是私人連線」，本來以前是個人電腦憑證出了狀況，後來才知道這個情況原因是 Chrome 58 版之後不再支援沒有 Subject Alternative Names 的憑證。&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 
@@ -42,7 +129,7 @@
       &lt;p&gt;&lt;a href=&quot;https://alexanderzeitler.com/articles/Fixing-Chrome-missing_subjectAltName-selfsigned-cert-openssl/&quot;&gt;Fixing Chrome 58+ [missing_subjectAltName] with openssl when using self signed certificates&lt;/a&gt;&amp;nbsp;&lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
   &lt;/ol&gt;
-&lt;/div&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="post" /><summary type="html">Chrome 58 版之後 https 網站出現錯誤 missing_subjectAltName</summary></entry><entry><title type="html">Linux command netcat</title><link href="https://twblog.hongjianching.com/2017/05/04/linux-command-netcat/" rel="alternate" type="text/html" title="Linux command netcat" /><published>2017-05-04T00:00:00+08:00</published><updated>2017-05-04T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2017/05/04/linux-command-netcat</id><content type="html" xml:base="https://twblog.hongjianching.com/2017/05/04/linux-command-netcat/">&lt;p&gt;Netcat 是 Linux 下的網路工具，這裡用來進行網路頻寬測試。&lt;/p&gt;
+&lt;/div&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="Chrome" /><summary type="html">Chrome 58 版之後 https 網站出現錯誤 missing_subjectAltName</summary></entry><entry><title type="html">Linux command netcat</title><link href="https://twblog.hongjianching.com/2017/05/04/linux-command-netcat/" rel="alternate" type="text/html" title="Linux command netcat" /><published>2017-05-04T00:00:00+08:00</published><updated>2017-05-04T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2017/05/04/linux-command-netcat</id><content type="html" xml:base="https://twblog.hongjianching.com/2017/05/04/linux-command-netcat/">&lt;p&gt;Netcat 是 Linux 下的網路工具，這裡用來進行網路頻寬測試。&lt;/p&gt;
 
 &lt;h1 id=&quot;ubuntu-install&quot;&gt;Ubuntu Install&lt;/h1&gt;
 
@@ -97,7 +184,7 @@
 &lt;/div&gt;
 
 &lt;h1 id=&quot;ref&quot;&gt;Ref&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&quot;https://askubuntu.com/questions/7976/how-do-you-test-the-network-speed-betwen-two-boxes&quot;&gt;How do you test the network speed betwen two boxes?&lt;/a&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="post" /><summary type="html">Netcat 是 Linux 下的網路工具，這裡用來進行網路頻寬測試。</summary></entry><entry><title type="html">Google Cloud OnBoard 2017 Taipei</title><link href="https://twblog.hongjianching.com/2017/04/19/google-cloud-onboard-2017-taipei/" rel="alternate" type="text/html" title="Google Cloud OnBoard 2017 Taipei" /><published>2017-04-19T00:00:00+08:00</published><updated>2017-04-19T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2017/04/19/google-cloud-onboard-2017-taipei</id><content type="html" xml:base="https://twblog.hongjianching.com/2017/04/19/google-cloud-onboard-2017-taipei/">&lt;p&gt;2017-04-19 Google Cloud OnBoard 活動在台北國際會議中心舉行。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://askubuntu.com/questions/7976/how-do-you-test-the-network-speed-betwen-two-boxes&quot;&gt;How do you test the network speed betwen two boxes?&lt;/a&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="Command-Line-Tools" /><category term="netcat" /><summary type="html">Netcat 是 Linux 下的網路工具，這裡用來進行網路頻寬測試。</summary></entry><entry><title type="html">Google Cloud OnBoard 2017 Taipei</title><link href="https://twblog.hongjianching.com/2017/04/19/google-cloud-onboard-2017-taipei/" rel="alternate" type="text/html" title="Google Cloud OnBoard 2017 Taipei" /><published>2017-04-19T00:00:00+08:00</published><updated>2017-04-19T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2017/04/19/google-cloud-onboard-2017-taipei</id><content type="html" xml:base="https://twblog.hongjianching.com/2017/04/19/google-cloud-onboard-2017-taipei/">&lt;p&gt;2017-04-19 Google Cloud OnBoard 活動在台北國際會議中心舉行。&lt;/p&gt;
 
 &lt;h1 id=&quot;活動心得&quot;&gt;活動心得&lt;/h1&gt;
 &lt;p&gt;&lt;img src=&quot;/assets/images/2017-04-19-google-cloud-onboard-2017-taipei/IMG_0291-800.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
@@ -289,7 +376,7 @@ Compute Engine is IaaS (受管理的基礎架構 DevOps)&lt;/p&gt;
       &lt;p&gt;https://cloud.google.com/shell/pricing&amp;nbsp;&lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
   &lt;/ol&gt;
-&lt;/div&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="post" /><summary type="html">2017-04-19 Google Cloud OnBoard 活動在台北國際會議中心舉行。</summary></entry><entry><title type="html">在 Windows 7 使用 Vagrant 建立 Docker VM 環境</title><link href="https://twblog.hongjianching.com/2016/07/10/use-vagrant-create-ubuntu-with-docker-in-windows-7/" rel="alternate" type="text/html" title="在 Windows 7 使用 Vagrant 建立 Docker VM 環境" /><published>2016-07-10T00:00:00+08:00</published><updated>2016-07-10T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2016/07/10/use-vagrant-create-ubuntu-with-docker-in-windows-7</id><content type="html" xml:base="https://twblog.hongjianching.com/2016/07/10/use-vagrant-create-ubuntu-with-docker-in-windows-7/">&lt;p&gt;需要安裝兩個軟體&lt;/p&gt;
+&lt;/div&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="GCP" /><category term="心得" /><summary type="html">2017-04-19 Google Cloud OnBoard 活動在台北國際會議中心舉行。</summary></entry><entry><title type="html">在 Windows 7 使用 Vagrant 建立 Docker VM 環境</title><link href="https://twblog.hongjianching.com/2016/07/10/use-vagrant-create-ubuntu-with-docker-in-windows-7/" rel="alternate" type="text/html" title="在 Windows 7 使用 Vagrant 建立 Docker VM 環境" /><published>2016-07-10T00:00:00+08:00</published><updated>2016-07-10T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2016/07/10/use-vagrant-create-ubuntu-with-docker-in-windows-7</id><content type="html" xml:base="https://twblog.hongjianching.com/2016/07/10/use-vagrant-create-ubuntu-with-docker-in-windows-7/">&lt;p&gt;需要安裝兩個軟體&lt;/p&gt;
 
 &lt;p&gt;一、VirtualBox&lt;/p&gt;
 

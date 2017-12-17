@@ -298,7 +298,7 @@
 <h1 id="ubuntu-install">Ubuntu Install</h1>
 
 <p>Ubuntu 16.04.2 LTS 版本已預裝 netcat, 如果你的環境沒有可以自行安裝</p>
-<div class="language-shell highlighter-rouge"><pre class="highlight"><code>sudo apt-get install netcat
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>sudo apt-get install netcat
 </code></pre>
 </div>
 
@@ -306,13 +306,13 @@
 
 <p>Netcat 開啟 port 12345 進行偵聽, 等待 client 連線</p>
 
-<div class="language-shell highlighter-rouge"><pre class="highlight"><code>nc -vvlnp 12345 &gt;/dev/null
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>nc -vvlnp 12345 &gt;/dev/null
 </code></pre>
 </div>
 
 <p>如果想要使用系統 port 像是 80 的話需要 root</p>
 
-<div class="language-shell highlighter-rouge"><pre class="highlight"><code>sudo nc -vvlnp 80 &gt;/dev/null
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>sudo nc -vvlnp 80 &gt;/dev/null
 </code></pre>
 </div>
 
@@ -321,13 +321,13 @@
 <p>使用 dd 產生資料，並透過 netcat 傳送到 server
 此範例會產生 1GM 的資料量 (1MB * 1K)</p>
 
-<div class="language-shell highlighter-rouge"><pre class="highlight"><code>dd <span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">bs</span><span class="o">=</span>1M <span class="nv">count</span><span class="o">=</span>1K | nc -vvn 13.75.44.147 80
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>dd <span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">bs</span><span class="o">=</span>1M <span class="nv">count</span><span class="o">=</span>1K | nc -vvn 13.75.44.147 80
 </code></pre>
 </div>
 
 <h1 id="demo-result">Demo Result</h1>
 
-<div class="language-shell highlighter-rouge"><pre class="highlight"><code>Connection to 13.75.44.147 80 port <span class="o">[</span>tcp/<span class="k">*</span><span class="o">]</span> succeeded!
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>Connection to 13.75.44.147 80 port <span class="o">[</span>tcp/<span class="k">*</span><span class="o">]</span> succeeded!
 1024+0 records <span class="k">in
 </span>1024+0 records out
 1073741824 bytes <span class="o">(</span>1.1 GB, 1.0 GiB<span class="o">)</span> copied, 14.2554 s, 75.3 MB/s
@@ -338,7 +338,7 @@
 
 <p>如果需要進行連續測試的話可以使用 shell 進行迴圈</p>
 
-<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
 
 <span class="k">while </span><span class="nb">true
 </span><span class="k">do

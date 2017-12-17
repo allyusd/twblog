@@ -311,23 +311,26 @@
 
 <p>下載安裝完 VirutalBox 及 Vagrant 之後，就可以開啟命令提示字元 (cmd.exe) 來操作嘍。首先建立這次要使用的資料夾，會用來放 vagrant 設定檔</p>
 
-<pre><code class="language-bat">mkdir vagrant\ubuntu
-cd vagrant\ubuntu
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>mkdir vagrant<span class="se">\u</span>buntu
+<span class="nb">cd </span>vagrant<span class="se">\u</span>buntu
 </code></pre>
+</div>
 
 <p><img src="/assets/images/2016-07-10-use-vagrant-create-ubuntu-with-docker-in-windows-7/001.png" alt="" /></p>
 
 <p>目標版本為 Ubuntu 14.04 LTS ，直接用已經存在的 Box 來進行初始化。</p>
 
-<pre><code class="language-bat">vagrant init ubuntu/trusty64
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>vagrant init ubuntu/trusty64
 </code></pre>
+</div>
 
 <p><img src="/assets/images/2016-07-10-use-vagrant-create-ubuntu-with-docker-in-windows-7/002.png" alt="" /></p>
 
 <p>初始化會在資料夾產生一個 Vagrantfile，是 Vagrant 主要的設定檔，目前只有指定 Box 名稱，如果想要設定 cpu, memory 等等，也在這裡設定，目前先用預設值來啟動 VM。</p>
 
-<pre><code class="language-bat">vagrant up
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>vagrant up
 </code></pre>
+</div>
 
 <p><img src="/assets/images/2016-07-10-use-vagrant-create-ubuntu-with-docker-in-windows-7/003.png" alt="" /></p>
 
@@ -335,7 +338,7 @@ cd vagrant\ubuntu
 
 <p>接著使用 ssh 登入 VM吧。</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>vagrant ssh
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>vagrant ssh
 </code></pre>
 </div>
 

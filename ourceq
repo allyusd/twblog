@@ -1,0 +1,126 @@
+[33mcommit a4343b4e6381e5ad05c1dcd92135310e395b2c81[m
+Author: allyusd <allyusd@yahoo.com.tw>
+Date:   Tue Dec 12 11:16:16 2017 +0800
+
+    update from souce
+
+[33mcommit 941756b144e1fa336d97a35a1c192cfd98c94b30[m
+Author: allyusd <allyusd@yahoo.com.tw>
+Date:   Fri May 12 00:33:45 2017 +0800
+
+    update from souce
+
+[33mcommit f2e120f3120e59509397f659480ad6c7bc11cf62[m
+Author: allyusd <allyusd@yahoo.com.tw>
+Date:   Mon May 8 19:45:43 2017 +0800
+
+    update from souce
+
+[33mcommit 2af7d95e199b99c3b577eca1c36d0c456ed003d6[m
+Author: allyusd <allyusd@yahoo.com.tw>
+Date:   Fri Apr 21 23:08:49 2017 +0800
+
+    update from source
+
+[33mcommit c1d75608ae554161e6bcb449884bc5f12a8adec1[m
+Author: allyusd <allyusd@yahoo.com.tw>
+Date:   Sun Apr 16 14:46:05 2017 +0800
+
+    update from source
+
+[33mcommit 72c4ac607e92aef2abce050ba6a4f672f532fa14[m
+Author: allyusd <allyusd@yahoo.com.tw>
+Date:   Sun Apr 16 14:38:46 2017 +0800
+
+    update from source
+
+[33mcommit 9f61c18c7b2e011fe0890d04e0fe73d29aaf8307[m
+Author: allyusd <allyusd@yahoo.com.tw>
+Date:   Sun Apr 16 14:34:20 2017 +0800
+
+    update from source
+
+[33mcommit a0c19b2a563cf73fba12fa73a04ac854168c0a6a[m
+Author: Hong, Jian-Ching <allyusd@users.noreply.github.com>
+Date:   Sat Apr 15 22:35:49 2017 +0800
+
+    Update CNAME
+
+[33mcommit 19043f27109a5b7f4168d2129364719a857cd04b[m
+Author: Hong, Jian-Ching <allyusd@users.noreply.github.com>
+Date:   Sat Apr 15 22:07:43 2017 +0800
+
+    Create CNAME
+
+[33mcommit 5815e9fd73574c4ae543db3e3bdb80073d18f815[m
+Author: Hong, Jian-Ching <allyusd@users.noreply.github.com>
+Date:   Sat Apr 15 22:07:38 2017 +0800
+
+    Delete CNAME
+
+[33mcommit 84758b58ea77f0f9f4031a8c307b9806c97c2d76[m
+Author: allyusd <allyusd@yahoo.com.tw>
+Date:   Fri Apr 14 20:50:07 2017 +0800
+
+    site: create CNAME
+
+[33mcommit 3d1535994690ce82a11c8f3c9db9bc2d6188f203[m
+Author: allyusd <allyusd@yahoo.com.tw>
+Date:   Fri Apr 14 20:47:03 2017 +0800
+
+    site: update avatar url
+
+[33mcommit da6e2e99d66f9cc4cebce2ded92a9b61b25daed3[m
+Merge: 791821a 0ec373d
+Author: allyusd <allyusd@yahoo.com.tw>
+Date:   Fri Apr 14 00:11:45 2017 +0800
+
+    Merge branch 'master' of github.com:allyusd/allyusd.github.io
+
+[33mcommit 791821aba3599f813b2954590657e3e477a1e695[m
+Author: allyusd <allyusd@yahoo.com.tw>
+Date:   Fri Apr 14 00:11:06 2017 +0800
+
+    site: change site base url to https://blog.HongJianChing.com
+
+[33mcommit 0ec373d7b5376cf863b8222f5c314393c55884fb[m
+Author: Hong, Jian-Ching <allyusd@users.noreply.github.com>
+Date:   Sat Apr 8 15:47:22 2017 +0800
+
+    Create CNAME
+
+[33mcommit 43a723365fba97429ecfc5c0a4a7312e4c8269c3[m
+Author: allyusd <allyusd@yahoo.com.tw>
+Date:   Sat Apr 8 14:55:30 2017 +0800
+
+    update: add image
+
+[33mcommit 1eb824c64e768cf17e348363e872d43927b4b95e[m
+Author: allyusd <allyusd@yahoo.com.tw>
+Date:   Wed Apr 5 23:05:05 2017 +0800
+
+    fix: typo
+
+[33mcommit c7458f65a66d098e4d320089673f7c2ddaefdb38[m
+Author: allyusd <allyusd@yahoo.com.tw>
+Date:   Mon Apr 3 20:12:26 2017 +0800
+
+    post: 2017-04-03-install-sdl2-and-build-exmaple-with-c++-on-ubuntu
+
+[33mcommit 5e3a43032fd76ac4f1c4f1eb37e8d32022b2062a[m
+Author: allyusd <allyusd@yahoo.com.tw>
+Date:   Sun Mar 26 21:09:24 2017 +0800
+
+    post: 2017-03-26-new-blog-online
+
+[33mcommit a890ab42ca56568154b65c5dce96417891c4b6de[m
+Author: allyusd <allyusd@yahoo.com.tw>
+Date:   Sun Mar 26 18:28:24 2017 +0800
+
+    jekyll: update config file
+
+[33mcommit 336e2f62cef11c2371f8780fc6bf0fb7076db789[m
+Author: allyusd <allyusd@yahoo.com.tw>
+Date:   Sun Mar 26 16:02:19 2017 +0800
+
+    init: jekyll minimal-mistakes theme

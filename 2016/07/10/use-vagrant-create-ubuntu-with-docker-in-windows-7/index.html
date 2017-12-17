@@ -1,0 +1,567 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.2.2 by Michael Rose
+  Copyright 2017 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="zh" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>在 Windows 7 使用 Vagrant 建立 Docker VM 環境 - Jian-Ching 記事本</title>
+
+
+
+
+<meta name="description" content="需要安裝兩個軟體">
+
+
+
+
+<meta name="author" content="洪健清">
+
+<meta property="og:locale" content="zh_TW">
+<meta property="og:site_name" content="Jian-Ching 記事本">
+<meta property="og:title" content="在 Windows 7 使用 Vagrant 建立 Docker VM 環境">
+
+
+  <link rel="canonical" href="https://twblog.HongJianChing.com/2016/07/10/use-vagrant-create-ubuntu-with-docker-in-windows-7/">
+  <meta property="og:url" content="https://twblog.HongJianChing.com/2016/07/10/use-vagrant-create-ubuntu-with-docker-in-windows-7/">
+
+
+
+  <meta property="og:description" content="需要安裝兩個軟體">
+
+
+
+
+
+  
+
+  
+
+
+
+
+
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2016-07-10T00:00:00+08:00">
+
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "洪健清",
+      "url" : "https://twblog.HongJianChing.com",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+  <meta name="google-site-verification" content="wjj5pJCiMFRllsWEU0WH3ofBhTmTmHLhm2nWgQo6XcY" />
+
+
+
+
+<!-- end SEO -->
+
+
+<link href="https://twblog.hongjianching.com/feed.xml" type="application/atom+xml" rel="alternate" title="Jian-Ching 記事本 Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+<meta http-equiv="cleartype" content="on">
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="https://twblog.hongjianching.com/">Jian-Ching 記事本</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item"><a href="https://twblog.HongJianChing.com/tags/">Tags</a></li>
+          
+        </ul>
+        <button><div class="navicon"></div></button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="https://en.gravatar.com/userimage/52239647/ccc888d68eb39b778b50b2032ee4c033.jpeg" alt="洪健清" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name" itemprop="name">洪健清</h3>
+    
+      <p class="author__bio" itemprop="description">
+        軟體程式工程師
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">追蹤</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> <span itemprop="name">台灣，台中市</span>
+        </li>
+      
+
+      
+        <li>
+          <a href="https://www.HongJianChing.com/" itemprop="url">
+            <i class="fa fa-fw fa-chain" aria-hidden="true"></i> 網站
+          </a>
+        </li>
+      
+
+      
+        <li>
+          <a href="mailto:allyusd yahoo com tw">
+            <meta itemprop="email" content="allyusd yahoo com tw" />
+            <i class="fa fa-fw fa-envelope-square" aria-hidden="true"></i> 電子信箱
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.facebook.com/jianching.hong" itemprop="sameAs">
+            <i class="fa fa-fw fa-facebook-square" aria-hidden="true"></i> Facebook
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://github.com/allyusd" itemprop="sameAs">
+            <i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </li>
+      
+
+      
+        <li>
+          <a href="https://www.stackoverflow.com/users/2613884/allyusd" itemprop="sameAs">
+            <i class="fa fa-fw fa-stack-overflow" aria-hidden="true"></i> Stackoverflow
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fa fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="在 Windows 7 使用 Vagrant 建立 Docker VM 環境">
+    <meta itemprop="description" content="需要安裝兩個軟體">
+    <meta itemprop="datePublished" content="July 10, 2016">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">在 Windows 7 使用 Vagrant 建立 Docker VM 環境
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        <p>需要安裝兩個軟體</p>
+
+<p>一、VirtualBox</p>
+
+<p>https://www.virtualbox.org/wiki/Downloads</p>
+
+<p>二、Vagrant</p>
+
+<p>https://www.vagrantup.com/downloads.html</p>
+
+<p>在下載的過程中，簡單介紹一下 Vagrant。</p>
+
+<p>Vagrant 官方定義為 「建立及設定輕量性、可重覆性及可攜性的開發環境」，主要是透過設定檔使用 VirtualBox 來建立一個虛擬機器 (Virtual Machine, VM)，是達成 「Infrastructure As Code」的一種方式。</p>
+
+<p>Vagrant 包裝好的環境，稱為 Vagrant Box，本來在 Vagrant Cloud 提供上傳下載，但是現在被 Atlas 合併後不開放新帳號註冊了，所以只能下載 Box，不能上傳，除非你有原本 Vagrant Cloud 的帳號，幸好主要是要用 Docker，以後有 DockerHub，這些事情就不重要嘍。</p>
+
+<p>下載安裝完 VirutalBox 及 Vagrant 之後，就可以開啟命令提示字元 (cmd.exe) 來操作嘍。首先建立這次要使用的資料夾，會用來放 vagrant 設定檔</p>
+
+<pre><code class="language-bat">mkdir vagrant\ubuntu
+cd vagrant\ubuntu
+</code></pre>
+
+<p><img src="/assets/images/2016-07-10-use-vagrant-create-ubuntu-with-docker-in-windows-7/001.png" alt="" /></p>
+
+<p>目標版本為 Ubuntu 14.04 LTS ，直接用已經存在的 Box 來進行初始化。</p>
+
+<pre><code class="language-bat">vagrant init ubuntu/trusty64
+</code></pre>
+
+<p><img src="/assets/images/2016-07-10-use-vagrant-create-ubuntu-with-docker-in-windows-7/002.png" alt="" /></p>
+
+<p>初始化會在資料夾產生一個 Vagrantfile，是 Vagrant 主要的設定檔，目前只有指定 Box 名稱，如果想要設定 cpu, memory 等等，也在這裡設定，目前先用預設值來啟動 VM。</p>
+
+<pre><code class="language-bat">vagrant up
+</code></pre>
+
+<p><img src="/assets/images/2016-07-10-use-vagrant-create-ubuntu-with-docker-in-windows-7/003.png" alt="" /></p>
+
+<p>如果是第一次使用這個 Box，會從 Atlas 網站下載，時間視檔案大小及網路速度而定，第二次之後就會省去這個動作，順便一提，下載後 Box 存放的路徑在 %USERPROFILE%.vagrant.d\boxes。等進度條跑完，Vagrant 就會依照設定把 VM 開起來嘍。</p>
+
+<p>接著使用 ssh 登入 VM吧。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>vagrant ssh
+</code></pre>
+</div>
+
+<p><img src="/assets/images/2016-07-10-use-vagrant-create-ubuntu-with-docker-in-windows-7/004.png" alt="" /></p>
+
+<p>這樣已經可以開始玩新建立的 VM 嘍，但是習慣用 PieTTY 連線的話怎麼辦呢？這時候就要回頭看一下啟動的訊息，其中最重要的是 22 (guest) =&gt; 2222 (host) 的 Forwading ports 設定，代表連到本機的 2222 port 就可以連到 VM 的 22 ssh port 喔。</p>
+
+<p><img src="/assets/images/2016-07-10-use-vagrant-create-ubuntu-with-docker-in-windows-7/005.png" alt="" /></p>
+
+<p>預設的帳密是 vagrant / vagrant</p>
+
+<p><img src="/assets/images/2016-07-10-use-vagrant-create-ubuntu-with-docker-in-windows-7/006.png" alt="" /></p>
+
+<p>因為 Ubuntu 14.04 還沒有預裝 Docker，所以我們要先安裝，</p>
+
+<p>透過官方提供的指令可以快速完成相關安裝及設定。</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>curl -sSL https://get.docker.com/ | sudo sh
+</code></pre>
+</div>
+
+<p><img src="/assets/images/2016-07-10-use-vagrant-create-ubuntu-with-docker-in-windows-7/007.png" alt="" /></p>
+
+<p>可以看到安裝的 Docker 版本是 1.11.2，且提示要使用非 root 操作 docker 的話，將該 user 加入 docker 群組中。</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>sudo usermod -aG docker <span class="k">${</span><span class="nv">USER</span><span class="k">}</span>
+</code></pre>
+</div>
+
+<p>輸入後重新登入，使用指令測試一下 docker</p>
+
+<p><img src="/assets/images/2016-07-10-use-vagrant-create-ubuntu-with-docker-in-windows-7/008.png" alt="" /></p>
+
+<p>回過頭來看一下 Vagrant 的效果，</p>
+
+<p>只需要兩行指令，達到輕量性。</p>
+
+<p>(init 指令可改為從 GitHub 取得 Vagrantfile)</p>
+
+<p>直接使用 Box，為可重覆性。</p>
+
+<p>可以在 Windows, Linux, Max 使用，算是可攜性。</p>
+
+<p>以後就不需要苦惱要設定 VirtualBox 的 Image 要怎麼辦了，大大減少從 OS 安裝開始的流程，也不必靠文件的 SOP 來建立想要的環境，接下來就可以開始放心玩 Docker 嘍！</p>
+
+<h2 id="udpate">Udpate</h2>
+
+<ul>
+  <li>2016-07-16 因為 williamyeh/ubuntu-trusty64-docker 除了安裝 docker 之外有其它客製化，為了保持環境單純，改用 ubuntu/trusty64 當範例</li>
+  <li>2017-12-12 搬移網站，調整為 markdown</li>
+</ul>
+
+<h2 id="資料來源">資料來源</h2>
+
+<p><a href="http://www.codedata.com.tw/social-coding/vagrant-tutorial-2-playing-vm-with-vagrant/">Vagrant Tutorial（2）跟著流浪漢把玩虛擬機</a></p>
+
+<p><a href="http://www.codedata.com.tw/social-coding/vagrant-tutorial-3-vm-lifecycle/">Vagrant Tutorial（3）細說虛擬機生滅狀態</a></p>
+
+<p><a href="http://stackoverflow.com/questions/26524691/vagrant-box-cant-login-with-password-from-virtualbox-gui">Vagrant box: can’t login with password from VirtualBox GUI</a></p>
+
+<p><a href="https://philipzheng.gitbooks.io/docker_practice/content/install/ubuntu.html">《Docker —— 從入門到實踐­》正體中文版 - Ubuntu 系列安裝 Docker</a></p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-tags" aria-hidden="true"></i> 標籤: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="https://twblog.hongjianching.com/tags/#docker" class="page__taxonomy-item" rel="tag">Docker</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://twblog.hongjianching.com/tags/#ubuntu" class="page__taxonomy-item" rel="tag">Ubuntu</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://twblog.hongjianching.com/tags/#vagrant" class="page__taxonomy-item" rel="tag">Vagrant</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://twblog.hongjianching.com/tags/#virtualbox" class="page__taxonomy-item" rel="tag">VirtualBox</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://twblog.hongjianching.com/tags/#windows7" class="page__taxonomy-item" rel="tag">Windows7</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2016-07-10T00:00:00+08:00">July 10, 2016</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">分享到</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=在 Windows 7 使用 Vagrant 建立 Docker VM 環境 https://twblog.hongjianching.com/2016/07/10/use-vagrant-create-ubuntu-with-docker-in-windows-7/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2016/07/10/use-vagrant-create-ubuntu-with-docker-in-windows-7/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2016/07/10/use-vagrant-create-ubuntu-with-docker-in-windows-7/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2016/07/10/use-vagrant-create-ubuntu-with-docker-in-windows-7/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="#" class="pagination--pager disabled">較舊</a>
+    
+    
+      <a href="https://twblog.hongjianching.com/2017/04/19/google-cloud-onboard-2017-taipei/" class="pagination--pager" title="Google Cloud OnBoard 2017 Taipei
+">較新</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+  
+    <h4 class="page__comments-title">留言</h4>
+    <section id="disqus_thread"></section>
+  
+</div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>追蹤:</strong></li>
+    
+    
+    
+    
+      <li><a href="http://github.com/allyusd"><i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    <li><a href="https://twblog.hongjianching.com/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> RSS Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2017 洪健清. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+      </footer>
+    </div>
+
+    <script src="/assets/js/main.min.js"></script>
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-9431648-15', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+  
+  <script type="text/javascript">
+  	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+  	var disqus_shortname = 'allyusd-twblog';
+
+  	/* * * DON'T EDIT BELOW THIS LINE * * */
+  	(function() {
+  		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  		dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  	})();
+
+  	/* * * DON'T EDIT BELOW THIS LINE * * */
+  	(function () {
+  		var s = document.createElement('script'); s.async = true;
+  		s.type = 'text/javascript';
+  		s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  		(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+  	}());
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+
+
+  </body>
+</html>

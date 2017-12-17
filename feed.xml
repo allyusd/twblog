@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2017-12-12T11:15:21+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">wget 下載檔案遇到網頁亂碼問題</title><link href="https://twblog.hongjianching.com/2017/12/12/wget-download-files-with-page-encoding-problem/" rel="alternate" type="text/html" title="wget 下載檔案遇到網頁亂碼問題" /><published>2017-12-12T00:00:00+08:00</published><updated>2017-12-12T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2017/12/12/wget-download-files-with-page-encoding-problem</id><content type="html" xml:base="https://twblog.hongjianching.com/2017/12/12/wget-download-files-with-page-encoding-problem/">&lt;p&gt;今天在 FB 看到這個問題，試著解決後紀錄下來。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2017-12-17T22:14:35+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">wget 下載檔案遇到網頁亂碼問題</title><link href="https://twblog.hongjianching.com/2017/12/12/wget-download-files-with-page-encoding-problem/" rel="alternate" type="text/html" title="wget 下載檔案遇到網頁亂碼問題" /><published>2017-12-12T00:00:00+08:00</published><updated>2017-12-12T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2017/12/12/wget-download-files-with-page-encoding-problem</id><content type="html" xml:base="https://twblog.hongjianching.com/2017/12/12/wget-download-files-with-page-encoding-problem/">&lt;p&gt;今天在 FB 看到這個問題，試著解決後紀錄下來。&lt;/p&gt;
 
 &lt;p&gt;原指令&lt;/p&gt;
 
@@ -289,4 +289,107 @@ Compute Engine is IaaS (受管理的基礎架構 DevOps)&lt;/p&gt;
       &lt;p&gt;https://cloud.google.com/shell/pricing&amp;nbsp;&lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
   &lt;/ol&gt;
-&lt;/div&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="post" /><summary type="html">2017-04-19 Google Cloud OnBoard 活動在台北國際會議中心舉行。</summary></entry></feed>
+&lt;/div&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="post" /><summary type="html">2017-04-19 Google Cloud OnBoard 活動在台北國際會議中心舉行。</summary></entry><entry><title type="html">在 Windows 7 使用 Vagrant 建立 Docker VM 環境</title><link href="https://twblog.hongjianching.com/2016/07/10/use-vagrant-create-ubuntu-with-docker-in-windows-7/" rel="alternate" type="text/html" title="在 Windows 7 使用 Vagrant 建立 Docker VM 環境" /><published>2016-07-10T00:00:00+08:00</published><updated>2016-07-10T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2016/07/10/use-vagrant-create-ubuntu-with-docker-in-windows-7</id><content type="html" xml:base="https://twblog.hongjianching.com/2016/07/10/use-vagrant-create-ubuntu-with-docker-in-windows-7/">&lt;p&gt;需要安裝兩個軟體&lt;/p&gt;
+
+&lt;p&gt;一、VirtualBox&lt;/p&gt;
+
+&lt;p&gt;https://www.virtualbox.org/wiki/Downloads&lt;/p&gt;
+
+&lt;p&gt;二、Vagrant&lt;/p&gt;
+
+&lt;p&gt;https://www.vagrantup.com/downloads.html&lt;/p&gt;
+
+&lt;p&gt;在下載的過程中，簡單介紹一下 Vagrant。&lt;/p&gt;
+
+&lt;p&gt;Vagrant 官方定義為 「建立及設定輕量性、可重覆性及可攜性的開發環境」，主要是透過設定檔使用 VirtualBox 來建立一個虛擬機器 (Virtual Machine, VM)，是達成 「Infrastructure As Code」的一種方式。&lt;/p&gt;
+
+&lt;p&gt;Vagrant 包裝好的環境，稱為 Vagrant Box，本來在 Vagrant Cloud 提供上傳下載，但是現在被 Atlas 合併後不開放新帳號註冊了，所以只能下載 Box，不能上傳，除非你有原本 Vagrant Cloud 的帳號，幸好主要是要用 Docker，以後有 DockerHub，這些事情就不重要嘍。&lt;/p&gt;
+
+&lt;p&gt;下載安裝完 VirutalBox 及 Vagrant 之後，就可以開啟命令提示字元 (cmd.exe) 來操作嘍。首先建立這次要使用的資料夾，會用來放 vagrant 設定檔&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-bat&quot;&gt;mkdir vagrant\ubuntu
+cd vagrant\ubuntu
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2016-07-10-use-vagrant-create-ubuntu-with-docker-in-windows-7/001.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;目標版本為 Ubuntu 14.04 LTS ，直接用已經存在的 Box 來進行初始化。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-bat&quot;&gt;vagrant init ubuntu/trusty64
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2016-07-10-use-vagrant-create-ubuntu-with-docker-in-windows-7/002.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;初始化會在資料夾產生一個 Vagrantfile，是 Vagrant 主要的設定檔，目前只有指定 Box 名稱，如果想要設定 cpu, memory 等等，也在這裡設定，目前先用預設值來啟動 VM。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-bat&quot;&gt;vagrant up
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2016-07-10-use-vagrant-create-ubuntu-with-docker-in-windows-7/003.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;如果是第一次使用這個 Box，會從 Atlas 網站下載，時間視檔案大小及網路速度而定，第二次之後就會省去這個動作，順便一提，下載後 Box 存放的路徑在 %USERPROFILE%.vagrant.d\boxes。等進度條跑完，Vagrant 就會依照設定把 VM 開起來嘍。&lt;/p&gt;
+
+&lt;p&gt;接著使用 ssh 登入 VM吧。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;vagrant ssh
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2016-07-10-use-vagrant-create-ubuntu-with-docker-in-windows-7/004.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;這樣已經可以開始玩新建立的 VM 嘍，但是習慣用 PieTTY 連線的話怎麼辦呢？這時候就要回頭看一下啟動的訊息，其中最重要的是 22 (guest) =&amp;gt; 2222 (host) 的 Forwading ports 設定，代表連到本機的 2222 port 就可以連到 VM 的 22 ssh port 喔。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2016-07-10-use-vagrant-create-ubuntu-with-docker-in-windows-7/005.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;預設的帳密是 vagrant / vagrant&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2016-07-10-use-vagrant-create-ubuntu-with-docker-in-windows-7/006.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;因為 Ubuntu 14.04 還沒有預裝 Docker，所以我們要先安裝，&lt;/p&gt;
+
+&lt;p&gt;透過官方提供的指令可以快速完成相關安裝及設定。&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;curl -sSL https://get.docker.com/ | sudo sh
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2016-07-10-use-vagrant-create-ubuntu-with-docker-in-windows-7/007.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;可以看到安裝的 Docker 版本是 1.11.2，且提示要使用非 root 操作 docker 的話，將該 user 加入 docker 群組中。&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo usermod -aG docker &lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;USER&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;輸入後重新登入，使用指令測試一下 docker&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2016-07-10-use-vagrant-create-ubuntu-with-docker-in-windows-7/008.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;回過頭來看一下 Vagrant 的效果，&lt;/p&gt;
+
+&lt;p&gt;只需要兩行指令，達到輕量性。&lt;/p&gt;
+
+&lt;p&gt;(init 指令可改為從 GitHub 取得 Vagrantfile)&lt;/p&gt;
+
+&lt;p&gt;直接使用 Box，為可重覆性。&lt;/p&gt;
+
+&lt;p&gt;可以在 Windows, Linux, Max 使用，算是可攜性。&lt;/p&gt;
+
+&lt;p&gt;以後就不需要苦惱要設定 VirtualBox 的 Image 要怎麼辦了，大大減少從 OS 安裝開始的流程，也不必靠文件的 SOP 來建立想要的環境，接下來就可以開始放心玩 Docker 嘍！&lt;/p&gt;
+
+&lt;h2 id=&quot;udpate&quot;&gt;Udpate&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;2016-07-16 因為 williamyeh/ubuntu-trusty64-docker 除了安裝 docker 之外有其它客製化，為了保持環境單純，改用 ubuntu/trusty64 當範例&lt;/li&gt;
+  &lt;li&gt;2017-12-12 搬移網站，調整為 markdown&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;資料來源&quot;&gt;資料來源&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.codedata.com.tw/social-coding/vagrant-tutorial-2-playing-vm-with-vagrant/&quot;&gt;Vagrant Tutorial（2）跟著流浪漢把玩虛擬機&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.codedata.com.tw/social-coding/vagrant-tutorial-3-vm-lifecycle/&quot;&gt;Vagrant Tutorial（3）細說虛擬機生滅狀態&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://stackoverflow.com/questions/26524691/vagrant-box-cant-login-with-password-from-virtualbox-gui&quot;&gt;Vagrant box: can’t login with password from VirtualBox GUI&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://philipzheng.gitbooks.io/docker_practice/content/install/ubuntu.html&quot;&gt;《Docker —— 從入門到實踐­》正體中文版 - Ubuntu 系列安裝 Docker&lt;/a&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="Vagrant" /><category term="Windows7" /><category term="Ubuntu" /><category term="Docker" /><category term="VirtualBox" /><summary type="html">需要安裝兩個軟體</summary></entry></feed>

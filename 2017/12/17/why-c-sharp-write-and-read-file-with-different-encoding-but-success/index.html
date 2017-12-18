@@ -323,8 +323,6 @@
 <p>網友提出疑問，為什麼 C# 使用不同編碼讀寫檔案卻成功？
 我看了一下，明明使用 BigEndianUnicode 寫檔，使用 UTF8 讀檔，不同的編碼理論上應該會是亂碼才對啊，這真是程式設計師第二常問的問題啊。<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup></p>
 
-<p>第二常問的問題：為什麼這樣對了？</p>
-
 <h2 id="假設-1">假設 1</h2>
 
 <p>首先假設會不會是異名同意，也就是 BigEndianUnicode 是 UTF8 的別名，兩者是相同的東西，那就可以解釋為什麼可以正確顯示。</p>
@@ -361,7 +359,7 @@
 <div class="footnotes">
   <ol>
     <li id="fn:1">
-      <p>程式設計師第一常問的問題：為什麼這樣錯了？&nbsp;<a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
+      <p>程式設計師第一常問的問題：為什麼這樣錯了？第二常問的問題：為什麼這樣對了？&nbsp;<a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:2">
       <p><a href="https://msdn.microsoft.com/zh-tw/library/system.text.encoding.utf8(v=vs.110).aspx">MSDN - Encoding.UTF8 屬性</a>&nbsp;<a href="#fnref:2" class="reversefootnote">&#8617;</a></p>

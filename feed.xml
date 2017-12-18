@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2017-12-19T00:04:30+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">為什麼 C# 使用不同編碼讀寫檔案卻成功？</title><link href="https://twblog.hongjianching.com/2017/12/17/why-c-sharp-write-and-read-file-with-different-encoding-but-success/" rel="alternate" type="text/html" title="為什麼 C# 使用不同編碼讀寫檔案卻成功？" /><published>2017-12-17T00:00:00+08:00</published><updated>2017-12-17T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2017/12/17/why-c-sharp-write-and-read-file-with-different-encoding%20but-success</id><content type="html" xml:base="https://twblog.hongjianching.com/2017/12/17/why-c-sharp-write-and-read-file-with-different-encoding-but-success/">&lt;h2 id=&quot;問題&quot;&gt;問題&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2017-12-19T00:11:00+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">為什麼 C# 使用不同編碼讀寫檔案卻成功？</title><link href="https://twblog.hongjianching.com/2017/12/17/why-c-sharp-write-and-read-file-with-different-encoding-but-success/" rel="alternate" type="text/html" title="為什麼 C# 使用不同編碼讀寫檔案卻成功？" /><published>2017-12-17T00:00:00+08:00</published><updated>2017-12-17T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2017/12/17/why-c-sharp-write-and-read-file-with-different-encoding%20but-success</id><content type="html" xml:base="https://twblog.hongjianching.com/2017/12/17/why-c-sharp-write-and-read-file-with-different-encoding-but-success/">&lt;h2 id=&quot;問題&quot;&gt;問題&lt;/h2&gt;
 
 &lt;p&gt;同樣在 FB 看到這個問題，紀錄下來。這是 C# 程式碼&lt;/p&gt;
 
@@ -27,8 +27,6 @@
 &lt;/div&gt;
 &lt;p&gt;網友提出疑問，為什麼 C# 使用不同編碼讀寫檔案卻成功？
 我看了一下，明明使用 BigEndianUnicode 寫檔，使用 UTF8 讀檔，不同的編碼理論上應該會是亂碼才對啊，這真是程式設計師第二常問的問題啊。&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
-
-&lt;p&gt;第二常問的問題：為什麼這樣對了？&lt;/p&gt;
 
 &lt;h2 id=&quot;假設-1&quot;&gt;假設 1&lt;/h2&gt;
 
@@ -66,7 +64,7 @@
 &lt;div class=&quot;footnotes&quot;&gt;
   &lt;ol&gt;
     &lt;li id=&quot;fn:1&quot;&gt;
-      &lt;p&gt;程式設計師第一常問的問題：為什麼這樣錯了？&amp;nbsp;&lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+      &lt;p&gt;程式設計師第一常問的問題：為什麼這樣錯了？第二常問的問題：為什麼這樣對了？&amp;nbsp;&lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
     &lt;li id=&quot;fn:2&quot;&gt;
       &lt;p&gt;&lt;a href=&quot;https://msdn.microsoft.com/zh-tw/library/system.text.encoding.utf8(v=vs.110).aspx&quot;&gt;MSDN - Encoding.UTF8 屬性&lt;/a&gt;&amp;nbsp;&lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;

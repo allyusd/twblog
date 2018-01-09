@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-01-09T21:47:42+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">Ubuntu 自動更新安全性套件</title><link href="https://twblog.hongjianching.com/2017/12/20/ubuntu-automatic-security-updates/" rel="alternate" type="text/html" title="Ubuntu 自動更新安全性套件" /><published>2017-12-20T00:00:00+08:00</published><updated>2017-12-20T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2017/12/20/ubuntu-automatic-security-updates</id><content type="html" xml:base="https://twblog.hongjianching.com/2017/12/20/ubuntu-automatic-security-updates/">&lt;p&gt;希望 Ubuntu 能自動更新安全性套件，避免手動管理，這個想法可以透過無人值守更新套件 unattended-upgrades 簡單的完成任務。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-01-09T21:49:54+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">Ubuntu 自動更新安全性套件</title><link href="https://twblog.hongjianching.com/2017/12/20/ubuntu-automatic-security-updates/" rel="alternate" type="text/html" title="Ubuntu 自動更新安全性套件" /><published>2017-12-20T00:00:00+08:00</published><updated>2017-12-20T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2017/12/20/ubuntu-automatic-security-updates</id><content type="html" xml:base="https://twblog.hongjianching.com/2017/12/20/ubuntu-automatic-security-updates/">&lt;p&gt;希望 Ubuntu 能自動更新安全性套件，避免手動管理，這個想法可以透過無人值守更新套件 unattended-upgrades 簡單的完成任務。&lt;/p&gt;
 
 &lt;h2 id=&quot;安裝及設定套件&quot;&gt;安裝及設定套件&lt;/h2&gt;
 &lt;p&gt;首先安裝套件&lt;/p&gt;
@@ -514,7 +514,71 @@ Compute Engine is IaaS (受管理的基礎架構 DevOps)&lt;/p&gt;
       &lt;p&gt;https://cloud.google.com/shell/pricing&amp;nbsp;&lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
   &lt;/ol&gt;
-&lt;/div&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="GCP" /><category term="心得" /><summary type="html">2017-04-19 Google Cloud OnBoard 活動在台北國際會議中心舉行。</summary></entry><entry><title type="html">在 Windows 7 使用 Vagrant 建立 Docker VM 環境</title><link href="https://twblog.hongjianching.com/2016/07/10/use-vagrant-create-ubuntu-with-docker-in-windows-7/" rel="alternate" type="text/html" title="在 Windows 7 使用 Vagrant 建立 Docker VM 環境" /><published>2016-07-10T00:00:00+08:00</published><updated>2016-07-10T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2016/07/10/use-vagrant-create-ubuntu-with-docker-in-windows-7</id><content type="html" xml:base="https://twblog.hongjianching.com/2016/07/10/use-vagrant-create-ubuntu-with-docker-in-windows-7/">&lt;p&gt;需要安裝兩個軟體&lt;/p&gt;
+&lt;/div&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="GCP" /><category term="心得" /><summary type="html">2017-04-19 Google Cloud OnBoard 活動在台北國際會議中心舉行。</summary></entry><entry><title type="html">Install SDL2 with Cpp on Ubuntu</title><link href="https://twblog.hongjianching.com/2017/04/03/install-sdl2-with-cpp-on-ubuntu/" rel="alternate" type="text/html" title="Install SDL2 with Cpp on Ubuntu" /><published>2017-04-03T00:00:00+08:00</published><updated>2017-04-03T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2017/04/03/install-sdl2-with-cpp-on-ubuntu</id><content type="html" xml:base="https://twblog.hongjianching.com/2017/04/03/install-sdl2-with-cpp-on-ubuntu/">&lt;h1 id=&quot;install-sdl2-on-ubuntu&quot;&gt;Install SDL2 on Ubuntu&lt;/h1&gt;
+
+&lt;p&gt;你可以容易的從套件安裝或是自行編譯&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt-get install libsdl2-dev
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&quot;sdl2-example-code-with-c&quot;&gt;SDL2 example code with C++&lt;/h1&gt;
+
+&lt;p&gt;這段範例程式基於 SDL2 文件，額外加上了 C++ 函式庫。&lt;/p&gt;
+
+&lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;#include &quot;SDL.h&quot;
+#include &amp;lt;iostream&amp;gt;
+&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;argc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;argv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[])&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SDL_Init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SDL_INIT_VIDEO&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SDL_INIT_AUDIO&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;SDL_Log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Unable to initialize SDL: %s&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SDL_GetError&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cout&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Hello SDL2 with C++&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;endl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;SDL_Quit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&quot;build-example-code&quot;&gt;Build example code&lt;/h1&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;g++ -I /usr/include/SDL2 main.cpp -o sdl-test -lSDL2 -lSDL2main
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Note: &lt;a href=&quot;https://www.howtogeek.com/howto/ubuntu/see-where-a-package-is-installed-on-ubuntu/&quot;&gt;See Where a Package is Installed on Ubuntu&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;run-the-exmaple&quot;&gt;Run the exmaple&lt;/h1&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;./sdl-test
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;如果執行正確的話，你會看到如下所示：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2017-04-03-install-sdl2-and-build-example-with-c++-on-ubuntu/demo.png&quot; alt=&quot;demo image&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;other&quot;&gt;Other&lt;/h1&gt;
+
+&lt;p&gt;如果你在 Ubuntu Server 下執行的話，可能會出現錯誤：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Unable to initialize SDL: Failed to connect to the Mir Server
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;因為這段範例有初始化 SDL_INIT_VIDEO 子系統，如果你不需要用到可以移除他。&lt;/p&gt;
+&lt;div class=&quot;footnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;http://gigi.nullneuron.net/gigilabs/how-to-set-up-sdl2-on-linux/&quot;&gt;HOW TO SET UP SDL2 ON LINUX&lt;/a&gt;&amp;nbsp;&lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="Cpp" /><category term="SDL2" /><category term="Ubuntu" /><summary type="html">Install SDL2 on Ubuntu</summary></entry><entry><title type="html">在 Windows 7 使用 Vagrant 建立 Docker VM 環境</title><link href="https://twblog.hongjianching.com/2016/07/10/use-vagrant-create-ubuntu-with-docker-in-windows-7/" rel="alternate" type="text/html" title="在 Windows 7 使用 Vagrant 建立 Docker VM 環境" /><published>2016-07-10T00:00:00+08:00</published><updated>2016-07-10T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2016/07/10/use-vagrant-create-ubuntu-with-docker-in-windows-7</id><content type="html" xml:base="https://twblog.hongjianching.com/2016/07/10/use-vagrant-create-ubuntu-with-docker-in-windows-7/">&lt;p&gt;需要安裝兩個軟體&lt;/p&gt;
 
 &lt;p&gt;一、VirtualBox&lt;/p&gt;
 

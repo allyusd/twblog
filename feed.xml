@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-01-14T17:57:50+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">使用 Visual Studio Code 開發 .Net Core</title><link href="https://twblog.hongjianching.com/2018/01/14/visual-studio-code-with-dotnet-core/" rel="alternate" type="text/html" title="使用 Visual Studio Code 開發 .Net Core" /><published>2018-01-14T00:00:00+08:00</published><updated>2018-01-14T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/01/14/visual-studio-code-with-dotnet-core</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/01/14/visual-studio-code-with-dotnet-core/">&lt;p&gt;.Net Core 是跨平台解決方案，同時 Visual Studio Code 也是跨平台開發工具，所以兩者搭配是很好的選擇。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-01-14T18:04:46+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">使用 Visual Studio Code 開發 .Net Core</title><link href="https://twblog.hongjianching.com/2018/01/14/visual-studio-code-with-dotnet-core/" rel="alternate" type="text/html" title="使用 Visual Studio Code 開發 .Net Core" /><published>2018-01-14T00:00:00+08:00</published><updated>2018-01-14T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/01/14/visual-studio-code-with-dotnet-core</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/01/14/visual-studio-code-with-dotnet-core/">&lt;p&gt;.Net Core 是跨平台解決方案，同時 Visual Studio Code 也是跨平台開發工具，所以兩者搭配是很好的選擇。&lt;/p&gt;
 
 &lt;h2 id=&quot;安裝-visual-studio-code-及-net-core&quot;&gt;安裝 Visual Studio Code 及 .Net Core&lt;/h2&gt;
 
@@ -16,7 +16,7 @@
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/2018-01-14-visual-studio-code-with-dotnet-core/001.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;，然後在 terminal (Ctrl+`) 使用 dotnet 指令建立一個 console 專案。執行後會發現 vs-code 左方檔案總管已經出現專案所需的檔案。&lt;/p&gt;
+&lt;p&gt;然後在終端機 (Ctrl+`) 使用 new 指令建立一個 console 專案。執行後會看到 vs-code 左方檔案總管已經出現專案所需的檔案。&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;dotnet new console
 &lt;/code&gt;&lt;/pre&gt;
@@ -30,7 +30,7 @@
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/2018-01-14-visual-studio-code-with-dotnet-core/002.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;#dotnet-restore&quot;&gt;dotnet restore 不見了？&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;#dotnet-restore&quot;&gt;曾經使用的 dotnet restore 不見了？&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;開發及偵錯&quot;&gt;開發及偵錯&lt;/h2&gt;
 
@@ -73,7 +73,7 @@
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/2018-01-14-visual-studio-code-with-dotnet-core/004.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;接著稍微調整程式碼如下：&lt;/p&gt;
+&lt;p&gt;接著稍微調整 Program.cs 程式碼如下：&lt;/p&gt;
 
 &lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
@@ -113,6 +113,8 @@
 &lt;p&gt;再次按下 F5 後，切換到終端機 (Ctrl+`)&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/2018-01-14-visual-studio-code-with-dotnet-core/006.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;教學結束，接著可以開始進行其它 C# 的練習嘍！&lt;/p&gt;
 
 &lt;h2 id=&quot;dotnet-restore&quot;&gt;dotnet restore&lt;/h2&gt;
 

@@ -33,12 +33,16 @@
 <lastmod>2017-12-12T00:00:00+08:00</lastmod>
 </url>
 <url>
-<loc>https://twblog.hongjianching.com/2017/12/17/why-c-sharp-write-and-read-file-with-different-encoding-but-success/</loc>
+<loc>https://twblog.hongjianching.com/2017/12/17/why-csharp-write-and-read-file-with-different-encoding-but-success/</loc>
 <lastmod>2017-12-17T00:00:00+08:00</lastmod>
 </url>
 <url>
 <loc>https://twblog.hongjianching.com/2017/12/20/ubuntu-automatic-security-updates/</loc>
 <lastmod>2017-12-20T00:00:00+08:00</lastmod>
+</url>
+<url>
+<loc>https://twblog.hongjianching.com/2018/01/14/visual-studio-code-with-dotnet-core/</loc>
+<lastmod>2018-01-14T00:00:00+08:00</lastmod>
 </url>
 <url>
 <loc>https://twblog.hongjianching.com/categories/</loc>
@@ -51,5 +55,8 @@
 </url>
 <url>
 <loc>https://twblog.hongjianching.com/page2/</loc>
+</url>
+<url>
+<loc>https://twblog.hongjianching.com/page3/</loc>
 </url>
 </urlset>

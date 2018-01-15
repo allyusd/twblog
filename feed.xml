@@ -1,4 +1,54 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-01-14T18:04:46+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">使用 Visual Studio Code 開發 .Net Core</title><link href="https://twblog.hongjianching.com/2018/01/14/visual-studio-code-with-dotnet-core/" rel="alternate" type="text/html" title="使用 Visual Studio Code 開發 .Net Core" /><published>2018-01-14T00:00:00+08:00</published><updated>2018-01-14T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/01/14/visual-studio-code-with-dotnet-core</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/01/14/visual-studio-code-with-dotnet-core/">&lt;p&gt;.Net Core 是跨平台解決方案，同時 Visual Studio Code 也是跨平台開發工具，所以兩者搭配是很好的選擇。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-01-15T21:42:35+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">ASP.Net Core Web API 使用 Entity Framework Core 和 PostgreSQL</title><link href="https://twblog.hongjianching.com/2018/01/15/asp-dotnet-core-web-api-using-entity-framework-core-and-postgresql/" rel="alternate" type="text/html" title="ASP.Net Core Web API 使用 Entity Framework Core 和 PostgreSQL" /><published>2018-01-15T00:00:00+08:00</published><updated>2018-01-15T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/01/15/asp-dotnet-core-web-api-using-entity-framework-core-and-postgresql</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/01/15/asp-dotnet-core-web-api-using-entity-framework-core-and-postgresql/">&lt;p&gt;ASP.Net Core Web API 使用 Entity Framework Core 和 PostgreSQL&lt;/p&gt;
+
+&lt;h2 id=&quot;前提&quot;&gt;前提&lt;/h2&gt;
+
+&lt;p&gt;如果你還沒有準備好 Visual Studio Code with .Net Core 開發環境，請先參考&lt;a href=&quot;https://twblog.hongjianching.com/2018/01/14/visual-studio-code-with-dotnet-core/&quot;&gt;使用 Visual Studio Code 開發 .Net Core&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;接著依照&lt;a href=&quot;https://docs.microsoft.com/zh-tw/aspnet/core/tutorials/web-api-vsc&quot;&gt;在 macOS、Linux 和 Windows 上，使用 ASP.NET Core MVC 和 Visual Studio Code 建立 Web API&lt;/a&gt;完成 Todo WebApi 的範例專案。&lt;/p&gt;
+
+&lt;h2 id=&quot;使用-entity-framework-core-和-postgresql&quot;&gt;使用 Entity Framework Core 和 PostgreSQL&lt;/h2&gt;
+
+&lt;p&gt;在 &lt;strong&gt;TodoApi.csproj&lt;/strong&gt; 新增套件參考&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;PackageReference Include=&quot;Npgsql.EntityFrameworkCore.PostgreSQL&quot; Version=&quot;2.0.0&quot; /&amp;gt;
+&amp;lt;PackageReference Include=&quot;Microsoft.EntityFrameworkCore.Design&quot; Version=&quot;2.0.1&quot; /&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;在 &lt;strong&gt;appsettings.json&lt;/strong&gt; 新增連接字串&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&quot;ConnectionStrings&quot;: { &quot;TodoContext&quot;: &quot;Server=localhost;User ID=postgres;Password=mysecretpassword;Database=postgres&quot; }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;接著修改 &lt;strong&gt;Startup.cs&lt;/strong&gt; 程式碼，註解原本的 InMemoryDatabase，改用 PostgreSQL。&lt;/p&gt;
+
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// services.AddDbContext&amp;lt;TodoContext&amp;gt;(opt =&amp;gt; opt.UseInMemoryDatabase(&quot;TodoList&quot;));
+&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;connectionString&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Configuration&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;GetConnectionString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;TodoContext&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;AddEntityFrameworkNpgsql&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;AddDbContext&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TodoContext&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;options&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;UseNpgsql&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;connectionString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;最後別忘了在資料庫建立表單。&lt;/p&gt;
+
+&lt;p&gt;注意，因為 C# 預設命名慣例是 PascalCase，而 PostgreSQL 預設命名慣例是 lower_case_with_underscores，所以如果 sql 的表格或欄位名稱不加上雙引號，會造成兩者不一致，這個範例是依 C# 命名慣例為主，個人習慣以 PostgreSQL 為主。&lt;/p&gt;
+
+&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;CREATE&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;TABLE&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;&quot;TodoItems&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;&quot;Id&quot;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;serial&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NOT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;&quot;Name&quot;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;varchar&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NOT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;&quot;IsComplete&quot;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bool&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NOT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;PRIMARY&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;KEY&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;&quot;Id&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;以上就完成使用 Entity Framework Core 和 PostgreSQL 取代原本 InMemoryDatabase，資料可以保留下來嘍！&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-01-15-asp-dotnet-core-web-api-using-entity-framework-core-and-postgresql/001.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;reference&quot;&gt;Reference&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.npgsql.org/efcore/index.html&quot;&gt;Npgsql - Getting Started&lt;/a&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="Visual-Studio-Code" /><category term=".Net-Core" /><category term="ASP.NET" /><category term="Web-API" /><category term="Entity-Framework-Core" /><category term="PostgreSQL" /><category term="CSharp" /><summary type="html">ASP.Net Core Web API 使用 Entity Framework Core 和 PostgreSQL</summary></entry><entry><title type="html">使用 Visual Studio Code 開發 .Net Core</title><link href="https://twblog.hongjianching.com/2018/01/14/visual-studio-code-with-dotnet-core/" rel="alternate" type="text/html" title="使用 Visual Studio Code 開發 .Net Core" /><published>2018-01-14T00:00:00+08:00</published><updated>2018-01-14T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/01/14/visual-studio-code-with-dotnet-core</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/01/14/visual-studio-code-with-dotnet-core/">&lt;p&gt;.Net Core 是跨平台解決方案，同時 Visual Studio Code 也是跨平台開發工具，所以兩者搭配是很好的選擇。&lt;/p&gt;
 
 &lt;h2 id=&quot;安裝-visual-studio-code-及-net-core&quot;&gt;安裝 Visual Studio Code 及 .Net Core&lt;/h2&gt;
 
@@ -12,17 +62,17 @@
 
 &lt;h2 id=&quot;hello-world-範例&quot;&gt;Hello World 範例&lt;/h2&gt;
 
-&lt;p&gt;建立一個 hello_world 資料夾，開啟 vs-code。&lt;/p&gt;
+&lt;p&gt;建立一個 &lt;strong&gt;hello_world&lt;/strong&gt; 資料夾，開啟 vs-code。&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/2018-01-14-visual-studio-code-with-dotnet-core/001.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;然後在終端機 (Ctrl+`) 使用 new 指令建立一個 console 專案。執行後會看到 vs-code 左方檔案總管已經出現專案所需的檔案。&lt;/p&gt;
+&lt;p&gt;然後在終端機 ( Ctrl+` ) 使用 &lt;strong&gt;new&lt;/strong&gt; 指令建立一個 console 專案。執行後會看到 vs-code 左方檔案總管已經出現專案所需的檔案。&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;dotnet new console
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;接著使用 run 執行程式，就會看到 Hello World。&lt;/p&gt;
+&lt;p&gt;接著使用 &lt;strong&gt;run&lt;/strong&gt; 執行程式，就會看到 &lt;strong&gt;Hello World&lt;/strong&gt;。&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;dotnet run
 &lt;/code&gt;&lt;/pre&gt;
@@ -34,7 +84,7 @@
 
 &lt;h2 id=&quot;開發及偵錯&quot;&gt;開發及偵錯&lt;/h2&gt;
 
-&lt;p&gt;第一個檔案是 hello_world.csproj，內容是專案相關設定。&lt;/p&gt;
+&lt;p&gt;第一個檔案是 &lt;strong&gt;hello_world.csproj&lt;/strong&gt;，內容是專案相關設定。&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;Project Sdk=&quot;Microsoft.NET.Sdk&quot;&amp;gt;
 
@@ -48,7 +98,7 @@
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;另一個檔案是 Program.cs，是已經寫好的 Hello World 程式碼。&lt;/p&gt;
+&lt;p&gt;另一個檔案是 &lt;strong&gt;Program.cs&lt;/strong&gt;，是已經寫好的 Hello World 程式碼。&lt;/p&gt;
 
 &lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 
@@ -73,7 +123,7 @@
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/2018-01-14-visual-studio-code-with-dotnet-core/004.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;接著稍微調整 Program.cs 程式碼如下：&lt;/p&gt;
+&lt;p&gt;接著稍微調整 &lt;strong&gt;Program.cs&lt;/strong&gt; 程式碼如下：&lt;/p&gt;
 
 &lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
@@ -84,7 +134,7 @@
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;在 Console.WriteLine 下一行設定中斷點 (小紅點)，然後執行 F5，別忘了左邊選擇偵錯可以看到變數資訊，滑鼠移到 message 變數也會顯示該變數的值，最下方也有顯示輸出的結果。&lt;/p&gt;
+&lt;p&gt;在 &lt;strong&gt;Console.WriteLine&lt;/strong&gt; 下一行設定中斷點 (小紅點)，然後執行 F5，別忘了左邊選擇偵錯可以看到變數資訊，滑鼠移到 &lt;strong&gt;message&lt;/strong&gt; 變數也會顯示該變數的值，最下方也有顯示輸出的結果。&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/2018-01-14-visual-studio-code-with-dotnet-core/005.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
@@ -92,7 +142,7 @@
 
 &lt;p&gt;如果只能顯示寫好的結果就不好玩了，接著我們讓程式能接受輸入的名字。&lt;/p&gt;
 
-&lt;p&gt;首先要調整 vs-code 偵錯相關設定檔 .vscode/launch.json，找到 console 參數，改為 integratedTerminal。&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;首先要調整 vs-code 偵錯相關設定檔 &lt;strong&gt;.vscode/launch.json&lt;/strong&gt;，找到 &lt;strong&gt;console&lt;/strong&gt; 參數，改為 &lt;strong&gt;integratedTerminal&lt;/strong&gt;。&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&quot;console&quot;: &quot;integratedTerminal&quot;,
 &lt;/code&gt;&lt;/pre&gt;
@@ -110,7 +160,7 @@
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;再次按下 F5 後，切換到終端機 (Ctrl+`)&lt;/p&gt;
+&lt;p&gt;再次按下 F5 後，切換到終端機 ( Ctrl+` )&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/2018-01-14-visual-studio-code-with-dotnet-core/006.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
@@ -655,68 +705,4 @@ Compute Engine is IaaS (受管理的基礎架構 DevOps)&lt;/p&gt;
       &lt;p&gt;https://cloud.google.com/shell/pricing&amp;nbsp;&lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
   &lt;/ol&gt;
-&lt;/div&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="GCP" /><category term="心得" /><summary type="html">2017-04-19 Google Cloud OnBoard 活動在台北國際會議中心舉行。</summary></entry><entry><title type="html">在 Ubuntu 安裝 SDL2 和 C++</title><link href="https://twblog.hongjianching.com/2017/04/03/install-sdl2-with-cpp-on-ubuntu/" rel="alternate" type="text/html" title="在 Ubuntu 安裝 SDL2 和 C++" /><published>2017-04-03T00:00:00+08:00</published><updated>2017-04-03T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2017/04/03/install-sdl2-with-cpp-on-ubuntu</id><content type="html" xml:base="https://twblog.hongjianching.com/2017/04/03/install-sdl2-with-cpp-on-ubuntu/">&lt;h1 id=&quot;install-sdl2-on-ubuntu&quot;&gt;Install SDL2 on Ubuntu&lt;/h1&gt;
-
-&lt;p&gt;可以簡單的從套件安裝或是自行編譯&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt-get install libsdl2-dev
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h1 id=&quot;sdl2-example-code-with-c&quot;&gt;SDL2 example code with C++&lt;/h1&gt;
-
-&lt;p&gt;這段範例程式基於 SDL2 文件，額外加上了 C++ 函式庫。&lt;/p&gt;
-
-&lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;#include &quot;SDL.h&quot;
-#include &amp;lt;iostream&amp;gt;
-&lt;/span&gt;
-&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;argc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;argv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[])&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SDL_Init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SDL_INIT_VIDEO&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SDL_INIT_AUDIO&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;SDL_Log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Unable to initialize SDL: %s&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SDL_GetError&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cout&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Hello SDL2 with C++&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;endl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;n&quot;&gt;SDL_Quit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h1 id=&quot;build-example-code&quot;&gt;Build example code&lt;/h1&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;g++ -I /usr/include/SDL2 main.cpp -o sdl-test -lSDL2 -lSDL2main
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Note: &lt;a href=&quot;https://www.howtogeek.com/howto/ubuntu/see-where-a-package-is-installed-on-ubuntu/&quot;&gt;See Where a Package is Installed on Ubuntu&lt;/a&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;run-the-exmaple&quot;&gt;Run the exmaple&lt;/h1&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;./sdl-test
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;如果執行正確的話，你會看到如下所示：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2017-04-03-install-sdl2-and-build-example-with-c++-on-ubuntu/demo.png&quot; alt=&quot;demo image&quot; /&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;other&quot;&gt;Other&lt;/h1&gt;
-
-&lt;p&gt;如果你在 Ubuntu Server 下執行的話，可能會出現錯誤：&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Unable to initialize SDL: Failed to connect to the Mir Server
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;因為這段範例有初始化 SDL_INIT_VIDEO 子系統，如果你不需要用到可以移除他。&lt;/p&gt;
-&lt;div class=&quot;footnotes&quot;&gt;
-  &lt;ol&gt;
-    &lt;li id=&quot;fn:1&quot;&gt;
-      &lt;p&gt;&lt;a href=&quot;http://gigi.nullneuron.net/gigilabs/how-to-set-up-sdl2-on-linux/&quot;&gt;HOW TO SET UP SDL2 ON LINUX&lt;/a&gt;&amp;nbsp;&lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/div&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="Cpp" /><category term="SDL2" /><category term="Ubuntu" /><summary type="html">Install SDL2 on Ubuntu</summary></entry></feed>
+&lt;/div&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="GCP" /><category term="心得" /><summary type="html">2017-04-19 Google Cloud OnBoard 活動在台北國際會議中心舉行。</summary></entry></feed>

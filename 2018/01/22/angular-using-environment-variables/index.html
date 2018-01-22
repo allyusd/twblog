@@ -19,12 +19,12 @@
 
 
 
-<title>ASP.Net Core Web API 使用 Entity Framework Core 和 PostgreSQL - Jian-Ching 記事本</title>
+<title>Angular 使用環境變數 - Jian-Ching 記事本</title>
 
 
 
 
-<meta name="description" content="ASP.Net Core Web API 使用 Entity Framework Core 和 PostgreSQL">
+<meta name="description" content="Angular 專案中，如果有依環境不同而需要不同的設定時，像是 apiUrl，該如何處理？">
 
 
 
@@ -33,15 +33,15 @@
 
 <meta property="og:locale" content="zh_TW">
 <meta property="og:site_name" content="Jian-Ching 記事本">
-<meta property="og:title" content="ASP.Net Core Web API 使用 Entity Framework Core 和 PostgreSQL">
+<meta property="og:title" content="Angular 使用環境變數">
 
 
-  <link rel="canonical" href="https://twblog.HongJianChing.com/2018/01/15/asp-dotnet-core-web-api-using-entity-framework-core-and-postgresql/">
-  <meta property="og:url" content="https://twblog.HongJianChing.com/2018/01/15/asp-dotnet-core-web-api-using-entity-framework-core-and-postgresql/">
+  <link rel="canonical" href="https://twblog.HongJianChing.com/2018/01/22/angular-using-environment-variables/">
+  <meta property="og:url" content="https://twblog.HongJianChing.com/2018/01/22/angular-using-environment-variables/">
 
 
 
-  <meta property="og:description" content="ASP.Net Core Web API 使用 Entity Framework Core 和 PostgreSQL">
+  <meta property="og:description" content="Angular 專案中，如果有依環境不同而需要不同的設定時，像是 apiUrl，該如何處理？">
 
 
 
@@ -56,7 +56,7 @@
 
 
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2018-01-15T00:00:00+08:00">
+  <meta property="article:published_time" content="2018-01-22T00:00:00+08:00">
 
 
 
@@ -278,72 +278,67 @@
 
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
-    <meta itemprop="headline" content="ASP.Net Core Web API 使用 Entity Framework Core 和 PostgreSQL">
-    <meta itemprop="description" content="ASP.Net Core Web API 使用 Entity Framework Core 和 PostgreSQL">
-    <meta itemprop="datePublished" content="January 15, 2018">
+    <meta itemprop="headline" content="Angular 使用環境變數">
+    <meta itemprop="description" content="Angular 專案中，如果有依環境不同而需要不同的設定時，像是 apiUrl，該如何處理？">
+    <meta itemprop="datePublished" content="January 22, 2018">
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 class="page__title" itemprop="headline">ASP.Net Core Web API 使用 Entity Framework Core 和 PostgreSQL
+          <h1 class="page__title" itemprop="headline">Angular 使用環境變數
 </h1>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        <p>ASP.Net Core Web API 使用 Entity Framework Core 和 PostgreSQL</p>
+        <p>Angular 專案中，如果有依環境不同而需要不同的設定時，像是 apiUrl，該如何處理？</p>
 
-<h2 id="前提">前提</h2>
+<h2 id="開發環境及生產環境">開發環境及生產環境</h2>
 
-<p>如果你還沒有準備好 Visual Studio Code with .Net Core 開發環境，請先參考<a href="https://twblog.hongjianching.com/2018/01/14/visual-studio-code-with-dotnet-core/">使用 Visual Studio Code 開發 .Net Core</a></p>
+<p>使用 <a href="https://github.com/angular/angular-cli">Angular CLI</a> 建立的專案預設會有兩個環境設定，一個是開發環境，另一個是生產環境，分別由 <strong>environment.ts</strong> 及 <strong>environment.prod.ts</strong> 兩個檔案所描述。</p>
 
-<p>接著依照<a href="https://docs.microsoft.com/zh-tw/aspnet/core/tutorials/web-api-vsc">在 macOS、Linux 和 Windows 上，使用 ASP.NET Core MVC 和 Visual Studio Code 建立 Web API</a>完成 Todo WebApi 的範例專案。</p>
+<p>常用的指令，像是 ng serve 時，預設使用開發環境；使用 ng build –prod 時，則會使用生產環境。</p>
 
-<h2 id="使用-entity-framework-core-和-postgresql">使用 Entity Framework Core 和 PostgreSQL</h2>
+<h2 id="新增及使用環境變數">新增及使用環境變數</h2>
 
-<p>在 <strong>TodoApi.csproj</strong> 新增套件參考</p>
+<p>使 apiUrl 為例，設定兩個檔案</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.0.0" /&gt;
-&lt;PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.0.1" /&gt;
+<p>environment.ts:</p>
+<div class="language-ts highlighter-rouge"><pre class="highlight"><code><span class="k">export</span> <span class="kd">const</span> <span class="nx">environment</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">production</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="na">apiUrl</span><span class="p">:</span> <span class="s1">'http://localhost/api/'</span><span class="p">,</span>
+<span class="p">};</span>
+
 </code></pre>
 </div>
 
-<p>在 <strong>appsettings.json</strong> 新增連接字串</p>
+<p>environment.prod.ts:</p>
+<div class="language-ts highlighter-rouge"><pre class="highlight"><code><span class="k">export</span> <span class="kd">const</span> <span class="nx">environment</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">production</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="na">apiUrl</span><span class="p">:</span> <span class="s1">'http://demo.com/api/'</span><span class="p">,</span>
+<span class="p">};</span>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>"ConnectionStrings": { "TodoContext": "Server=localhost;User ID=postgres;Password=mysecretpassword;Database=postgres" }
 </code></pre>
 </div>
 
-<p>接著修改 <strong>Startup.cs</strong> 程式碼，註解原本的 InMemoryDatabase，改用 PostgreSQL。</p>
+<p>然後在 service 加入</p>
 
-<div class="language-csharp highlighter-rouge"><pre class="highlight"><code><span class="c1">// services.AddDbContext&lt;TodoContext&gt;(opt =&gt; opt.UseInMemoryDatabase("TodoList"));
-</span><span class="kt">var</span> <span class="n">connectionString</span> <span class="p">=</span> <span class="n">Configuration</span><span class="p">.</span><span class="nf">GetConnectionString</span><span class="p">(</span><span class="s">"TodoContext"</span><span class="p">);</span>
-<span class="n">services</span><span class="p">.</span><span class="nf">AddEntityFrameworkNpgsql</span><span class="p">().</span><span class="n">AddDbContext</span><span class="p">&lt;</span><span class="n">TodoContext</span><span class="p">&gt;(</span><span class="n">options</span> <span class="p">=&gt;</span> <span class="n">options</span><span class="p">.</span><span class="nf">UseNpgsql</span><span class="p">(</span><span class="n">connectionString</span><span class="p">));</span>
+<div class="language-ts highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">environment</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'../../environments/environment'</span><span class="p">;</span>
+<span class="err">‧‧‧</span>
+<span class="k">private</span> <span class="nx">baseUrl</span> <span class="err">:</span> <span class="kr">string</span> <span class="o">=</span> <span class="nx">environment</span><span class="p">.</span><span class="nx">apiUrl</span> <span class="o">+</span> <span class="s1">'foo'</span><span class="p">;</span>
+<span class="err">‧‧‧</span>
 </code></pre>
 </div>
 
-<p>最後別忘了在資料庫建立表單。</p>
-
-<p>注意，因為 C# 預設命名慣例是 PascalCase，而 PostgreSQL 預設命名慣例是 lower_case_with_underscores，所以如果 sql 的表格或欄位名稱不加上雙引號，會造成兩者不一致，這個範例是依 C# 命名慣例為主，個人習慣以 PostgreSQL 為主。</p>
-
-<div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="nv">"TodoItems"</span> <span class="p">(</span>
-    <span class="nv">"Id"</span> <span class="n">serial</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
-    <span class="nv">"Name"</span> <span class="n">varchar</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
-    <span class="nv">"IsComplete"</span> <span class="n">bool</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
-    <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">"Id"</span><span class="p">)</span>
-<span class="p">);</span>
-</code></pre>
-</div>
-
-<p>以上就完成使用 Entity Framework Core 和 PostgreSQL 取代原本 InMemoryDatabase，資料可以保留下來嘍！</p>
-
-<p><img src="/assets/images/2018-01-15-asp-dotnet-core-web-api-using-entity-framework-core-and-postgresql/001.png" alt="" /></p>
+<p>這麼一來，在開發環境時，baseUrl 是 ‘http://localhost/api/foo’，在生產環境時，baseUrl 是 ‘http://demo.com/api/foo’，這樣就可以達到開發跟生產環境使用不同的設定。</p>
 
 <h2 id="reference">Reference</h2>
 
-<p><a href="http://www.npgsql.org/efcore/index.html">Npgsql - Getting Started</a></p>
+<p><a href="https://medium.com/beautiful-angular/angular-2-and-environment-variables-59c57ba643be">Angular 2 and environment variables</a></p>
+
+<p><a href="https://alligator.io/angular/environment-variables/">Environment Variables in Angular</a></p>
 
         
       </section>
@@ -364,31 +359,7 @@
     
       
       
-      <a href="https://twblog.hongjianching.com/tags/#net-core" class="page__taxonomy-item" rel="tag">.Net-Core</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://twblog.hongjianching.com/tags/#asp-net" class="page__taxonomy-item" rel="tag">ASP.NET</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://twblog.hongjianching.com/tags/#csharp" class="page__taxonomy-item" rel="tag">CSharp</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://twblog.hongjianching.com/tags/#entity-framework-core" class="page__taxonomy-item" rel="tag">Entity-Framework-Core</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://twblog.hongjianching.com/tags/#postgresql" class="page__taxonomy-item" rel="tag">PostgreSQL</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://twblog.hongjianching.com/tags/#visual-studio-code" class="page__taxonomy-item" rel="tag">Visual-Studio-Code</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://twblog.hongjianching.com/tags/#web-api" class="page__taxonomy-item" rel="tag">Web-API</a>
+      <a href="https://twblog.hongjianching.com/tags/#angular" class="page__taxonomy-item" rel="tag">Angular</a>
     
     </span>
   </p>
@@ -397,7 +368,7 @@
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2018-01-15T00:00:00+08:00">January 15, 2018</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2018-01-22T00:00:00+08:00">January 22, 2018</time></p>
         
       </footer>
 
@@ -406,25 +377,24 @@
     <h4 class="page__share-title">分享到</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=ASP.Net Core Web API 使用 Entity Framework Core 和 PostgreSQL https://twblog.hongjianching.com/2018/01/15/asp-dotnet-core-web-api-using-entity-framework-core-and-postgresql/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=Angular 使用環境變數 https://twblog.hongjianching.com/2018/01/22/angular-using-environment-variables/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2018/01/15/asp-dotnet-core-web-api-using-entity-framework-core-and-postgresql/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2018/01/22/angular-using-environment-variables/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2018/01/15/asp-dotnet-core-web-api-using-entity-framework-core-and-postgresql/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2018/01/22/angular-using-environment-variables/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2018/01/15/asp-dotnet-core-web-api-using-entity-framework-core-and-postgresql/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2018/01/22/angular-using-environment-variables/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="https://twblog.hongjianching.com/2018/01/14/visual-studio-code-with-dotnet-core/" class="pagination--pager" title="使用 Visual Studio Code 開發 .Net Core
+      <a href="https://twblog.hongjianching.com/2018/01/15/asp-dotnet-core-web-api-using-entity-framework-core-and-postgresql/" class="pagination--pager" title="ASP.Net Core Web API 使用 Entity Framework Core 和 PostgreSQL
 ">較舊</a>
     
     
-      <a href="https://twblog.hongjianching.com/2018/01/22/angular-using-environment-variables/" class="pagination--pager" title="Angular 使用環境變數
-">較新</a>
+      <a href="#" class="pagination--pager disabled">較新</a>
     
   </nav>
 
@@ -486,19 +456,7 @@
   ga('send', 'pageview');
   
   
-    ga('send', 'event', 'taggedPost', 'view', 'Visual-Studio-Code');
-  
-    ga('send', 'event', 'taggedPost', 'view', '.Net-Core');
-  
-    ga('send', 'event', 'taggedPost', 'view', 'ASP.NET');
-  
-    ga('send', 'event', 'taggedPost', 'view', 'Web-API');
-  
-    ga('send', 'event', 'taggedPost', 'view', 'Entity-Framework-Core');
-  
-    ga('send', 'event', 'taggedPost', 'view', 'PostgreSQL');
-  
-    ga('send', 'event', 'taggedPost', 'view', 'CSharp');
+    ga('send', 'event', 'taggedPost', 'view', 'Angular');
   
   
 </script>

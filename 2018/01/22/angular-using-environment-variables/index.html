@@ -323,7 +323,7 @@
 </code></pre>
 </div>
 
-<p>然後在 service 加入</p>
+<p>然後編輯 foo.service.ts</p>
 
 <div class="language-ts highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">environment</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'../../environments/environment'</span><span class="p">;</span>
 <span class="err">‧‧‧</span>
@@ -332,7 +332,11 @@
 </code></pre>
 </div>
 
-<p>這麼一來，在開發環境時，baseUrl 是 ‘http://localhost/api/foo’，在生產環境時，baseUrl 是 ‘http://demo.com/api/foo’，這樣就可以達到開發跟生產環境使用不同的設定。</p>
+<p>在開發環境時，baseUrl 是 ‘http://localhost/api/foo’</p>
+
+<p>在生產環境時，baseUrl 是 ‘http://demo.com/api/foo’</p>
+
+<p>這樣就可以達到開發跟生產環境使用不同的設定。</p>
 
 <h2 id="reference">Reference</h2>
 

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-01-22T21:04:57+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">Angular 使用環境變數</title><link href="https://twblog.hongjianching.com/2018/01/22/angular-using-environment-variables/" rel="alternate" type="text/html" title="Angular 使用環境變數" /><published>2018-01-22T00:00:00+08:00</published><updated>2018-01-22T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/01/22/angular-using-environment-variables</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/01/22/angular-using-environment-variables/">&lt;p&gt;Angular 專案中，如果有依環境不同而需要不同的設定時，像是 apiUrl，該如何處理？&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-01-22T21:08:49+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">Angular 使用環境變數</title><link href="https://twblog.hongjianching.com/2018/01/22/angular-using-environment-variables/" rel="alternate" type="text/html" title="Angular 使用環境變數" /><published>2018-01-22T00:00:00+08:00</published><updated>2018-01-22T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/01/22/angular-using-environment-variables</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/01/22/angular-using-environment-variables/">&lt;p&gt;Angular 專案中，如果有依環境不同而需要不同的設定時，像是 apiUrl，該如何處理？&lt;/p&gt;
 
 &lt;h2 id=&quot;開發環境及生產環境&quot;&gt;開發環境及生產環境&lt;/h2&gt;
 
@@ -28,7 +28,7 @@
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;然後在 service 加入&lt;/p&gt;
+&lt;p&gt;然後編輯 foo.service.ts&lt;/p&gt;
 
 &lt;div class=&quot;language-ts highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;environment&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'../../environments/environment'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;err&quot;&gt;‧‧‧&lt;/span&gt;
@@ -37,7 +37,11 @@
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;這麼一來，在開發環境時，baseUrl 是 ‘http://localhost/api/foo’，在生產環境時，baseUrl 是 ‘http://demo.com/api/foo’，這樣就可以達到開發跟生產環境使用不同的設定。&lt;/p&gt;
+&lt;p&gt;在開發環境時，baseUrl 是 ‘http://localhost/api/foo’&lt;/p&gt;
+
+&lt;p&gt;在生產環境時，baseUrl 是 ‘http://demo.com/api/foo’&lt;/p&gt;
+
+&lt;p&gt;這樣就可以達到開發跟生產環境使用不同的設定。&lt;/p&gt;
 
 &lt;h2 id=&quot;reference&quot;&gt;Reference&lt;/h2&gt;
 

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-01-22T21:08:49+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">Angular 使用環境變數</title><link href="https://twblog.hongjianching.com/2018/01/22/angular-using-environment-variables/" rel="alternate" type="text/html" title="Angular 使用環境變數" /><published>2018-01-22T00:00:00+08:00</published><updated>2018-01-22T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/01/22/angular-using-environment-variables</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/01/22/angular-using-environment-variables/">&lt;p&gt;Angular 專案中，如果有依環境不同而需要不同的設定時，像是 apiUrl，該如何處理？&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-01-24T14:26:55+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">Angular 使用環境變數</title><link href="https://twblog.hongjianching.com/2018/01/22/angular-using-environment-variables/" rel="alternate" type="text/html" title="Angular 使用環境變數" /><published>2018-01-22T00:00:00+08:00</published><updated>2018-01-22T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/01/22/angular-using-environment-variables</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/01/22/angular-using-environment-variables/">&lt;p&gt;Angular 專案中，如果有依環境不同而需要不同的設定時，像是 apiUrl，該如何處理？&lt;/p&gt;
 
 &lt;h2 id=&quot;開發環境及生產環境&quot;&gt;開發環境及生產環境&lt;/h2&gt;
 
@@ -238,7 +238,7 @@
       &lt;p&gt;&lt;a href=&quot;https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md#console-terminal-window&quot;&gt;Configurating launch.json for C# debugging&lt;/a&gt;&amp;nbsp;&lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
   &lt;/ol&gt;
-&lt;/div&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="Visual-Studio-Code" /><category term=".Net-Core" /><category term="CSharp" /><summary type="html">.Net Core 是跨平台解決方案，同時 Visual Studio Code 也是跨平台開發工具，所以兩者搭配是很好的選擇。</summary></entry><entry><title type="html">Ubuntu 自動更新安全性套件</title><link href="https://twblog.hongjianching.com/2017/12/20/ubuntu-automatic-security-updates/" rel="alternate" type="text/html" title="Ubuntu 自動更新安全性套件" /><published>2017-12-20T00:00:00+08:00</published><updated>2017-12-20T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2017/12/20/ubuntu-automatic-security-updates</id><content type="html" xml:base="https://twblog.hongjianching.com/2017/12/20/ubuntu-automatic-security-updates/">&lt;p&gt;希望 Ubuntu 能自動更新安全性套件，避免手動管理，這個想法可以透過無人值守更新套件 unattended-upgrades 簡單的完成任務。&lt;/p&gt;
+&lt;/div&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="Visual-Studio-Code" /><category term=".Net-Core" /><category term="CSharp" /><summary type="html">.Net Core 是跨平台解決方案，同時 Visual Studio Code 也是跨平台開發工具，所以兩者搭配是很好的選擇。</summary></entry><entry><title type="html">Best Internal Top Level Domain</title><link href="https://twblog.hongjianching.com/2017/12/21/best-internal-top-level-domain/" rel="alternate" type="text/html" title="Best Internal Top Level Domain" /><published>2017-12-21T00:00:00+08:00</published><updated>2017-12-21T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2017/12/21/best-internal-top-level-domain</id><content type="html" xml:base="https://twblog.hongjianching.com/2017/12/21/best-internal-top-level-domain/"></content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><summary type="html"></summary></entry><entry><title type="html">Ubuntu 自動更新安全性套件</title><link href="https://twblog.hongjianching.com/2017/12/20/ubuntu-automatic-security-updates/" rel="alternate" type="text/html" title="Ubuntu 自動更新安全性套件" /><published>2017-12-20T00:00:00+08:00</published><updated>2017-12-20T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2017/12/20/ubuntu-automatic-security-updates</id><content type="html" xml:base="https://twblog.hongjianching.com/2017/12/20/ubuntu-automatic-security-updates/">&lt;p&gt;希望 Ubuntu 能自動更新安全性套件，避免手動管理，這個想法可以透過無人值守更新套件 unattended-upgrades 簡單的完成任務。&lt;/p&gt;
 
 &lt;h2 id=&quot;安裝及設定套件&quot;&gt;安裝及設定套件&lt;/h2&gt;
 &lt;p&gt;首先安裝套件&lt;/p&gt;
@@ -507,59 +507,4 @@ APT::Periodic::Unattended-Upgrade &quot;1&quot;;
       &lt;p&gt;&lt;a href=&quot;https://alexanderzeitler.com/articles/Fixing-Chrome-missing_subjectAltName-selfsigned-cert-openssl/&quot;&gt;Fixing Chrome 58+ [missing_subjectAltName] with openssl when using self signed certificates&lt;/a&gt;&amp;nbsp;&lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
   &lt;/ol&gt;
-&lt;/div&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="Chrome" /><summary type="html">Chrome 58 版之後 https 網站出現錯誤 missing_subjectAltName</summary></entry><entry><title type="html">Linux command netcat</title><link href="https://twblog.hongjianching.com/2017/05/04/linux-command-netcat/" rel="alternate" type="text/html" title="Linux command netcat" /><published>2017-05-04T00:00:00+08:00</published><updated>2017-05-04T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2017/05/04/linux-command-netcat</id><content type="html" xml:base="https://twblog.hongjianching.com/2017/05/04/linux-command-netcat/">&lt;p&gt;Netcat 是 Linux 下的網路工具，這裡用來進行網路頻寬測試。&lt;/p&gt;
-
-&lt;h1 id=&quot;ubuntu-install&quot;&gt;Ubuntu Install&lt;/h1&gt;
-
-&lt;p&gt;Ubuntu 16.04.2 LTS 版本已預裝 netcat, 如果你的環境沒有可以自行安裝&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt-get install netcat
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h1 id=&quot;server-side&quot;&gt;Server Side&lt;/h1&gt;
-
-&lt;p&gt;Netcat 開啟 port 12345 進行偵聽, 等待 client 連線&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;nc -vvlnp 12345 &amp;gt;/dev/null
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;如果想要使用系統 port 像是 80 的話需要 root&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo nc -vvlnp 80 &amp;gt;/dev/null
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h1 id=&quot;client-side&quot;&gt;Client Side&lt;/h1&gt;
-
-&lt;p&gt;使用 dd 產生資料，並透過 netcat 傳送到 server
-此範例會產生 1GM 的資料量 (1MB * 1K)&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;dd &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/dev/zero &lt;span class=&quot;nv&quot;&gt;bs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1M &lt;span class=&quot;nv&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1K | nc -vvn 13.75.44.147 80
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h1 id=&quot;demo-result&quot;&gt;Demo Result&lt;/h1&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Connection to 13.75.44.147 80 port &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;tcp/&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; succeeded!
-1024+0 records &lt;span class=&quot;k&quot;&gt;in
-&lt;/span&gt;1024+0 records out
-1073741824 bytes &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1.1 GB, 1.0 GiB&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; copied, 14.2554 s, 75.3 MB/s
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h1 id=&quot;infinite-loop-server&quot;&gt;Infinite Loop Server&lt;/h1&gt;
-
-&lt;p&gt;如果需要進行連續測試的話可以使用 shell 進行迴圈&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;while &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;true
-&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;do
-    &lt;/span&gt;sudo nc -vvlnp 80 &amp;gt;/dev/null
-&lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h1 id=&quot;ref&quot;&gt;Ref&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&quot;https://askubuntu.com/questions/7976/how-do-you-test-the-network-speed-betwen-two-boxes&quot;&gt;How do you test the network speed betwen two boxes?&lt;/a&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="Command-Line-Tools" /><category term="netcat" /><summary type="html">Netcat 是 Linux 下的網路工具，這裡用來進行網路頻寬測試。</summary></entry></feed>
+&lt;/div&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="Chrome" /><summary type="html">Chrome 58 版之後 https 網站出現錯誤 missing_subjectAltName</summary></entry></feed>

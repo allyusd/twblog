@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-01-24T14:29:57+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">Angular 使用環境變數</title><link href="https://twblog.hongjianching.com/2018/01/22/angular-using-environment-variables/" rel="alternate" type="text/html" title="Angular 使用環境變數" /><published>2018-01-22T00:00:00+08:00</published><updated>2018-01-22T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/01/22/angular-using-environment-variables</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/01/22/angular-using-environment-variables/">&lt;p&gt;Angular 專案中，如果有依環境不同而需要不同的設定時，像是 apiUrl，該如何處理？&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-01-24T14:34:18+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">Angular 使用環境變數</title><link href="https://twblog.hongjianching.com/2018/01/22/angular-using-environment-variables/" rel="alternate" type="text/html" title="Angular 使用環境變數" /><published>2018-01-22T00:00:00+08:00</published><updated>2018-01-22T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/01/22/angular-using-environment-variables</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/01/22/angular-using-environment-variables/">&lt;p&gt;Angular 專案中，如果有依環境不同而需要不同的設定時，像是 apiUrl，該如何處理？&lt;/p&gt;
 
 &lt;h2 id=&quot;開發環境及生產環境&quot;&gt;開發環境及生產環境&lt;/h2&gt;
 
@@ -243,12 +243,12 @@
 &lt;ul&gt;
   &lt;li&gt;server1.dev&lt;/li&gt;
   &lt;li&gt;server1.test&lt;/li&gt;
-  &lt;li&gt;server1.apple (apple maybe a your product name)&lt;/li&gt;
+  &lt;li&gt;server1.apple (apple 也許是你的產品名稱)&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;要注意了，這可能導致一些麻煩，如果你是個謹慎的人，在使用網域前先在 &lt;a href=&quot;https://data.iana.org/TLD/tlds-alpha-by-domain.txt&quot;&gt;IANA TLD List&lt;/a&gt; 或是 &lt;a href=&quot;https://en.wikipedia.org/wiki/List_of_Internet_top-level_domains&quot;&gt;Wiki - List of Internet top-level domains&lt;/a&gt; 確認現實中不存在，然而這不代表之後不會被買走。&lt;/p&gt;
+&lt;p&gt;要注意了，這可能導致一些麻煩&lt;sup id=&quot;fnref:3&quot;&gt;&lt;a href=&quot;#fn:3&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;，如果你是個謹慎的人，在使用網域前先在 &lt;a href=&quot;https://data.iana.org/TLD/tlds-alpha-by-domain.txt&quot;&gt;IANA TLD List&lt;/a&gt; 或是 &lt;a href=&quot;https://en.wikipedia.org/wiki/List_of_Internet_top-level_domains&quot;&gt;Wiki - List of Internet top-level domains&lt;/a&gt; 確認現實中不存在，但是這不代表之後不會被買走。&lt;/p&gt;
 
-&lt;p&gt;事實上 .dev 已經是 Google 所有，而且計劃繼續擁有更多&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;。同樣的 .apple 也已經被買下，正是你熟悉的 Apple 公司。&lt;sup id=&quot;fnref:2&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;不要使用別人的網域，像是&lt;a href=&quot;https://ma.ttias.be/chrome-force-dev-domains-https-via-preloaded-hsts/&quot;&gt;這個事件&lt;/a&gt;就可能受到波及。&lt;sup id=&quot;fnref:3&quot;&gt;&lt;a href=&quot;#fn:3&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;事實上 .dev 已經是 Google 所有，而且計劃繼續擁有更多&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;。同樣的 .apple 也已經被買下，正是你熟悉的 Apple 公司。&lt;sup id=&quot;fnref:2&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 
 &lt;p&gt;不論是不是誤打誤中，幸運的 .test 是個可接受的選項，他在 &lt;a href=&quot;https://tools.ietf.org/html/rfc2606&quot;&gt;RFC2606&lt;/a&gt; 被明確的保留下來做為&lt;strong&gt;測試&lt;/strong&gt;使用。該文件只保留了四個頂級網域和三個次級網域。&lt;/p&gt;
 
@@ -283,14 +283,14 @@
 &lt;p&gt;&lt;a href=&quot;https://serverfault.com/questions/17255/top-level-domain-domain-suffix-for-private-network&quot;&gt;Top level domain/domain suffix for private network?&lt;/a&gt;&lt;/p&gt;
 &lt;div class=&quot;footnotes&quot;&gt;
   &lt;ol&gt;
+    &lt;li id=&quot;fn:3&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://ma.ttias.be/chrome-force-dev-domains-https-via-preloaded-hsts/&quot;&gt;Chrome 63 forces .dev domains to HTTPS via preloaded HSTS&lt;/a&gt;&amp;nbsp;&lt;a href=&quot;#fnref:3&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
     &lt;li id=&quot;fn:1&quot;&gt;
       &lt;p&gt;&lt;a href=&quot;https://www.registry.google/&quot;&gt;Google Registry&lt;/a&gt;&amp;nbsp;&lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
     &lt;li id=&quot;fn:2&quot;&gt;
       &lt;p&gt;&lt;a href=&quot;https://www.iana.org/domains/root/db&quot;&gt;IANA - Root Zone Database&lt;/a&gt;&amp;nbsp;&lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:3&quot;&gt;
-      &lt;p&gt;&lt;a href=&quot;https://ma.ttias.be/chrome-force-dev-domains-https-via-preloaded-hsts/&quot;&gt;Chrome 63 forces .dev domains to HTTPS via preloaded HSTS&lt;/a&gt;&amp;nbsp;&lt;a href=&quot;#fnref:3&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
   &lt;/ol&gt;
 &lt;/div&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="Domain" /><summary type="html">你是否會在內部網路使用一些自己發明的網域名稱呢？像是</summary></entry><entry><title type="html">Ubuntu 自動更新安全性套件</title><link href="https://twblog.hongjianching.com/2017/12/20/ubuntu-automatic-security-updates/" rel="alternate" type="text/html" title="Ubuntu 自動更新安全性套件" /><published>2017-12-20T00:00:00+08:00</published><updated>2017-12-20T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2017/12/20/ubuntu-automatic-security-updates</id><content type="html" xml:base="https://twblog.hongjianching.com/2017/12/20/ubuntu-automatic-security-updates/">&lt;p&gt;希望 Ubuntu 能自動更新安全性套件，避免手動管理，這個想法可以透過無人值守更新套件 unattended-upgrades 簡單的完成任務。&lt;/p&gt;

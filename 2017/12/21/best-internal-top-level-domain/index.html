@@ -19,12 +19,12 @@
 
 
 
-<title>Best Internal Top Level Domain - Jian-Ching 記事本</title>
+<title>最好的內部頂級網域 - Jian-Ching 記事本</title>
 
 
 
 
-<meta name="description" content="">
+<meta name="description" content="你是否會在內部網路使用一些自己發明的網域名稱呢？像是">
 
 
 
@@ -33,7 +33,7 @@
 
 <meta property="og:locale" content="zh_TW">
 <meta property="og:site_name" content="Jian-Ching 記事本">
-<meta property="og:title" content="Best Internal Top Level Domain">
+<meta property="og:title" content="最好的內部頂級網域">
 
 
   <link rel="canonical" href="https://twblog.HongJianChing.com/2017/12/21/best-internal-top-level-domain/">
@@ -41,7 +41,7 @@
 
 
 
-  <meta property="og:description" content="">
+  <meta property="og:description" content="你是否會在內部網路使用一些自己發明的網域名稱呢？像是">
 
 
 
@@ -278,22 +278,77 @@
 
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Best Internal Top Level Domain">
-    <meta itemprop="description" content="">
+    <meta itemprop="headline" content="最好的內部頂級網域">
+    <meta itemprop="description" content="你是否會在內部網路使用一些自己發明的網域名稱呢？像是">
     <meta itemprop="datePublished" content="December 21, 2017">
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 class="page__title" itemprop="headline">Best Internal Top Level Domain
+          <h1 class="page__title" itemprop="headline">最好的內部頂級網域
 </h1>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        
+        <p>你是否會在內部網路使用一些自己發明的網域名稱呢？像是</p>
+
+<ul>
+  <li>server1.dev</li>
+  <li>server1.test</li>
+  <li>server1.apple (apple maybe a your product name)</li>
+</ul>
+
+<p>要注意了，這可能導致一些麻煩，如果你是個謹慎的人，在使用網域前先在 <a href="https://data.iana.org/TLD/tlds-alpha-by-domain.txt">IANA TLD List</a> 或是 <a href="https://en.wikipedia.org/wiki/List_of_Internet_top-level_domains">Wiki - List of Internet top-level domains</a> 確認現實中不存在，然而這不代表之後不會被買走。</p>
+
+<p>事實上 .dev 已經是 Google 所有，而且計劃繼續擁有更多<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup>。同樣的 .apple 也已經被買下，正是你熟悉的 Apple 公司。<sup id="fnref:2"><a href="#fn:2" class="footnote">2</a></sup>不要使用別人的網域，像是<a href="https://ma.ttias.be/chrome-force-dev-domains-https-via-preloaded-hsts/">這個事件</a>就可能受到波及。<sup id="fnref:3"><a href="#fn:3" class="footnote">3</a></sup></p>
+
+<p>不論是不是誤打誤中，幸運的 .test 是個可接受的選項，他在 <a href="https://tools.ietf.org/html/rfc2606">RFC2606</a> 被明確的保留下來做為<strong>測試</strong>使用。該文件只保留了四個頂級網域和三個次級網域。</p>
+
+<ul>
+  <li>.test</li>
+  <li>.example</li>
+  <li>.invalid</li>
+  <li>.localhost</li>
+  <li>example.com</li>
+  <li>example.net</li>
+  <li>example.org</li>
+</ul>
+
+<p>雖然有人提出<a href="https://tools.ietf.org/html/draft-chapin-rfc2606bis-00">建議</a>希望保留更多的頂級網域，像是 .local、.localdomain、.domain、.lan、.home、.host，可惜沒有被接受。</p>
+
+<p>最好的方式是直接買一個網域，建立次級網域當內部使用。</p>
+
+<p>像是購買 allyusd.com，然後使用 dev.allyusd.com 當作內部網域。</p>
+
+<p>另一個可接受的方式是使用 .test 或是 .example，因為 .invalid 語義上不太好，而 .localhost 又<a href="https://tools.ietf.org/html/draft-west-let-localhost-be-localhost-06">有人提出</a>希望他真的是 localhost。</p>
+
+<h2 id="reference">Reference</h2>
+
+<p><a href="https://www.pluralsight.com/blog/software-development/choose-internal-top-level-domain-name">Why MyCompany.Local is a Bad Idea</a></p>
+
+<p><a href="https://iyware.com/dont-use-dev-for-development/">Don’t Use .dev For Development</a></p>
+
+<p><a href="http://www.itprotoday.com/management-mobility/q-can-i-use-local-or-pvt-top-level-domain-tld-names-part-active-directory-ad">Q. Can I use the .local or .pvt top-level domain (TLD) names as part of an Active Directory (AD) tree name?</a></p>
+
+<p><a href="https://isc.sans.edu/forums/diary/Stop+Using+internal+Top+Level+Domain+Names/21095/">Stop Using “internal” Top Level Domain Names</a></p>
+
+<p><a href="https://serverfault.com/questions/17255/top-level-domain-domain-suffix-for-private-network">Top level domain/domain suffix for private network?</a></p>
+<div class="footnotes">
+  <ol>
+    <li id="fn:1">
+      <p><a href="https://www.registry.google/">Google Registry</a>&nbsp;<a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:2">
+      <p><a href="https://www.iana.org/domains/root/db">IANA - Root Zone Database</a>&nbsp;<a href="#fnref:2" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:3">
+      <p><a href="https://ma.ttias.be/chrome-force-dev-domains-https-via-preloaded-hsts/">Chrome 63 forces .dev domains to HTTPS via preloaded HSTS</a>&nbsp;<a href="#fnref:3" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
 
         
       </section>
@@ -301,6 +356,25 @@
       <footer class="page__meta">
         
         
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-tags" aria-hidden="true"></i> 標籤: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="https://twblog.hongjianching.com/tags/#domain" class="page__taxonomy-item" rel="tag">Domain</a>
+    
+    </span>
+  </p>
+
+
 
 
         
@@ -313,7 +387,7 @@
     <h4 class="page__share-title">分享到</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=Best Internal Top Level Domain https://twblog.hongjianching.com/2017/12/21/best-internal-top-level-domain/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=最好的內部頂級網域 https://twblog.hongjianching.com/2017/12/21/best-internal-top-level-domain/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
   <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2017/12/21/best-internal-top-level-domain/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
@@ -391,6 +465,10 @@
 
   ga('create', 'UA-9431648-15', 'auto');
   ga('send', 'pageview');
+  
+  
+    ga('send', 'event', 'taggedPost', 'view', 'Domain');
+  
   
 </script>
 

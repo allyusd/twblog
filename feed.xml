@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-01-25T23:02:51+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">Angular 使用環境變數</title><link href="https://twblog.hongjianching.com/2018/01/22/angular-using-environment-variables/" rel="alternate" type="text/html" title="Angular 使用環境變數" /><published>2018-01-22T00:00:00+08:00</published><updated>2018-01-22T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/01/22/angular-using-environment-variables</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/01/22/angular-using-environment-variables/">&lt;p&gt;Angular 專案中，如果有依環境不同而需要不同的設定時，像是 apiUrl，該如何處理？&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-01-25T23:07:37+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">Angular 使用環境變數</title><link href="https://twblog.hongjianching.com/2018/01/22/angular-using-environment-variables/" rel="alternate" type="text/html" title="Angular 使用環境變數" /><published>2018-01-22T00:00:00+08:00</published><updated>2018-01-22T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/01/22/angular-using-environment-variables</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/01/22/angular-using-environment-variables/">&lt;p&gt;Angular 專案中，如果有依環境不同而需要不同的設定時，像是 apiUrl，該如何處理？&lt;/p&gt;
 
 &lt;h2 id=&quot;開發環境及生產環境&quot;&gt;開發環境及生產環境&lt;/h2&gt;
 
@@ -554,32 +554,36 @@ APT::Periodic::Unattended-Upgrade &quot;1&quot;;
 
 &lt;h2 id=&quot;基本用法&quot;&gt;基本用法&lt;/h2&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;–style=allman
-大括號都在新的一行&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;–exclue=####
-排除特定檔案或目標&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;–ignore-exclude-errors-x / -xi
-忽略且不顯示被排除的項目&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;–suffix=none / -n
-不保留原始檔的備份&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;–recursive / -r / -R
-遞歸處理所有子目錄&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;–quiet / -q
-不會有任何的訊息&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;--style=allman
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;大括號都在新的一行&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;--exclue=####
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;排除特定檔案或目標&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;--ignore-exclude-errors-x / -xi
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;忽略且不顯示被排除的項目&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;--suffix=none / -n
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;不保留原始檔的備份&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;--recursive / -r / -R
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;遞歸處理所有子目錄&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;--quiet / -q
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;不會有任何的訊息&lt;/p&gt;
 
 &lt;p&gt;將上面的選項組合起來，對這一層開始包含所有子目錄的 .cpp 及 .h 檔案進行格式化，但是排除 depend 目錄，範例：&lt;/p&gt;
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;astyle --style&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;allman --exclude&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;depend --ignore-exclude-errors-x --suffix&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;none --recursive --quiet &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;.cpp &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;.h
@@ -592,69 +596,82 @@ APT::Periodic::Unattended-Upgrade &quot;1&quot;;
 &lt;/div&gt;
 
 &lt;h2 id=&quot;風格設定&quot;&gt;風格設定&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;–style=allman / –style=bsd / –style=break / -A1
-大括號都在新的一行&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;–indent-switches / -S
-switch 內縮排&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;–indent-namespaces / -N
-namespaces 內縮排&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;–indent-after-parens / -xU
-多行的參數縮排&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;–indent-preproc-block / -xW
-預處理器內縮排，像是 #ifdef … #endif 之間&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;–indent-col1-comments / -Y
-註解跟著程式碼一起縮排&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;–pad-oper / -p
-操作符號前後空白，像是 1+1 會變成 1 + 1&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;–pad-header / -H 
-在 if, while, for 之後加上空白&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;–align-pointer=type   / -k1
-將指標或參考符號靠近型別，像是 string&amp;amp; my_name;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;–add-braces / -j 
-只有一行的 if 也加上大括號&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;–close-templates / -xy
-消除連續模板間的空白&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;–mode=c
-指定為 C, C++, C++/CLI, and Objective-C 程式語言&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;–delete-empty-lines / -xe
-本來想用結果發現他會砍過頭，先不使用&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;–max-code-length=#   / -xC#
-–break-after-logical / -xL
-每行字元上限，目前覺得不需要處理&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;–indent=tab / –indent=tab=# / -t / -t#
-取代 tab 為空白字元，跟 IDE 預設值衝突，先不使用&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;--style=allman / --style=bsd / --style=break / -A1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;大括號都在新的一行&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;--indent-switches / -S
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;switch 內縮排&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;--indent-namespaces / -N
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;namespaces 內縮排&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;--indent-after-parens / -xU
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;多行的參數縮排&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;--indent-preproc-block / -xW
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;預處理器內縮排，像是 #ifdef … #endif 之間&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;--indent-col1-comments / -Y
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;註解跟著程式碼一起縮排&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;--pad-oper / -p
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;操作符號前後空白，像是 1+1 會變成 1 + 1&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;--pad-header / -H
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;在 if, while, for 之後加上空白&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;--align-pointer=type   / -k1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;將指標或參考符號靠近型別，像是 string&amp;amp; my_name;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;--add-braces / -j 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;只有一行的 if 也加上大括號&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;--close-templates / -xy
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;消除連續模板間的空白&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;--mode=c
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;指定為 C, C++, C++/CLI, and Objective-C 程式語言&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;--delete-empty-lines / -xe
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;本來想用結果發現他會砍過頭，先不使用&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;--max-code-length=#   / -xC#
+--break-after-logical / -xL
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;每行字元上限，目前覺得不需要處理&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;--indent=tab / --indent=tab=# / -t / -t#
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;取代 tab 為空白字元，跟 IDE 預設值衝突，先不使用&lt;/p&gt;
 
 &lt;p&gt;長指令範示：&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;astyle --style=allman --indent=tab --indent-switches --indent-namespaces --indent-after-parens --indent-preproc-block --indent-col1-comments --pad-oper --pad-header --align-pointer=type --add-braces --close-templates --mode=c --exclude=depend -xinrq *.cpp *.h

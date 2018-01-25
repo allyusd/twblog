@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-01-24T14:36:29+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">Angular 使用環境變數</title><link href="https://twblog.hongjianching.com/2018/01/22/angular-using-environment-variables/" rel="alternate" type="text/html" title="Angular 使用環境變數" /><published>2018-01-22T00:00:00+08:00</published><updated>2018-01-22T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/01/22/angular-using-environment-variables</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/01/22/angular-using-environment-variables/">&lt;p&gt;Angular 專案中，如果有依環境不同而需要不同的設定時，像是 apiUrl，該如何處理？&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-01-25T23:02:51+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">Angular 使用環境變數</title><link href="https://twblog.hongjianching.com/2018/01/22/angular-using-environment-variables/" rel="alternate" type="text/html" title="Angular 使用環境變數" /><published>2018-01-22T00:00:00+08:00</published><updated>2018-01-22T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/01/22/angular-using-environment-variables</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/01/22/angular-using-environment-variables/">&lt;p&gt;Angular 專案中，如果有依環境不同而需要不同的設定時，像是 apiUrl，該如何處理？&lt;/p&gt;
 
 &lt;h2 id=&quot;開發環境及生產環境&quot;&gt;開發環境及生產環境&lt;/h2&gt;
 
@@ -542,24 +542,130 @@ APT::Periodic::Unattended-Upgrade &quot;1&quot;;
       &lt;p&gt;&lt;a href=&quot;https://github.com/mmistakes/minimal-mistakes/issues/1219&quot;&gt;Upgrade-friendly way of adjusting font sizes globally&lt;/a&gt;&amp;nbsp;&lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
   &lt;/ol&gt;
-&lt;/div&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="Jekyll" /><category term="Minimal-Mistakes" /><summary type="html">覺得 Minimal Mistakes 預設的字型大小實在是太大了，對於 Blog 來說很不習慣，幸好可以透過修改 sass 檔來調整全站設定，雖然作者不建議直接修改他。1 Upgrade-friendly way of adjusting font sizes globally&amp;nbsp;&amp;#8617;</summary></entry><entry><title type="html">Chrome 58 https error missing_subjectAltName</title><link href="https://twblog.hongjianching.com/2017/05/12/chrome-https-error-missing_subjectaltname/" rel="alternate" type="text/html" title="Chrome 58 https error missing_subjectAltName" /><published>2017-05-12T00:00:00+08:00</published><updated>2017-05-12T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2017/05/12/chrome-https-error-missing_subjectaltname</id><content type="html" xml:base="https://twblog.hongjianching.com/2017/05/12/chrome-https-error-missing_subjectaltname/">&lt;p&gt;Chrome 58 版之後 https 網站出現錯誤 missing_subjectAltName&lt;/p&gt;
+&lt;/div&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="Jekyll" /><category term="Minimal-Mistakes" /><summary type="html">覺得 Minimal Mistakes 預設的字型大小實在是太大了，對於 Blog 來說很不習慣，幸好可以透過修改 sass 檔來調整全站設定，雖然作者不建議直接修改他。1 Upgrade-friendly way of adjusting font sizes globally&amp;nbsp;&amp;#8617;</summary></entry><entry><title type="html">Artistic Style 3.0 - 程式風格自動格式化工具</title><link href="https://twblog.hongjianching.com/2017/11/22/artistic-style-code-style-automatic-formatter/" rel="alternate" type="text/html" title="Artistic Style 3.0 - 程式風格自動格式化工具" /><published>2017-11-22T00:00:00+08:00</published><updated>2017-11-22T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2017/11/22/artistic-style-code-style-automatic-formatter</id><content type="html" xml:base="https://twblog.hongjianching.com/2017/11/22/artistic-style-code-style-automatic-formatter/">&lt;p&gt;一個免費、快速、小型的自動源始碼格式化工具，支援 C/C++、C++/CLI、Objective-C、C# 和 Jave。&lt;/p&gt;
 
-&lt;p&gt;最近突然遇到 Chrome 瀏覽內部網站 https 時出現錯誤，「您的連線不是私人連線」，本來以前是個人電腦憑證出了狀況，後來才知道這個情況原因是 Chrome 58 版之後不再支援沒有 Subject Alternative Names 的憑證。&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;這是官方網站，包含下載連結。
+&lt;a href=&quot;http://astyle.sourceforge.net/&quot;&gt;Artistic Style 3.0 - WebSite&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;Since version 58, Chrome requires SSL certificates to use SAN (Subject Alternative Name) instead of the popular Common Name (CN)&lt;sup id=&quot;fnref:2&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;官方的文件有詳細的說明，有興趣的可以深入研究。
+&lt;a href=&quot;http://astyle.sourceforge.net/astyle.html&quot;&gt;Artistic Style 3.0 - Documentation&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;測試 Firefox 53 同樣有此現象，可能從 48 開始就不支援 commonName maching
-同步測試發現 IE 11 不受影響&lt;/p&gt;
+&lt;p&gt;以下範例皆為個人喜好&lt;/p&gt;
 
-&lt;h3 id=&quot;other-ref&quot;&gt;Other Ref&lt;/h3&gt;
-&lt;p&gt;&lt;a href=&quot;http://stackoverflow.com/questions/27294589/creating-self-signed-certificate-for-domain-and-subdomains-neterr-cert-commo&quot;&gt;Creating self signed certificate for domain and subdomains - NET::ERR_CERT_COMMON_NAME_INVALID&lt;/a&gt;&lt;/p&gt;
-&lt;div class=&quot;footnotes&quot;&gt;
-  &lt;ol&gt;
-    &lt;li id=&quot;fn:1&quot;&gt;
-      &lt;p&gt;&lt;a href=&quot;https://www.chromestatus.com/feature/4981025180483584&quot;&gt;Support for commonName matching in Certificates (removed)&lt;/a&gt;&amp;nbsp;&lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:2&quot;&gt;
-      &lt;p&gt;&lt;a href=&quot;https://alexanderzeitler.com/articles/Fixing-Chrome-missing_subjectAltName-selfsigned-cert-openssl/&quot;&gt;Fixing Chrome 58+ [missing_subjectAltName] with openssl when using self signed certificates&lt;/a&gt;&amp;nbsp;&lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/div&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="Chrome" /><summary type="html">Chrome 58 版之後 https 網站出現錯誤 missing_subjectAltName</summary></entry></feed>
+&lt;h2 id=&quot;基本用法&quot;&gt;基本用法&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;–style=allman
+大括號都在新的一行&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;–exclue=####
+排除特定檔案或目標&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;–ignore-exclude-errors-x / -xi
+忽略且不顯示被排除的項目&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;–suffix=none / -n
+不保留原始檔的備份&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;–recursive / -r / -R
+遞歸處理所有子目錄&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;–quiet / -q
+不會有任何的訊息&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;將上面的選項組合起來，對這一層開始包含所有子目錄的 .cpp 及 .h 檔案進行格式化，但是排除 depend 目錄，範例：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;astyle --style&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;allman --exclude&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;depend --ignore-exclude-errors-x --suffix&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;none --recursive --quiet &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;.cpp &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;.h
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;太長了，改用短指令&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;astyle --style&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;allman --exclude&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;depend -A1xinrq &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;.cpp &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;.h
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;風格設定&quot;&gt;風格設定&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;–style=allman / –style=bsd / –style=break / -A1
+大括號都在新的一行&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;–indent-switches / -S
+switch 內縮排&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;–indent-namespaces / -N
+namespaces 內縮排&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;–indent-after-parens / -xU
+多行的參數縮排&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;–indent-preproc-block / -xW
+預處理器內縮排，像是 #ifdef … #endif 之間&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;–indent-col1-comments / -Y
+註解跟著程式碼一起縮排&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;–pad-oper / -p
+操作符號前後空白，像是 1+1 會變成 1 + 1&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;–pad-header / -H 
+在 if, while, for 之後加上空白&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;–align-pointer=type   / -k1
+將指標或參考符號靠近型別，像是 string&amp;amp; my_name;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;–add-braces / -j 
+只有一行的 if 也加上大括號&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;–close-templates / -xy
+消除連續模板間的空白&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;–mode=c
+指定為 C, C++, C++/CLI, and Objective-C 程式語言&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;–delete-empty-lines / -xe
+本來想用結果發現他會砍過頭，先不使用&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;–max-code-length=#   / -xC#
+–break-after-logical / -xL
+每行字元上限，目前覺得不需要處理&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;–indent=tab / –indent=tab=# / -t / -t#
+取代 tab 為空白字元，跟 IDE 預設值衝突，先不使用&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;長指令範示：&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;astyle --style=allman --indent=tab --indent-switches --indent-namespaces --indent-after-parens --indent-preproc-block --indent-col1-comments --pad-oper --pad-header --align-pointer=type --add-braces --close-templates --mode=c --exclude=depend -xinrq *.cpp *.h
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;短指令範例：&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;astyle -A1SNxUxWYpHk1jxy --mode=c --exclude=depend -xinrq *.cpp *.h
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;reference&quot;&gt;Reference&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://stackoverflow.com/questions/841075/best-c-code-formatter-beautifier&quot;&gt;Best C++ Code Formatter/Beautifier&lt;/a&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="Cpp" /><category term="Coding-Style" /><category term="Automatic-Formatter" /><summary type="html">一個免費、快速、小型的自動源始碼格式化工具，支援 C/C++、C++/CLI、Objective-C、C# 和 Jave。</summary></entry></feed>

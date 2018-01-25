@@ -19,12 +19,12 @@
 
 
 
-<title>修改 Minimal Mistakes Jekyll Theme 網站字型大小 - Jian-Ching 記事本</title>
+<title>Artistic Style 3.0 - 程式風格自動格式化工具 - Jian-Ching 記事本</title>
 
 
 
 
-<meta name="description" content="覺得 Minimal Mistakes 預設的字型大小實在是太大了，對於 Blog 來說很不習慣，幸好可以透過修改 sass 檔來調整全站設定，雖然作者不建議直接修改他。1            Upgrade-friendly way of adjusting font sizes globally&nbsp;&#8617;      ">
+<meta name="description" content="一個免費、快速、小型的自動源始碼格式化工具，支援 C/C++、C++/CLI、Objective-C、C# 和 Jave。">
 
 
 
@@ -33,15 +33,15 @@
 
 <meta property="og:locale" content="zh_TW">
 <meta property="og:site_name" content="Jian-Ching 記事本">
-<meta property="og:title" content="修改 Minimal Mistakes Jekyll Theme 網站字型大小">
+<meta property="og:title" content="Artistic Style 3.0 - 程式風格自動格式化工具">
 
 
-  <link rel="canonical" href="https://twblog.HongJianChing.com/2017/11/25/change-minimal-mistakes-jekyll-theme-site-font-size/">
-  <meta property="og:url" content="https://twblog.HongJianChing.com/2017/11/25/change-minimal-mistakes-jekyll-theme-site-font-size/">
+  <link rel="canonical" href="https://twblog.HongJianChing.com/2017/11/22/artistic-style-code-style-automatic-formatter/">
+  <meta property="og:url" content="https://twblog.HongJianChing.com/2017/11/22/artistic-style-code-style-automatic-formatter/">
 
 
 
-  <meta property="og:description" content="覺得 Minimal Mistakes 預設的字型大小實在是太大了，對於 Blog 來說很不習慣，幸好可以透過修改 sass 檔來調整全站設定，雖然作者不建議直接修改他。1            Upgrade-friendly way of adjusting font sizes globally&nbsp;&#8617;      ">
+  <meta property="og:description" content="一個免費、快速、小型的自動源始碼格式化工具，支援 C/C++、C++/CLI、Objective-C、C# 和 Jave。">
 
 
 
@@ -56,7 +56,7 @@
 
 
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2017-11-25T00:00:00+08:00">
+  <meta property="article:published_time" content="2017-11-22T00:00:00+08:00">
 
 
 
@@ -278,70 +278,148 @@
 
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
-    <meta itemprop="headline" content="修改 Minimal Mistakes Jekyll Theme 網站字型大小">
-    <meta itemprop="description" content="覺得 Minimal Mistakes 預設的字型大小實在是太大了，對於 Blog 來說很不習慣，幸好可以透過修改 sass 檔來調整全站設定，雖然作者不建議直接修改他。1            Upgrade-friendly way of adjusting font sizes globally&nbsp;&#8617;      ">
-    <meta itemprop="datePublished" content="November 25, 2017">
+    <meta itemprop="headline" content="Artistic Style 3.0 - 程式風格自動格式化工具">
+    <meta itemprop="description" content="一個免費、快速、小型的自動源始碼格式化工具，支援 C/C++、C++/CLI、Objective-C、C# 和 Jave。">
+    <meta itemprop="datePublished" content="November 22, 2017">
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 class="page__title" itemprop="headline">修改 Minimal Mistakes Jekyll Theme 網站字型大小
+          <h1 class="page__title" itemprop="headline">Artistic Style 3.0 - 程式風格自動格式化工具
 </h1>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        <p>覺得 Minimal Mistakes 預設的字型大小實在是太大了，對於 Blog 來說很不習慣，幸好可以透過修改 sass 檔來調整全站設定，雖然作者不建議直接修改他。<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup></p>
+        <p>一個免費、快速、小型的自動源始碼格式化工具，支援 C/C++、C++/CLI、Objective-C、C# 和 Jave。</p>
 
-<p>原本的 _reset.scss 片段</p>
+<p>這是官方網站，包含下載連結。
+<a href="http://astyle.sourceforge.net/">Artistic Style 3.0 - WebSite</a></p>
 
-<div class="language-scss highlighter-rouge"><pre class="highlight"><code><span class="nt">html</span> <span class="p">{</span>
-  <span class="cm">/* apply a natural box layout model to all elements */</span>
-  <span class="nl">box-sizing</span><span class="p">:</span> <span class="n">border-box</span><span class="p">;</span>
-  <span class="nl">background-color</span><span class="p">:</span> <span class="nv">$background-color</span><span class="p">;</span>
-  <span class="nl">font-size</span><span class="p">:</span> <span class="m">16px</span><span class="p">;</span>
+<p>官方的文件有詳細的說明，有興趣的可以深入研究。
+<a href="http://astyle.sourceforge.net/astyle.html">Artistic Style 3.0 - Documentation</a></p>
 
-  <span class="k">@include</span> <span class="nd">breakpoint</span><span class="p">(</span><span class="nv">$medium</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nl">font-size</span><span class="p">:</span> <span class="m">18px</span><span class="p">;</span>
-  <span class="p">}</span>
+<p>以下範例皆為個人喜好</p>
 
-  <span class="k">@include</span> <span class="nd">breakpoint</span><span class="p">(</span><span class="nv">$large</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nl">font-size</span><span class="p">:</span> <span class="m">20px</span><span class="p">;</span>
-  <span class="p">}</span>
+<h2 id="基本用法">基本用法</h2>
 
-  <span class="k">@include</span> <span class="nd">breakpoint</span><span class="p">(</span><span class="nv">$x-large</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nl">font-size</span><span class="p">:</span> <span class="m">22px</span><span class="p">;</span>
-  <span class="p">}</span>
+<ul>
+  <li>
+    <p>–style=allman
+大括號都在新的一行</p>
+  </li>
+  <li>
+    <p>–exclue=####
+排除特定檔案或目標</p>
+  </li>
+  <li>
+    <p>–ignore-exclude-errors-x / -xi
+忽略且不顯示被排除的項目</p>
+  </li>
+  <li>
+    <p>–suffix=none / -n
+不保留原始檔的備份</p>
+  </li>
+  <li>
+    <p>–recursive / -r / -R
+遞歸處理所有子目錄</p>
+  </li>
+  <li>
+    <p>–quiet / -q
+不會有任何的訊息</p>
+  </li>
+</ul>
 
-  <span class="na">-webkit-text-size-adjust</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
-  <span class="na">-ms-text-size-adjust</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
-<span class="p">}</span>
+<p>將上面的選項組合起來，對這一層開始包含所有子目錄的 .cpp 及 .h 檔案進行格式化，但是排除 depend 目錄，範例：</p>
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>astyle --style<span class="o">=</span>allman --exclude<span class="o">=</span>depend --ignore-exclude-errors-x --suffix<span class="o">=</span>none --recursive --quiet <span class="k">*</span>.cpp <span class="k">*</span>.h
 </code></pre>
 </div>
 
-<p>修改為</p>
-
-<div class="language-sass highlighter-rouge"><pre class="highlight"><code><span class="nt">html</span> <span class="err">{</span>
-  <span class="cm">/* apply a natural box layout model to all elements */
-</span>  <span class="nl">box-sizing</span><span class="p">:</span> <span class="n">border-box</span><span class="err">;</span>
-  <span class="nl">background-color</span><span class="p">:</span> <span class="nv">$background-color</span><span class="err">;</span>
-  <span class="nl">font-size</span><span class="p">:</span> <span class="m">16px</span><span class="err">;</span>
-
-  <span class="na">-webkit-text-size-adjust</span><span class="p">:</span> <span class="m">100%</span><span class="err">;</span>
-  <span class="na">-ms-text-size-adjust</span><span class="p">:</span> <span class="m">100%</span><span class="err">;</span>
-<span class="err">}</span>
+<p>太長了，改用短指令</p>
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>astyle --style<span class="o">=</span>allman --exclude<span class="o">=</span>depend -A1xinrq <span class="k">*</span>.cpp <span class="k">*</span>.h
 </code></pre>
 </div>
 
-<div class="footnotes">
-  <ol>
-    <li id="fn:1">
-      <p><a href="https://github.com/mmistakes/minimal-mistakes/issues/1219">Upgrade-friendly way of adjusting font sizes globally</a>&nbsp;<a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
-    </li>
-  </ol>
+<h2 id="風格設定">風格設定</h2>
+<ul>
+  <li>
+    <p>–style=allman / –style=bsd / –style=break / -A1
+大括號都在新的一行</p>
+  </li>
+  <li>
+    <p>–indent-switches / -S
+switch 內縮排</p>
+  </li>
+  <li>
+    <p>–indent-namespaces / -N
+namespaces 內縮排</p>
+  </li>
+  <li>
+    <p>–indent-after-parens / -xU
+多行的參數縮排</p>
+  </li>
+  <li>
+    <p>–indent-preproc-block / -xW
+預處理器內縮排，像是 #ifdef … #endif 之間</p>
+  </li>
+  <li>
+    <p>–indent-col1-comments / -Y
+註解跟著程式碼一起縮排</p>
+  </li>
+  <li>
+    <p>–pad-oper / -p
+操作符號前後空白，像是 1+1 會變成 1 + 1</p>
+  </li>
+  <li>
+    <p>–pad-header / -H 
+在 if, while, for 之後加上空白</p>
+  </li>
+  <li>
+    <p>–align-pointer=type   / -k1
+將指標或參考符號靠近型別，像是 string&amp; my_name;</p>
+  </li>
+  <li>
+    <p>–add-braces / -j 
+只有一行的 if 也加上大括號</p>
+  </li>
+  <li>
+    <p>–close-templates / -xy
+消除連續模板間的空白</p>
+  </li>
+  <li>
+    <p>–mode=c
+指定為 C, C++, C++/CLI, and Objective-C 程式語言</p>
+  </li>
+  <li>
+    <p>–delete-empty-lines / -xe
+本來想用結果發現他會砍過頭，先不使用</p>
+  </li>
+  <li>
+    <p>–max-code-length=#   / -xC#
+–break-after-logical / -xL
+每行字元上限，目前覺得不需要處理</p>
+  </li>
+  <li>
+    <p>–indent=tab / –indent=tab=# / -t / -t#
+取代 tab 為空白字元，跟 IDE 預設值衝突，先不使用</p>
+  </li>
+</ul>
+
+<p>長指令範示：</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>astyle --style=allman --indent=tab --indent-switches --indent-namespaces --indent-after-parens --indent-preproc-block --indent-col1-comments --pad-oper --pad-header --align-pointer=type --add-braces --close-templates --mode=c --exclude=depend -xinrq *.cpp *.h
+</code></pre>
 </div>
+
+<p>短指令範例：</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>astyle -A1SNxUxWYpHk1jxy --mode=c --exclude=depend -xinrq *.cpp *.h
+</code></pre>
+</div>
+
+<h2 id="reference">Reference</h2>
+
+<p><a href="https://stackoverflow.com/questions/841075/best-c-code-formatter-beautifier">Best C++ Code Formatter/Beautifier</a></p>
 
         
       </section>
@@ -362,11 +440,15 @@
     
       
       
-      <a href="https://twblog.hongjianching.com/tags/#jekyll" class="page__taxonomy-item" rel="tag">Jekyll</a><span class="sep">, </span>
+      <a href="https://twblog.hongjianching.com/tags/#automatic-formatter" class="page__taxonomy-item" rel="tag">Automatic-Formatter</a><span class="sep">, </span>
     
       
       
-      <a href="https://twblog.hongjianching.com/tags/#minimal-mistakes" class="page__taxonomy-item" rel="tag">Minimal-Mistakes</a>
+      <a href="https://twblog.hongjianching.com/tags/#coding-style" class="page__taxonomy-item" rel="tag">Coding-Style</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://twblog.hongjianching.com/tags/#cpp" class="page__taxonomy-item" rel="tag">Cpp</a>
     
     </span>
   </p>
@@ -375,7 +457,7 @@
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2017-11-25T00:00:00+08:00">November 25, 2017</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2017-11-22T00:00:00+08:00">November 22, 2017</time></p>
         
       </footer>
 
@@ -384,24 +466,24 @@
     <h4 class="page__share-title">分享到</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=修改 Minimal Mistakes Jekyll Theme 網站字型大小 https://twblog.hongjianching.com/2017/11/25/change-minimal-mistakes-jekyll-theme-site-font-size/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=Artistic Style 3.0 - 程式風格自動格式化工具 https://twblog.hongjianching.com/2017/11/22/artistic-style-code-style-automatic-formatter/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2017/11/25/change-minimal-mistakes-jekyll-theme-site-font-size/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2017/11/22/artistic-style-code-style-automatic-formatter/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2017/11/25/change-minimal-mistakes-jekyll-theme-site-font-size/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2017/11/22/artistic-style-code-style-automatic-formatter/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2017/11/25/change-minimal-mistakes-jekyll-theme-site-font-size/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2017/11/22/artistic-style-code-style-automatic-formatter/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="https://twblog.hongjianching.com/2017/11/22/artistic-style-code-style-automatic-formatter/" class="pagination--pager" title="Artistic Style 3.0 - 程式風格自動格式化工具
+      <a href="https://twblog.hongjianching.com/2017/05/12/chrome-https-error-missing_subjectaltname/" class="pagination--pager" title="Chrome 58 https error missing_subjectAltName
 ">較舊</a>
     
     
-      <a href="https://twblog.hongjianching.com/2017/12/05/tracking-blog-post-tags-in-google-analytics-with-minimal-mistakes-jekyll-theme/" class="pagination--pager" title="使用 Google Analytics 追蹤文章標籤 (Tags) 在 Minimal Mistakes Jekyll Theme
+      <a href="https://twblog.hongjianching.com/2017/11/25/change-minimal-mistakes-jekyll-theme-site-font-size/" class="pagination--pager" title="修改 Minimal Mistakes Jekyll Theme 網站字型大小
 ">較新</a>
     
   </nav>
@@ -464,9 +546,11 @@
   ga('send', 'pageview');
   
   
-    ga('send', 'event', 'taggedPost', 'view', 'Jekyll');
+    ga('send', 'event', 'taggedPost', 'view', 'Cpp');
   
-    ga('send', 'event', 'taggedPost', 'view', 'Minimal-Mistakes');
+    ga('send', 'event', 'taggedPost', 'view', 'Coding-Style');
+  
+    ga('send', 'event', 'taggedPost', 'view', 'Automatic-Formatter');
   
   
 </script>

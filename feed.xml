@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-02-06T04:15:53+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">CSS DIV 問題</title><link href="https://twblog.hongjianching.com/2018/01/26/css-div-problem/" rel="alternate" type="text/html" title="CSS DIV 問題" /><published>2018-01-26T00:00:00+08:00</published><updated>2018-01-26T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/01/26/css-div-problem</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/01/26/css-div-problem/">&lt;p&gt;這是我遇到的問題，當右邊 div 比左邊高度還少的時候，會從下方往上堆疊。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-02-06T04:17:16+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">CSS DIV 問題</title><link href="https://twblog.hongjianching.com/2018/01/26/css-div-problem/" rel="alternate" type="text/html" title="CSS DIV 問題" /><published>2018-01-26T00:00:00+08:00</published><updated>2018-01-26T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/01/26/css-div-problem</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/01/26/css-div-problem/">&lt;p&gt;這是我遇到的問題，當右邊 div 比左邊高度還少的時候，會從下方往上堆疊。&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/2018-01-26-css-div-problem/002.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
@@ -47,7 +47,7 @@
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;中間試了幾種改法都不太滿意，後來發現這個例子滿足我希望達到的效果，當右邊 div 比左邊高度還少的時候，會從上而下依序顯示。跟原本的差異只正 div 中間有 a1, a2, a3, b1, b2, b3 文字。&lt;/p&gt;
+&lt;p&gt;中間試了幾種改法都不太滿意，後來發現這個例子滿足我希望達到的效果，當右邊 div 比左邊高度還少的時候，會從上而下依序顯示。跟原本的差異只有 div 中間有 a1, a2, a3, b1, b2, b3 文字。&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/2018-01-26-css-div-problem/001.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 

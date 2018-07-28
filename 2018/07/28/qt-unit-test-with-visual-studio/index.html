@@ -1,0 +1,533 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.2.2 by Michael Rose
+  Copyright 2017 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="zh" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>Qt Unit Test with Visual Studio - Jian-Ching 記事本</title>
+
+
+
+
+<meta name="description" content="基於現成的 Visual Studio 套件 Google Test Adapter，直接借用 Google Test 來進行 Qt Unit Test。">
+
+
+
+
+<meta name="author" content="洪健清">
+
+<meta property="og:locale" content="zh_TW">
+<meta property="og:site_name" content="Jian-Ching 記事本">
+<meta property="og:title" content="Qt Unit Test with Visual Studio">
+
+
+  <link rel="canonical" href="https://twblog.HongJianChing.com/2018/07/28/qt-unit-test-with-visual-studio/">
+  <meta property="og:url" content="https://twblog.HongJianChing.com/2018/07/28/qt-unit-test-with-visual-studio/">
+
+
+
+  <meta property="og:description" content="基於現成的 Visual Studio 套件 Google Test Adapter，直接借用 Google Test 來進行 Qt Unit Test。">
+
+
+
+
+
+  
+
+  
+
+
+
+
+
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2018-07-28T00:00:00+08:00">
+
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "洪健清",
+      "url" : "https://twblog.HongJianChing.com",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+  <meta name="google-site-verification" content="wjj5pJCiMFRllsWEU0WH3ofBhTmTmHLhm2nWgQo6XcY" />
+
+
+
+
+<!-- end SEO -->
+
+
+<link href="https://twblog.hongjianching.com/feed.xml" type="application/atom+xml" rel="alternate" title="Jian-Ching 記事本 Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+<meta http-equiv="cleartype" content="on">
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="https://twblog.hongjianching.com/">Jian-Ching 記事本</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item"><a href="https://twblog.HongJianChing.com/tags/">Tags</a></li>
+          
+        </ul>
+        <button><div class="navicon"></div></button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="https://en.gravatar.com/userimage/52239647/ccc888d68eb39b778b50b2032ee4c033.jpeg" alt="洪健清" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name" itemprop="name">洪健清</h3>
+    
+      <p class="author__bio" itemprop="description">
+        軟體程式工程師
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">追蹤</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> <span itemprop="name">台灣，台中市</span>
+        </li>
+      
+
+      
+        <li>
+          <a href="https://www.HongJianChing.com/" itemprop="url">
+            <i class="fa fa-fw fa-chain" aria-hidden="true"></i> 網站
+          </a>
+        </li>
+      
+
+      
+        <li>
+          <a href="mailto:allyusd yahoo com tw">
+            <meta itemprop="email" content="allyusd yahoo com tw" />
+            <i class="fa fa-fw fa-envelope-square" aria-hidden="true"></i> 電子信箱
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.facebook.com/jianching.hong" itemprop="sameAs">
+            <i class="fa fa-fw fa-facebook-square" aria-hidden="true"></i> Facebook
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://github.com/allyusd" itemprop="sameAs">
+            <i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </li>
+      
+
+      
+        <li>
+          <a href="https://www.stackoverflow.com/users/2613884/allyusd" itemprop="sameAs">
+            <i class="fa fa-fw fa-stack-overflow" aria-hidden="true"></i> Stackoverflow
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fa fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Qt Unit Test with Visual Studio">
+    <meta itemprop="description" content="基於現成的 Visual Studio 套件 Google Test Adapter，直接借用 Google Test 來進行 Qt Unit Test。">
+    <meta itemprop="datePublished" content="July 28, 2018">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">Qt Unit Test with Visual Studio
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        <p>基於現成的 Visual Studio 套件 <a href="https://marketplace.visualstudio.com/items?itemName=ChristianSoltenborn.GoogleTestAdapter">Google Test Adapter</a>，直接借用 <a href="https://github.com/google/googletest">Google Test</a> 來進行 Qt Unit Test。</p>
+
+<p>有機會再來整合 Qt 自己的 <a href="http://doc.qt.io/qt-5/qttest-index.html">Qt Test</a></p>
+
+<p><a href="https://github.com/allyusd/qt-vs-unit-test">Example Code</a></p>
+
+<h2 id="建立-vs-google-test-專案">建立 VS Google Test 專案</h2>
+
+<p><img src="/assets/images/2018-07-28-qt-unit-test-with-visual-studio/2018-07-28_16-41-53.png" alt="" /></p>
+
+<p>建立後會有一個一定會通過的 Unit Test</p>
+
+<div class="language-cpp highlighter-rouge"><pre class="highlight"><code><span class="n">TEST</span><span class="p">(</span><span class="n">TestCaseName</span><span class="p">,</span> <span class="n">TestName</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">EXPECT_EQ</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+  <span class="n">EXPECT_TRUE</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>Run Test</p>
+
+<p><img src="/assets/images/2018-07-28-qt-unit-test-with-visual-studio/2018-07-28_17-26-18.png" alt="" /></p>
+
+<h2 id="編寫-unit-test">編寫 Unit Test</h2>
+
+<p>修改 Unit Test 如下</p>
+
+<div class="language-cpp highlighter-rouge"><pre class="highlight"><code><span class="n">TEST</span><span class="p">(</span><span class="n">TestLogic</span><span class="p">,</span> <span class="n">HelloMessage</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">Logic</span> <span class="n">logic</span><span class="p">;</span>
+
+	<span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">name</span> <span class="o">=</span> <span class="n">logic</span><span class="p">.</span><span class="n">getHelloMessage</span><span class="p">(</span><span class="s">"Jian-Ching"</span><span class="p">).</span><span class="n">toStdString</span><span class="p">();</span>
+	<span class="n">EXPECT_EQ</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="s">"Hello Jian-Ching"</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>新增 Logic Class 及 getHelloMessage 函式</p>
+
+<div class="language-cpp highlighter-rouge"><pre class="highlight"><code><span class="n">QString</span> <span class="n">Logic</span><span class="o">::</span><span class="n">getHelloMessage</span><span class="p">(</span><span class="n">QString</span> <span class="n">name</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">return</span> <span class="s">""</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>Run Test, 我們會得到一個紅燈</p>
+
+<p><img src="/assets/images/2018-07-28-qt-unit-test-with-visual-studio/2018-07-28_17-49-45.png" alt="" /></p>
+
+<h2 id="實作-qt-程式碼">實作 Qt 程式碼</h2>
+
+<p>實作 getHelloMessage 函式</p>
+
+<div class="language-cpp highlighter-rouge"><pre class="highlight"><code><span class="n">QString</span> <span class="n">Logic</span><span class="o">::</span><span class="n">getHelloMessage</span><span class="p">(</span><span class="n">QString</span> <span class="n">name</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">return</span> <span class="n">QString</span><span class="p">(</span><span class="s">"Hello "</span><span class="p">).</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>Run Test, 成功通過測試</p>
+
+<p><img src="/assets/images/2018-07-28-qt-unit-test-with-visual-studio/2018-07-28_17-51-25.png" alt="" /></p>
+
+<h2 id="其它">其它</h2>
+<p>如果你的 Goolge Test Apapter 發生錯誤，可以確認一下是否是遇到這個問題，如果問題還未修復，可以先將 Visual Studio 切換為英文語系即可正常使用。</p>
+
+<p><a href="https://github.com/Microsoft/TestAdapterForGoogleTest/issues/121">Google test adapter does not work when the UI of Visual Studio is non english · Issue #121 · Microsoft/TestAdapterForGoogleTest</a></p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-tags" aria-hidden="true"></i> 標籤: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="https://twblog.hongjianching.com/tags/#qt" class="page__taxonomy-item" rel="tag">Qt</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://twblog.hongjianching.com/tags/#unit-test" class="page__taxonomy-item" rel="tag">Unit-Test</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://twblog.hongjianching.com/tags/#visual-studio" class="page__taxonomy-item" rel="tag">Visual-Studio</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2018-07-28T00:00:00+08:00">July 28, 2018</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">分享到</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Qt Unit Test with Visual Studio https://twblog.hongjianching.com/2018/07/28/qt-unit-test-with-visual-studio/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2018/07/28/qt-unit-test-with-visual-studio/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2018/07/28/qt-unit-test-with-visual-studio/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2018/07/28/qt-unit-test-with-visual-studio/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="https://twblog.hongjianching.com/2018/01/26/css-div-problem/" class="pagination--pager" title="CSS DIV 問題
+">較舊</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">較新</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+  
+    <h4 class="page__comments-title">留言</h4>
+    <section id="disqus_thread"></section>
+  
+</div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>追蹤:</strong></li>
+    
+    
+    
+    
+      <li><a href="http://github.com/allyusd"><i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    <li><a href="https://twblog.hongjianching.com/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> RSS Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2018 洪健清. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+      </footer>
+    </div>
+
+    <script src="/assets/js/main.min.js"></script>
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-9431648-15', 'auto');
+  ga('send', 'pageview');
+  
+  
+    ga('send', 'event', 'taggedPost', 'view', 'Qt');
+  
+    ga('send', 'event', 'taggedPost', 'view', 'Unit-Test');
+  
+    ga('send', 'event', 'taggedPost', 'view', 'Visual-Studio');
+  
+  
+</script>
+
+
+
+
+
+
+
+  
+  <script type="text/javascript">
+  	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+  	var disqus_shortname = 'allyusd-twblog';
+
+  	/* * * DON'T EDIT BELOW THIS LINE * * */
+  	(function() {
+  		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  		dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  	})();
+
+  	/* * * DON'T EDIT BELOW THIS LINE * * */
+  	(function () {
+  		var s = document.createElement('script'); s.async = true;
+  		s.type = 'text/javascript';
+  		s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  		(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+  	}());
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+
+
+  </body>
+</html>

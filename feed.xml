@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-08-13T20:18:19+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">Qt using Logger in Unit Test</title><link href="https://twblog.hongjianching.com/2018/08/13/qt-using-logger-in-unit-test/" rel="alternate" type="text/html" title="Qt using Logger in Unit Test" /><published>2018-08-13T00:00:00+08:00</published><updated>2018-08-13T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/08/13/qt-using-logger-in-unit-test</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/08/13/qt-using-logger-in-unit-test/">&lt;p&gt;先來一張 Test Pass 的結果&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-08-13T20:24:42+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">Qt using Logger in Unit Test</title><link href="https://twblog.hongjianching.com/2018/08/13/qt-using-logger-in-unit-test/" rel="alternate" type="text/html" title="Qt using Logger in Unit Test" /><published>2018-08-13T00:00:00+08:00</published><updated>2018-08-13T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/08/13/qt-using-logger-in-unit-test</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/08/13/qt-using-logger-in-unit-test/">&lt;p&gt;先來一張 Test Pass 的結果&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/2018-08-13-qt-using-logger-in-unit-test/2018-08-13_20-07-59.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;legacy-code&quot;&gt;Legacy Code&lt;/h2&gt;
 &lt;p&gt;開始主題前，先來聊一聊 Legacy Code，&lt;/p&gt;
 
-&lt;p&gt;在 &lt;a href=&quot;https://www.amazon.com/Working-Effectively-Legacy-Michael-Feathers/dp/0131177052&quot;&gt;Working Effectively with Legacy Code&lt;/a&gt; 中，作者對於 Legacy Code 的定義為，沒有測試的程式碼。因為缺乏測試，所以害怕去修改現有的程式碼。&lt;/p&gt;
+&lt;p&gt;在 &lt;a href=&quot;https://www.amazon.com/Working-Effectively-Legacy-Michael-Feathers/dp/0131177052&quot;&gt;Working Effectively with Legacy Code&lt;/a&gt; 中，作者對於 Legacy Code 的定義為，沒有測試的程式碼。因為缺乏測試，所以害怕去修改現有的程式碼。久而久之，就越來越不敢修改了，因為你不知道改了之後會弄壞了什麼。&lt;/p&gt;
 
 &lt;h3 id=&quot;高偶合&quot;&gt;高偶合&lt;/h3&gt;
 &lt;p&gt;在實際案例上，往往 Legacy Code 又有各種疊床架屋的情況，常常會牽一髮而動全身。
@@ -15,7 +15,7 @@
 &lt;p&gt;要加上單元測試，就不可避免會遇到程式缺乏可測試性的問題，偏偏 Legacy Code 往往欠缺可測試性。&lt;/p&gt;
 
 &lt;h3 id=&quot;重構&quot;&gt;重構&lt;/h3&gt;
-&lt;p&gt;想要擁有可測試性，就要將現有的程式改寫，需要進行重構。然而，重構是有風險的，建議先寫測試再開始重構。&lt;/p&gt;
+&lt;p&gt;想要擁有可測試性，就要將程式改寫，需要進行重構。然而，重構是有風險的，建議先寫測試再開始重構。&lt;/p&gt;
 
 &lt;h3 id=&quot;先有雞先有蛋&quot;&gt;先有雞？先有蛋？&lt;/h3&gt;
 &lt;p&gt;很好，我們已經陷入了無窮迴圈，可能有人耐不住決定打掉重練了。別急，讓我們回到主題。&lt;/p&gt;
@@ -36,9 +36,9 @@
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;中間有使用 Qt logger 進行輸出，借助於 Qt logging framework 的完善設計，可以直接利用 qInstallMessageHandler 函式進行注入。在其它架構或語言，應該不難找到 ILog 或是 LogFactory 之類的方法。&lt;/p&gt;
+&lt;p&gt;中間有使用 Qt logger 進行輸出，借助於 Qt logging framework 的完善設計，可以直接利用 qInstallMessageHandler 函式進行注入。在其它架構或語言，試著找到 ILog 或是 LogFactory 之類的方法。&lt;/p&gt;
 
-&lt;p&gt;下面是 Unit Test 的使用方法&lt;/p&gt;
+&lt;p&gt;下面是 Unit Test 中使用 logger 的方法&lt;/p&gt;
 
 &lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;QVector&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;g_loggerMessages&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 
@@ -59,7 +59,7 @@
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;這個技巧可以利用最低的成本，最小的改變為 Legacy Code 補上 Unit Test，緊接著透過 &lt;a href=&quot;https://www.amazon.com/Working-Effectively-Legacy-Michael-Feathers/dp/0131177052&quot;&gt;Working Effectively with Legacy Code&lt;/a&gt; 中的技巧，開始拆解程式間的相依性。&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="Qt" /><category term="Unit-Test" /><category term="Visual-Studio" /><summary type="html">先來一張 Test Pass 的結果</summary></entry><entry><title type="html">Qt Unit Test with Visual Studio</title><link href="https://twblog.hongjianching.com/2018/07/28/qt-unit-test-with-visual-studio/" rel="alternate" type="text/html" title="Qt Unit Test with Visual Studio" /><published>2018-07-28T00:00:00+08:00</published><updated>2018-07-28T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/07/28/qt-unit-test-with-visual-studio</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/07/28/qt-unit-test-with-visual-studio/">&lt;p&gt;基於現成的 Visual Studio 套件 &lt;a href=&quot;https://marketplace.visualstudio.com/items?itemName=ChristianSoltenborn.GoogleTestAdapter&quot;&gt;Google Test Adapter&lt;/a&gt;，直接借用 &lt;a href=&quot;https://github.com/google/googletest&quot;&gt;Google Test&lt;/a&gt; 來進行 Qt Unit Test。&lt;/p&gt;
+&lt;p&gt;這個技巧可以利用最低的成本，最小的改變為 Legacy Code 補上 Unit Test，接著透過 &lt;a href=&quot;https://www.amazon.com/Working-Effectively-Legacy-Michael-Feathers/dp/0131177052&quot;&gt;Working Effectively with Legacy Code&lt;/a&gt; 中的技巧，開始拆解程式間的相依性。&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="Qt" /><category term="Unit-Test" /><category term="Visual-Studio" /><summary type="html">先來一張 Test Pass 的結果</summary></entry><entry><title type="html">Qt Unit Test with Visual Studio</title><link href="https://twblog.hongjianching.com/2018/07/28/qt-unit-test-with-visual-studio/" rel="alternate" type="text/html" title="Qt Unit Test with Visual Studio" /><published>2018-07-28T00:00:00+08:00</published><updated>2018-07-28T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/07/28/qt-unit-test-with-visual-studio</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/07/28/qt-unit-test-with-visual-studio/">&lt;p&gt;基於現成的 Visual Studio 套件 &lt;a href=&quot;https://marketplace.visualstudio.com/items?itemName=ChristianSoltenborn.GoogleTestAdapter&quot;&gt;Google Test Adapter&lt;/a&gt;，直接借用 &lt;a href=&quot;https://github.com/google/googletest&quot;&gt;Google Test&lt;/a&gt; 來進行 Qt Unit Test。&lt;/p&gt;
 
 &lt;p&gt;有機會再來整合 Qt 自己的 &lt;a href=&quot;http://doc.qt.io/qt-5/qttest-index.html&quot;&gt;Qt Test&lt;/a&gt;&lt;/p&gt;
 

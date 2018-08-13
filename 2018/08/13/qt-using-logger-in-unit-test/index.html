@@ -19,12 +19,12 @@
 
 
 
-<title>Qt Unit Test with Visual Studio - Jian-Ching 記事本</title>
+<title>Qt using Logger in Unit Test - Jian-Ching 記事本</title>
 
 
 
 
-<meta name="description" content="基於現成的 Visual Studio 套件 Google Test Adapter，直接借用 Google Test 來進行 Qt Unit Test。">
+<meta name="description" content="先來一張 Test Pass 的結果">
 
 
 
@@ -33,15 +33,15 @@
 
 <meta property="og:locale" content="zh_TW">
 <meta property="og:site_name" content="Jian-Ching 記事本">
-<meta property="og:title" content="Qt Unit Test with Visual Studio">
+<meta property="og:title" content="Qt using Logger in Unit Test">
 
 
-  <link rel="canonical" href="https://twblog.HongJianChing.com/2018/07/28/qt-unit-test-with-visual-studio/">
-  <meta property="og:url" content="https://twblog.HongJianChing.com/2018/07/28/qt-unit-test-with-visual-studio/">
+  <link rel="canonical" href="https://twblog.HongJianChing.com/2018/08/13/qt-using-logger-in-unit-test/">
+  <meta property="og:url" content="https://twblog.HongJianChing.com/2018/08/13/qt-using-logger-in-unit-test/">
 
 
 
-  <meta property="og:description" content="基於現成的 Visual Studio 套件 Google Test Adapter，直接借用 Google Test 來進行 Qt Unit Test。">
+  <meta property="og:description" content="先來一張 Test Pass 的結果">
 
 
 
@@ -56,7 +56,7 @@
 
 
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2018-07-28T00:00:00+08:00">
+  <meta property="article:published_time" content="2018-08-13T00:00:00+08:00">
 
 
 
@@ -278,90 +278,83 @@
 
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Qt Unit Test with Visual Studio">
-    <meta itemprop="description" content="基於現成的 Visual Studio 套件 Google Test Adapter，直接借用 Google Test 來進行 Qt Unit Test。">
-    <meta itemprop="datePublished" content="July 28, 2018">
+    <meta itemprop="headline" content="Qt using Logger in Unit Test">
+    <meta itemprop="description" content="先來一張 Test Pass 的結果">
+    <meta itemprop="datePublished" content="August 13, 2018">
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 class="page__title" itemprop="headline">Qt Unit Test with Visual Studio
+          <h1 class="page__title" itemprop="headline">Qt using Logger in Unit Test
 </h1>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        <p>基於現成的 Visual Studio 套件 <a href="https://marketplace.visualstudio.com/items?itemName=ChristianSoltenborn.GoogleTestAdapter">Google Test Adapter</a>，直接借用 <a href="https://github.com/google/googletest">Google Test</a> 來進行 Qt Unit Test。</p>
+        <p>先來一張 Test Pass 的結果</p>
 
-<p>有機會再來整合 Qt 自己的 <a href="http://doc.qt.io/qt-5/qttest-index.html">Qt Test</a></p>
+<p><img src="/assets/images/2018-08-13-qt-using-logger-in-unit-test/2018-08-13_20-07-59.png" alt="" /></p>
 
-<p><a href="https://github.com/allyusd/qt-vs-unit-test">Example Code</a></p>
+<h2 id="legacy-code">Legacy Code</h2>
+<p>開始主題前，先來聊一聊 Legacy Code，</p>
 
-<h2 id="建立-vs-google-test-專案">建立 VS Google Test 專案</h2>
+<p>在 <a href="https://www.amazon.com/Working-Effectively-Legacy-Michael-Feathers/dp/0131177052">Working Effectively with Legacy Code</a> 中，作者對於 Legacy Code 的定義為，沒有測試的程式碼。因為缺乏測試，所以害怕去修改現有的程式碼。</p>
 
-<p><img src="/assets/images/2018-07-28-qt-unit-test-with-visual-studio/2018-07-28_16-41-53.png" alt="" /></p>
+<h3 id="高偶合">高偶合</h3>
+<p>在實際案例上，往往 Legacy Code 又有各種疊床架屋的情況，常常會牽一髮而動全身。
+所以要處理 Legacy Code，基本的動作是加上單元測試 (Unit Test)。</p>
 
-<p>建立後會有一個一定會通過的 Unit Test</p>
+<h3 id="缺乏可測試性">缺乏可測試性</h3>
+<p>要加上單元測試，就不可避免會遇到程式缺乏可測試性的問題，偏偏 Legacy Code 往往欠缺可測試性。</p>
 
-<div class="language-cpp highlighter-rouge"><pre class="highlight"><code><span class="n">TEST</span><span class="p">(</span><span class="n">TestCaseName</span><span class="p">,</span> <span class="n">TestName</span><span class="p">)</span> <span class="p">{</span>
-  <span class="n">EXPECT_EQ</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
-  <span class="n">EXPECT_TRUE</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+<h3 id="重構">重構</h3>
+<p>想要擁有可測試性，就要將現有的程式改寫，需要進行重構。然而，重構是有風險的，建議先寫測試再開始重構。</p>
+
+<h3 id="先有雞先有蛋">先有雞？先有蛋？</h3>
+<p>很好，我們已經陷入了無窮迴圈，可能有人耐不住決定打掉重練了。別急，讓我們回到主題。</p>
+
+<h2 id="利用-logger-協助-unit-test">利用 Logger 協助 Unit Test</h2>
+<p>存活下來的 Legacy Code 專案，通常埋有不少 Log，就算沒有，補上新的 Log 也是很輕易的，我們可以利用這些 Log 進行 Unit Test。</p>
+
+<p>以 Qt 來說，這是一段產品代碼，範例中很簡單，你可以想像他是一個 1000 行中的某段函式。</p>
+
+<div class="language-cpp highlighter-rouge"><pre class="highlight"><code><span class="n">QString</span> <span class="n">Logic</span><span class="o">::</span><span class="n">getHelloMessage</span><span class="p">(</span><span class="n">QString</span> <span class="n">name</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">auto</span> <span class="n">helloMessage</span> <span class="o">=</span> <span class="n">QString</span><span class="p">(</span><span class="s">"Hello "</span><span class="p">).</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
+		 
+	<span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">helloMessage</span><span class="p">.</span><span class="n">toStdString</span><span class="p">().</span><span class="n">data</span><span class="p">();</span>
+
+	<span class="k">return</span> <span class="n">helloMessage</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre>
 </div>
 
-<p>Run Test</p>
+<p>中間有使用 Qt logger 進行輸出，借助於 Qt logging framework 的完善設計，可以直接利用 qInstallMessageHandler 函式進行注入。在其它架構或語言，應該不難找到 ILog 或是 LogFactory 之類的方法。</p>
 
-<p><img src="/assets/images/2018-07-28-qt-unit-test-with-visual-studio/2018-07-28_17-26-18.png" alt="" /></p>
+<p>下面是 Unit Test 的使用方法</p>
 
-<h2 id="編寫-unit-test">編寫 Unit Test</h2>
+<div class="language-cpp highlighter-rouge"><pre class="highlight"><code><span class="k">static</span> <span class="n">QVector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">g_loggerMessages</span><span class="p">;</span>
 
-<p>修改 Unit Test 如下</p>
-
-<div class="language-cpp highlighter-rouge"><pre class="highlight"><code><span class="n">TEST</span><span class="p">(</span><span class="n">TestLogic</span><span class="p">,</span> <span class="n">HelloMessage</span><span class="p">)</span>
+<span class="kt">void</span> <span class="nf">myMessageOutput</span><span class="p">(</span><span class="n">QtMsgType</span> <span class="n">type</span><span class="p">,</span> <span class="k">const</span> <span class="n">QMessageLogContext</span> <span class="o">&amp;</span><span class="n">context</span><span class="p">,</span> <span class="k">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">msg</span><span class="p">)</span>
 <span class="p">{</span>
+	<span class="n">g_loggerMessages</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="n">toStdString</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="n">TEST</span><span class="p">(</span><span class="n">TestLogic</span><span class="p">,</span> <span class="n">HelloMessage</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">qInstallMessageHandler</span><span class="p">(</span><span class="n">myMessageOutput</span><span class="p">);</span>
+
 	<span class="n">Logic</span> <span class="n">logic</span><span class="p">;</span>
 
 	<span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">name</span> <span class="o">=</span> <span class="n">logic</span><span class="p">.</span><span class="n">getHelloMessage</span><span class="p">(</span><span class="s">"Jian-Ching"</span><span class="p">).</span><span class="n">toStdString</span><span class="p">();</span>
-	<span class="n">EXPECT_EQ</span><span class="p">(</span><span class="s">"Hello Jian-Ching"</span><span class="p">,</span> <span class="n">name</span><span class="p">);</span>
+	<span class="n">EXPECT_EQ</span><span class="p">(</span><span class="nb">true</span><span class="p">,</span> <span class="n">g_loggerMessages</span><span class="p">.</span><span class="n">contains</span><span class="p">(</span><span class="s">"Hello Jian-Ching"</span><span class="p">));</span>
 <span class="p">}</span>
 </code></pre>
 </div>
 
-<p>新增 Logic Class 及 getHelloMessage 函式</p>
-
-<div class="language-cpp highlighter-rouge"><pre class="highlight"><code><span class="n">QString</span> <span class="n">Logic</span><span class="o">::</span><span class="n">getHelloMessage</span><span class="p">(</span><span class="n">QString</span> <span class="n">name</span><span class="p">)</span>
-<span class="p">{</span>
-	<span class="k">return</span> <span class="s">""</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre>
-</div>
-
-<p>Run Test, 我們會得到一個紅燈</p>
-
-<p><img src="/assets/images/2018-07-28-qt-unit-test-with-visual-studio/2018-07-28_20-24-27.png" alt="" /></p>
-
-<h2 id="實作-qt-程式碼">實作 Qt 程式碼</h2>
-
-<p>實作 getHelloMessage 函式</p>
-
-<div class="language-cpp highlighter-rouge"><pre class="highlight"><code><span class="n">QString</span> <span class="n">Logic</span><span class="o">::</span><span class="n">getHelloMessage</span><span class="p">(</span><span class="n">QString</span> <span class="n">name</span><span class="p">)</span>
-<span class="p">{</span>
-	<span class="k">return</span> <span class="n">QString</span><span class="p">(</span><span class="s">"Hello "</span><span class="p">).</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre>
-</div>
-
-<p>Run Test, 成功通過測試</p>
-
-<p><img src="/assets/images/2018-07-28-qt-unit-test-with-visual-studio/2018-07-28_17-51-25.png" alt="" /></p>
-
-<h2 id="其它">其它</h2>
-<p>如果你的 Goolge Test Apapter 發生錯誤，可以確認一下是否是遇到這個問題，如果問題還未修復，可以先將 Visual Studio 切換為英文語系即可正常使用。</p>
-
-<p><a href="https://github.com/Microsoft/TestAdapterForGoogleTest/issues/121">Google test adapter does not work when the UI of Visual Studio is non english · Issue #121 · Microsoft/TestAdapterForGoogleTest</a></p>
+<p>這個技巧可以利用最低的成本，最小的改變為 Legacy Code 補上 Unit Test，緊接著透過 <a href="https://www.amazon.com/Working-Effectively-Legacy-Michael-Feathers/dp/0131177052">Working Effectively with Legacy Code</a> 中的技巧，開始拆解程式間的相依性。</p>
 
         
       </section>
@@ -399,7 +392,7 @@
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2018-07-28T00:00:00+08:00">July 28, 2018</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2018-08-13T00:00:00+08:00">August 13, 2018</time></p>
         
       </footer>
 
@@ -408,25 +401,24 @@
     <h4 class="page__share-title">分享到</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=Qt Unit Test with Visual Studio https://twblog.hongjianching.com/2018/07/28/qt-unit-test-with-visual-studio/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=Qt using Logger in Unit Test https://twblog.hongjianching.com/2018/08/13/qt-using-logger-in-unit-test/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2018/07/28/qt-unit-test-with-visual-studio/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2018/08/13/qt-using-logger-in-unit-test/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2018/07/28/qt-unit-test-with-visual-studio/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2018/08/13/qt-using-logger-in-unit-test/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2018/07/28/qt-unit-test-with-visual-studio/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2018/08/13/qt-using-logger-in-unit-test/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="https://twblog.hongjianching.com/2018/01/26/css-div-problem/" class="pagination--pager" title="CSS DIV 問題
+      <a href="https://twblog.hongjianching.com/2018/07/28/qt-unit-test-with-visual-studio/" class="pagination--pager" title="Qt Unit Test with Visual Studio
 ">較舊</a>
     
     
-      <a href="https://twblog.hongjianching.com/2018/08/13/qt-using-logger-in-unit-test/" class="pagination--pager" title="Qt using Logger in Unit Test
-">較新</a>
+      <a href="#" class="pagination--pager disabled">較新</a>
     
   </nav>
 

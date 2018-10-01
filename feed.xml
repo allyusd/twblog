@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-09-12T20:46:50+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">Visual Studio Precompiled Headers setting issues</title><link href="https://twblog.hongjianching.com/2018/09/12/visual-studio-precompiled-headers-setting-issues/" rel="alternate" type="text/html" title="Visual Studio Precompiled Headers setting issues" /><published>2018-09-12T00:00:00+08:00</published><updated>2018-09-12T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/09/12/visual-studio-precompiled-headers-setting-issues</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/09/12/visual-studio-precompiled-headers-setting-issues/">&lt;h2 id=&quot;precompiled-headers&quot;&gt;Precompiled Headers&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-01T22:02:51+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">2019 iT 邦幫忙鐵人賽 目錄</title><link href="https://twblog.hongjianching.com/2018/10/01/2019-ithelp-ironman-30-days-challenge-index/" rel="alternate" type="text/html" title="2019 iT 邦幫忙鐵人賽 目錄" /><published>2018-10-01T00:00:00+08:00</published><updated>2018-10-01T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/01/2019-ithelp-ironman-30-days-challenge-index</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/01/2019-ithelp-ironman-30-days-challenge-index/"></content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><summary type="html"></summary></entry><entry><title type="html">Visual Studio Precompiled Headers setting issues</title><link href="https://twblog.hongjianching.com/2018/09/12/visual-studio-precompiled-headers-setting-issues/" rel="alternate" type="text/html" title="Visual Studio Precompiled Headers setting issues" /><published>2018-09-12T00:00:00+08:00</published><updated>2018-09-12T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/09/12/visual-studio-precompiled-headers-setting-issues</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/09/12/visual-studio-precompiled-headers-setting-issues/">&lt;h2 id=&quot;precompiled-headers&quot;&gt;Precompiled Headers&lt;/h2&gt;
 &lt;p&gt;最近發現專案使用的 Precompiled Headers 設定錯誤，增加了 94% 的建置時間。&lt;/p&gt;
 
 &lt;p&gt;以下是錯誤的專案設定
@@ -540,52 +540,4 @@
       &lt;p&gt;&lt;a href=&quot;https://www.iana.org/domains/root/db&quot;&gt;IANA - Root Zone Database&lt;/a&gt;&amp;nbsp;&lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
   &lt;/ol&gt;
-&lt;/div&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="Domain" /><summary type="html">你是否會在內部網路使用一些自己發明的網域名稱呢？像是</summary></entry><entry><title type="html">Ubuntu 自動更新安全性套件</title><link href="https://twblog.hongjianching.com/2017/12/20/ubuntu-automatic-security-updates/" rel="alternate" type="text/html" title="Ubuntu 自動更新安全性套件" /><published>2017-12-20T00:00:00+08:00</published><updated>2017-12-20T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2017/12/20/ubuntu-automatic-security-updates</id><content type="html" xml:base="https://twblog.hongjianching.com/2017/12/20/ubuntu-automatic-security-updates/">&lt;p&gt;希望 Ubuntu 能自動更新安全性套件，避免手動管理，這個想法可以透過無人值守更新套件 unattended-upgrades 簡單的完成任務。&lt;/p&gt;
-
-&lt;h2 id=&quot;安裝及設定套件&quot;&gt;安裝及設定套件&lt;/h2&gt;
-&lt;p&gt;首先安裝套件&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt install unattended-upgrades
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;接著編輯設定檔&lt;/p&gt;
-
-&lt;p&gt;/etc/apt/apt.conf.d/50unattended-upgrades&lt;/p&gt;
-
-&lt;p&gt;Allowed-Origins 設定預設只安裝安全性更新，這也是常見的需求。如果你希望一般套件也自動更新，可以取消 ${distro_codename}-updates” 的註解，&lt;/p&gt;
-
-&lt;p&gt;如果有要保留的套件不希望被更新的，可以使用 Package-Blacklist 設定。&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Unattended-Upgrade::Allowed-Origins {
-        &quot;${distro_id}:${distro_codename}&quot;;
-        &quot;${distro_id}:${distro_codename}-security&quot;;
-        // Extended Security Maintenance; doesn't necessarily exist for
-        // every release and this system may not have it installed, but if
-        // available, the policy for updates is such that unattended-upgrades
-        // should also install from here by default.
-        &quot;${distro_id}ESM:${distro_codename}&quot;;
-        &quot;${distro_id}:${distro_codename}-updates&quot;;
-//      &quot;${distro_id}:${distro_codename}-proposed&quot;;
-//      &quot;${distro_id}:${distro_codename}-backports&quot;;
-};
-
-Unattended-Upgrade::Package-Blacklist {
-//      &quot;vim&quot;;
-//      &quot;libc6&quot;;
-//      &quot;libc6-dev&quot;;
-//      &quot;libc6-i686&quot;;
-};
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;無人值守更新預設是沒有啟動的，需要編緝設定開啟
-/etc/apt/apt.conf.d/20auto-upgrades&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;APT::Periodic::Update-Package-Lists &quot;1&quot;;
-APT::Periodic::Download-Upgradeable-Packages &quot;1&quot;;
-APT::Periodic::AutocleanInterval &quot;7&quot;;
-APT::Periodic::Unattended-Upgrade &quot;1&quot;;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;上述設定除了啟動無人值守之外，還設定每 7 天清除套件，避免被自動下載的套件給塞滿硬碟空間。&lt;/p&gt;
-
-&lt;h2 id=&quot;reference&quot;&gt;Reference&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://help.ubuntu.com/lts/serverguide/automatic-updates.html&quot;&gt;Automatic Updates&lt;/a&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="Ubuntu" /><category term="Automatic" /><summary type="html">希望 Ubuntu 能自動更新安全性套件，避免手動管理，這個想法可以透過無人值守更新套件 unattended-upgrades 簡單的完成任務。</summary></entry></feed>
+&lt;/div&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="Domain" /><summary type="html">你是否會在內部網路使用一些自己發明的網域名稱呢？像是</summary></entry></feed>

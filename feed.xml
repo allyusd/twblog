@@ -1,4 +1,60 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-01T22:02:51+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">2019 iT 邦幫忙鐵人賽 目錄</title><link href="https://twblog.hongjianching.com/2018/10/01/2019-ithelp-ironman-30-days-challenge-index/" rel="alternate" type="text/html" title="2019 iT 邦幫忙鐵人賽 目錄" /><published>2018-10-01T00:00:00+08:00</published><updated>2018-10-01T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/01/2019-ithelp-ironman-30-days-challenge-index</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/01/2019-ithelp-ironman-30-days-challenge-index/"></content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><summary type="html"></summary></entry><entry><title type="html">Visual Studio Precompiled Headers setting issues</title><link href="https://twblog.hongjianching.com/2018/09/12/visual-studio-precompiled-headers-setting-issues/" rel="alternate" type="text/html" title="Visual Studio Precompiled Headers setting issues" /><published>2018-09-12T00:00:00+08:00</published><updated>2018-09-12T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/09/12/visual-studio-precompiled-headers-setting-issues</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/09/12/visual-studio-precompiled-headers-setting-issues/">&lt;h2 id=&quot;precompiled-headers&quot;&gt;Precompiled Headers&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-01T22:08:08+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">2019 iT 邦幫忙鐵人賽 目錄及前言</title><link href="https://twblog.hongjianching.com/2018/10/01/2019-ithelp-ironman-30-days-challenge-index/" rel="alternate" type="text/html" title="2019 iT 邦幫忙鐵人賽 目錄及前言" /><published>2018-10-01T00:00:00+08:00</published><updated>2018-10-01T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/01/2019-ithelp-ironman-30-days-challenge-index</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/01/2019-ithelp-ironman-30-days-challenge-index/">&lt;p&gt;第一篇，照慣例(誰說的？)用來當目錄和前言，尤其是這次沒有明確主題的系列，更是需要目錄，因為連我自己都不知道會有哪些文章。(逃~)&lt;/p&gt;
+
+&lt;h1 id=&quot;參賽&quot;&gt;參賽&lt;/h1&gt;
+
+&lt;p&gt;大概 1、2 年前就知道 iT 邦幫忙鐵人賽，雖然感到興趣，但一直沒有行動，主要原因是懶(真好意思說)，次要原因就是知道的時候已經開賽了。這次被室友提醒這個活動，決定挑戰一下。&lt;/p&gt;
+
+&lt;h2 id=&quot;參賽主要目的&quot;&gt;參賽主要目的&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;為明年鐵人賽準備&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;本來打算準備一年，明年再參加的，但是想想，沒參加過怎麼知道該準備什麼？該注意什麼？該改進什麼呢？所以就報名參賽了。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;清除堆積的筆記&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://twblog.hongjianching.com/&quot;&gt;個人部落格 - Jian-Ching 記事本&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;雖然自己的部落格從去年 4 月就建立了，但是至今 1 年半過去，文章數還是寥寥無幾，其中還有從舊站搬過來的，令人汗顏。&lt;/p&gt;
+
+&lt;p&gt;相反的，hackmd 中好幾篇筆記堆積已久，利用這個機會強迫自己清理一下。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;主題&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;這次的系列文章雖然都跟軟體開發有關，但沒有特定的主題。從筆記中找到的 tag 有&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;DevOps、CI、CD
+    &lt;ul&gt;
+      &lt;li&gt;GitLab&lt;/li&gt;
+      &lt;li&gt;Jenkins&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Docker&lt;/li&gt;
+  &lt;li&gt;Shell Script&lt;/li&gt;
+  &lt;li&gt;Agile&lt;/li&gt;
+  &lt;li&gt;Ubuntu&lt;/li&gt;
+  &lt;li&gt;Qt&lt;/li&gt;
+  &lt;li&gt;C#&lt;/li&gt;
+  &lt;li&gt;Angular&lt;/li&gt;
+  &lt;li&gt;Database&lt;/li&gt;
+  &lt;li&gt;Python&lt;/li&gt;
+  &lt;li&gt;Socket&lt;/li&gt;
+  &lt;li&gt;Game programming&lt;/li&gt;
+  &lt;li&gt;Software &amp;amp; Tool&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;上述主題不一定會出現，對特定主題有興趣的話，可以留言作為發文參考。
+(如果有人在看的話 XD)&lt;/p&gt;
+
+&lt;h1 id=&quot;目錄&quot;&gt;目錄&lt;/h1&gt;
+
+&lt;p&gt;Day01 - 2019 iT 邦幫忙鐵人賽 目錄及前言&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><summary type="html">第一篇，照慣例(誰說的？)用來當目錄和前言，尤其是這次沒有明確主題的系列，更是需要目錄，因為連我自己都不知道會有哪些文章。(逃~)</summary></entry><entry><title type="html">Visual Studio Precompiled Headers setting issues</title><link href="https://twblog.hongjianching.com/2018/09/12/visual-studio-precompiled-headers-setting-issues/" rel="alternate" type="text/html" title="Visual Studio Precompiled Headers setting issues" /><published>2018-09-12T00:00:00+08:00</published><updated>2018-09-12T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/09/12/visual-studio-precompiled-headers-setting-issues</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/09/12/visual-studio-precompiled-headers-setting-issues/">&lt;h2 id=&quot;precompiled-headers&quot;&gt;Precompiled Headers&lt;/h2&gt;
 &lt;p&gt;最近發現專案使用的 Precompiled Headers 設定錯誤，增加了 94% 的建置時間。&lt;/p&gt;
 
 &lt;p&gt;以下是錯誤的專案設定

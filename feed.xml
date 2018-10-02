@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-02T22:24:13+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">安裝 Docker</title><link href="https://twblog.hongjianching.com/2018/10/02/install-docker/" rel="alternate" type="text/html" title="安裝 Docker" /><published>2018-10-02T00:00:00+08:00</published><updated>2018-10-02T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/02/install-docker</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/02/install-docker/">&lt;h1 id=&quot;docker-的優勢&quot;&gt;Docker 的優勢&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-02T22:27:32+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">安裝 Docker</title><link href="https://twblog.hongjianching.com/2018/10/02/install-docker/" rel="alternate" type="text/html" title="安裝 Docker" /><published>2018-10-02T00:00:00+08:00</published><updated>2018-10-02T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/02/install-docker</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/02/install-docker/">&lt;h1 id=&quot;docker-的優勢&quot;&gt;Docker 的優勢&lt;/h1&gt;
 &lt;p&gt;Docker 的介紹就跳過了，&lt;del&gt;因為我也不懂&lt;/del&gt;&lt;/p&gt;
 
 &lt;p&gt;不只常聽到的 DevOps 還是 CI / CD 會用到 Docker，平常拿來玩一些有的沒的東西時也很好用。不像 VM 還要作快照跟還原，用 docker 可以做完實驗後直接登出就消失，不留痕跡。&lt;/p&gt;
@@ -34,14 +34,7 @@ sudo usermod -aG docker &lt;span class=&quot;nv&quot;&gt;$USER&lt;/span&gt;
 
 &lt;p&gt;第二行則是將現有的使用者加入 docker 群組，否則會沒有權限操作 docker 指令&lt;/p&gt;
 
-&lt;table&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;ref: [Get Docker CE for Ubuntu&lt;/td&gt;
-      &lt;td&gt;Docker Documentation](https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-using-the-convenience-script)&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
+&lt;p&gt;ref: &lt;a href=&quot;https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-using-the-convenience-script&quot;&gt;Get Docker CE for Ubuntu - Docker Documentation&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;記得重新登入取得新的權限，然後接著執行一下 hello world&lt;/p&gt;
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run hello-world

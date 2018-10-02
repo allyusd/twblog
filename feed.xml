@@ -1,4 +1,55 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-01T22:08:08+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">2019 iT 邦幫忙鐵人賽 目錄及前言</title><link href="https://twblog.hongjianching.com/2018/10/01/2019-ithelp-ironman-30-days-challenge-index/" rel="alternate" type="text/html" title="2019 iT 邦幫忙鐵人賽 目錄及前言" /><published>2018-10-01T00:00:00+08:00</published><updated>2018-10-01T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/01/2019-ithelp-ironman-30-days-challenge-index</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/01/2019-ithelp-ironman-30-days-challenge-index/">&lt;p&gt;第一篇，照慣例(誰說的？)用來當目錄和前言，尤其是這次沒有明確主題的系列，更是需要目錄，因為連我自己都不知道會有哪些文章。(逃~)&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-02T22:19:45+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">安裝 Docker</title><link href="https://twblog.hongjianching.com/2018/10/02/install-docker/" rel="alternate" type="text/html" title="安裝 Docker" /><published>2018-10-02T00:00:00+08:00</published><updated>2018-10-02T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/02/install-docker</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/02/install-docker/">&lt;h1 id=&quot;docker-的優勢&quot;&gt;Docker 的優勢&lt;/h1&gt;
+&lt;p&gt;Docker 的介紹就跳過了，&lt;del&gt;因為我也不懂&lt;/del&gt;
+不只常聽到的 DevOps 還是 CI / CD 會用到 Docker，平常拿來玩一些有的沒的東西時也很好用。不像 VM 還要作快照跟還原，用 docker 可以做完實驗後直接登出就消失，不留痕跡。&lt;/p&gt;
+
+&lt;p&gt;簡單來說，使用他的優點就是&lt;del&gt;趕流行&lt;/del&gt;、&lt;strong&gt;快&lt;/strong&gt;、&lt;strong&gt;封裝&lt;/strong&gt;、&lt;strong&gt;繼承&lt;/strong&gt;、&lt;del&gt;多型&lt;/del&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;快
+啟動非常快速，不算下載 Image 的時間，啟動一個 container 只是幾秒鐘的事情。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;封裝
+將開發或執行環境封裝在 Image 裡面，不用擔心沒安裝或少設定什麼。
+如果是實驗用的環境，就不用擔心會汙染 Host，可以隨心所欲，想安裝什麼就安裝什麼，想改什麼設定就改什麼設定。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;繼承
+別人建好的 Image 可以直接繼承使用，或者自己建立 Base Image，然後一直疊加上去。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;安裝-docker&quot;&gt;安裝 Docker&lt;/h1&gt;
+&lt;p&gt;環境我選擇最新的 Ubuntu LTS 18.04 來當 Host，
+如果手邊沒有多的電腦安裝的話可以用 VirtualBox 裝起來跑。&lt;/p&gt;
+
+&lt;p&gt;透過懶人指令安裝 Docker&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo sh -c &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;curl -fsSL https://get.docker.com&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+sudo usermod -aG docker &lt;span class=&quot;nv&quot;&gt;$USER&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/allyusd/script/blob/master/docker.sh&quot;&gt;script/docker.sh at master · allyusd/script&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;第一行用 docker 官方提供的 script 快速安裝
+第二行則是將現有的使用者加入 docker 群組，否則會沒有權限操作 docker 指令&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;ref: [Get Docker CE for Ubuntu&lt;/td&gt;
+      &lt;td&gt;Docker Documentation](https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-using-the-convenience-script)&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;記得重新登入取得新的權限，然後接著執行一下 hello world&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run hello-world
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;看到訊息就代表成功執行 docker 嘍
+&lt;img src=&quot;/assets/images/2018-10-02-install-docker/2018-10-02_22-06-01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Docker" /><summary type="html">Docker 的優勢 Docker 的介紹就跳過了，因為我也不懂 不只常聽到的 DevOps 還是 CI / CD 會用到 Docker，平常拿來玩一些有的沒的東西時也很好用。不像 VM 還要作快照跟還原，用 docker 可以做完實驗後直接登出就消失，不留痕跡。</summary></entry><entry><title type="html">2019 iT 邦幫忙鐵人賽 目錄及前言</title><link href="https://twblog.hongjianching.com/2018/10/01/2019-ithelp-ironman-30-days-challenge-index/" rel="alternate" type="text/html" title="2019 iT 邦幫忙鐵人賽 目錄及前言" /><published>2018-10-01T00:00:00+08:00</published><updated>2018-10-01T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/01/2019-ithelp-ironman-30-days-challenge-index</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/01/2019-ithelp-ironman-30-days-challenge-index/">&lt;p&gt;第一篇，照慣例(誰說的？)用來當目錄和前言，尤其是這次沒有明確主題的系列，更是需要目錄，因為連我自己都不知道會有哪些文章。(逃~)&lt;/p&gt;
 
 &lt;h1 id=&quot;參賽&quot;&gt;參賽&lt;/h1&gt;
 
@@ -541,59 +592,4 @@
       &lt;p&gt;&lt;a href=&quot;https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md#console-terminal-window&quot;&gt;Configurating launch.json for C# debugging&lt;/a&gt;&amp;nbsp;&lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
   &lt;/ol&gt;
-&lt;/div&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="Visual-Studio-Code" /><category term=".Net-Core" /><category term="CSharp" /><summary type="html">.Net Core 是跨平台解決方案，同時 Visual Studio Code 也是跨平台開發工具，所以兩者搭配是很好的選擇。</summary></entry><entry><title type="html">最好的內部頂級網域 (Best internal top level domain)</title><link href="https://twblog.hongjianching.com/2017/12/21/best-internal-top-level-domain/" rel="alternate" type="text/html" title="最好的內部頂級網域 (Best internal top level domain)" /><published>2017-12-21T00:00:00+08:00</published><updated>2017-12-21T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2017/12/21/best-internal-top-level-domain</id><content type="html" xml:base="https://twblog.hongjianching.com/2017/12/21/best-internal-top-level-domain/">&lt;p&gt;你是否會在內部網路使用一些自己發明的網域名稱呢？像是&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;server1.dev&lt;/li&gt;
-  &lt;li&gt;server1.test&lt;/li&gt;
-  &lt;li&gt;server1.apple (apple 也許是你的產品名稱)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;要注意了，這可能導致一些麻煩&lt;sup id=&quot;fnref:3&quot;&gt;&lt;a href=&quot;#fn:3&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;，如果你是個謹慎的人，在使用網域前先在 &lt;a href=&quot;https://data.iana.org/TLD/tlds-alpha-by-domain.txt&quot;&gt;IANA TLD List&lt;/a&gt; 或是 &lt;a href=&quot;https://en.wikipedia.org/wiki/List_of_Internet_top-level_domains&quot;&gt;Wiki - List of Internet top-level domains&lt;/a&gt; 確認現實中不存在，但是這不代表之後不會被買走。&lt;/p&gt;
-
-&lt;p&gt;事實上 .dev 已經是 Google 所有，而且計劃繼續擁有更多&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;。同樣的 .apple 也已經被買下，正是你熟悉的 Apple 公司。&lt;sup id=&quot;fnref:2&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
-
-&lt;p&gt;不論是不是誤打誤中，幸運的 .test 是個可接受的選項，他在 &lt;a href=&quot;https://tools.ietf.org/html/rfc2606&quot;&gt;RFC2606&lt;/a&gt; 被明確的保留下來做為&lt;strong&gt;測試&lt;/strong&gt;使用。該文件只保留了四個頂級網域和三個次級網域。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;.test&lt;/li&gt;
-  &lt;li&gt;.example&lt;/li&gt;
-  &lt;li&gt;.invalid&lt;/li&gt;
-  &lt;li&gt;.localhost&lt;/li&gt;
-  &lt;li&gt;example.com&lt;/li&gt;
-  &lt;li&gt;example.net&lt;/li&gt;
-  &lt;li&gt;example.org&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;雖然有人提出&lt;a href=&quot;https://tools.ietf.org/html/draft-chapin-rfc2606bis-00&quot;&gt;建議&lt;/a&gt;希望保留更多的頂級網域，像是 .local、.localdomain、.domain、.lan、.home、.host，可惜沒有被接受。&lt;/p&gt;
-
-&lt;p&gt;最好的方式是直接買一個網域，建立次級網域當內部使用。&lt;/p&gt;
-
-&lt;p&gt;像是購買 allyusd.com，然後使用 dev.allyusd.com 當作內部網域。&lt;/p&gt;
-
-&lt;p&gt;另一個可接受的方式是使用 .test 或是 .example，因為 .invalid 語義上不太好，而 .localhost 又&lt;a href=&quot;https://tools.ietf.org/html/draft-west-let-localhost-be-localhost-06&quot;&gt;有人提出&lt;/a&gt;希望他真的是 localhost。&lt;/p&gt;
-
-&lt;h2 id=&quot;reference&quot;&gt;Reference&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://www.pluralsight.com/blog/software-development/choose-internal-top-level-domain-name&quot;&gt;Why MyCompany.Local is a Bad Idea&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://iyware.com/dont-use-dev-for-development/&quot;&gt;Don’t Use .dev For Development&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://www.itprotoday.com/management-mobility/q-can-i-use-local-or-pvt-top-level-domain-tld-names-part-active-directory-ad&quot;&gt;Q. Can I use the .local or .pvt top-level domain (TLD) names as part of an Active Directory (AD) tree name?&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://isc.sans.edu/forums/diary/Stop+Using+internal+Top+Level+Domain+Names/21095/&quot;&gt;Stop Using “internal” Top Level Domain Names&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://serverfault.com/questions/17255/top-level-domain-domain-suffix-for-private-network&quot;&gt;Top level domain/domain suffix for private network?&lt;/a&gt;&lt;/p&gt;
-&lt;div class=&quot;footnotes&quot;&gt;
-  &lt;ol&gt;
-    &lt;li id=&quot;fn:3&quot;&gt;
-      &lt;p&gt;&lt;a href=&quot;https://ma.ttias.be/chrome-force-dev-domains-https-via-preloaded-hsts/&quot;&gt;Chrome 63 forces .dev domains to HTTPS via preloaded HSTS&lt;/a&gt;&amp;nbsp;&lt;a href=&quot;#fnref:3&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:1&quot;&gt;
-      &lt;p&gt;&lt;a href=&quot;https://www.registry.google/&quot;&gt;Google Registry&lt;/a&gt;&amp;nbsp;&lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:2&quot;&gt;
-      &lt;p&gt;&lt;a href=&quot;https://www.iana.org/domains/root/db&quot;&gt;IANA - Root Zone Database&lt;/a&gt;&amp;nbsp;&lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/div&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="Domain" /><summary type="html">你是否會在內部網路使用一些自己發明的網域名稱呢？像是</summary></entry></feed>
+&lt;/div&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="Visual-Studio-Code" /><category term=".Net-Core" /><category term="CSharp" /><summary type="html">.Net Core 是跨平台解決方案，同時 Visual Studio Code 也是跨平台開發工具，所以兩者搭配是很好的選擇。</summary></entry></feed>

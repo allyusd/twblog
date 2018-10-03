@@ -1,4 +1,73 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-02T22:39:21+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">安裝 Docker</title><link href="https://twblog.hongjianching.com/2018/10/02/install-docker/" rel="alternate" type="text/html" title="安裝 Docker" /><published>2018-10-02T00:00:00+08:00</published><updated>2018-10-02T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/02/install-docker</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/02/install-docker/">&lt;h1 id=&quot;docker-的優勢&quot;&gt;Docker 的優勢&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-03T21:57:55+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">Run Docker Basic</title><link href="https://twblog.hongjianching.com/2018/10/03/run-docker-basic/" rel="alternate" type="text/html" title="Run Docker Basic" /><published>2018-10-03T00:00:00+08:00</published><updated>2018-10-03T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/03/run-docker-basic</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/03/run-docker-basic/">&lt;hr /&gt;
+&lt;p&gt;title: “使用 Docker”
+tags: 2019-iT-邦幫忙鐵人賽 Docker
+—&lt;/p&gt;
+
+&lt;p&gt;上一篇講安裝 Docker，&lt;/p&gt;
+
+&lt;p&gt;這篇進入正題，開始使用 Docker&lt;/p&gt;
+
+&lt;h1 id=&quot;ps---顯示容器清單&quot;&gt;ps - 顯示容器清單&lt;/h1&gt;
+&lt;p&gt;首先是 ps，列出目前執行中的容器。雖然沒有明確說明，猜想是 linux 的 ps 指令，也就是 process status&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker ps
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;如果想要看到全部，包含已停止的，加上 -a 參數，代表 all 全部&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker ps -a
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;如果有照著之前執行過 hello-world，就會發現他出現在清單上，而且是 Exit 狀態。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-03-run-docker/2018-10-03_20-50-14.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;rm---刪除容器&quot;&gt;rm - 刪除容器&lt;/h1&gt;
+&lt;p&gt;使用 rm 指令，代表 remove 移除，可以使用 id 或者 name 來刪除&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker rm trusting_wozniak
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;執行成功會顯示被刪除的名字，再用 ps -a 查詢會發現之前的容器已經消失嘍&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-03-run-docker/2018-10-03_20-58-51.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;預設 rm 指令只能刪除停止的容器，如果要強制刪除執行中的容器，就要使用 -f 參數，代表 force 強制&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker rm -f running_container
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&quot;run---執行容器&quot;&gt;run - 執行容器&lt;/h1&gt;
+
+&lt;h2 id=&quot;hello-wrold&quot;&gt;hello-wrold&lt;/h2&gt;
+&lt;p&gt;使用 run 執行容器，上一篇已經偷跑執行 hello world&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run hello-world
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;如果確認是跑完就不再使用的，可以在執行時加上 –rm 參數，當容器終止時會自動刪除，很方便&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run --rm hello-world
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-03-run-docker/2018-10-03_21-07-42.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;ubuntu&quot;&gt;ubuntu&lt;/h2&gt;
+&lt;p&gt;只能跑 hello world 絕對不夠，接著來執行 ubuntu 吧。沒錯，在 ubuntu 上面執行 ubuntu 容器，這次 ubuntu 18.04 版本的 image 只有 &lt;a href=&quot;https://microbadger.com/images/ubuntu:18.04&quot;&gt;30.3 MB&lt;/a&gt;，比前一版 16.04 還少了 11 MB&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run --rm ubuntu:18.04
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;執行後，docker 開始下載 ubuntu 18.04 的 image，然後，沒有然後，什麼事都沒發生。這是一開始容易卡關的地方，實際上，容器執行後因為沒事做就終止了，然後被自動刪除 (–rm)。&lt;/p&gt;
+
+&lt;p&gt;如果想要跟容器互動，可以加上 -it&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run --rm -it ubuntu:18.04
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-03-run-docker/2018-10-03_21-25-42.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;這次因為 image 已經在本機了，所以馬上就進入容器內，可以開始大玩特玩喔。雖然 ubuntu docker image 為了最小化，所以很多套件都沒有預裝，但是有 apt-get 可以使用，不用太擔心，想要什麼自己裝就好了。&lt;/p&gt;
+
+&lt;p&gt;如果玩膩了，只要輸入 exit 就會退出容器，同時容器就會終止，然後自動刪除嘍。&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><summary type="html">title: “使用 Docker” tags: 2019-iT-邦幫忙鐵人賽 Docker —</summary></entry><entry><title type="html">安裝 Docker</title><link href="https://twblog.hongjianching.com/2018/10/02/install-docker/" rel="alternate" type="text/html" title="安裝 Docker" /><published>2018-10-02T00:00:00+08:00</published><updated>2018-10-02T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/02/install-docker</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/02/install-docker/">&lt;h1 id=&quot;docker-的優勢&quot;&gt;Docker 的優勢&lt;/h1&gt;
 &lt;p&gt;Docker 的介紹就跳過了，&lt;del&gt;因為我也不懂&lt;/del&gt;&lt;/p&gt;
 
 &lt;p&gt;不只常聽到的 DevOps 還是 CI / CD 會用到 Docker，平常拿來玩一些有的沒的東西時也很好用。不像 VM 還要作快照跟還原，用 docker 可以做完實驗後直接登出就消失，不留痕跡。&lt;/p&gt;
@@ -447,145 +516,4 @@ sudo usermod -aG docker &lt;span class=&quot;nv&quot;&gt;$USER&lt;/span&gt;
 
 &lt;h2 id=&quot;reference&quot;&gt;Reference&lt;/h2&gt;
 
-&lt;p&gt;&lt;a href=&quot;http://www.npgsql.org/efcore/index.html&quot;&gt;Npgsql - Getting Started&lt;/a&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="Visual-Studio-Code" /><category term=".Net-Core" /><category term="ASP.NET" /><category term="Web-API" /><category term="Entity-Framework-Core" /><category term="PostgreSQL" /><category term="CSharp" /><summary type="html">ASP.Net Core Web API 使用 Entity Framework Core 和 PostgreSQL</summary></entry><entry><title type="html">使用 Visual Studio Code 開發 .Net Core</title><link href="https://twblog.hongjianching.com/2018/01/14/visual-studio-code-with-dotnet-core/" rel="alternate" type="text/html" title="使用 Visual Studio Code 開發 .Net Core" /><published>2018-01-14T00:00:00+08:00</published><updated>2018-01-14T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/01/14/visual-studio-code-with-dotnet-core</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/01/14/visual-studio-code-with-dotnet-core/">&lt;p&gt;.Net Core 是跨平台解決方案，同時 Visual Studio Code 也是跨平台開發工具，所以兩者搭配是很好的選擇。&lt;/p&gt;
-
-&lt;h2 id=&quot;安裝-visual-studio-code-及-net-core&quot;&gt;安裝 Visual Studio Code 及 .Net Core&lt;/h2&gt;
-
-&lt;p&gt;首先安裝 &lt;a href=&quot;https://code.visualstudio.com/&quot;&gt;Visual Studio Code&lt;/a&gt;，當前版本為 1.19.2。&lt;/p&gt;
-
-&lt;p&gt;還有安裝 &lt;a href=&quot;https://www.microsoft.com/net/&quot;&gt;.NET Core&lt;/a&gt;，當前版本為：&lt;/p&gt;
-
-&lt;p&gt;.Net Core SDK 2.1.4&lt;/p&gt;
-
-&lt;p&gt;.Net Core Runtime 2.0.5&lt;/p&gt;
-
-&lt;h2 id=&quot;hello-world-範例&quot;&gt;Hello World 範例&lt;/h2&gt;
-
-&lt;p&gt;建立一個 &lt;strong&gt;hello_world&lt;/strong&gt; 資料夾，開啟 vs-code。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-01-14-visual-studio-code-with-dotnet-core/001.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;然後在終端機 ( Ctrl+` ) 使用 &lt;strong&gt;new&lt;/strong&gt; 指令建立一個 console 專案。執行後會看到 vs-code 左方檔案總管已經出現專案所需的檔案。&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;dotnet new console
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;接著使用 &lt;strong&gt;run&lt;/strong&gt; 執行程式，就會看到 &lt;strong&gt;Hello World&lt;/strong&gt;。&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;dotnet run
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-01-14-visual-studio-code-with-dotnet-core/002.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;#dotnet-restore&quot;&gt;曾經使用的 dotnet restore 不見了？&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;開發及偵錯&quot;&gt;開發及偵錯&lt;/h2&gt;
-
-&lt;p&gt;第一個檔案是 &lt;strong&gt;hello_world.csproj&lt;/strong&gt;，內容是專案相關設定。&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;Project Sdk=&quot;Microsoft.NET.Sdk&quot;&amp;gt;
-
-  &amp;lt;PropertyGroup&amp;gt;
-    &amp;lt;OutputType&amp;gt;Exe&amp;lt;/OutputType&amp;gt;
-    &amp;lt;TargetFramework&amp;gt;netcoreapp2.0&amp;lt;/TargetFramework&amp;gt;
-  &amp;lt;/PropertyGroup&amp;gt;
-
-&amp;lt;/Project&amp;gt;
-
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;另一個檔案是 &lt;strong&gt;Program.cs&lt;/strong&gt;，是已經寫好的 Hello World 程式碼。&lt;/p&gt;
-
-&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;hello_world&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Program&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;Console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;WriteLine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Hello World!&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;如果是第一次開啟 C# 相關檔案，vs-code 會建議你安裝 C# 套件，選擇安裝。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-01-14-visual-studio-code-with-dotnet-core/003.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;安裝完重啟 vs-code 又會提示你加入偵錯相關設定檔，選擇是。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-01-14-visual-studio-code-with-dotnet-core/004.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;接著稍微調整 &lt;strong&gt;Program.cs&lt;/strong&gt; 程式碼如下：&lt;/p&gt;
-
-&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Jian-Ching&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;message&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Hello &quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;!&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;Console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;WriteLine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;在 &lt;strong&gt;Console.WriteLine&lt;/strong&gt; 下一行設定中斷點 (小紅點)，然後執行 F5，別忘了左邊選擇偵錯可以看到變數資訊，滑鼠移到 &lt;strong&gt;message&lt;/strong&gt; 變數也會顯示該變數的值，最下方也有顯示輸出的結果。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-01-14-visual-studio-code-with-dotnet-core/005.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;console-input&quot;&gt;Console input&lt;/h2&gt;
-
-&lt;p&gt;如果只能顯示寫好的結果就不好玩了，接著我們讓程式能接受輸入的名字。&lt;/p&gt;
-
-&lt;p&gt;首先要調整 vs-code 偵錯相關設定檔 &lt;strong&gt;.vscode/launch.json&lt;/strong&gt;，找到 &lt;strong&gt;console&lt;/strong&gt; 參數，改為 &lt;strong&gt;integratedTerminal&lt;/strong&gt;。&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&quot;console&quot;: &quot;integratedTerminal&quot;,
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;然後修改程式碼：&lt;/p&gt;
-
-&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;Console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;WriteLine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;What's your name?&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;ReadLine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;message&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Hello &quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;!&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;Console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;WriteLine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;再次按下 F5 後，切換到終端機 ( Ctrl+` )&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-01-14-visual-studio-code-with-dotnet-core/006.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;教學結束，接著可以開始進行其它 C# 的練習嘍！&lt;/p&gt;
-
-&lt;h2 id=&quot;dotnet-restore&quot;&gt;dotnet restore&lt;/h2&gt;
-
-&lt;p&gt;如果你曾經使用過 .Net Core，那可能還紀得這個指令。&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;dotnet restore
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;從 .Net Core 2.0 開炲，dotnet restore 已經隱含在所有指令，例如 new, build, run，所以不太需要單獨執行這個指令。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://docs.microsoft.com/zh-tw/dotnet/core/tools/dotnet-restore?tabs=netcore2x&quot;&gt;Microsoft Docs - dotnet restore&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;reference&quot;&gt;Reference&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://code.visualstudio.com/docs/other/dotnet&quot;&gt;Using .NET Core in Visual Studio Code&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://microsoft.com/net/core&quot;&gt;Install the C# extension from the VS Code Marketplace&lt;/a&gt;&lt;/p&gt;
-&lt;div class=&quot;footnotes&quot;&gt;
-  &lt;ol&gt;
-    &lt;li id=&quot;fn:1&quot;&gt;
-      &lt;p&gt;&lt;a href=&quot;https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md#console-terminal-window&quot;&gt;Configurating launch.json for C# debugging&lt;/a&gt;&amp;nbsp;&lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/div&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="Visual-Studio-Code" /><category term=".Net-Core" /><category term="CSharp" /><summary type="html">.Net Core 是跨平台解決方案，同時 Visual Studio Code 也是跨平台開發工具，所以兩者搭配是很好的選擇。</summary></entry></feed>
+&lt;p&gt;&lt;a href=&quot;http://www.npgsql.org/efcore/index.html&quot;&gt;Npgsql - Getting Started&lt;/a&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="Visual-Studio-Code" /><category term=".Net-Core" /><category term="ASP.NET" /><category term="Web-API" /><category term="Entity-Framework-Core" /><category term="PostgreSQL" /><category term="CSharp" /><summary type="html">ASP.Net Core Web API 使用 Entity Framework Core 和 PostgreSQL</summary></entry></feed>

@@ -19,12 +19,12 @@
 
 
 
-<title>安裝 Docker - Jian-Ching 記事本</title>
+<title>Run Docker Basic - Jian-Ching 記事本</title>
 
 
 
 
-<meta name="description" content="Docker 的優勢Docker 的介紹就跳過了，因為我也不懂">
+<meta name="description" content="title: “使用 Docker”tags: 2019-iT-邦幫忙鐵人賽 Docker—">
 
 
 
@@ -33,15 +33,15 @@
 
 <meta property="og:locale" content="zh_TW">
 <meta property="og:site_name" content="Jian-Ching 記事本">
-<meta property="og:title" content="安裝 Docker">
+<meta property="og:title" content="Run Docker Basic">
 
 
-  <link rel="canonical" href="https://twblog.HongJianChing.com/2018/10/02/install-docker/">
-  <meta property="og:url" content="https://twblog.HongJianChing.com/2018/10/02/install-docker/">
+  <link rel="canonical" href="https://twblog.HongJianChing.com/2018/10/03/run-docker-basic/">
+  <meta property="og:url" content="https://twblog.HongJianChing.com/2018/10/03/run-docker-basic/">
 
 
 
-  <meta property="og:description" content="Docker 的優勢Docker 的介紹就跳過了，因為我也不懂">
+  <meta property="og:description" content="title: “使用 Docker”tags: 2019-iT-邦幫忙鐵人賽 Docker—">
 
 
 
@@ -56,7 +56,7 @@
 
 
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2018-10-02T00:00:00+08:00">
+  <meta property="article:published_time" content="2018-10-03T00:00:00+08:00">
 
 
 
@@ -278,69 +278,92 @@
 
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
-    <meta itemprop="headline" content="安裝 Docker">
-    <meta itemprop="description" content="Docker 的優勢Docker 的介紹就跳過了，因為我也不懂">
-    <meta itemprop="datePublished" content="October 02, 2018">
+    <meta itemprop="headline" content="Run Docker Basic">
+    <meta itemprop="description" content="title: “使用 Docker”tags: 2019-iT-邦幫忙鐵人賽 Docker—">
+    <meta itemprop="datePublished" content="October 03, 2018">
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 class="page__title" itemprop="headline">安裝 Docker
+          <h1 class="page__title" itemprop="headline">Run Docker Basic
 </h1>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        <h1 id="docker-的優勢">Docker 的優勢</h1>
-<p>Docker 的介紹就跳過了，<del>因為我也不懂</del></p>
+        
+<hr />
+<p>title: “使用 Docker”
+tags: 2019-iT-邦幫忙鐵人賽 Docker
+—</p>
 
-<p>不只常聽到的 DevOps 還是 CI / CD 會用到 Docker，平常拿來玩一些有的沒的東西時也很好用。不像 VM 還要作快照跟還原，用 docker 可以做完實驗後直接登出就消失，不留痕跡。</p>
+<p>上一篇講安裝 Docker，</p>
 
-<p>簡單來說，使用他的優點就是<del>趕流行</del>、<strong>快</strong>、<strong>封裝</strong>、<strong>繼承</strong>、<del>多型</del></p>
+<p>這篇進入正題，開始使用 Docker</p>
 
-<ul>
-  <li>快</li>
-</ul>
+<h1 id="ps---顯示容器清單">ps - 顯示容器清單</h1>
+<p>首先是 ps，列出目前執行中的容器。雖然沒有明確說明，猜想是 linux 的 ps 指令，也就是 process status</p>
 
-<p>啟動非常快速，不算下載 Image 的時間，啟動一個 container 只是幾秒鐘的事情。</p>
-
-<ul>
-  <li>封裝</li>
-</ul>
-
-<p>將開發或執行環境封裝在 Image 裡面，不用擔心沒安裝或少設定什麼。如果是實驗用的環境，就不用擔心會汙染 Host，可以隨心所欲，想安裝什麼就安裝什麼，想改什麼設定就改什麼設定。</p>
-
-<ul>
-  <li>繼承</li>
-</ul>
-
-<p>別人建好的 Image 可以直接繼承使用，或者自己建立 Base Image，然後一直疊加上去。</p>
-
-<h1 id="安裝-docker">安裝 Docker</h1>
-<p>環境我選擇最新的 Ubuntu LTS 18.04 來當 Host，如果手邊沒有多的電腦安裝的話可以用 VirtualBox 裝起來跑。</p>
-
-<p>透過懶人指令安裝 Docker</p>
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>sudo sh -c <span class="s2">"</span><span class="k">$(</span>curl -fsSL https://get.docker.com<span class="k">)</span><span class="s2">"</span>
-sudo usermod -aG docker <span class="nv">$USER</span>
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>docker ps
 </code></pre>
 </div>
-<p><a href="https://github.com/allyusd/script/blob/master/docker.sh">script/docker.sh at master · allyusd/script</a></p>
 
-<p>第一行用 docker 官方提供的 script 快速安裝</p>
+<p>如果想要看到全部，包含已停止的，加上 -a 參數，代表 all 全部</p>
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>docker ps -a
+</code></pre>
+</div>
+<p>如果有照著之前執行過 hello-world，就會發現他出現在清單上，而且是 Exit 狀態。</p>
 
-<p>第二行則是將現有的使用者加入 docker 群組，否則會沒有權限操作 docker 指令</p>
+<p><img src="/assets/images/2018-10-03-run-docker/2018-10-03_20-50-14.png" alt="" /></p>
 
-<p>ref: <a href="https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-using-the-convenience-script">Get Docker CE for Ubuntu - Docker Documentation</a></p>
+<h1 id="rm---刪除容器">rm - 刪除容器</h1>
+<p>使用 rm 指令，代表 remove 移除，可以使用 id 或者 name 來刪除</p>
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>docker rm trusting_wozniak
+</code></pre>
+</div>
+<p>執行成功會顯示被刪除的名字，再用 ps -a 查詢會發現之前的容器已經消失嘍</p>
 
-<p>記得重新登入取得新的權限，然後接著執行一下 hello world</p>
+<p><img src="/assets/images/2018-10-03-run-docker/2018-10-03_20-58-51.png" alt="" /></p>
+
+<p>預設 rm 指令只能刪除停止的容器，如果要強制刪除執行中的容器，就要使用 -f 參數，代表 force 強制</p>
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>docker rm -f running_container
+</code></pre>
+</div>
+
+<h1 id="run---執行容器">run - 執行容器</h1>
+
+<h2 id="hello-wrold">hello-wrold</h2>
+<p>使用 run 執行容器，上一篇已經偷跑執行 hello world</p>
 <div class="language-bash highlighter-rouge"><pre class="highlight"><code>docker run hello-world
 </code></pre>
 </div>
 
-<p>看到訊息就代表成功執行 docker 嘍
-<img src="/assets/images/2018-10-02-install-docker/2018-10-02_22-06-01.png" alt="" /></p>
+<p>如果確認是跑完就不再使用的，可以在執行時加上 –rm 參數，當容器終止時會自動刪除，很方便</p>
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>docker run --rm hello-world
+</code></pre>
+</div>
+
+<p><img src="/assets/images/2018-10-03-run-docker/2018-10-03_21-07-42.png" alt="" /></p>
+
+<h2 id="ubuntu">ubuntu</h2>
+<p>只能跑 hello world 絕對不夠，接著來執行 ubuntu 吧。沒錯，在 ubuntu 上面執行 ubuntu 容器，這次 ubuntu 18.04 版本的 image 只有 <a href="https://microbadger.com/images/ubuntu:18.04">30.3 MB</a>，比前一版 16.04 還少了 11 MB</p>
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>docker run --rm ubuntu:18.04
+</code></pre>
+</div>
+<p>執行後，docker 開始下載 ubuntu 18.04 的 image，然後，沒有然後，什麼事都沒發生。這是一開始容易卡關的地方，實際上，容器執行後因為沒事做就終止了，然後被自動刪除 (–rm)。</p>
+
+<p>如果想要跟容器互動，可以加上 -it</p>
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>docker run --rm -it ubuntu:18.04
+</code></pre>
+</div>
+
+<p><img src="/assets/images/2018-10-03-run-docker/2018-10-03_21-25-42.png" alt="" /></p>
+
+<p>這次因為 image 已經在本機了，所以馬上就進入容器內，可以開始大玩特玩喔。雖然 ubuntu docker image 為了最小化，所以很多套件都沒有預裝，但是有 apt-get 可以使用，不用太擔心，想要什麼自己裝就好了。</p>
+
+<p>如果玩膩了，只要輸入 exit 就會退出容器，同時容器就會終止，然後自動刪除嘍。</p>
 
         
       </section>
@@ -348,33 +371,10 @@ sudo usermod -aG docker <span class="nv">$USER</span>
       <footer class="page__meta">
         
         
-  
-
-
-  
-  
-  
-
-  <p class="page__taxonomy">
-    <strong><i class="fa fa-fw fa-tags" aria-hidden="true"></i> 標籤: </strong>
-    <span itemprop="keywords">
-    
-      
-      
-      <a href="https://twblog.hongjianching.com/tags/#2019-it-%E9%82%A6%E5%B9%AB%E5%BF%99%E9%90%B5%E4%BA%BA%E8%B3%BD" class="page__taxonomy-item" rel="tag">2019-iT-邦幫忙鐵人賽</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://twblog.hongjianching.com/tags/#docker" class="page__taxonomy-item" rel="tag">Docker</a>
-    
-    </span>
-  </p>
-
-
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2018-10-02T00:00:00+08:00">October 02, 2018</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2018-10-03T00:00:00+08:00">October 03, 2018</time></p>
         
       </footer>
 
@@ -383,25 +383,24 @@ sudo usermod -aG docker <span class="nv">$USER</span>
     <h4 class="page__share-title">分享到</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=安裝 Docker https://twblog.hongjianching.com/2018/10/02/install-docker/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=Run Docker Basic https://twblog.hongjianching.com/2018/10/03/run-docker-basic/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2018/10/02/install-docker/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2018/10/03/run-docker-basic/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2018/10/02/install-docker/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2018/10/03/run-docker-basic/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2018/10/02/install-docker/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2018/10/03/run-docker-basic/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="https://twblog.hongjianching.com/2018/10/01/2019-ithelp-ironman-30-days-challenge-index/" class="pagination--pager" title="2019 iT 邦幫忙鐵人賽 目錄及前言
+      <a href="https://twblog.hongjianching.com/2018/10/02/install-docker/" class="pagination--pager" title="安裝 Docker
 ">較舊</a>
     
     
-      <a href="https://twblog.hongjianching.com/2018/10/03/run-docker-basic/" class="pagination--pager" title="Run Docker Basic
-">較新</a>
+      <a href="#" class="pagination--pager disabled">較新</a>
     
   </nav>
 
@@ -461,12 +460,6 @@ sudo usermod -aG docker <span class="nv">$USER</span>
 
   ga('create', 'UA-9431648-15', 'auto');
   ga('send', 'pageview');
-  
-  
-    ga('send', 'event', 'taggedPost', 'view', '2019-iT-邦幫忙鐵人賽');
-  
-    ga('send', 'event', 'taggedPost', 'view', 'Docker');
-  
   
 </script>
 

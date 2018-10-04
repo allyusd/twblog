@@ -19,12 +19,12 @@
 
 
 
-<title>使用 Docker - 基本操作 - Jian-Ching 記事本</title>
+<title>使用 Docker - 背景服務 - Jian-Ching 記事本</title>
 
 
 
 
-<meta name="description" content="上一篇講安裝 Docker，">
+<meta name="description" content="接著使用 Docker - 基本操作">
 
 
 
@@ -33,15 +33,15 @@
 
 <meta property="og:locale" content="zh_TW">
 <meta property="og:site_name" content="Jian-Ching 記事本">
-<meta property="og:title" content="使用 Docker - 基本操作">
+<meta property="og:title" content="使用 Docker - 背景服務">
 
 
-  <link rel="canonical" href="https://twblog.HongJianChing.com/2018/10/03/run-docker-basic/">
-  <meta property="og:url" content="https://twblog.HongJianChing.com/2018/10/03/run-docker-basic/">
+  <link rel="canonical" href="https://twblog.HongJianChing.com/2018/10/04/run-docker-service/">
+  <meta property="og:url" content="https://twblog.HongJianChing.com/2018/10/04/run-docker-service/">
 
 
 
-  <meta property="og:description" content="上一篇講安裝 Docker，">
+  <meta property="og:description" content="接著使用 Docker - 基本操作">
 
 
 
@@ -56,7 +56,7 @@
 
 
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2018-10-03T00:00:00+08:00">
+  <meta property="article:published_time" content="2018-10-04T00:00:00+08:00">
 
 
 
@@ -278,86 +278,85 @@
 
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
-    <meta itemprop="headline" content="使用 Docker - 基本操作">
-    <meta itemprop="description" content="上一篇講安裝 Docker，">
-    <meta itemprop="datePublished" content="October 03, 2018">
+    <meta itemprop="headline" content="使用 Docker - 背景服務">
+    <meta itemprop="description" content="接著使用 Docker - 基本操作">
+    <meta itemprop="datePublished" content="October 04, 2018">
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 class="page__title" itemprop="headline">使用 Docker - 基本操作
+          <h1 class="page__title" itemprop="headline">使用 Docker - 背景服務
 </h1>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        <p>上一篇講<a href="https://twblog.hongjianching.com/2018/10/02/install-docker/">安裝 Docker</a>，</p>
-
-<p>這篇進入正題，開始使用 Docker</p>
-
-<h1 id="ps---顯示容器清單">ps - 顯示容器清單</h1>
-<p>首先是 ps，列出目前執行中的容器。雖然沒有明確說明，猜想是 linux 的 ps 指令，也就是 process status</p>
-
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>docker ps
-</code></pre>
-</div>
-
-<p>如果想要看到全部，包含已停止的，加上 -a 參數，代表 all 全部</p>
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>docker ps -a
-</code></pre>
-</div>
-<p>如果有照著之前執行過 hello-world，就會發現他出現在清單上，而且是 Exit 狀態。</p>
-
-<p><img src="/assets/images/2018-10-03-run-docker/2018-10-03_20-50-15.png" alt="" /></p>
-
-<h1 id="rm---刪除容器">rm - 刪除容器</h1>
-<p>使用 rm 指令，代表 remove 移除，可以使用 id 或者 name 來刪除</p>
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>docker rm trusting_wozniak
-</code></pre>
-</div>
-<p>執行成功會顯示被刪除的名字，再用 ps -a 查詢會發現之前的容器已經消失嘍</p>
-
-<p><img src="/assets/images/2018-10-03-run-docker/2018-10-03_20-58-52.png" alt="" /></p>
-
-<p>預設 rm 指令只能刪除停止的容器，如果要強制刪除執行中的容器，就要使用 -f 參數，代表 force 強制</p>
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>docker rm -f running_container
-</code></pre>
-</div>
+        <p>接著<a href="https://twblog.hongjianching.com/2018/10/03/run-docker-basic/">使用 Docker - 基本操作</a></p>
 
 <h1 id="run---執行容器">run - 執行容器</h1>
 
-<h2 id="hello-wrold">hello-wrold</h2>
-<p>使用 run 執行容器，上一篇已經偷跑執行 hello world</p>
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>docker run hello-world
+<p>之前提到使用 run 及 -it 參數可以進入容器內操作，這時候如果輸入 exit 離開就會結束容器執行。但如果不想結束容器運作，單純想退出 shell 怎麼辦？</p>
+
+<p>直接關閉 shell 或是按下 <code class="highlighter-rouge">Ctrl + p</code> 及 <code class="highlighter-rouge">Ctrl + q</code> 就可以保持容器運作</p>
+
+<p>那能不能一開始就想讓容器保持運作，像一個背景服務一樣單獨執行而不進入 shell 介面呢？</p>
+
+<p>可以，使用 -d，代表 detach</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>docker run --rm -d -it ubuntu:18.04
 </code></pre>
 </div>
 
-<p>如果確認是跑完就不再使用的，可以在執行時加上 –rm 參數，當容器終止時會自動刪除，很方便</p>
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>docker run --rm hello-world
+<p><img src="/assets/images/2018-10-04-run-docker-service/2018-10-04_21-43-15.png" alt="" /></p>
+
+<h1 id="attach">attach</h1>
+<p>好的，雖然我剛剛是這麼要求的，但是我反悔想進入容器內操作，能不能不要啟動新的容器直接進入目前執行中的容器呢？</p>
+
+<p>可以，剛剛是 detach，反過來是 attach，一樣可以透過 id 或 name 指定要進入的容器</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>docker attach running_container
 </code></pre>
 </div>
 
-<p><img src="/assets/images/2018-10-03-run-docker/2018-10-03_21-07-43.png" alt="" /></p>
+<p><img src="/assets/images/2018-10-04-run-docker-service/2018-10-04_21-47-55.png" alt="" /></p>
 
-<h2 id="ubuntu">ubuntu</h2>
-<p>只能跑 hello world 絕對不夠，接著來執行 ubuntu 吧。沒錯，在 ubuntu 上面執行 ubuntu 容器，這次 ubuntu 18.04 版本的 image 只有 <a href="https://microbadger.com/images/ubuntu:18.04">30.3 MB</a>，比前一版 16.04 還少了 11 MB</p>
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>docker run --rm ubuntu:18.04
-</code></pre>
-</div>
-<p>執行後，docker 開始下載 ubuntu 18.04 的 image，然後，沒有然後，什麼事都沒發生。這是一開始容易卡關的地方，實際上，容器執行後因為沒事做就終止了，然後被自動刪除 (–rm)。</p>
+<p>記得要離開的時候要透過 <code class="highlighter-rouge">Ctrl + p</code> 及 <code class="highlighter-rouge">Ctrl + q</code> 進行 detach，否則容器會終止運行喔。</p>
 
-<p>如果想要跟容器互動，可以加上 -it</p>
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>docker run --rm -it ubuntu:18.04
+<h1 id="stop-start---停止啟動容器">stop, start - 停止、啟動容器</h1>
+<p>既然我們的目標是一個背景服務，萬一不小心直接輸入 exit 關掉的話就不好了，所以我們可以把之前為了方便測試的 –rm 參數拿掉，這樣容器在終止時還會保留下來。</p>
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>docker run -d -it ubuntu:18.04
 </code></pre>
 </div>
 
-<p><img src="/assets/images/2018-10-03-run-docker/2018-10-03_21-25-43.png" alt="" /></p>
+<p>這裡同時介紹一下，運行中的容器想要停止的話可以透過 stop 指令，並且透過 start 重新啟動</p>
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>docker stop running_container
+</code></pre>
+</div>
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>docker start running_container
+</code></pre>
+</div>
 
-<p>這次因為 image 已經在本機了，所以馬上就進入容器內，可以開始大玩特玩喔。雖然 ubuntu docker image 為了最小化，所以很多套件都沒有預裝，但是有 apt-get 可以使用，不用太擔心，想要什麼自己裝就好了。</p>
+<p><img src="/assets/images/2018-10-04-run-docker-service/2018-10-04_21-58-47.png" alt="" /></p>
 
-<p>如果玩膩了，只要輸入 exit 就會退出容器，同時容器就會終止，然後自動刪除嘍。</p>
+<h1 id="restart---重新啟動">–restart - 重新啟動</h1>
+<p>要作為背景服務，別忘了自動重新啟動的功能，透過 –restart 加上 always 讓 docker 自動幫容器重新啟動</p>
+
+<p>重新啟動包含下列情境</p>
+<ul>
+  <li>Host 開機時自動啟動容器 (是的，預設開機時是不會啟動的喔)</li>
+  <li>在容器中不小心輸入 exit 退出運行時自動重啟</li>
+  <li>容器運行中的程式當掉了，自動重啟</li>
+</ul>
+
+<p>這邊要注意，自動重啟 <strong>不包含</strong> 上面提到的 stop 指令喔，透過 stop 指令還是會停止面前容器運作，不會自動重啟的，不過也因為這樣才能進行維謢作業</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>docker run --restart<span class="o">=</span>always -d -it ubuntu:18.04
+</code></pre>
+</div>
+
+<p><img src="/assets/images/2018-10-04-run-docker-service/2018-10-04_22-09-23.png" alt="" /></p>
 
         
       </section>
@@ -391,7 +390,7 @@
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2018-10-03T00:00:00+08:00">October 03, 2018</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2018-10-04T00:00:00+08:00">October 04, 2018</time></p>
         
       </footer>
 
@@ -400,25 +399,24 @@
     <h4 class="page__share-title">分享到</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=使用 Docker - 基本操作 https://twblog.hongjianching.com/2018/10/03/run-docker-basic/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=使用 Docker - 背景服務 https://twblog.hongjianching.com/2018/10/04/run-docker-service/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2018/10/03/run-docker-basic/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2018/10/04/run-docker-service/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2018/10/03/run-docker-basic/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2018/10/04/run-docker-service/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2018/10/03/run-docker-basic/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2018/10/04/run-docker-service/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="https://twblog.hongjianching.com/2018/10/02/install-docker/" class="pagination--pager" title="安裝 Docker
+      <a href="https://twblog.hongjianching.com/2018/10/03/run-docker-basic/" class="pagination--pager" title="使用 Docker - 基本操作
 ">較舊</a>
     
     
-      <a href="https://twblog.hongjianching.com/2018/10/04/run-docker-service/" class="pagination--pager" title="使用 Docker - 背景服務
-">較新</a>
+      <a href="#" class="pagination--pager disabled">較新</a>
     
   </nav>
 

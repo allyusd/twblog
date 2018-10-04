@@ -1,4 +1,67 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-03T22:10:54+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">使用 Docker - 基本操作</title><link href="https://twblog.hongjianching.com/2018/10/03/run-docker-basic/" rel="alternate" type="text/html" title="使用 Docker - 基本操作" /><published>2018-10-03T00:00:00+08:00</published><updated>2018-10-03T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/03/run-docker-basic</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/03/run-docker-basic/">&lt;p&gt;上一篇講&lt;a href=&quot;https://twblog.hongjianching.com/2018/10/02/install-docker/&quot;&gt;安裝 Docker&lt;/a&gt;，&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-04T22:18:08+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">使用 Docker - 背景服務</title><link href="https://twblog.hongjianching.com/2018/10/04/run-docker-service/" rel="alternate" type="text/html" title="使用 Docker - 背景服務" /><published>2018-10-04T00:00:00+08:00</published><updated>2018-10-04T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/04/run-docker-service</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/04/run-docker-service/">&lt;p&gt;接著&lt;a href=&quot;https://twblog.hongjianching.com/2018/10/03/run-docker-basic/&quot;&gt;使用 Docker - 基本操作&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;run---執行容器&quot;&gt;run - 執行容器&lt;/h1&gt;
+
+&lt;p&gt;之前提到使用 run 及 -it 參數可以進入容器內操作，這時候如果輸入 exit 離開就會結束容器執行。但如果不想結束容器運作，單純想退出 shell 怎麼辦？&lt;/p&gt;
+
+&lt;p&gt;直接關閉 shell 或是按下 &lt;code class=&quot;highlighter-rouge&quot;&gt;Ctrl + p&lt;/code&gt; 及 &lt;code class=&quot;highlighter-rouge&quot;&gt;Ctrl + q&lt;/code&gt; 就可以保持容器運作&lt;/p&gt;
+
+&lt;p&gt;那能不能一開始就想讓容器保持運作，像一個背景服務一樣單獨執行而不進入 shell 介面呢？&lt;/p&gt;
+
+&lt;p&gt;可以，使用 -d，代表 detach&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run --rm -d -it ubuntu:18.04
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-04-run-docker-service/2018-10-04_21-43-15.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;attach&quot;&gt;attach&lt;/h1&gt;
+&lt;p&gt;好的，雖然我剛剛是這麼要求的，但是我反悔想進入容器內操作，能不能不要啟動新的容器直接進入目前執行中的容器呢？&lt;/p&gt;
+
+&lt;p&gt;可以，剛剛是 detach，反過來是 attach，一樣可以透過 id 或 name 指定要進入的容器&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker attach running_container
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-04-run-docker-service/2018-10-04_21-47-55.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;記得要離開的時候要透過 &lt;code class=&quot;highlighter-rouge&quot;&gt;Ctrl + p&lt;/code&gt; 及 &lt;code class=&quot;highlighter-rouge&quot;&gt;Ctrl + q&lt;/code&gt; 進行 detach，否則容器會終止運行喔。&lt;/p&gt;
+
+&lt;h1 id=&quot;stop-start---停止啟動容器&quot;&gt;stop, start - 停止、啟動容器&lt;/h1&gt;
+&lt;p&gt;既然我們的目標是一個背景服務，萬一不小心直接輸入 exit 關掉的話就不好了，所以我們可以把之前為了方便測試的 –rm 參數拿掉，這樣容器在終止時還會保留下來。&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run -d -it ubuntu:18.04
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;這裡同時介紹一下，運行中的容器想要停止的話可以透過 stop 指令，並且透過 start 重新啟動&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker stop running_container
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker start running_container
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-04-run-docker-service/2018-10-04_21-58-47.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;restart---重新啟動&quot;&gt;–restart - 重新啟動&lt;/h1&gt;
+&lt;p&gt;要作為背景服務，別忘了自動重新啟動的功能，透過 –restart 加上 always 讓 docker 自動幫容器重新啟動&lt;/p&gt;
+
+&lt;p&gt;重新啟動包含下列情境&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Host 開機時自動啟動容器 (是的，預設開機時是不會啟動的喔)&lt;/li&gt;
+  &lt;li&gt;在容器中不小心輸入 exit 退出運行時自動重啟&lt;/li&gt;
+  &lt;li&gt;容器運行中的程式當掉了，自動重啟&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;這邊要注意，自動重啟 &lt;strong&gt;不包含&lt;/strong&gt; 上面提到的 stop 指令喔，透過 stop 指令還是會停止面前容器運作，不會自動重啟的，不過也因為這樣才能進行維謢作業&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run --restart&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;always -d -it ubuntu:18.04
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-04-run-docker-service/2018-10-04_22-09-23.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Docker" /><summary type="html">接著使用 Docker - 基本操作</summary></entry><entry><title type="html">使用 Docker - 基本操作</title><link href="https://twblog.hongjianching.com/2018/10/03/run-docker-basic/" rel="alternate" type="text/html" title="使用 Docker - 基本操作" /><published>2018-10-03T00:00:00+08:00</published><updated>2018-10-03T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/03/run-docker-basic</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/03/run-docker-basic/">&lt;p&gt;上一篇講&lt;a href=&quot;https://twblog.hongjianching.com/2018/10/02/install-docker/&quot;&gt;安裝 Docker&lt;/a&gt;，&lt;/p&gt;
 
 &lt;p&gt;這篇進入正題，開始使用 Docker&lt;/p&gt;
 
@@ -461,54 +524,4 @@ sudo usermod -aG docker &lt;span class=&quot;nv&quot;&gt;$USER&lt;/span&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://medium.com/beautiful-angular/angular-2-and-environment-variables-59c57ba643be&quot;&gt;Angular 2 and environment variables&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://alligator.io/angular/environment-variables/&quot;&gt;Environment Variables in Angular&lt;/a&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="Angular" /><summary type="html">Angular 專案中，如果有依環境不同而需要不同的設定時，像是 apiUrl，該如何處理？</summary></entry><entry><title type="html">ASP.Net Core Web API 使用 Entity Framework Core 和 PostgreSQL</title><link href="https://twblog.hongjianching.com/2018/01/15/asp-dotnet-core-web-api-using-entity-framework-core-and-postgresql/" rel="alternate" type="text/html" title="ASP.Net Core Web API 使用 Entity Framework Core 和 PostgreSQL" /><published>2018-01-15T00:00:00+08:00</published><updated>2018-01-15T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/01/15/asp-dotnet-core-web-api-using-entity-framework-core-and-postgresql</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/01/15/asp-dotnet-core-web-api-using-entity-framework-core-and-postgresql/">&lt;p&gt;ASP.Net Core Web API 使用 Entity Framework Core 和 PostgreSQL&lt;/p&gt;
-
-&lt;h2 id=&quot;前提&quot;&gt;前提&lt;/h2&gt;
-
-&lt;p&gt;如果你還沒有準備好 Visual Studio Code with .Net Core 開發環境，請先參考&lt;a href=&quot;https://twblog.hongjianching.com/2018/01/14/visual-studio-code-with-dotnet-core/&quot;&gt;使用 Visual Studio Code 開發 .Net Core&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;接著依照&lt;a href=&quot;https://docs.microsoft.com/zh-tw/aspnet/core/tutorials/web-api-vsc&quot;&gt;在 macOS、Linux 和 Windows 上，使用 ASP.NET Core MVC 和 Visual Studio Code 建立 Web API&lt;/a&gt;完成 Todo WebApi 的範例專案。&lt;/p&gt;
-
-&lt;h2 id=&quot;使用-entity-framework-core-和-postgresql&quot;&gt;使用 Entity Framework Core 和 PostgreSQL&lt;/h2&gt;
-
-&lt;p&gt;在 &lt;strong&gt;TodoApi.csproj&lt;/strong&gt; 新增套件參考&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;PackageReference Include=&quot;Npgsql.EntityFrameworkCore.PostgreSQL&quot; Version=&quot;2.0.0&quot; /&amp;gt;
-&amp;lt;PackageReference Include=&quot;Microsoft.EntityFrameworkCore.Design&quot; Version=&quot;2.0.1&quot; /&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;在 &lt;strong&gt;appsettings.json&lt;/strong&gt; 新增連接字串&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&quot;ConnectionStrings&quot;: { &quot;TodoContext&quot;: &quot;Server=localhost;User ID=postgres;Password=mysecretpassword;Database=postgres&quot; }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;接著修改 &lt;strong&gt;Startup.cs&lt;/strong&gt; 程式碼，註解原本的 InMemoryDatabase，改用 PostgreSQL。&lt;/p&gt;
-
-&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// services.AddDbContext&amp;lt;TodoContext&amp;gt;(opt =&amp;gt; opt.UseInMemoryDatabase(&quot;TodoList&quot;));
-&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;connectionString&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Configuration&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;GetConnectionString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;TodoContext&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;AddEntityFrameworkNpgsql&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;AddDbContext&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TodoContext&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;options&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;UseNpgsql&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;connectionString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;最後別忘了在資料庫建立表單。&lt;/p&gt;
-
-&lt;p&gt;注意，因為 C# 預設命名慣例是 PascalCase，而 PostgreSQL 預設命名慣例是 lower_case_with_underscores，所以如果 sql 的表格或欄位名稱不加上雙引號，會造成兩者不一致，這個範例是依 C# 命名慣例為主，個人習慣以 PostgreSQL 為主。&lt;/p&gt;
-
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;CREATE&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;TABLE&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;&quot;TodoItems&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-    &lt;span class=&quot;nv&quot;&gt;&quot;Id&quot;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;serial&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NOT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;nv&quot;&gt;&quot;Name&quot;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;varchar&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NOT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;nv&quot;&gt;&quot;IsComplete&quot;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bool&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NOT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;PRIMARY&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;KEY&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;&quot;Id&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;以上就完成使用 Entity Framework Core 和 PostgreSQL 取代原本 InMemoryDatabase，資料可以保留下來嘍！&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-01-15-asp-dotnet-core-web-api-using-entity-framework-core-and-postgresql/001.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;reference&quot;&gt;Reference&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://www.npgsql.org/efcore/index.html&quot;&gt;Npgsql - Getting Started&lt;/a&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="Visual-Studio-Code" /><category term=".Net-Core" /><category term="ASP.NET" /><category term="Web-API" /><category term="Entity-Framework-Core" /><category term="PostgreSQL" /><category term="CSharp" /><summary type="html">ASP.Net Core Web API 使用 Entity Framework Core 和 PostgreSQL</summary></entry></feed>
+&lt;p&gt;&lt;a href=&quot;https://alligator.io/angular/environment-variables/&quot;&gt;Environment Variables in Angular&lt;/a&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="Angular" /><summary type="html">Angular 專案中，如果有依環境不同而需要不同的設定時，像是 apiUrl，該如何處理？</summary></entry></feed>

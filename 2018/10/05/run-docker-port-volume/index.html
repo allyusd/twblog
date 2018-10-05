@@ -19,12 +19,12 @@
 
 
 
-<title>使用 Docker - 背景服務 - Jian-Ching 記事本</title>
+<title>使用 Docker - Port 及 Volume - Jian-Ching 記事本</title>
 
 
 
 
-<meta name="description" content="接著使用 Docker - 基本操作">
+<meta name="description" content="這篇講一下設定 Port 及 Volume，也是網路及硬碟最簡單的用法">
 
 
 
@@ -33,15 +33,15 @@
 
 <meta property="og:locale" content="zh_TW">
 <meta property="og:site_name" content="Jian-Ching 記事本">
-<meta property="og:title" content="使用 Docker - 背景服務">
+<meta property="og:title" content="使用 Docker - Port 及 Volume">
 
 
-  <link rel="canonical" href="https://twblog.HongJianChing.com/2018/10/04/run-docker-service/">
-  <meta property="og:url" content="https://twblog.HongJianChing.com/2018/10/04/run-docker-service/">
+  <link rel="canonical" href="https://twblog.HongJianChing.com/2018/10/05/run-docker-port-volume/">
+  <meta property="og:url" content="https://twblog.HongJianChing.com/2018/10/05/run-docker-port-volume/">
 
 
 
-  <meta property="og:description" content="接著使用 Docker - 基本操作">
+  <meta property="og:description" content="這篇講一下設定 Port 及 Volume，也是網路及硬碟最簡單的用法">
 
 
 
@@ -56,7 +56,7 @@
 
 
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2018-10-04T00:00:00+08:00">
+  <meta property="article:published_time" content="2018-10-05T00:00:00+08:00">
 
 
 
@@ -278,85 +278,70 @@
 
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
-    <meta itemprop="headline" content="使用 Docker - 背景服務">
-    <meta itemprop="description" content="接著使用 Docker - 基本操作">
-    <meta itemprop="datePublished" content="October 04, 2018">
+    <meta itemprop="headline" content="使用 Docker - Port 及 Volume">
+    <meta itemprop="description" content="這篇講一下設定 Port 及 Volume，也是網路及硬碟最簡單的用法">
+    <meta itemprop="datePublished" content="October 05, 2018">
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 class="page__title" itemprop="headline">使用 Docker - 背景服務
+          <h1 class="page__title" itemprop="headline">使用 Docker - Port 及 Volume
 </h1>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        <p>接著<a href="https://twblog.hongjianching.com/2018/10/03/run-docker-basic/">使用 Docker - 基本操作</a></p>
+        <p>這篇講一下設定 Port 及 Volume，也是網路及硬碟最簡單的用法</p>
 
-<h1 id="run---執行容器">run - 執行容器</h1>
+<p>上一篇 <a href="https://twblog.hongjianching.com/2018/10/04/run-docker-service/">使用 Docker - 背景服務</a> 已經提到如何啟動背景服務執行的方法，這次直接進到容器內，安裝並啟動 nginx。</p>
 
-<p>之前提到使用 run 及 -it 參數可以進入容器內操作，這時候如果輸入 exit 離開就會結束容器執行。但如果不想結束容器運作，單純想退出 shell 怎麼辦？</p>
-
-<p>直接關閉 shell 或是按下 <code class="highlighter-rouge">Ctrl + p</code> 及 <code class="highlighter-rouge">Ctrl + q</code> 就可以保持容器運作</p>
-
-<p>那能不能一開始就想讓容器保持運作，像一個背景服務一樣單獨執行而不進入 shell 介面呢？</p>
-
-<p>可以，使用 -d，代表 detach</p>
-
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>docker run --rm -d -it ubuntu:18.04
+<div class="highlighter-rouge"><pre class="highlight"><code>apt update &amp;&amp; apt install nginx -y
+service nginx start
 </code></pre>
 </div>
 
-<p><img src="/assets/images/2018-10-04-run-docker-service/2018-10-04_21-43-15.png" alt="" /></p>
+<p>然後在 chrome 上面輸入 localhost，就會出現
+<img src="/assets/images/2018-10-05-run-docker-port-volume/2018-10-05_22-33-14.png" alt="" /></p>
 
-<h1 id="attach">attach</h1>
-<p>好的，雖然我剛剛是這麼要求的，但是我反悔想進入容器內操作，能不能不要啟動新的容器直接進入目前執行中的容器呢？</p>
+<p>這是因為容器是個獨立的環境，預設是沒有任何 Port 對外開放的。</p>
 
-<p>可以，剛剛是 detach，反過來是 attach，一樣可以透過 id 或 name 指定要進入的容器</p>
+<h1 id="-p-port-對映">-p Port 對映</h1>
 
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>docker attach running_container
+<p>使用 -p 參數，左邊是 host 的 port 號，右邊是 container 的 port 號。在這個例子中都是 80 port，完整的指令如下(這串指串越來越長了呢…)</p>
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>docker run --restart<span class="o">=</span>always -d -it -p 80:80 ubuntu:18.04
+</code></pre>
+</div>
+<p>執行後可以用 ps 看一下，會發現在 PORTS 欄位多了剛剛加上的設定喔
+<img src="/assets/images/2018-10-05-run-docker-port-volume/2018-10-05_22-27-42.png" alt="" /></p>
+
+<p>接著再次安裝並啟動 nginx，並且在 chrome 按下 F5 更新，這次成功出現網頁了</p>
+
+<p><img src="/assets/images/2018-10-05-run-docker-port-volume/2018-10-05_22-32-34.png" alt="" /></p>
+
+<h1 id="-v-volume-對映">-v Volume 對映</h1>
+<p>接著，我們想要修改網頁，但是容器內沒有編輯器而且不想安裝，能不能直接在 Host 上面修改，然後直接反應在容器呢？</p>
+
+<p>接著利用 Volume 對映，就好像前面講到可以指定 Port 一樣，只是這次換成了硬碟路徑對映，使用 -v 參數，左邊是 Host 路徑，右邊是 container 路徑。在這個例子中，設定在家目錄的 www，對應到 container 內 nginx 的預設路徑 /usr/share/nginx/html，完整的指令如下</p>
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>docker run --restart<span class="o">=</span>always -d -it -p 80:80 -v ~/www:/var/www/html ubuntu:18.04
 </code></pre>
 </div>
 
-<p><img src="/assets/images/2018-10-04-run-docker-service/2018-10-04_21-47-55.png" alt="" /></p>
-
-<p>記得要離開的時候要透過 <code class="highlighter-rouge">Ctrl + p</code> 及 <code class="highlighter-rouge">Ctrl + q</code> 進行 detach，否則容器會終止運行喔。</p>
-
-<h1 id="stop-start---停止啟動容器">stop, start - 停止、啟動容器</h1>
-<p>既然我們的目標是一個背景服務，萬一不小心直接輸入 exit 關掉的話就不好了，所以我們可以把之前為了方便測試的 –rm 參數拿掉，這樣容器在終止時還會保留下來。</p>
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>docker run -d -it ubuntu:18.04
+<p>已經變得超級長了，這時候在 script 或 Dockerfile 中為了方便閱讀，可能會寫成這樣，意思是一樣的</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>docker run \
+    --restart=always \
+    -d \
+    -it \
+    -p 80:80 \
+    -v ~/www:/var/www/html \
+    ubuntu:18.04
 </code></pre>
 </div>
 
-<p>這裡同時介紹一下，運行中的容器想要停止的話可以透過 stop 指令，並且透過 start 重新啟動</p>
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>docker stop running_container
-</code></pre>
-</div>
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>docker start running_container
-</code></pre>
-</div>
+<p>安裝並啟動 nginx，退出容器並且修改 host 的 html 檔案，在 chrome 按下 F5 更新後可以看到網頁已經是修改後的樣子了</p>
 
-<p><img src="/assets/images/2018-10-04-run-docker-service/2018-10-04_21-58-47.png" alt="" /></p>
-
-<h1 id="restart---重新啟動">–restart - 重新啟動</h1>
-<p>要作為背景服務，別忘了自動重新啟動的功能，透過 –restart 加上 always 讓 docker 自動幫容器重新啟動</p>
-
-<p>重新啟動包含下列情境</p>
-<ul>
-  <li>Host 開機時自動啟動容器 (是的，預設開機時是不會啟動的喔)</li>
-  <li>在容器中不小心輸入 exit 退出運行時自動重啟</li>
-  <li>容器運行中的程式當掉了，自動重啟</li>
-</ul>
-
-<p>這邊要注意，自動重啟 <strong>不包含</strong> 上面提到的 stop 指令喔，透過 stop 指令還是會停止面前容器運作，不會自動重啟的，不過也因為這樣才能進行維謢作業</p>
-
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>docker run --restart<span class="o">=</span>always -d -it ubuntu:18.04
-</code></pre>
-</div>
-
-<p><img src="/assets/images/2018-10-04-run-docker-service/2018-10-04_22-09-23.png" alt="" /></p>
+<p><img src="/assets/images/2018-10-05-run-docker-port-volume/2018-10-05_23-35-16.png" alt="" /></p>
 
         
       </section>
@@ -390,7 +375,7 @@
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2018-10-04T00:00:00+08:00">October 04, 2018</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2018-10-05T00:00:00+08:00">October 05, 2018</time></p>
         
       </footer>
 
@@ -399,25 +384,24 @@
     <h4 class="page__share-title">分享到</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=使用 Docker - 背景服務 https://twblog.hongjianching.com/2018/10/04/run-docker-service/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=使用 Docker - Port 及 Volume https://twblog.hongjianching.com/2018/10/05/run-docker-port-volume/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2018/10/04/run-docker-service/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2018/10/05/run-docker-port-volume/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2018/10/04/run-docker-service/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2018/10/05/run-docker-port-volume/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2018/10/04/run-docker-service/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2018/10/05/run-docker-port-volume/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="https://twblog.hongjianching.com/2018/10/03/run-docker-basic/" class="pagination--pager" title="使用 Docker - 基本操作
+      <a href="https://twblog.hongjianching.com/2018/10/04/run-docker-service/" class="pagination--pager" title="使用 Docker - 背景服務
 ">較舊</a>
     
     
-      <a href="https://twblog.hongjianching.com/2018/10/05/run-docker-port-volume/" class="pagination--pager" title="使用 Docker - Port 及 Volume
-">較新</a>
+      <a href="#" class="pagination--pager disabled">較新</a>
     
   </nav>
 

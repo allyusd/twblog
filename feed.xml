@@ -1,4 +1,52 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-04T22:18:08+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">使用 Docker - 背景服務</title><link href="https://twblog.hongjianching.com/2018/10/04/run-docker-service/" rel="alternate" type="text/html" title="使用 Docker - 背景服務" /><published>2018-10-04T00:00:00+08:00</published><updated>2018-10-04T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/04/run-docker-service</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/04/run-docker-service/">&lt;p&gt;接著&lt;a href=&quot;https://twblog.hongjianching.com/2018/10/03/run-docker-basic/&quot;&gt;使用 Docker - 基本操作&lt;/a&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-05T23:37:51+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">使用 Docker - Port 及 Volume</title><link href="https://twblog.hongjianching.com/2018/10/05/run-docker-port-volume/" rel="alternate" type="text/html" title="使用 Docker - Port 及 Volume" /><published>2018-10-05T00:00:00+08:00</published><updated>2018-10-05T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/05/run-docker-port-volume</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/05/run-docker-port-volume/">&lt;p&gt;這篇講一下設定 Port 及 Volume，也是網路及硬碟最簡單的用法&lt;/p&gt;
+
+&lt;p&gt;上一篇 &lt;a href=&quot;https://twblog.hongjianching.com/2018/10/04/run-docker-service/&quot;&gt;使用 Docker - 背景服務&lt;/a&gt; 已經提到如何啟動背景服務執行的方法，這次直接進到容器內，安裝並啟動 nginx。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;apt update &amp;amp;&amp;amp; apt install nginx -y
+service nginx start
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;然後在 chrome 上面輸入 localhost，就會出現
+&lt;img src=&quot;/assets/images/2018-10-05-run-docker-port-volume/2018-10-05_22-33-14.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;這是因為容器是個獨立的環境，預設是沒有任何 Port 對外開放的。&lt;/p&gt;
+
+&lt;h1 id=&quot;-p-port-對映&quot;&gt;-p Port 對映&lt;/h1&gt;
+
+&lt;p&gt;使用 -p 參數，左邊是 host 的 port 號，右邊是 container 的 port 號。在這個例子中都是 80 port，完整的指令如下(這串指串越來越長了呢…)&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run --restart&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;always -d -it -p 80:80 ubuntu:18.04
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;執行後可以用 ps 看一下，會發現在 PORTS 欄位多了剛剛加上的設定喔
+&lt;img src=&quot;/assets/images/2018-10-05-run-docker-port-volume/2018-10-05_22-27-42.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;接著再次安裝並啟動 nginx，並且在 chrome 按下 F5 更新，這次成功出現網頁了&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-05-run-docker-port-volume/2018-10-05_22-32-34.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;-v-volume-對映&quot;&gt;-v Volume 對映&lt;/h1&gt;
+&lt;p&gt;接著，我們想要修改網頁，但是容器內沒有編輯器而且不想安裝，能不能直接在 Host 上面修改，然後直接反應在容器呢？&lt;/p&gt;
+
+&lt;p&gt;接著利用 Volume 對映，就好像前面講到可以指定 Port 一樣，只是這次換成了硬碟路徑對映，使用 -v 參數，左邊是 Host 路徑，右邊是 container 路徑。在這個例子中，設定在家目錄的 www，對應到 container 內 nginx 的預設路徑 /usr/share/nginx/html，完整的指令如下&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run --restart&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;always -d -it -p 80:80 -v ~/www:/var/www/html ubuntu:18.04
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;已經變得超級長了，這時候在 script 或 Dockerfile 中為了方便閱讀，可能會寫成這樣，意思是一樣的&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run \
+    --restart=always \
+    -d \
+    -it \
+    -p 80:80 \
+    -v ~/www:/var/www/html \
+    ubuntu:18.04
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;安裝並啟動 nginx，退出容器並且修改 host 的 html 檔案，在 chrome 按下 F5 更新後可以看到網頁已經是修改後的樣子了&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-05-run-docker-port-volume/2018-10-05_23-35-16.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Docker" /><summary type="html">這篇講一下設定 Port 及 Volume，也是網路及硬碟最簡單的用法</summary></entry><entry><title type="html">使用 Docker - 背景服務</title><link href="https://twblog.hongjianching.com/2018/10/04/run-docker-service/" rel="alternate" type="text/html" title="使用 Docker - 背景服務" /><published>2018-10-04T00:00:00+08:00</published><updated>2018-10-04T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/04/run-docker-service</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/04/run-docker-service/">&lt;p&gt;接著&lt;a href=&quot;https://twblog.hongjianching.com/2018/10/03/run-docker-basic/&quot;&gt;使用 Docker - 基本操作&lt;/a&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;run---執行容器&quot;&gt;run - 執行容器&lt;/h1&gt;
 
@@ -475,53 +523,4 @@ sudo usermod -aG docker &lt;span class=&quot;nv&quot;&gt;$USER&lt;/span&gt;
   &lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
 &lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="CSS" /><summary type="html">這是我遇到的問題，當右邊 div 比左邊高度還少的時候，會從下方往上堆疊。</summary></entry><entry><title type="html">Angular 使用環境變數</title><link href="https://twblog.hongjianching.com/2018/01/22/angular-using-environment-variables/" rel="alternate" type="text/html" title="Angular 使用環境變數" /><published>2018-01-22T00:00:00+08:00</published><updated>2018-01-22T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/01/22/angular-using-environment-variables</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/01/22/angular-using-environment-variables/">&lt;p&gt;Angular 專案中，如果有依環境不同而需要不同的設定時，像是 apiUrl，該如何處理？&lt;/p&gt;
-
-&lt;h2 id=&quot;開發環境及生產環境&quot;&gt;開發環境及生產環境&lt;/h2&gt;
-
-&lt;p&gt;使用 &lt;a href=&quot;https://github.com/angular/angular-cli&quot;&gt;Angular CLI&lt;/a&gt; 建立的專案預設會有兩個環境設定，一個是開發環境，另一個是生產環境，分別由 &lt;strong&gt;environment.ts&lt;/strong&gt; 及 &lt;strong&gt;environment.prod.ts&lt;/strong&gt; 兩個檔案所描述。&lt;/p&gt;
-
-&lt;p&gt;常用的指令，像是 ng serve 時，預設使用開發環境；使用 ng build –prod 時，則會使用生產環境。&lt;/p&gt;
-
-&lt;h2 id=&quot;新增及使用環境變數&quot;&gt;新增及使用環境變數&lt;/h2&gt;
-
-&lt;p&gt;使 apiUrl 為例，設定兩個檔案&lt;/p&gt;
-
-&lt;p&gt;environment.ts:&lt;/p&gt;
-&lt;div class=&quot;language-ts highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;environment&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;production&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;apiUrl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'http://localhost/api/'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;environment.prod.ts:&lt;/p&gt;
-&lt;div class=&quot;language-ts highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;environment&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;production&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;apiUrl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'http://demo.com/api/'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;然後編輯 foo.service.ts&lt;/p&gt;
-
-&lt;div class=&quot;language-ts highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;environment&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'../../environments/environment'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;err&quot;&gt;‧‧‧&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;baseUrl&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;environment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;apiUrl&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'foo'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;err&quot;&gt;‧‧‧&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;在開發環境時，baseUrl 是 ‘http://localhost/api/foo’&lt;/p&gt;
-
-&lt;p&gt;在生產環境時，baseUrl 是 ‘http://demo.com/api/foo’&lt;/p&gt;
-
-&lt;p&gt;這樣就可以達到開發跟生產環境使用不同的設定。&lt;/p&gt;
-
-&lt;h2 id=&quot;reference&quot;&gt;Reference&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://medium.com/beautiful-angular/angular-2-and-environment-variables-59c57ba643be&quot;&gt;Angular 2 and environment variables&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://alligator.io/angular/environment-variables/&quot;&gt;Environment Variables in Angular&lt;/a&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="Angular" /><summary type="html">Angular 專案中，如果有依環境不同而需要不同的設定時，像是 apiUrl，該如何處理？</summary></entry></feed>
+&lt;/div&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="CSS" /><summary type="html">這是我遇到的問題，當右邊 div 比左邊高度還少的時候，會從下方往上堆疊。</summary></entry></feed>

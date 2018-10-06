@@ -24,7 +24,7 @@
 
 
 
-<meta name="description" content="">
+<meta name="description" content="這篇寫簡單 Dockerfile 來建立自己的 Docker Image">
 
 
 
@@ -41,7 +41,7 @@
 
 
 
-  <meta property="og:description" content="">
+  <meta property="og:description" content="這篇寫簡單 Dockerfile 來建立自己的 Docker Image">
 
 
 
@@ -279,7 +279,7 @@
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
     <meta itemprop="headline" content="使用 Dockerfile 建立自己的 Docker Image">
-    <meta itemprop="description" content="">
+    <meta itemprop="description" content="這篇寫簡單 Dockerfile 來建立自己的 Docker Image">
     <meta itemprop="datePublished" content="October 06, 2018">
     
 
@@ -293,7 +293,72 @@
       
 
       <section class="page__content" itemprop="text">
-        
+        <p>這篇寫簡單 Dockerfile 來建立自己的 Docker Image</p>
+
+<p>在前一篇 <a href="https://twblog.hongjianching.com/2018/10/05/run-docker-port-volume/">使用 Docker - Port 及 Volume</a>中，如果有照著每個動作來做的話，一定會發現一件事。</p>
+
+<p>那就是，安裝 nginx 的動作重覆很多次而且很久(因為每次都要重新下載)</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>apt update &amp;&amp; apt install nginx -y
+service nginx start
+</code></pre>
+</div>
+
+<p>就是上面兩行指令，一再的重覆</p>
+
+<h1 id="dockerfile">Dockerfile</h1>
+<p>在 <a href="https://twblog.hongjianching.com/2018/10/02/install-docker/">安裝 Docker</a> 時有提過，使用 Docker 其中一個優勢就是繼承，這個特性在 Dockerfile 可以體現出來。</p>
+
+<p>Dockerfile 最基本的指令是 FROM，也就是這個 Dockerfile 是繼承哪個 image 的。有一行就可以視為合格的 Dockerfile，像是我們用 ubuntu 當基底。</p>
+
+<pre><code class="language-Dockerfile">FROM ubuntu:18.04
+</code></pre>
+
+<p>當然，這樣產生的 image 會跟 ubuntu:18.04 一模一樣，所以我們要加上我們想要的，安裝 nginx 動作。透過 RUN 指令，可以幫我們做到這件事</p>
+
+<pre><code class="language-Dockerfile">FROM ubuntu:18.04
+
+RUN apt update &amp;&amp; apt install nginx -y
+</code></pre>
+
+<p>最後，別忘了啟動 nginx，畢竟能自動完成的事情，又何必自己來呢？透過 CMD 指令，告訴 Docker 啟動容器後應該做什麼事情。</p>
+
+<p>這邊特別說明一下，如果 CMD 後面指定的是不會結束的程式，那就沒有問題，但是之前是透過 service 命令啟動的，因為這個命令一執行就結束了，接著容器就結束了，為了避免這種情況，後面加上了 /bin/bash 維持運作。(當然也可以直接執行 nginx 就不用這個動作)</p>
+
+<pre><code class="language-Dockerfile">FROM ubuntu:18.04
+
+RUN apt update &amp;&amp; apt install nginx -y
+
+CMD service nginx start &amp;&amp; /bin/bash
+</code></pre>
+
+<h1 id="build---建置映像檔">build - 建置映像檔</h1>
+
+<p>寫完 Dockerfile，就可以建置 image 了，透過 build 指令，後面接 Dockerfile 所在的路徑，最好加上 -t 參數給個名字</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>docker build . -t webserver
+</code></pre>
+</div>
+
+<p>等他建置完，我們可以透過 images 指令來查詢本機目前有哪些 image</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>docker images
+</code></pre>
+</div>
+<p><img src="/assets/images/2018-10-06-using-dockerfile-build-docker-image/2018-10-06_22-09-13.png" alt="" /></p>
+
+<p>從圖片中可以看到，除了我們之前用到的 hello-wrold 和 ubuntu:18.04 之外，還多了一個 webserver 的 image，這就是剛剛建立好的映像檔。這麼一來我們把之前的指令改用 webserver 來啟動吧。</p>
+
+<pre><code class="language-base">docker run \
+    --restart=always \
+    -d \
+    -it \
+    -p 80:80 \
+    -v ~/www:/var/www/html \
+    webserver
+</code></pre>
+
+<p>這次不再需要進入容器，也不用啟動 nginx，直接可以在 http://localhost 出現網頁嘍！</p>
 
         
       </section>

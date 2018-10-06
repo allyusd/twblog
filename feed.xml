@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-06T22:18:59+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">使用 Dockerfile 建立自己的 Docker Image</title><link href="https://twblog.hongjianching.com/2018/10/06/using-dockerfile-build-docker-image/" rel="alternate" type="text/html" title="使用 Dockerfile 建立自己的 Docker Image" /><published>2018-10-06T00:00:00+08:00</published><updated>2018-10-06T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/06/using-dockerfile-build-docker-image</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/06/using-dockerfile-build-docker-image/">&lt;p&gt;這篇寫簡單 Dockerfile 來建立自己的 Docker Image&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-06T22:22:34+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">使用 Dockerfile 建立自己的 Docker Image</title><link href="https://twblog.hongjianching.com/2018/10/06/using-dockerfile-build-docker-image/" rel="alternate" type="text/html" title="使用 Dockerfile 建立自己的 Docker Image" /><published>2018-10-06T00:00:00+08:00</published><updated>2018-10-06T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/06/using-dockerfile-build-docker-image</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/06/using-dockerfile-build-docker-image/">&lt;p&gt;這篇寫簡單 Dockerfile 來建立自己的 Docker Image&lt;/p&gt;
 
 &lt;p&gt;在前一篇 &lt;a href=&quot;https://twblog.hongjianching.com/2018/10/05/run-docker-port-volume/&quot;&gt;使用 Docker - Port 及 Volume&lt;/a&gt;中，如果有照著每個動作來做的話，一定會發現一件事。&lt;/p&gt;
 
@@ -16,26 +16,29 @@ service nginx start
 
 &lt;p&gt;Dockerfile 最基本的指令是 FROM，也就是這個 Dockerfile 是繼承哪個 image 的。有一行就可以視為合格的 Dockerfile，像是我們用 ubuntu 當基底。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&quot;language-Dockerfile&quot;&gt;FROM ubuntu:18.04
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;FROM ubuntu:18.04
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;當然，這樣產生的 image 會跟 ubuntu:18.04 一模一樣，所以我們要加上我們想要的，安裝 nginx 動作。透過 RUN 指令，可以幫我們做到這件事&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&quot;language-Dockerfile&quot;&gt;FROM ubuntu:18.04
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;FROM ubuntu:18.04
 
 RUN apt update &amp;amp;&amp;amp; apt install nginx -y
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;最後，別忘了啟動 nginx，畢竟能自動完成的事情，又何必自己來呢？透過 CMD 指令，告訴 Docker 啟動容器後應該做什麼事情。&lt;/p&gt;
 
 &lt;p&gt;這邊特別說明一下，如果 CMD 後面指定的是不會結束的程式，那就沒有問題，但是之前是透過 service 命令啟動的，因為這個命令一執行就結束了，接著容器就結束了，為了避免這種情況，後面加上了 /bin/bash 維持運作。(當然也可以直接執行 nginx 就不用這個動作)&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&quot;language-Dockerfile&quot;&gt;FROM ubuntu:18.04
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;FROM ubuntu:18.04
 
 RUN apt update &amp;amp;&amp;amp; apt install nginx -y
 
 CMD service nginx start &amp;amp;&amp;amp; /bin/bash
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;h1 id=&quot;build---建置映像檔&quot;&gt;build - 建置映像檔&lt;/h1&gt;
 
@@ -54,14 +57,15 @@ CMD service nginx start &amp;amp;&amp;amp; /bin/bash
 
 &lt;p&gt;從圖片中可以看到，除了我們之前用到的 hello-wrold 和 ubuntu:18.04 之外，還多了一個 webserver 的 image，這就是剛剛建立好的映像檔。這麼一來我們把之前的指令改用 webserver 來啟動吧。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&quot;language-base&quot;&gt;docker run \
-    --restart=always \
-    -d \
-    -it \
-    -p 80:80 \
-    -v ~/www:/var/www/html \
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    --restart&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;always &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    -d &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    -it &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    -p 80:80 &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    -v ~/www:/var/www/html &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
     webserver
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;這次不再需要進入容器，也不用啟動 nginx，直接可以在 http://localhost 出現網頁嘍！&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Docker" /><summary type="html">這篇寫簡單 Dockerfile 來建立自己的 Docker Image</summary></entry><entry><title type="html">使用 Docker - Port 及 Volume</title><link href="https://twblog.hongjianching.com/2018/10/05/run-docker-port-volume/" rel="alternate" type="text/html" title="使用 Docker - Port 及 Volume" /><published>2018-10-05T00:00:00+08:00</published><updated>2018-10-05T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/05/run-docker-port-volume</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/05/run-docker-port-volume/">&lt;p&gt;這篇講一下設定 Port 及 Volume，也是網路及硬碟最簡單的用法&lt;/p&gt;
 

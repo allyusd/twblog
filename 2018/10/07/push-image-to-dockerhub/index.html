@@ -19,12 +19,12 @@
 
 
 
-<title>使用 Dockerfile 建立自己的 Docker Image - Jian-Ching 記事本</title>
+<title>將 Image 發佈到 Docker Hub - Jian-Ching 記事本</title>
 
 
 
 
-<meta name="description" content="這篇寫簡單 Dockerfile 來建立自己的 Docker Image">
+<meta name="description" content="這篇會說明如何將 Image 發佈到 Docker Hub。">
 
 
 
@@ -33,15 +33,15 @@
 
 <meta property="og:locale" content="zh_TW">
 <meta property="og:site_name" content="Jian-Ching 記事本">
-<meta property="og:title" content="使用 Dockerfile 建立自己的 Docker Image">
+<meta property="og:title" content="將 Image 發佈到 Docker Hub">
 
 
-  <link rel="canonical" href="https://twblog.HongJianChing.com/2018/10/06/using-dockerfile-build-docker-image/">
-  <meta property="og:url" content="https://twblog.HongJianChing.com/2018/10/06/using-dockerfile-build-docker-image/">
+  <link rel="canonical" href="https://twblog.HongJianChing.com/2018/10/07/push-image-to-dockerhub/">
+  <meta property="og:url" content="https://twblog.HongJianChing.com/2018/10/07/push-image-to-dockerhub/">
 
 
 
-  <meta property="og:description" content="這篇寫簡單 Dockerfile 來建立自己的 Docker Image">
+  <meta property="og:description" content="這篇會說明如何將 Image 發佈到 Docker Hub。">
 
 
 
@@ -56,7 +56,7 @@
 
 
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2018-10-06T00:00:00+08:00">
+  <meta property="article:published_time" content="2018-10-07T00:00:00+08:00">
 
 
 
@@ -278,79 +278,70 @@
 
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
-    <meta itemprop="headline" content="使用 Dockerfile 建立自己的 Docker Image">
-    <meta itemprop="description" content="這篇寫簡單 Dockerfile 來建立自己的 Docker Image">
-    <meta itemprop="datePublished" content="October 06, 2018">
+    <meta itemprop="headline" content="將 Image 發佈到 Docker Hub">
+    <meta itemprop="description" content="這篇會說明如何將 Image 發佈到 Docker Hub。">
+    <meta itemprop="datePublished" content="October 07, 2018">
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 class="page__title" itemprop="headline">使用 Dockerfile 建立自己的 Docker Image
+          <h1 class="page__title" itemprop="headline">將 Image 發佈到 Docker Hub
 </h1>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        <p>這篇寫簡單 Dockerfile 來建立自己的 Docker Image</p>
+        <p>這篇會說明如何將 Image 發佈到 Docker Hub。</p>
 
-<p>在前一篇 <a href="https://twblog.hongjianching.com/2018/10/05/run-docker-port-volume/">使用 Docker - Port 及 Volume</a>中，如果有照著每個動作來做的話，一定會發現一件事。</p>
+<p>在前一篇 <a href="https://twblog.hongjianching.com/2018/10/06/using-dockerfile-build-docker-image/">使用 Dockerfile 建立自己的 Docker Image</a> 已經知道如何建立自己的 image，但是建立的 image 只能本機使用，除非手動復製，否則不能在其它電腦使用。</p>
 
-<p>那就是，安裝 nginx 的動作重覆很多次而且很久(因為每次都要重新下載)</p>
+<p>在這之前有個疑問，那之前我們使用的 image，像是 hello-world、ubuntu:18.04 是從哪裡來的呢？</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>apt update &amp;&amp; apt install nginx -y
-service nginx start
+<h1 id="docker-hub">Docker Hub</h1>
+<p>來源其實就是 <a href="https://hub.docker.com/">Docker Hub</a>，目前是 Docker 預設的 image 來源，像是 <a href="https://hub.docker.com/_/hello-world/">hello-world</a>、<a href="https://hub.docker.com/_/ubuntu/">ubuntu</a>。從網站上可以找看看自己有興趣的 image，或者上傳自己的 image。</p>
+
+<p>我們建立好 Docker Hub 帳號之後，就可以建立 image repository，按右上角的 Create，然後選擇 Create Repository</p>
+
+<p><img src="/assets/images/2018-10-07-push-image-to-dockerhub/2018-10-07_21-28-11.png" alt="" /></p>
+
+<p>接著在 name 的欄位輸入想要的 image 名稱，這個範例中命名為 ithelp-webserver，在下面的 description 可以輸入想要說明的資訊。Visibility 決定這個 image 是不是公開的，公開的話每個人都可以使用，私有的話只有自己能用，但是免費帳號只能有個一個私有倉庫，想要多一些的話就要付費。選擇後按下 Create。</p>
+
+<p><img src="/assets/images/2018-10-07-push-image-to-dockerhub/2018-10-07_21-32-50.png" alt="" /></p>
+
+<p>完成後就會看到這個畫面，這樣一個映像檔倉庫就建立完成了，左上方就是這個 image 的名稱，因為 docker hub 是全球的人共用的，所以個人建立的 image 都會放在該帳號下，這個例子中就是 allyusd/ithelp-webserver。</p>
+
+<p><img src="/assets/images/2018-10-07-push-image-to-dockerhub/2018-10-07_21-37-31.png" alt="" /></p>
+
+<p>然後回到 console，利用 build 指令重新命名 allyusd/ithelp-webserver 映像檔，因為跟前一個完全一樣，所以動作很快完成。</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>docker build . -t allyusd/ithelp-webserver
 </code></pre>
 </div>
 
-<p>就是上面兩行指令，一再的重覆</p>
+<p>在將做好的 image 發佈到 docker hub 之前，需要先證明自己是這個倉庫的擁有者，需要透過 login 指令登入，接著輸入帳號、密碼</p>
 
-<h1 id="dockerfile">Dockerfile</h1>
-<p>在 <a href="https://twblog.hongjianching.com/2018/10/02/install-docker/">安裝 Docker</a> 時有提過，使用 Docker 其中一個優勢就是繼承，這個特性在 Dockerfile 可以體現出來。</p>
-
-<p>Dockerfile 最基本的指令是 FROM，也就是這個 Dockerfile 是繼承哪個 image 的。有一行就可以視為合格的 Dockerfile，像是我們用 ubuntu 當基底。</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>FROM ubuntu:18.04
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>docker login
 </code></pre>
 </div>
 
-<p>當然，這樣產生的 image 會跟 ubuntu:18.04 一模一樣，所以我們要加上我們想要的，安裝 nginx 動作。透過 RUN 指令，可以幫我們做到這件事</p>
+<p>完成登入後，就可以使用 push 指令發佈 image 到 docker hub</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>FROM ubuntu:18.04
-
-RUN apt update &amp;&amp; apt install nginx -y
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>docker push allyusd/ithelp-webserver
 </code></pre>
 </div>
+<p><img src="/assets/images/2018-10-07-push-image-to-dockerhub/2018-10-07_22-11-55.png" alt="" /></p>
 
-<p>最後，別忘了啟動 nginx，畢竟能自動完成的事情，又何必自己來呢？透過 CMD 指令，告訴 Docker 啟動容器後應該做什麼事情。</p>
+<p>完成後可以回到 dockerhub 專案的位置，選擇 Tags 就可以看到剛剛上傳的資訊</p>
 
-<p>這邊特別說明一下，如果 CMD 後面指定的是不會結束的程式，那就沒有問題，但是之前是透過 service 命令啟動的，因為這個命令一執行就結束了，接著容器就結束了，為了避免這種情況，後面加上了 /bin/bash 維持運作。(當然也可以直接執行 nginx 就不用這個動作)</p>
+<p><img src="/assets/images/2018-10-07-push-image-to-dockerhub/2018-10-07_22-13-23.png" alt="" /></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>FROM ubuntu:18.04
+<p>最後我們可以先用 rmi 指令刪除本地的 image，然後再用新的指令啟動 webserver</p>
 
-RUN apt update &amp;&amp; apt install nginx -y
-
-CMD service nginx start &amp;&amp; /bin/bash
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>docker rmi allyusd/ithelp-webserver
 </code></pre>
 </div>
-
-<h1 id="build---建置映像檔">build - 建置映像檔</h1>
-
-<p>寫完 Dockerfile，就可以建置 image 了，透過 build 指令，後面接 Dockerfile 所在的路徑，最好加上 -t 參數給個名字</p>
-
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>docker build . -t webserver
-</code></pre>
-</div>
-
-<p>等他建置完，我們可以透過 images 指令來查詢本機目前有哪些 image</p>
-
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>docker images
-</code></pre>
-</div>
-<p><img src="/assets/images/2018-10-06-using-dockerfile-build-docker-image/2018-10-06_22-09-13.png" alt="" /></p>
-
-<p>從圖片中可以看到，除了我們之前用到的 hello-wrold 和 ubuntu:18.04 之外，還多了一個 webserver 的 image，這就是剛剛建立好的映像檔。這麼一來我們把之前的指令改用 webserver 來啟動吧。</p>
 
 <div class="language-bash highlighter-rouge"><pre class="highlight"><code>docker run <span class="se">\</span>
     --restart<span class="o">=</span>always <span class="se">\</span>
@@ -358,11 +349,12 @@ CMD service nginx start &amp;&amp; /bin/bash
     -it <span class="se">\</span>
     -p 80:80 <span class="se">\</span>
     -v ~/www:/var/www/html <span class="se">\</span>
-    webserver
+    allyusd/ithelp-webserver
 </code></pre>
 </div>
+<p><img src="/assets/images/2018-10-07-push-image-to-dockerhub/2018-10-07_22-18-26.png" alt="" /></p>
 
-<p>這次不再需要進入容器，也不用啟動 nginx，直接可以在 http://localhost 出現網頁嘍！</p>
+<p>這麼一來，我們就在任何電腦啟動我們自己做的映像檔</p>
 
         
       </section>
@@ -396,7 +388,7 @@ CMD service nginx start &amp;&amp; /bin/bash
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2018-10-06T00:00:00+08:00">October 06, 2018</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2018-10-07T00:00:00+08:00">October 07, 2018</time></p>
         
       </footer>
 
@@ -405,25 +397,24 @@ CMD service nginx start &amp;&amp; /bin/bash
     <h4 class="page__share-title">分享到</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=使用 Dockerfile 建立自己的 Docker Image https://twblog.hongjianching.com/2018/10/06/using-dockerfile-build-docker-image/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=將 Image 發佈到 Docker Hub https://twblog.hongjianching.com/2018/10/07/push-image-to-dockerhub/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2018/10/06/using-dockerfile-build-docker-image/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2018/10/07/push-image-to-dockerhub/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2018/10/06/using-dockerfile-build-docker-image/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2018/10/07/push-image-to-dockerhub/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2018/10/06/using-dockerfile-build-docker-image/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2018/10/07/push-image-to-dockerhub/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="https://twblog.hongjianching.com/2018/10/05/run-docker-port-volume/" class="pagination--pager" title="使用 Docker - Port 及 Volume
+      <a href="https://twblog.hongjianching.com/2018/10/06/using-dockerfile-build-docker-image/" class="pagination--pager" title="使用 Dockerfile 建立自己的 Docker Image
 ">較舊</a>
     
     
-      <a href="https://twblog.hongjianching.com/2018/10/07/push-image-to-dockerhub/" class="pagination--pager" title="將 Image 發佈到 Docker Hub
-">較新</a>
+      <a href="#" class="pagination--pager disabled">較新</a>
     
   </nav>
 

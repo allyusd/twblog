@@ -1,4 +1,65 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-07T22:21:48+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">使用 Dockerfile 建立自己的 Docker Image</title><link href="https://twblog.hongjianching.com/2018/10/06/using-dockerfile-build-docker-image/" rel="alternate" type="text/html" title="使用 Dockerfile 建立自己的 Docker Image" /><published>2018-10-06T00:00:00+08:00</published><updated>2018-10-06T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/06/using-dockerfile-build-docker-image</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/06/using-dockerfile-build-docker-image/">&lt;p&gt;這篇寫簡單 Dockerfile 來建立自己的 Docker Image&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-07T22:27:38+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">將 Image 發佈到 Docker Hub</title><link href="https://twblog.hongjianching.com/2018/10/07/push-image-to-dockerhub/" rel="alternate" type="text/html" title="將 Image 發佈到 Docker Hub" /><published>2018-10-07T00:00:00+08:00</published><updated>2018-10-07T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/07/push-image-to-dockerhub</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/07/push-image-to-dockerhub/">&lt;p&gt;這篇會說明如何將 Image 發佈到 Docker Hub。&lt;/p&gt;
+
+&lt;p&gt;在前一篇 &lt;a href=&quot;https://twblog.hongjianching.com/2018/10/06/using-dockerfile-build-docker-image/&quot;&gt;使用 Dockerfile 建立自己的 Docker Image&lt;/a&gt; 已經知道如何建立自己的 image，但是建立的 image 只能本機使用，除非手動復製，否則不能在其它電腦使用。&lt;/p&gt;
+
+&lt;p&gt;在這之前有個疑問，那之前我們使用的 image，像是 hello-world、ubuntu:18.04 是從哪裡來的呢？&lt;/p&gt;
+
+&lt;h1 id=&quot;docker-hub&quot;&gt;Docker Hub&lt;/h1&gt;
+&lt;p&gt;來源其實就是 &lt;a href=&quot;https://hub.docker.com/&quot;&gt;Docker Hub&lt;/a&gt;，目前是 Docker 預設的 image 來源，像是 &lt;a href=&quot;https://hub.docker.com/_/hello-world/&quot;&gt;hello-world&lt;/a&gt;、&lt;a href=&quot;https://hub.docker.com/_/ubuntu/&quot;&gt;ubuntu&lt;/a&gt;。從網站上可以找看看自己有興趣的 image，或者上傳自己的 image。&lt;/p&gt;
+
+&lt;p&gt;我們建立好 Docker Hub 帳號之後，就可以建立 image repository，按右上角的 Create，然後選擇 Create Repository&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-07-push-image-to-dockerhub/2018-10-07_21-28-11.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;接著在 name 的欄位輸入想要的 image 名稱，這個範例中命名為 ithelp-webserver，在下面的 description 可以輸入想要說明的資訊。Visibility 決定這個 image 是不是公開的，公開的話每個人都可以使用，私有的話只有自己能用，但是免費帳號只能有個一個私有倉庫，想要多一些的話就要付費。選擇後按下 Create。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-07-push-image-to-dockerhub/2018-10-07_21-32-50.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;完成後就會看到這個畫面，這樣一個映像檔倉庫就建立完成了，左上方就是這個 image 的名稱，因為 docker hub 是全球的人共用的，所以個人建立的 image 都會放在該帳號下，這個例子中就是 allyusd/ithelp-webserver。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-07-push-image-to-dockerhub/2018-10-07_21-37-31.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;然後回到 console，利用 build 指令重新命名 allyusd/ithelp-webserver 映像檔，因為跟前一個完全一樣，所以動作很快完成。&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker build . -t allyusd/ithelp-webserver
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;在將做好的 image 發佈到 docker hub 之前，需要先證明自己是這個倉庫的擁有者，需要透過 login 指令登入，接著輸入帳號、密碼&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker login
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;完成登入後，就可以使用 push 指令發佈 image 到 docker hub&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker push allyusd/ithelp-webserver
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-07-push-image-to-dockerhub/2018-10-07_22-11-55.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;完成後可以回到 dockerhub 專案的位置，選擇 Tags 就可以看到剛剛上傳的資訊&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-07-push-image-to-dockerhub/2018-10-07_22-13-23.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;最後我們可以先用 rmi 指令刪除本地的 image，然後再用新的指令啟動 webserver&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker rmi allyusd/ithelp-webserver
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    --restart&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;always &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    -d &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    -it &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    -p 80:80 &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    -v ~/www:/var/www/html &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    allyusd/ithelp-webserver
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-07-push-image-to-dockerhub/2018-10-07_22-18-26.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;這麼一來，我們就在任何電腦啟動我們自己做的映像檔&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Docker" /><summary type="html">這篇會說明如何將 Image 發佈到 Docker Hub。</summary></entry><entry><title type="html">使用 Dockerfile 建立自己的 Docker Image</title><link href="https://twblog.hongjianching.com/2018/10/06/using-dockerfile-build-docker-image/" rel="alternate" type="text/html" title="使用 Dockerfile 建立自己的 Docker Image" /><published>2018-10-06T00:00:00+08:00</published><updated>2018-10-06T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/06/using-dockerfile-build-docker-image</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/06/using-dockerfile-build-docker-image/">&lt;p&gt;這篇寫簡單 Dockerfile 來建立自己的 Docker Image&lt;/p&gt;
 
 &lt;p&gt;在前一篇 &lt;a href=&quot;https://twblog.hongjianching.com/2018/10/05/run-docker-port-volume/&quot;&gt;使用 Docker - Port 及 Volume&lt;/a&gt;中，如果有照著每個動作來做的話，一定會發現一件事。&lt;/p&gt;
 
@@ -454,72 +515,4 @@ sudo usermod -aG docker &lt;span class=&quot;nv&quot;&gt;$USER&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;這個技巧可以利用最低的成本，最小的改變為 Legacy Code 補上 Unit Test，接著透過 &lt;a href=&quot;https://www.amazon.com/Working-Effectively-Legacy-Michael-Feathers/dp/0131177052&quot;&gt;Working Effectively with Legacy Code&lt;/a&gt; 中的技巧，開始拆解程式間的相依性。&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="Qt" /><category term="Unit-Test" /><category term="Visual-Studio" /><summary type="html">先來一張 Test Pass 的結果</summary></entry><entry><title type="html">Qt Unit Test with Visual Studio</title><link href="https://twblog.hongjianching.com/2018/07/28/qt-unit-test-with-visual-studio/" rel="alternate" type="text/html" title="Qt Unit Test with Visual Studio" /><published>2018-07-28T00:00:00+08:00</published><updated>2018-07-28T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/07/28/qt-unit-test-with-visual-studio</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/07/28/qt-unit-test-with-visual-studio/">&lt;p&gt;基於現成的 Visual Studio 套件 &lt;a href=&quot;https://marketplace.visualstudio.com/items?itemName=ChristianSoltenborn.GoogleTestAdapter&quot;&gt;Google Test Adapter&lt;/a&gt;，直接借用 &lt;a href=&quot;https://github.com/google/googletest&quot;&gt;Google Test&lt;/a&gt; 來進行 Qt Unit Test。&lt;/p&gt;
-
-&lt;p&gt;有機會再來整合 Qt 自己的 &lt;a href=&quot;http://doc.qt.io/qt-5/qttest-index.html&quot;&gt;Qt Test&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/allyusd/qt-vs-unit-test&quot;&gt;Example Code&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;建立-vs-google-test-專案&quot;&gt;建立 VS Google Test 專案&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-07-28-qt-unit-test-with-visual-studio/2018-07-28_16-41-53.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;建立後會有一個一定會通過的 Unit Test&lt;/p&gt;
-
-&lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;TEST&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TestCaseName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TestName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;EXPECT_EQ&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;EXPECT_TRUE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Run Test&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-07-28-qt-unit-test-with-visual-studio/2018-07-28_17-26-18.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;編寫-unit-test&quot;&gt;編寫 Unit Test&lt;/h2&gt;
-
-&lt;p&gt;修改 Unit Test 如下&lt;/p&gt;
-
-&lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;TEST&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TestLogic&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HelloMessage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;Logic&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;logic&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-	&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;logic&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getHelloMessage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Jian-Ching&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;toStdString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;EXPECT_EQ&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Hello Jian-Ching&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;新增 Logic Class 及 getHelloMessage 函式&lt;/p&gt;
-
-&lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;QString&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Logic&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getHelloMessage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;QString&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Run Test, 我們會得到一個紅燈&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-07-28-qt-unit-test-with-visual-studio/2018-07-28_20-24-27.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;實作-qt-程式碼&quot;&gt;實作 Qt 程式碼&lt;/h2&gt;
-
-&lt;p&gt;實作 getHelloMessage 函式&lt;/p&gt;
-
-&lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;QString&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Logic&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getHelloMessage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;QString&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;QString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Hello &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Run Test, 成功通過測試&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-07-28-qt-unit-test-with-visual-studio/2018-07-28_17-51-25.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;其它&quot;&gt;其它&lt;/h2&gt;
-&lt;p&gt;如果你的 Goolge Test Apapter 發生錯誤，可以確認一下是否是遇到這個問題，如果問題還未修復，可以先將 Visual Studio 切換為英文語系即可正常使用。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/Microsoft/TestAdapterForGoogleTest/issues/121&quot;&gt;Google test adapter does not work when the UI of Visual Studio is non english · Issue #121 · Microsoft/TestAdapterForGoogleTest&lt;/a&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="Qt" /><category term="Unit-Test" /><category term="Visual-Studio" /><summary type="html">基於現成的 Visual Studio 套件 Google Test Adapter，直接借用 Google Test 來進行 Qt Unit Test。</summary></entry></feed>
+&lt;p&gt;這個技巧可以利用最低的成本，最小的改變為 Legacy Code 補上 Unit Test，接著透過 &lt;a href=&quot;https://www.amazon.com/Working-Effectively-Legacy-Michael-Feathers/dp/0131177052&quot;&gt;Working Effectively with Legacy Code&lt;/a&gt; 中的技巧，開始拆解程式間的相依性。&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="Qt" /><category term="Unit-Test" /><category term="Visual-Studio" /><summary type="html">先來一張 Test Pass 的結果</summary></entry></feed>

@@ -1,4 +1,47 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-08T22:01:08+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">使用 GitHub 在 DockerHub 自動建置 Docker Image</title><link href="https://twblog.hongjianching.com/2018/10/08/create-dockerhub-automated-build/" rel="alternate" type="text/html" title="使用 GitHub 在 DockerHub 自動建置 Docker Image" /><published>2018-10-08T00:00:00+08:00</published><updated>2018-10-08T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/08/create-dockerhub-automated-build</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/08/create-dockerhub-automated-build/">&lt;p&gt;今天要談論如何使用 GitHub 和 DockerHub 建立自動建置 Image，功能強大，但是反而非常的簡單喔！&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-09T21:57:08+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">在 Ubuntu 使用 Docker 安裝 Jenkins</title><link href="https://twblog.hongjianching.com/2018/10/09/install-jenkins-with-docker-on-ubuntu/" rel="alternate" type="text/html" title=" 在 Ubuntu 使用 Docker 安裝 Jenkins" /><published>2018-10-09T00:00:00+08:00</published><updated>2018-10-09T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/09/install-jenkins-with-docker-on-ubuntu</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/09/install-jenkins-with-docker-on-ubuntu/">&lt;p&gt;Jenkins 是 CI 老牌工具，透過新的 Docker 技術，快速建立自己的 CI 環境。&lt;/p&gt;
+
+&lt;p&gt;如果還沒有 Docker 執行環境，可以參考 &lt;a href=&quot;https://twblog.hongjianching.com/2018/10/02/install-docker/&quot;&gt;安裝 Docker&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;第一步先在 host 建立存放 Jenkins 的目錄，放在 /data/jenkins&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo mkdir -p /data/jenkins
+sudo chown -R &lt;span class=&quot;nv&quot;&gt;$USER&lt;/span&gt;:&lt;span class=&quot;nv&quot;&gt;$GROUP&lt;/span&gt; /data
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;透過 docker 啟動 jenkins&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run \
+    --name jenkins \
+    -d --restart always \
+    -p 8080:8080 -p 50000:50000 \
+    -v /data/jenkins:/var/jenkins_home \
+    jenkins/jenkins:lts
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;然後可以在 http://localhost:8080 看到 jenkins 準備上工了&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-09-install-jenkins-with-docker-on-ubuntu/2018-10-09_21-19-05.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;等一段時候之後，jenkins 就會要求輸入預設管理員密碼，畫面上提示 &lt;code class=&quot;highlighter-rouge&quot;&gt;/var/jenkins_home/secrets/initialAdminPassword&lt;/code&gt;，但是我們有將容器的 &lt;code class=&quot;highlighter-rouge&quot;&gt;/var/jenkins_home&lt;/code&gt; 對映到 host 的 &lt;code class=&quot;highlighter-rouge&quot;&gt;/data/jenkins&lt;/code&gt;，所以我們可以在 &lt;code class=&quot;highlighter-rouge&quot;&gt;/data/jenkins/secrets/initialAdminPassword&lt;/code&gt; 找到預設密碼&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;cat /data/jenkins/secrets/initialAdminPassword
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;按下確認後，選擇 install suggested plugins，plugins 可以之後再依需要安裝&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-09-install-jenkins-with-docker-on-ubuntu/2018-10-09_21-31-09.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;等待 plugin 安裝完成後，建立第一個管理員帳號，接著輸入 Jenkins URL，如果只是測試用可以保持 losthost 沒關係，但是如果要正式使用，記得改為真實 IP 喔。最後可以看到 &lt;strong&gt;Jenkins is ready&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-09-install-jenkins-with-docker-on-ubuntu/2018-10-09_21-51-52.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;按下 &lt;em&gt;Start using Jenkins&lt;/em&gt; 之後就會看到 Jenkins 主頁面了&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-09-install-jenkins-with-docker-on-ubuntu/2018-10-09_21-53-11.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Jenkins 建置完成嘍！&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Docker" /><category term="Jenkins" /><category term="Ubuntu" /><summary type="html">Jenkins 是 CI 老牌工具，透過新的 Docker 技術，快速建立自己的 CI 環境。</summary></entry><entry><title type="html">使用 GitHub 在 DockerHub 自動建置 Docker Image</title><link href="https://twblog.hongjianching.com/2018/10/08/create-dockerhub-automated-build/" rel="alternate" type="text/html" title="使用 GitHub 在 DockerHub 自動建置 Docker Image" /><published>2018-10-08T00:00:00+08:00</published><updated>2018-10-08T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/08/create-dockerhub-automated-build</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/08/create-dockerhub-automated-build/">&lt;p&gt;今天要談論如何使用 GitHub 和 DockerHub 建立自動建置 Image，功能強大，但是反而非常的簡單喔！&lt;/p&gt;
 
 &lt;p&gt;前一篇 &lt;a href=&quot;https://twblog.hongjianching.com/2018/10/07/push-image-to-dockerhub/&quot;&gt;將 Image 發佈到 Docker Hub&lt;/a&gt; 已經學會手動將做好的 Image 放到 DockerHub 上，但是製作的動作很多，而且如果是想給別人用會有疑慮，因為不知道你的映像檔做了哪些修改，或者會不會加什麼料進去呢？&lt;/p&gt;
 
@@ -479,23 +522,4 @@ sudo usermod -aG docker &lt;span class=&quot;nv&quot;&gt;$USER&lt;/span&gt;
 &lt;p&gt;啟用後建置時間只需要 3.5 秒，再節省 60% 的建置時間。&lt;/p&gt;
 
 &lt;h2 id=&quot;結論&quot;&gt;結論&lt;/h2&gt;
-&lt;p&gt;正確設定 Precompiled Headers 加上 Multi-processor Compilation，從原本的 100 秒 縮短為 3.5 秒，等於加速了 28 倍，可以大幅減少等待時間。&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="Visual-Studio" /><summary type="html">Precompiled Headers 最近發現專案使用的 Precompiled Headers 設定錯誤，增加了 94% 的建置時間。</summary></entry><entry><title type="html">Start using trello</title><link href="https://twblog.hongjianching.com/2018/08/25/start-using-trello/" rel="alternate" type="text/html" title="Start using trello" /><published>2018-08-25T00:00:00+08:00</published><updated>2018-08-25T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/08/25/start-using-trello</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/08/25/start-using-trello/">&lt;p&gt;這篇是使用一個月 Trello 完成三張卡片的心得紀錄。&lt;/p&gt;
-
-&lt;p&gt;我從 Welcome Board 中的紀錄找到，早在 2011 年就註冊 Trello，中間一直有斷斷續續使用一下下，但是沒有一個「長期」(超過一週)的卡片完結的。&lt;/p&gt;
-
-&lt;p&gt;說故事之前，先上圖
-&lt;img src=&quot;/assets/images/2018-08-25-start-using-trello/2018-08-25_23-03-29.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;在 7/23 日的時候，開始第 N 次試用 Trello 進行個人管理，其中一張卡片就是圖中的「GitLab with JIRA Integration」。可以發現 Attachments 中的 LINK 是當天存下來的，也是第一個任務相關資訊。&lt;/p&gt;
-
-&lt;p&gt;註：Attachments 的 LINK 太佔空間了，加上 Description 有支援 Markdown，所以後來的連結都改放那。&lt;/p&gt;
-
-&lt;p&gt;使用上覺得最方便的是 Checklist，可以協助任務進行「細切」的動作，而且想到什麼就加上去，Trello 有手機 App，想到什麼隨時可以更新。圖片的 6 個項目，一開始根本不存在，像第 4 項「Write script setup all project」，以過去的經驗來說，我都是寫 shell script 處理自動化任務的。但因為工作上開始有使用 python 的需求，想說不然就拿這個當練習吧，所以在這項註記要使用 python 完成。&lt;/p&gt;
-
-&lt;p&gt;剛開始使用的第一週，一直在試著調整要幾個 Board，要什麼欄位才好，覺得不用的 Board 就 Close，然後把要的卡片復製帶走。過程中蠻傷害腦細胞的，因為不知道怎麼樣比較好，後來發現都想太多了。&lt;/p&gt;
-
-&lt;p&gt;過去我常常有些想法想進行，但如果在3天內沒有完成，那這件事就永遠不會完成了。這張卡片，從 7/23 開始，中間慢慢一個任務一個任務進行，最後在 8/23 全部完成，時間剛好整整一個月，算是蠻特別的經驗。中間雖然還會是亂開副本，像是為了 GitLab Runner 環境弄了一下 Vagrant 卡了半天，還好有明確的 Checklist，後來拉回來直接用 VirtualBox 安裝 Ubuntu 來用，至於 Vagrant 就獨立開一張卡片丟到 Backlog 去了。&lt;/p&gt;
-
-&lt;p&gt;任務管理上，DUE DATE 是很重要的，尤其是四象限中的重要但不緊急的事項，常常被遣忘。在卡片上可以自己加上預定要執行的日期，方便提醒自己該完成這個任務。Trello 免費版支援一個 Power-Ups，非常建議開啟 Calendar，還可以同步到 Google 月曆，非常方便。&lt;/p&gt;
-
-&lt;p&gt;對於 Trello 工具的使用，我覺得跟上週參加&lt;a href=&quot;https://agilecommtw.kktix.cc/events/kanbanbrucelee&quot;&gt;Agile Hsinchu 八月聚會: 讓李小龍幫你看見 KANBAN 的美好&lt;/a&gt;的心得一樣，「不要想太多，先開始用」。在使用的過程中，自然會找到更適合自己的方法，算是「邊移動邊開火」的實踐。&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="Trello" /><summary type="html">這篇是使用一個月 Trello 完成三張卡片的心得紀錄。</summary></entry></feed>
+&lt;p&gt;正確設定 Precompiled Headers 加上 Multi-processor Compilation，從原本的 100 秒 縮短為 3.5 秒，等於加速了 28 倍，可以大幅減少等待時間。&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="Visual-Studio" /><summary type="html">Precompiled Headers 最近發現專案使用的 Precompiled Headers 設定錯誤，增加了 94% 的建置時間。</summary></entry></feed>

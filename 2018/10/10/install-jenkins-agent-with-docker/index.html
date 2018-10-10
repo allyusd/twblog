@@ -19,12 +19,12 @@
 
 
 
-<title>使用 Docker 安裝 Jenkins - Jian-Ching 記事本</title>
+<title>使用 Docker 安裝 Jenkins Agent - Jian-Ching 記事本</title>
 
 
 
 
-<meta name="description" content="Jenkins 是 CI 老牌工具，透過新的 Docker 技術，快速建立自己的 CI 環境。">
+<meta name="description" content="讓 Jenkins Master 專心在 CI Server 的任務，剩下的工作交給 Jenkins Agent 處理，這樣可以降低環境的複雜度，也可以增加維護的方便性。">
 
 
 
@@ -33,15 +33,15 @@
 
 <meta property="og:locale" content="zh_TW">
 <meta property="og:site_name" content="Jian-Ching 記事本">
-<meta property="og:title" content="使用 Docker 安裝 Jenkins">
+<meta property="og:title" content="使用 Docker 安裝 Jenkins Agent">
 
 
-  <link rel="canonical" href="https://twblog.HongJianChing.com/2018/10/09/install-jenkins-with-docker/">
-  <meta property="og:url" content="https://twblog.HongJianChing.com/2018/10/09/install-jenkins-with-docker/">
+  <link rel="canonical" href="https://twblog.HongJianChing.com/2018/10/10/install-jenkins-agent-with-docker/">
+  <meta property="og:url" content="https://twblog.HongJianChing.com/2018/10/10/install-jenkins-agent-with-docker/">
 
 
 
-  <meta property="og:description" content="Jenkins 是 CI 老牌工具，透過新的 Docker 技術，快速建立自己的 CI 環境。">
+  <meta property="og:description" content="讓 Jenkins Master 專心在 CI Server 的任務，剩下的工作交給 Jenkins Agent 處理，這樣可以降低環境的複雜度，也可以增加維護的方便性。">
 
 
 
@@ -56,7 +56,7 @@
 
 
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2018-10-09T00:00:00+08:00">
+  <meta property="article:published_time" content="2018-10-10T00:00:00+08:00">
 
 
 
@@ -278,65 +278,87 @@
 
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
-    <meta itemprop="headline" content="使用 Docker 安裝 Jenkins">
-    <meta itemprop="description" content="Jenkins 是 CI 老牌工具，透過新的 Docker 技術，快速建立自己的 CI 環境。">
-    <meta itemprop="datePublished" content="October 09, 2018">
+    <meta itemprop="headline" content="使用 Docker 安裝 Jenkins Agent">
+    <meta itemprop="description" content="讓 Jenkins Master 專心在 CI Server 的任務，剩下的工作交給 Jenkins Agent 處理，這樣可以降低環境的複雜度，也可以增加維護的方便性。">
+    <meta itemprop="datePublished" content="October 10, 2018">
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 class="page__title" itemprop="headline">使用 Docker 安裝 Jenkins
+          <h1 class="page__title" itemprop="headline">使用 Docker 安裝 Jenkins Agent
 </h1>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        <p>Jenkins 是 CI 老牌工具，透過新的 Docker 技術，快速建立自己的 CI 環境。</p>
+        <p>讓 Jenkins Master 專心在 CI Server 的任務，剩下的工作交給 Jenkins Agent 處理，這樣可以降低環境的複雜度，也可以增加維護的方便性。</p>
 
-<p>如果還沒有 Docker 執行環境，可以參考 <a href="https://twblog.hongjianching.com/2018/10/02/install-docker/">安裝 Docker</a></p>
+<p>如果還沒有安裝 Jenkins Master 的話可以先參考 <a href="https://twblog.hongjianching.com/2018/10/09/install-jenkins-with-docker-on-ubuntu/">使用 Docker 安裝 Jenkins</a></p>
 
-<p>第一步先在 host 建立存放 Jenkins 的目錄，放在 /data/jenkins</p>
+<h1 id="jenkins-master-設定">Jenkins Master 設定</h1>
 
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>sudo mkdir -p /data/jenkins
-sudo chown -R <span class="nv">$USER</span>:<span class="nv">$GROUP</span> /data
+<p>首先在 Jenkins 網頁選擇 <em>管理 Jenkins</em></p>
+
+<p><img src="/assets/images/2018-10-10-install-jenkins-agent-with-docker/2018-10-10_21-41-38.png" alt="" /></p>
+
+<p>接著往下找到 <em>管理節點</em>，然後點擊 <em>Master</em></p>
+
+<p><img src="/assets/images/2018-10-10-install-jenkins-agent-with-docker/2018-10-10_21-44-34.png" alt="" /></p>
+
+<p><img src="/assets/images/2018-10-10-install-jenkins-agent-with-docker/2018-10-10_21-45-56.png" alt="" /></p>
+
+<p>這個節點就是 Jenkins Master，也是目前操作網站所在的位置，選擇左方的 <em>設定</em></p>
+
+<p><img src="/assets/images/2018-10-10-install-jenkins-agent-with-docker/2018-10-10_21-47-13.png" alt="" /></p>
+
+<p>為了避免有任何的工作在 Master 上面執行，把 <em>執行程式數</em> 設為 <strong>0</strong> 然後儲存</p>
+
+<p><img src="/assets/images/2018-10-10-install-jenkins-agent-with-docker/2018-10-10_21-49-25.png" alt="" /></p>
+
+<p>我們可以在左下方看到原本的兩個執行程式狀態消失了，接著點左上方的 <em>節點</em> 回到管理節點頁面</p>
+
+<p><img src="/assets/images/2018-10-10-install-jenkins-agent-with-docker/2018-10-10_21-51-31.png" alt="" /></p>
+
+<p>這次選擇 <em>新增節點</em></p>
+
+<p><img src="/assets/images/2018-10-10-install-jenkins-agent-with-docker/2018-10-10_21-53-30.png" alt="" /></p>
+
+<p>輸入節點名稱為 <em>agent</em> 並且按下 <em>Permanent Agent</em> 之後按下 OK</p>
+
+<p><img src="/assets/images/2018-10-10-install-jenkins-agent-with-docker/2018-10-10_21-54-33.png" alt="" /></p>
+
+<p>在新節點的設定頁面，保持預設值不變，直接按下儲存，然後回到管理節點頁面</p>
+
+<p><img src="/assets/images/2018-10-10-install-jenkins-agent-with-docker/2018-10-10_21-56-11.png" alt="" /></p>
+
+<p>在管理節點頁面按下剛剛新增的 <em>agnet</em></p>
+
+<p><img src="/assets/images/2018-10-10-install-jenkins-agent-with-docker/2018-10-10_21-57-36.png" alt="" /></p>
+
+<p>在 agent 節點會有一行教你怎麼執行 Jenkins agnet 的指令，這邊我們只要拿 secret 後面的參數就好，這個例子是 <strong>1cdcff34b6ddadf38ca3ca42869ae0ad68e62d0274fbad43798b749e3f840884</strong></p>
+
+<p><img src="/assets/images/2018-10-10-install-jenkins-agent-with-docker/2018-10-10_21-58-37.png" alt="" /></p>
+
+<h1 id="jenkins-agent-安裝">Jenkins Agent 安裝</h1>
+
+<p>使用 Docker 啟動 Jenkins Agent，需要三個參數，分別是 Jenkins 的網址、剛剛拿到的 secret token 還有 agent 名稱</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>docker run <span class="se">\</span>
+    --name jenkins_agent <span class="se">\</span>
+    -d --restart always <span class="se">\</span>
+    jenkins/jnlp-slave <span class="se">\</span>
+    -url http://192.168.5.20:8080 <span class="se">\</span>
+    1cdcff34b6ddadf38ca3ca42869ae0ad68e62d0274fbad43798b749e3f840884 <span class="se">\</span>
+    agent
 </code></pre>
 </div>
 
-<p>透過 docker 啟動 jenkins</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>docker run \
-    --name jenkins \
-    -d --restart always \
-    -p 8080:8080 -p 50000:50000 \
-    -v /data/jenkins:/var/jenkins_home \
-    jenkins/jenkins:lts
-</code></pre>
-</div>
+<p>是的，這樣 Jenkins Agent 就完成啟動，回到剛剛的 Agent 頁面按下 F5 重新更新，會發現 Agent 已經上線並且準備工作了。</p>
 
-<p>然後可以在 http://localhost:8080 看到 jenkins 準備上工了</p>
+<p><img src="/assets/images/2018-10-10-install-jenkins-agent-with-docker/2018-10-10_22-12-40.png" alt="" /></p>
 
-<p><img src="/assets/images/2018-10-09-install-jenkins-with-docker/2018-10-09_21-19-05.png" alt="" /></p>
-
-<p>等一段時候之後，jenkins 就會要求輸入預設管理員密碼，畫面上提示 <code class="highlighter-rouge">/var/jenkins_home/secrets/initialAdminPassword</code>，但是我們有將容器的 <code class="highlighter-rouge">/var/jenkins_home</code> 對映到 host 的 <code class="highlighter-rouge">/data/jenkins</code>，所以我們可以在 <code class="highlighter-rouge">/data/jenkins/secrets/initialAdminPassword</code> 找到預設密碼</p>
-
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>cat /data/jenkins/secrets/initialAdminPassword
-</code></pre>
-</div>
-
-<p>按下確認後，選擇 install suggested plugins，plugins 可以之後再依需要安裝</p>
-
-<p><img src="/assets/images/2018-10-09-install-jenkins-with-docker/2018-10-09_21-31-09.png" alt="" /></p>
-
-<p>等待 plugin 安裝完成後，建立第一個管理員帳號，接著輸入 Jenkins URL，如果只是測試用可以保持 losthost 沒關係，但是如果要正式使用，記得改為真實 IP 喔。最後可以看到 <strong>Jenkins is ready</strong>。</p>
-
-<p><img src="/assets/images/2018-10-09-install-jenkins-with-docker/2018-10-09_21-51-52.png" alt="" /></p>
-
-<p>按下 <em>Start using Jenkins</em> 之後就會看到 Jenkins 主頁面了</p>
-
-<p><img src="/assets/images/2018-10-09-install-jenkins-with-docker/2018-10-09_21-53-11.png" alt="" /></p>
-
-<p>Jenkins 建置完成嘍！</p>
 
         
       </section>
@@ -374,7 +396,7 @@ sudo chown -R <span class="nv">$USER</span>:<span class="nv">$GROUP</span> /data
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2018-10-09T00:00:00+08:00">October 09, 2018</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2018-10-10T00:00:00+08:00">October 10, 2018</time></p>
         
       </footer>
 
@@ -383,25 +405,24 @@ sudo chown -R <span class="nv">$USER</span>:<span class="nv">$GROUP</span> /data
     <h4 class="page__share-title">分享到</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=使用 Docker 安裝 Jenkins https://twblog.hongjianching.com/2018/10/09/install-jenkins-with-docker/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=使用 Docker 安裝 Jenkins Agent https://twblog.hongjianching.com/2018/10/10/install-jenkins-agent-with-docker/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2018/10/09/install-jenkins-with-docker/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2018/10/10/install-jenkins-agent-with-docker/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2018/10/09/install-jenkins-with-docker/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2018/10/10/install-jenkins-agent-with-docker/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2018/10/09/install-jenkins-with-docker/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2018/10/10/install-jenkins-agent-with-docker/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="https://twblog.hongjianching.com/2018/10/08/create-dockerhub-automated-build/" class="pagination--pager" title="使用 GitHub 在 DockerHub 自動建置 Docker Image
+      <a href="https://twblog.hongjianching.com/2018/10/09/install-jenkins-with-docker/" class="pagination--pager" title="使用 Docker 安裝 Jenkins
 ">較舊</a>
     
     
-      <a href="https://twblog.hongjianching.com/2018/10/10/install-jenkins-agent-with-docker/" class="pagination--pager" title="使用 Docker 安裝 Jenkins Agent
-">較新</a>
+      <a href="#" class="pagination--pager disabled">較新</a>
     
   </nav>
 

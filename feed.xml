@@ -1,4 +1,68 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-10T21:39:30+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">使用 Docker 安裝 Jenkins</title><link href="https://twblog.hongjianching.com/2018/10/09/install-jenkins-with-docker/" rel="alternate" type="text/html" title="使用 Docker 安裝 Jenkins" /><published>2018-10-09T00:00:00+08:00</published><updated>2018-10-09T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/09/install-jenkins-with-docker</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/09/install-jenkins-with-docker/">&lt;p&gt;Jenkins 是 CI 老牌工具，透過新的 Docker 技術，快速建立自己的 CI 環境。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-10T22:15:41+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">使用 Docker 安裝 Jenkins Agent</title><link href="https://twblog.hongjianching.com/2018/10/10/install-jenkins-agent-with-docker/" rel="alternate" type="text/html" title="使用 Docker 安裝 Jenkins Agent" /><published>2018-10-10T00:00:00+08:00</published><updated>2018-10-10T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/10/install-jenkins-agent-with-docker</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/10/install-jenkins-agent-with-docker/">&lt;p&gt;讓 Jenkins Master 專心在 CI Server 的任務，剩下的工作交給 Jenkins Agent 處理，這樣可以降低環境的複雜度，也可以增加維護的方便性。&lt;/p&gt;
+
+&lt;p&gt;如果還沒有安裝 Jenkins Master 的話可以先參考 &lt;a href=&quot;https://twblog.hongjianching.com/2018/10/09/install-jenkins-with-docker-on-ubuntu/&quot;&gt;使用 Docker 安裝 Jenkins&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;jenkins-master-設定&quot;&gt;Jenkins Master 設定&lt;/h1&gt;
+
+&lt;p&gt;首先在 Jenkins 網頁選擇 &lt;em&gt;管理 Jenkins&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-10-install-jenkins-agent-with-docker/2018-10-10_21-41-38.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;接著往下找到 &lt;em&gt;管理節點&lt;/em&gt;，然後點擊 &lt;em&gt;Master&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-10-install-jenkins-agent-with-docker/2018-10-10_21-44-34.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-10-install-jenkins-agent-with-docker/2018-10-10_21-45-56.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;這個節點就是 Jenkins Master，也是目前操作網站所在的位置，選擇左方的 &lt;em&gt;設定&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-10-install-jenkins-agent-with-docker/2018-10-10_21-47-13.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;為了避免有任何的工作在 Master 上面執行，把 &lt;em&gt;執行程式數&lt;/em&gt; 設為 &lt;strong&gt;0&lt;/strong&gt; 然後儲存&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-10-install-jenkins-agent-with-docker/2018-10-10_21-49-25.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;我們可以在左下方看到原本的兩個執行程式狀態消失了，接著點左上方的 &lt;em&gt;節點&lt;/em&gt; 回到管理節點頁面&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-10-install-jenkins-agent-with-docker/2018-10-10_21-51-31.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;這次選擇 &lt;em&gt;新增節點&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-10-install-jenkins-agent-with-docker/2018-10-10_21-53-30.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;輸入節點名稱為 &lt;em&gt;agent&lt;/em&gt; 並且按下 &lt;em&gt;Permanent Agent&lt;/em&gt; 之後按下 OK&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-10-install-jenkins-agent-with-docker/2018-10-10_21-54-33.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;在新節點的設定頁面，保持預設值不變，直接按下儲存，然後回到管理節點頁面&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-10-install-jenkins-agent-with-docker/2018-10-10_21-56-11.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;在管理節點頁面按下剛剛新增的 &lt;em&gt;agnet&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-10-install-jenkins-agent-with-docker/2018-10-10_21-57-36.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;在 agent 節點會有一行教你怎麼執行 Jenkins agnet 的指令，這邊我們只要拿 secret 後面的參數就好，這個例子是 &lt;strong&gt;1cdcff34b6ddadf38ca3ca42869ae0ad68e62d0274fbad43798b749e3f840884&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-10-install-jenkins-agent-with-docker/2018-10-10_21-58-37.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;jenkins-agent-安裝&quot;&gt;Jenkins Agent 安裝&lt;/h1&gt;
+
+&lt;p&gt;使用 Docker 啟動 Jenkins Agent，需要三個參數，分別是 Jenkins 的網址、剛剛拿到的 secret token 還有 agent 名稱&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    --name jenkins_agent &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    -d --restart always &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    jenkins/jnlp-slave &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    -url http://192.168.5.20:8080 &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    1cdcff34b6ddadf38ca3ca42869ae0ad68e62d0274fbad43798b749e3f840884 &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    agent
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;是的，這樣 Jenkins Agent 就完成啟動，回到剛剛的 Agent 頁面按下 F5 重新更新，會發現 Agent 已經上線並且準備工作了。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-10-install-jenkins-agent-with-docker/2018-10-10_22-12-40.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Docker" /><category term="Jenkins" /><summary type="html">讓 Jenkins Master 專心在 CI Server 的任務，剩下的工作交給 Jenkins Agent 處理，這樣可以降低環境的複雜度，也可以增加維護的方便性。</summary></entry><entry><title type="html">使用 Docker 安裝 Jenkins</title><link href="https://twblog.hongjianching.com/2018/10/09/install-jenkins-with-docker/" rel="alternate" type="text/html" title="使用 Docker 安裝 Jenkins" /><published>2018-10-09T00:00:00+08:00</published><updated>2018-10-09T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/09/install-jenkins-with-docker</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/09/install-jenkins-with-docker/">&lt;p&gt;Jenkins 是 CI 老牌工具，透過新的 Docker 技術，快速建立自己的 CI 環境。&lt;/p&gt;
 
 &lt;p&gt;如果還沒有 Docker 執行環境，可以參考 &lt;a href=&quot;https://twblog.hongjianching.com/2018/10/02/install-docker/&quot;&gt;安裝 Docker&lt;/a&gt;&lt;/p&gt;
 
@@ -493,33 +557,4 @@ sudo usermod -aG docker &lt;span class=&quot;nv&quot;&gt;$USER&lt;/span&gt;
 
 &lt;h1 id=&quot;目錄&quot;&gt;目錄&lt;/h1&gt;
 
-&lt;p&gt;Day01 - 2019 iT 邦幫忙鐵人賽 目錄及前言&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><summary type="html">第一篇，照慣例(誰說的？)用來當目錄和前言，尤其是這次沒有明確主題的系列，更是需要目錄，因為連我自己都不知道會有哪些文章。(逃~)</summary></entry><entry><title type="html">Visual Studio Precompiled Headers setting issues</title><link href="https://twblog.hongjianching.com/2018/09/12/visual-studio-precompiled-headers-setting-issues/" rel="alternate" type="text/html" title="Visual Studio Precompiled Headers setting issues" /><published>2018-09-12T00:00:00+08:00</published><updated>2018-09-12T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/09/12/visual-studio-precompiled-headers-setting-issues</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/09/12/visual-studio-precompiled-headers-setting-issues/">&lt;h2 id=&quot;precompiled-headers&quot;&gt;Precompiled Headers&lt;/h2&gt;
-&lt;p&gt;最近發現專案使用的 Precompiled Headers 設定錯誤，增加了 94% 的建置時間。&lt;/p&gt;
-
-&lt;p&gt;以下是錯誤的專案設定
-&lt;img src=&quot;/assets/images/2018-09-12-visual-studio-precompiled-headers-setting-issues/2018-09-12_20-24-11.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;在專案中的 Precompiled Headers 設定選項雖然有三個，分別是&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Create(/Yc)&lt;/li&gt;
-  &lt;li&gt;Use(/Yu)&lt;/li&gt;
-  &lt;li&gt;Not Using Precompiled Headers&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;但其實真正能選的只有兩種，就是 Create(/Yc) 不能選，因為這是給檔案設定的。
-如果這個專案要啟用 Precompiled Headers 就選 Use(/Yu)，
-不啟用就選 Not Using Precompiled Headers。&lt;/p&gt;
-
-&lt;p&gt;因為這個專案要啟用，所以改為  Use(/Yu)
-&lt;img src=&quot;/assets/images/2018-09-12-visual-studio-precompiled-headers-setting-issues/2018-09-12_20-25-12.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;就是這個小小的設定，原本要編譯 100 秒的專案，只需要 5.8 秒，足足降低了 94% 的建置時間。&lt;/p&gt;
-
-&lt;h2 id=&quot;multi-processor-compilation&quot;&gt;Multi-processor Compilation&lt;/h2&gt;
-&lt;p&gt;因為目前的電腦都有多核的設計，再啟用多核心編譯功能，設定 Multi-processor Compilation 為 Yes (/MP)
-&lt;img src=&quot;/assets/images/2018-09-12-visual-studio-precompiled-headers-setting-issues/2018-09-12_20-32-50.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;啟用後建置時間只需要 3.5 秒，再節省 60% 的建置時間。&lt;/p&gt;
-
-&lt;h2 id=&quot;結論&quot;&gt;結論&lt;/h2&gt;
-&lt;p&gt;正確設定 Precompiled Headers 加上 Multi-processor Compilation，從原本的 100 秒 縮短為 3.5 秒，等於加速了 28 倍，可以大幅減少等待時間。&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="Visual-Studio" /><summary type="html">Precompiled Headers 最近發現專案使用的 Precompiled Headers 設定錯誤，增加了 94% 的建置時間。</summary></entry></feed>
+&lt;p&gt;Day01 - 2019 iT 邦幫忙鐵人賽 目錄及前言&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><summary type="html">第一篇，照慣例(誰說的？)用來當目錄和前言，尤其是這次沒有明確主題的系列，更是需要目錄，因為連我自己都不知道會有哪些文章。(逃~)</summary></entry></feed>

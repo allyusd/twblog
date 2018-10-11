@@ -1,4 +1,49 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-11T22:35:52+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">使用 Docker 安裝 Jenkins Agent</title><link href="https://twblog.hongjianching.com/2018/10/10/install-jenkins-agent-with-docker/" rel="alternate" type="text/html" title="使用 Docker 安裝 Jenkins Agent" /><published>2018-10-10T00:00:00+08:00</published><updated>2018-10-10T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/10/install-jenkins-agent-with-docker</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/10/install-jenkins-agent-with-docker/">&lt;p&gt;讓 Jenkins Master 專心在 CI Server 的任務，剩下的工作交給 Jenkins Agent 處理，這樣可以降低環境的複雜度，也可以增加維護的方便性。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-11T22:36:43+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">在 Ubuntu 安裝 C++ 編譯環境</title><link href="https://twblog.hongjianching.com/2018/10/11/install-cpp-compiler-on-ubuntu/" rel="alternate" type="text/html" title="在 Ubuntu 安裝 C++ 編譯環境" /><published>2018-10-11T00:00:00+08:00</published><updated>2018-10-11T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/11/install-cpp-compiler-on-ubuntu</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/11/install-cpp-compiler-on-ubuntu/">&lt;p&gt;Ubuntu 預設沒有 C++ 編譯環境，但是可以自己安裝&lt;/p&gt;
+
+&lt;p&gt;不想影響現有的 host，所以叫 docker 建一個 ubuntu 出來&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run -it ubuntu:18.04
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;安裝 C++ 編譯環境套件&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;apt update
+apt install build-essential -y
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;可以選擇手動建立一個檔案存為 helloworld.cpp&lt;/p&gt;
+&lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;#include &amp;lt;iostream&amp;gt;
+&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;argc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;argv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[])&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cout&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Hello World&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;endl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;或是直接透過 git clone 一份&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git clone https://github.com/allyusd/helloworld.cpp.git
+&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;helloworld.cpp
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;如果要使用 git 的話，因為 docker 版本的 ubuntu 預設沒有安裝，記得先安裝 git 套件。&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;apt install git -y
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;程式碼內容很單純，就是顯示 &lt;strong&gt;Hello World&lt;/strong&gt; 文字而己，只是驗證我們的 C++ 環境已經準備好了&lt;/p&gt;
+
+&lt;p&gt;接著透過 C++ 的編譯器 g++ 來編譯&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;g++ helloworld.cpp -o helloworld
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;建置後會產生一個 &lt;strong&gt;helloworld&lt;/strong&gt; 的檔案，就可以執行了&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;./helloworld
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;看到 Hello Wolrd 完成環境建置！&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-11-install-cpp-compiler-on-ubuntu/2018-10-11_22-31-48.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Cpp" /><category term="Ubuntu" /><summary type="html">Ubuntu 預設沒有 C++ 編譯環境，但是可以自己安裝</summary></entry><entry><title type="html">使用 Docker 安裝 Jenkins Agent</title><link href="https://twblog.hongjianching.com/2018/10/10/install-jenkins-agent-with-docker/" rel="alternate" type="text/html" title="使用 Docker 安裝 Jenkins Agent" /><published>2018-10-10T00:00:00+08:00</published><updated>2018-10-10T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/10/install-jenkins-agent-with-docker</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/10/install-jenkins-agent-with-docker/">&lt;p&gt;讓 Jenkins Master 專心在 CI Server 的任務，剩下的工作交給 Jenkins Agent 處理，這樣可以降低環境的複雜度，也可以增加維護的方便性。&lt;/p&gt;
 
 &lt;p&gt;如果還沒有安裝 Jenkins Master 的話可以先參考 &lt;a href=&quot;https://twblog.hongjianching.com/2018/10/09/install-jenkins-with-docker-on-ubuntu/&quot;&gt;使用 Docker 安裝 Jenkins&lt;/a&gt;&lt;/p&gt;
 
@@ -506,60 +551,4 @@ sudo usermod -aG docker &lt;span class=&quot;nv&quot;&gt;$USER&lt;/span&gt;
 &lt;/div&gt;
 
 &lt;p&gt;看到訊息就代表成功執行 docker 嘍
-&lt;img src=&quot;/assets/images/2018-10-02-install-docker/2018-10-02_22-06-01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Docker" /><summary type="html">Docker 的優勢 Docker 的介紹就跳過了，因為我也不懂</summary></entry><entry><title type="html">2019 iT 邦幫忙鐵人賽 目錄及前言</title><link href="https://twblog.hongjianching.com/2018/10/01/2019-ithelp-ironman-30-days-challenge-index/" rel="alternate" type="text/html" title="2019 iT 邦幫忙鐵人賽 目錄及前言" /><published>2018-10-01T00:00:00+08:00</published><updated>2018-10-01T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/01/2019-ithelp-ironman-30-days-challenge-index</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/01/2019-ithelp-ironman-30-days-challenge-index/">&lt;p&gt;第一篇，照慣例(誰說的？)用來當目錄和前言，尤其是這次沒有明確主題的系列，更是需要目錄，因為連我自己都不知道會有哪些文章。(逃~)&lt;/p&gt;
-
-&lt;h1 id=&quot;參賽&quot;&gt;參賽&lt;/h1&gt;
-
-&lt;p&gt;大概 1、2 年前就知道 iT 邦幫忙鐵人賽，雖然感到興趣，但一直沒有行動，主要原因是懶(真好意思說)，次要原因就是知道的時候已經開賽了。這次被室友提醒這個活動，決定挑戰一下。&lt;/p&gt;
-
-&lt;h2 id=&quot;參賽主要目的&quot;&gt;參賽主要目的&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;為明年鐵人賽準備&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;本來打算準備一年，明年再參加的，但是想想，沒參加過怎麼知道該準備什麼？該注意什麼？該改進什麼呢？所以就報名參賽了。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;清除堆積的筆記&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://twblog.hongjianching.com/&quot;&gt;個人部落格 - Jian-Ching 記事本&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;雖然自己的部落格從去年 4 月就建立了，但是至今 1 年半過去，文章數還是寥寥無幾，其中還有從舊站搬過來的，令人汗顏。&lt;/p&gt;
-
-&lt;p&gt;相反的，hackmd 中好幾篇筆記堆積已久，利用這個機會強迫自己清理一下。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;主題&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;這次的系列文章雖然都跟軟體開發有關，但沒有特定的主題。從筆記中找到的 tag 有&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;DevOps、CI、CD
-    &lt;ul&gt;
-      &lt;li&gt;GitLab&lt;/li&gt;
-      &lt;li&gt;Jenkins&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Docker&lt;/li&gt;
-  &lt;li&gt;Shell Script&lt;/li&gt;
-  &lt;li&gt;Agile&lt;/li&gt;
-  &lt;li&gt;Ubuntu&lt;/li&gt;
-  &lt;li&gt;Qt&lt;/li&gt;
-  &lt;li&gt;C#&lt;/li&gt;
-  &lt;li&gt;Angular&lt;/li&gt;
-  &lt;li&gt;Database&lt;/li&gt;
-  &lt;li&gt;Python&lt;/li&gt;
-  &lt;li&gt;Socket&lt;/li&gt;
-  &lt;li&gt;Game programming&lt;/li&gt;
-  &lt;li&gt;Software &amp;amp; Tool&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;上述主題不一定會出現，對特定主題有興趣的話，可以留言作為發文參考。
-(如果有人在看的話 XD)&lt;/p&gt;
-
-&lt;h1 id=&quot;目錄&quot;&gt;目錄&lt;/h1&gt;
-
-&lt;p&gt;Day01 - 2019 iT 邦幫忙鐵人賽 目錄及前言&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><summary type="html">第一篇，照慣例(誰說的？)用來當目錄和前言，尤其是這次沒有明確主題的系列，更是需要目錄，因為連我自己都不知道會有哪些文章。(逃~)</summary></entry></feed>
+&lt;img src=&quot;/assets/images/2018-10-02-install-docker/2018-10-02_22-06-01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Docker" /><summary type="html">Docker 的優勢 Docker 的介紹就跳過了，因為我也不懂</summary></entry></feed>

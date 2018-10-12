@@ -1,4 +1,53 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-12T23:41:35+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">在 Ubuntu 安裝 C++ 編譯環境</title><link href="https://twblog.hongjianching.com/2018/10/11/install-cpp-compiler-on-ubuntu/" rel="alternate" type="text/html" title="在 Ubuntu 安裝 C++ 編譯環境" /><published>2018-10-11T00:00:00+08:00</published><updated>2018-10-11T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/11/install-cpp-compiler-on-ubuntu</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/11/install-cpp-compiler-on-ubuntu/">&lt;p&gt;Ubuntu 預設沒有 C++ 編譯環境，但是可以自己安裝&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-12T23:44:34+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">建立擁有 C++ 編譯環境及 Jenkins Agent 的 Docker Image - Part 1</title><link href="https://twblog.hongjianching.com/2018/10/12/create-cpp-compiler-with-jenkins-agent-docker-image-part-1/" rel="alternate" type="text/html" title="建立擁有 C++ 編譯環境及 Jenkins Agent 的 Docker Image - Part 1" /><published>2018-10-12T00:00:00+08:00</published><updated>2018-10-12T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/12/create-cpp-compiler-with-jenkins-agent-docker-image-part-1</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/12/create-cpp-compiler-with-jenkins-agent-docker-image-part-1/">&lt;p&gt;介紹如何建立一個有 C++ 編譯環境及 Jenkins Agent 的 Docker Image。&lt;/p&gt;
+
+&lt;p&gt;在 &lt;a href=&quot;https://twblog.hongjianching.com/2018/10/10/install-jenkins-agent-with-docker/&quot;&gt;使用 Docker 安裝 Jenkins Agent&lt;/a&gt; 我們已經建立了一個有 Agent 的 Jenkins CI 系統，先建立一個小小的專案，單純確認 Jenkins Agent 是否正常運作。&lt;/p&gt;
+
+&lt;p&gt;選擇左方選單的&lt;code class=&quot;highlighter-rouge&quot;&gt;新增作業&lt;/code&gt;，然後名稱輸入 &lt;code class=&quot;highlighter-rouge&quot;&gt;test&lt;/code&gt; 並且選擇建置 &lt;code class=&quot;highlighter-rouge&quot;&gt;Free-Style 軟體專案&lt;/code&gt; 之後按下 OK&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-11-12-create-cpp-compiler-with-jenkins-agent-docker-image/2018-10-12_22-57-50.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-11-12-create-cpp-compiler-with-jenkins-agent-docker-image/2018-10-12_23-11-45.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;之後會自動進入 test 專案的設定，拉到最下方的&lt;code class=&quot;highlighter-rouge&quot;&gt;建置&lt;/code&gt;，選擇&lt;code class=&quot;highlighter-rouge&quot;&gt;新增建置步驟&lt;/code&gt;後按下&lt;code class=&quot;highlighter-rouge&quot;&gt;執行 Shell&lt;/code&gt;，在指令欄位輸入&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;cat /etc/&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;-release
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;按下儲存後，自動切換到專案主頁，點擊左方&lt;code class=&quot;highlighter-rouge&quot;&gt;馬上建置&lt;/code&gt;一下，然後點擊左下角&lt;code class=&quot;highlighter-rouge&quot;&gt;建置歷程&lt;/code&gt;出現的&lt;code class=&quot;highlighter-rouge&quot;&gt;#1&lt;/code&gt;，再選擇左方的 &lt;code class=&quot;highlighter-rouge&quot;&gt;Console Output&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-11-12-create-cpp-compiler-with-jenkins-agent-docker-image/2018-10-12_23-19-09.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-11-12-create-cpp-compiler-with-jenkins-agent-docker-image/2018-10-12_23-20-07.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;在右邊就會出現在 Agent 上執行的結果&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-11-12-create-cpp-compiler-with-jenkins-agent-docker-image/2018-10-12_23-21-26.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;看到這個結果，代表我們的 Jenkins 系統正確的運作喔。&lt;/p&gt;
+
+&lt;p&gt;接著 &lt;a href=&quot;https://twblog.hongjianching.com/2018/10/11/install-cpp-compiler-on-ubuntu/&quot;&gt;在 Ubuntu 安裝 C++ 編譯環境&lt;/a&gt; 這篇也已經知道如何編譯 C++ 程式，讓我們試著在 Jenkins 上完成這個件事吧。&lt;/p&gt;
+
+&lt;p&gt;照著上面的流程，再新增一個專案，命名為 test_cpp，這次在&lt;code class=&quot;highlighter-rouge&quot;&gt;原始碼管理&lt;/code&gt;選擇 &lt;code class=&quot;highlighter-rouge&quot;&gt;Git&lt;/code&gt; 並且輸入 git 網址 &lt;code class=&quot;highlighter-rouge&quot;&gt;https://github.com/allyusd/helloworld.cpp.git&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-11-12-create-cpp-compiler-with-jenkins-agent-docker-image/2018-10-12_23-25-37.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;然後在&lt;code class=&quot;highlighter-rouge&quot;&gt;執行 Shell&lt;/code&gt;輸入編譯跟執行的動作，&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;g++ helloworld.cpp -o helloworld
+./helloworld
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;按下儲存後，點選馬上建置，但是，我們得到一個紅燈，代表建置失敗&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-11-12-create-cpp-compiler-with-jenkins-agent-docker-image/2018-10-12_23-29-19.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;讓我們看一下錯誤訊息&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-11-12-create-cpp-compiler-with-jenkins-agent-docker-image/2018-10-12_23-31-05.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;錯誤訊息 &lt;code class=&quot;highlighter-rouge&quot;&gt;g++: not found&lt;/code&gt; 代表我們的 Agent 沒有 C++ 編譯環境，在下一篇我們來解決這個問題&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Cpp" /><category term="Docker" /><category term="Jenkins" /><summary type="html">介紹如何建立一個有 C++ 編譯環境及 Jenkins Agent 的 Docker Image。</summary></entry><entry><title type="html">在 Ubuntu 安裝 C++ 編譯環境</title><link href="https://twblog.hongjianching.com/2018/10/11/install-cpp-compiler-on-ubuntu/" rel="alternate" type="text/html" title="在 Ubuntu 安裝 C++ 編譯環境" /><published>2018-10-11T00:00:00+08:00</published><updated>2018-10-11T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/11/install-cpp-compiler-on-ubuntu</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/11/install-cpp-compiler-on-ubuntu/">&lt;p&gt;Ubuntu 預設沒有 C++ 編譯環境，但是可以自己安裝&lt;/p&gt;
 
 &lt;p&gt;不想影響現有的 host，所以叫 docker 建一個 ubuntu 出來&lt;/p&gt;
 
@@ -504,51 +553,4 @@ service nginx start
 
 &lt;p&gt;這次因為 image 已經在本機了，所以馬上就進入容器內，可以開始大玩特玩喔。雖然 ubuntu docker image 為了最小化，所以很多套件都沒有預裝，但是有 apt-get 可以使用，不用太擔心，想要什麼自己裝就好了。&lt;/p&gt;
 
-&lt;p&gt;如果玩膩了，只要輸入 exit 就會退出容器，同時容器就會終止，然後自動刪除嘍。&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Docker" /><summary type="html">上一篇講安裝 Docker，</summary></entry><entry><title type="html">安裝 Docker</title><link href="https://twblog.hongjianching.com/2018/10/02/install-docker/" rel="alternate" type="text/html" title="安裝 Docker" /><published>2018-10-02T00:00:00+08:00</published><updated>2018-10-02T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/02/install-docker</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/02/install-docker/">&lt;h1 id=&quot;docker-的優勢&quot;&gt;Docker 的優勢&lt;/h1&gt;
-&lt;p&gt;Docker 的介紹就跳過了，&lt;del&gt;因為我也不懂&lt;/del&gt;&lt;/p&gt;
-
-&lt;p&gt;不只常聽到的 DevOps 還是 CI / CD 會用到 Docker，平常拿來玩一些有的沒的東西時也很好用。不像 VM 還要作快照跟還原，用 docker 可以做完實驗後直接登出就消失，不留痕跡。&lt;/p&gt;
-
-&lt;p&gt;簡單來說，使用他的優點就是&lt;del&gt;趕流行&lt;/del&gt;、&lt;strong&gt;快&lt;/strong&gt;、&lt;strong&gt;封裝&lt;/strong&gt;、&lt;strong&gt;繼承&lt;/strong&gt;、&lt;del&gt;多型&lt;/del&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;快&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;啟動非常快速，不算下載 Image 的時間，啟動一個 container 只是幾秒鐘的事情。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;封裝&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;將開發或執行環境封裝在 Image 裡面，不用擔心沒安裝或少設定什麼。如果是實驗用的環境，就不用擔心會汙染 Host，可以隨心所欲，想安裝什麼就安裝什麼，想改什麼設定就改什麼設定。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;繼承&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;別人建好的 Image 可以直接繼承使用，或者自己建立 Base Image，然後一直疊加上去。&lt;/p&gt;
-
-&lt;h1 id=&quot;安裝-docker&quot;&gt;安裝 Docker&lt;/h1&gt;
-&lt;p&gt;環境我選擇最新的 Ubuntu LTS 18.04 來當 Host，如果手邊沒有多的電腦安裝的話可以用 VirtualBox 裝起來跑。&lt;/p&gt;
-
-&lt;p&gt;透過懶人指令安裝 Docker&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo sh -c &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;curl -fsSL https://get.docker.com&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
-sudo usermod -aG docker &lt;span class=&quot;nv&quot;&gt;$USER&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/allyusd/script/blob/master/docker.sh&quot;&gt;script/docker.sh at master · allyusd/script&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;第一行用 docker 官方提供的 script 快速安裝&lt;/p&gt;
-
-&lt;p&gt;第二行則是將現有的使用者加入 docker 群組，否則會沒有權限操作 docker 指令&lt;/p&gt;
-
-&lt;p&gt;ref: &lt;a href=&quot;https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-using-the-convenience-script&quot;&gt;Get Docker CE for Ubuntu - Docker Documentation&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;記得重新登入取得新的權限，然後接著執行一下 hello world&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run hello-world
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;看到訊息就代表成功執行 docker 嘍
-&lt;img src=&quot;/assets/images/2018-10-02-install-docker/2018-10-02_22-06-01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Docker" /><summary type="html">Docker 的優勢 Docker 的介紹就跳過了，因為我也不懂</summary></entry></feed>
+&lt;p&gt;如果玩膩了，只要輸入 exit 就會退出容器，同時容器就會終止，然後自動刪除嘍。&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Docker" /><summary type="html">上一篇講安裝 Docker，</summary></entry></feed>

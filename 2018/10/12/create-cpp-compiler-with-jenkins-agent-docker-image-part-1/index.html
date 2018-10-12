@@ -19,12 +19,12 @@
 
 
 
-<title>在 Ubuntu 安裝 C++ 編譯環境 - Jian-Ching 記事本</title>
+<title>建立擁有 C++ 編譯環境及 Jenkins Agent 的 Docker Image - Part 1 - Jian-Ching 記事本</title>
 
 
 
 
-<meta name="description" content="Ubuntu 預設沒有 C++ 編譯環境，但是可以自己安裝">
+<meta name="description" content="介紹如何建立一個有 C++ 編譯環境及 Jenkins Agent 的 Docker Image。">
 
 
 
@@ -33,15 +33,15 @@
 
 <meta property="og:locale" content="zh_TW">
 <meta property="og:site_name" content="Jian-Ching 記事本">
-<meta property="og:title" content="在 Ubuntu 安裝 C++ 編譯環境">
+<meta property="og:title" content="建立擁有 C++ 編譯環境及 Jenkins Agent 的 Docker Image - Part 1">
 
 
-  <link rel="canonical" href="https://twblog.HongJianChing.com/2018/10/11/install-cpp-compiler-on-ubuntu/">
-  <meta property="og:url" content="https://twblog.HongJianChing.com/2018/10/11/install-cpp-compiler-on-ubuntu/">
+  <link rel="canonical" href="https://twblog.HongJianChing.com/2018/10/12/create-cpp-compiler-with-jenkins-agent-docker-image-part-1/">
+  <meta property="og:url" content="https://twblog.HongJianChing.com/2018/10/12/create-cpp-compiler-with-jenkins-agent-docker-image-part-1/">
 
 
 
-  <meta property="og:description" content="Ubuntu 預設沒有 C++ 編譯環境，但是可以自己安裝">
+  <meta property="og:description" content="介紹如何建立一個有 C++ 編譯環境及 Jenkins Agent 的 Docker Image。">
 
 
 
@@ -56,7 +56,7 @@
 
 
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2018-10-11T00:00:00+08:00">
+  <meta property="article:published_time" content="2018-10-12T00:00:00+08:00">
 
 
 
@@ -278,67 +278,71 @@
 
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
-    <meta itemprop="headline" content="在 Ubuntu 安裝 C++ 編譯環境">
-    <meta itemprop="description" content="Ubuntu 預設沒有 C++ 編譯環境，但是可以自己安裝">
-    <meta itemprop="datePublished" content="October 11, 2018">
+    <meta itemprop="headline" content="建立擁有 C++ 編譯環境及 Jenkins Agent 的 Docker Image - Part 1">
+    <meta itemprop="description" content="介紹如何建立一個有 C++ 編譯環境及 Jenkins Agent 的 Docker Image。">
+    <meta itemprop="datePublished" content="October 12, 2018">
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 class="page__title" itemprop="headline">在 Ubuntu 安裝 C++ 編譯環境
+          <h1 class="page__title" itemprop="headline">建立擁有 C++ 編譯環境及 Jenkins Agent 的 Docker Image - Part 1
 </h1>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        <p>Ubuntu 預設沒有 C++ 編譯環境，但是可以自己安裝</p>
+        <p>介紹如何建立一個有 C++ 編譯環境及 Jenkins Agent 的 Docker Image。</p>
 
-<p>不想影響現有的 host，所以叫 docker 建一個 ubuntu 出來</p>
+<p>在 <a href="https://twblog.hongjianching.com/2018/10/10/install-jenkins-agent-with-docker/">使用 Docker 安裝 Jenkins Agent</a> 我們已經建立了一個有 Agent 的 Jenkins CI 系統，先建立一個小小的專案，單純確認 Jenkins Agent 是否正常運作。</p>
 
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>docker run -it ubuntu:18.04
-</code></pre>
-</div>
-<p>安裝 C++ 編譯環境套件</p>
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>apt update
-apt install build-essential -y
-</code></pre>
-</div>
-<p>可以選擇手動建立一個檔案存為 helloworld.cpp</p>
-<div class="language-cpp highlighter-rouge"><pre class="highlight"><code><span class="cp">#include &lt;iostream&gt;
-</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
-<span class="p">{</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Hello World"</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-    
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre>
-</div>
-<p>或是直接透過 git clone 一份</p>
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>git clone https://github.com/allyusd/helloworld.cpp.git
-<span class="nb">cd </span>helloworld.cpp
-</code></pre>
-</div>
-<p>如果要使用 git 的話，因為 docker 版本的 ubuntu 預設沒有安裝，記得先安裝 git 套件。</p>
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>apt install git -y
-</code></pre>
-</div>
-<p>程式碼內容很單純，就是顯示 <strong>Hello World</strong> 文字而己，只是驗證我們的 C++ 環境已經準備好了</p>
+<p>選擇左方選單的<code class="highlighter-rouge">新增作業</code>，然後名稱輸入 <code class="highlighter-rouge">test</code> 並且選擇建置 <code class="highlighter-rouge">Free-Style 軟體專案</code> 之後按下 OK</p>
 
-<p>接著透過 C++ 的編譯器 g++ 來編譯</p>
+<p><img src="/assets/images/2018-11-12-create-cpp-compiler-with-jenkins-agent-docker-image/2018-10-12_22-57-50.png" alt="" /></p>
+
+<p><img src="/assets/images/2018-11-12-create-cpp-compiler-with-jenkins-agent-docker-image/2018-10-12_23-11-45.png" alt="" /></p>
+
+<p>之後會自動進入 test 專案的設定，拉到最下方的<code class="highlighter-rouge">建置</code>，選擇<code class="highlighter-rouge">新增建置步驟</code>後按下<code class="highlighter-rouge">執行 Shell</code>，在指令欄位輸入</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>cat /etc/<span class="k">*</span>-release
+</code></pre>
+</div>
+
+<p>按下儲存後，自動切換到專案主頁，點擊左方<code class="highlighter-rouge">馬上建置</code>一下，然後點擊左下角<code class="highlighter-rouge">建置歷程</code>出現的<code class="highlighter-rouge">#1</code>，再選擇左方的 <code class="highlighter-rouge">Console Output</code></p>
+
+<p><img src="/assets/images/2018-11-12-create-cpp-compiler-with-jenkins-agent-docker-image/2018-10-12_23-19-09.png" alt="" /></p>
+
+<p><img src="/assets/images/2018-11-12-create-cpp-compiler-with-jenkins-agent-docker-image/2018-10-12_23-20-07.png" alt="" /></p>
+
+<p>在右邊就會出現在 Agent 上執行的結果</p>
+
+<p><img src="/assets/images/2018-11-12-create-cpp-compiler-with-jenkins-agent-docker-image/2018-10-12_23-21-26.png" alt="" /></p>
+
+<p>看到這個結果，代表我們的 Jenkins 系統正確的運作喔。</p>
+
+<p>接著 <a href="https://twblog.hongjianching.com/2018/10/11/install-cpp-compiler-on-ubuntu/">在 Ubuntu 安裝 C++ 編譯環境</a> 這篇也已經知道如何編譯 C++ 程式，讓我們試著在 Jenkins 上完成這個件事吧。</p>
+
+<p>照著上面的流程，再新增一個專案，命名為 test_cpp，這次在<code class="highlighter-rouge">原始碼管理</code>選擇 <code class="highlighter-rouge">Git</code> 並且輸入 git 網址 <code class="highlighter-rouge">https://github.com/allyusd/helloworld.cpp.git</code></p>
+
+<p><img src="/assets/images/2018-11-12-create-cpp-compiler-with-jenkins-agent-docker-image/2018-10-12_23-25-37.png" alt="" /></p>
+
+<p>然後在<code class="highlighter-rouge">執行 Shell</code>輸入編譯跟執行的動作，</p>
+
 <div class="language-bash highlighter-rouge"><pre class="highlight"><code>g++ helloworld.cpp -o helloworld
-</code></pre>
-</div>
-<p>建置後會產生一個 <strong>helloworld</strong> 的檔案，就可以執行了</p>
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>./helloworld
+./helloworld
 </code></pre>
 </div>
 
-<p>看到 Hello Wolrd 就代表我們完成環境建置啦！</p>
+<p>按下儲存後，點選馬上建置，但是，我們得到一個紅燈，代表建置失敗</p>
 
-<p><img src="/assets/images/2018-10-11-install-cpp-compiler-on-ubuntu/2018-10-11_22-31-48.png" alt="" /></p>
+<p><img src="/assets/images/2018-11-12-create-cpp-compiler-with-jenkins-agent-docker-image/2018-10-12_23-29-19.png" alt="" /></p>
+
+<p>讓我們看一下錯誤訊息</p>
+
+<p><img src="/assets/images/2018-11-12-create-cpp-compiler-with-jenkins-agent-docker-image/2018-10-12_23-31-05.png" alt="" /></p>
+
+<p>錯誤訊息 <code class="highlighter-rouge">g++: not found</code> 代表我們的 Agent 沒有 C++ 編譯環境，在下一篇我們來解決這個問題</p>
 
         
       </section>
@@ -367,7 +371,11 @@ apt install build-essential -y
     
       
       
-      <a href="https://twblog.hongjianching.com/tags/#ubuntu" class="page__taxonomy-item" rel="tag">Ubuntu</a>
+      <a href="https://twblog.hongjianching.com/tags/#docker" class="page__taxonomy-item" rel="tag">Docker</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://twblog.hongjianching.com/tags/#jenkins" class="page__taxonomy-item" rel="tag">Jenkins</a>
     
     </span>
   </p>
@@ -376,7 +384,7 @@ apt install build-essential -y
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2018-10-11T00:00:00+08:00">October 11, 2018</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2018-10-12T00:00:00+08:00">October 12, 2018</time></p>
         
       </footer>
 
@@ -385,25 +393,24 @@ apt install build-essential -y
     <h4 class="page__share-title">分享到</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=在 Ubuntu 安裝 C++ 編譯環境 https://twblog.hongjianching.com/2018/10/11/install-cpp-compiler-on-ubuntu/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=建立擁有 C++ 編譯環境及 Jenkins Agent 的 Docker Image - Part 1 https://twblog.hongjianching.com/2018/10/12/create-cpp-compiler-with-jenkins-agent-docker-image-part-1/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2018/10/11/install-cpp-compiler-on-ubuntu/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2018/10/12/create-cpp-compiler-with-jenkins-agent-docker-image-part-1/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2018/10/11/install-cpp-compiler-on-ubuntu/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2018/10/12/create-cpp-compiler-with-jenkins-agent-docker-image-part-1/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2018/10/11/install-cpp-compiler-on-ubuntu/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2018/10/12/create-cpp-compiler-with-jenkins-agent-docker-image-part-1/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="https://twblog.hongjianching.com/2018/10/10/install-jenkins-agent-with-docker/" class="pagination--pager" title="使用 Docker 安裝 Jenkins Agent
+      <a href="https://twblog.hongjianching.com/2018/10/11/install-cpp-compiler-on-ubuntu/" class="pagination--pager" title="在 Ubuntu 安裝 C++ 編譯環境
 ">較舊</a>
     
     
-      <a href="https://twblog.hongjianching.com/2018/10/12/create-cpp-compiler-with-jenkins-agent-docker-image-part-1/" class="pagination--pager" title="建立擁有 C++ 編譯環境及 Jenkins Agent 的 Docker Image - Part 1
-">較新</a>
+      <a href="#" class="pagination--pager disabled">較新</a>
     
   </nav>
 
@@ -469,7 +476,9 @@ apt install build-essential -y
   
     ga('send', 'event', 'taggedPost', 'view', 'Cpp');
   
-    ga('send', 'event', 'taggedPost', 'view', 'Ubuntu');
+    ga('send', 'event', 'taggedPost', 'view', 'Docker');
+  
+    ga('send', 'event', 'taggedPost', 'view', 'Jenkins');
   
   
 </script>

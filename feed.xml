@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-12T23:44:34+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">建立擁有 C++ 編譯環境及 Jenkins Agent 的 Docker Image - Part 1</title><link href="https://twblog.hongjianching.com/2018/10/12/create-cpp-compiler-with-jenkins-agent-docker-image-part-1/" rel="alternate" type="text/html" title="建立擁有 C++ 編譯環境及 Jenkins Agent 的 Docker Image - Part 1" /><published>2018-10-12T00:00:00+08:00</published><updated>2018-10-12T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/12/create-cpp-compiler-with-jenkins-agent-docker-image-part-1</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/12/create-cpp-compiler-with-jenkins-agent-docker-image-part-1/">&lt;p&gt;介紹如何建立一個有 C++ 編譯環境及 Jenkins Agent 的 Docker Image。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-12T23:45:40+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">建立擁有 C++ 編譯環境及 Jenkins Agent 的 Docker Image - Part 1</title><link href="https://twblog.hongjianching.com/2018/10/12/create-cpp-compiler-with-jenkins-agent-docker-image-part-1/" rel="alternate" type="text/html" title="建立擁有 C++ 編譯環境及 Jenkins Agent 的 Docker Image - Part 1" /><published>2018-10-12T00:00:00+08:00</published><updated>2018-10-12T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/12/create-cpp-compiler-with-jenkins-agent-docker-image-part-1</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/12/create-cpp-compiler-with-jenkins-agent-docker-image-part-1/">&lt;p&gt;介紹如何建立一個有 C++ 編譯環境及 Jenkins Agent 的 Docker Image。&lt;/p&gt;
 
 &lt;p&gt;在 &lt;a href=&quot;https://twblog.hongjianching.com/2018/10/10/install-jenkins-agent-with-docker/&quot;&gt;使用 Docker 安裝 Jenkins Agent&lt;/a&gt; 我們已經建立了一個有 Agent 的 Jenkins CI 系統，先建立一個小小的專案，單純確認 Jenkins Agent 是否正常運作。&lt;/p&gt;
 
 &lt;p&gt;選擇左方選單的&lt;code class=&quot;highlighter-rouge&quot;&gt;新增作業&lt;/code&gt;，然後名稱輸入 &lt;code class=&quot;highlighter-rouge&quot;&gt;test&lt;/code&gt; 並且選擇建置 &lt;code class=&quot;highlighter-rouge&quot;&gt;Free-Style 軟體專案&lt;/code&gt; 之後按下 OK&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-11-12-create-cpp-compiler-with-jenkins-agent-docker-image/2018-10-12_22-57-50.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-12-create-cpp-compiler-with-jenkins-agent-docker-image-part-1/2018-10-12_22-57-50.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-11-12-create-cpp-compiler-with-jenkins-agent-docker-image/2018-10-12_23-11-45.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-12-create-cpp-compiler-with-jenkins-agent-docker-image-part-1/2018-10-12_23-11-45.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;之後會自動進入 test 專案的設定，拉到最下方的&lt;code class=&quot;highlighter-rouge&quot;&gt;建置&lt;/code&gt;，選擇&lt;code class=&quot;highlighter-rouge&quot;&gt;新增建置步驟&lt;/code&gt;後按下&lt;code class=&quot;highlighter-rouge&quot;&gt;執行 Shell&lt;/code&gt;，在指令欄位輸入&lt;/p&gt;
 
@@ -16,13 +16,13 @@
 
 &lt;p&gt;按下儲存後，自動切換到專案主頁，點擊左方&lt;code class=&quot;highlighter-rouge&quot;&gt;馬上建置&lt;/code&gt;一下，然後點擊左下角&lt;code class=&quot;highlighter-rouge&quot;&gt;建置歷程&lt;/code&gt;出現的&lt;code class=&quot;highlighter-rouge&quot;&gt;#1&lt;/code&gt;，再選擇左方的 &lt;code class=&quot;highlighter-rouge&quot;&gt;Console Output&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-11-12-create-cpp-compiler-with-jenkins-agent-docker-image/2018-10-12_23-19-09.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-12-create-cpp-compiler-with-jenkins-agent-docker-image-part-1/2018-10-12_23-19-09.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-11-12-create-cpp-compiler-with-jenkins-agent-docker-image/2018-10-12_23-20-07.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-12-create-cpp-compiler-with-jenkins-agent-docker-image-part-1/2018-10-12_23-20-07.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;在右邊就會出現在 Agent 上執行的結果&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-11-12-create-cpp-compiler-with-jenkins-agent-docker-image/2018-10-12_23-21-26.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-12-create-cpp-compiler-with-jenkins-agent-docker-image-part-1/2018-10-12_23-21-26.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;看到這個結果，代表我們的 Jenkins 系統正確的運作喔。&lt;/p&gt;
 
@@ -30,7 +30,7 @@
 
 &lt;p&gt;照著上面的流程，再新增一個專案，命名為 test_cpp，這次在&lt;code class=&quot;highlighter-rouge&quot;&gt;原始碼管理&lt;/code&gt;選擇 &lt;code class=&quot;highlighter-rouge&quot;&gt;Git&lt;/code&gt; 並且輸入 git 網址 &lt;code class=&quot;highlighter-rouge&quot;&gt;https://github.com/allyusd/helloworld.cpp.git&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-11-12-create-cpp-compiler-with-jenkins-agent-docker-image/2018-10-12_23-25-37.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-12-create-cpp-compiler-with-jenkins-agent-docker-image-part-1/2018-10-12_23-25-37.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;然後在&lt;code class=&quot;highlighter-rouge&quot;&gt;執行 Shell&lt;/code&gt;輸入編譯跟執行的動作，&lt;/p&gt;
 
@@ -41,11 +41,11 @@
 
 &lt;p&gt;按下儲存後，點選馬上建置，但是，我們得到一個紅燈，代表建置失敗&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-11-12-create-cpp-compiler-with-jenkins-agent-docker-image/2018-10-12_23-29-19.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-12-create-cpp-compiler-with-jenkins-agent-docker-image-part-1/2018-10-12_23-29-19.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;讓我們看一下錯誤訊息&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-11-12-create-cpp-compiler-with-jenkins-agent-docker-image/2018-10-12_23-31-05.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-12-create-cpp-compiler-with-jenkins-agent-docker-image-part-1/2018-10-12_23-31-05.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;錯誤訊息 &lt;code class=&quot;highlighter-rouge&quot;&gt;g++: not found&lt;/code&gt; 代表我們的 Agent 沒有 C++ 編譯環境，在下一篇我們來解決這個問題&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Cpp" /><category term="Docker" /><category term="Jenkins" /><summary type="html">介紹如何建立一個有 C++ 編譯環境及 Jenkins Agent 的 Docker Image。</summary></entry><entry><title type="html">在 Ubuntu 安裝 C++ 編譯環境</title><link href="https://twblog.hongjianching.com/2018/10/11/install-cpp-compiler-on-ubuntu/" rel="alternate" type="text/html" title="在 Ubuntu 安裝 C++ 編譯環境" /><published>2018-10-11T00:00:00+08:00</published><updated>2018-10-11T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/11/install-cpp-compiler-on-ubuntu</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/11/install-cpp-compiler-on-ubuntu/">&lt;p&gt;Ubuntu 預設沒有 C++ 編譯環境，但是可以自己安裝&lt;/p&gt;
 

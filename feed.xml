@@ -1,4 +1,107 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-12T23:45:40+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">建立擁有 C++ 編譯環境及 Jenkins Agent 的 Docker Image - Part 1</title><link href="https://twblog.hongjianching.com/2018/10/12/create-cpp-compiler-with-jenkins-agent-docker-image-part-1/" rel="alternate" type="text/html" title="建立擁有 C++ 編譯環境及 Jenkins Agent 的 Docker Image - Part 1" /><published>2018-10-12T00:00:00+08:00</published><updated>2018-10-12T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/12/create-cpp-compiler-with-jenkins-agent-docker-image-part-1</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/12/create-cpp-compiler-with-jenkins-agent-docker-image-part-1/">&lt;p&gt;介紹如何建立一個有 C++ 編譯環境及 Jenkins Agent 的 Docker Image。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-13T22:37:06+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">建立擁有 C++ 編譯環境及 Jenkins Agent 的 Docker Image - Part 2</title><link href="https://twblog.hongjianching.com/2018/10/13/create-cpp-compiler-with-jenkins-agent-docker-image-part-2/" rel="alternate" type="text/html" title="建立擁有 C++ 編譯環境及 Jenkins Agent 的 Docker Image - Part 2" /><published>2018-10-13T00:00:00+08:00</published><updated>2018-10-13T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/13/create-cpp-compiler-with-jenkins-agent-docker-image-part-2</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/13/create-cpp-compiler-with-jenkins-agent-docker-image-part-2/">&lt;p&gt;前一篇發現預設的 Jenkins Agent 沒有 C++ 編譯環境，所以我們要來解決這個問題。&lt;/p&gt;
+
+&lt;p&gt;在 &lt;a href=&quot;https://twblog.hongjianching.com/2018/10/10/install-jenkins-agent-with-docker/&quot;&gt;使用 Docker 安裝 Jenkins Agent&lt;/a&gt; 中提到使用的 agent docker image 是 jenkins/jnlp-slave，所以我們先參考一下原本的 Dockerfile 是怎麼寫的 &lt;a href=&quot;https://github.com/jenkinsci/docker-jnlp-slave/blob/3.26-1/Dockerfile&quot;&gt;(source)&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;FROM jenkins/slave:3.26-1
+MAINTAINER Oleg Nenashev &amp;lt;o.v.nenashev@gmail.com&amp;gt;
+LABEL Description=&quot;This is a base image, which allows connecting Jenkins agents via JNLP protocols&quot; Vendor=&quot;Jenkins project&quot; Version=&quot;3.23&quot;
+
+COPY jenkins-slave /usr/local/bin/jenkins-slave
+
+ENTRYPOINT [&quot;jenkins-slave&quot;]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;從中可以知道，就是復製了 slave 檔案以及設定啟動 slave，因為複製做一次就好，所以我們只需要啟動 slave。&lt;/p&gt;
+
+&lt;p&gt;利用 &lt;a href=&quot;https://twblog.hongjianching.com/2018/10/08/create-dockerhub-automated-build/&quot;&gt;使用 GitHub 在 DockerHub 自動建置 Docker Image&lt;/a&gt; 的方法，建立一個 &lt;a href=&quot;https://github.com/allyusd/docker-jenkins-jnlp-slave-cpp&quot;&gt;docker-jenkins-jnlp-slave-cpp&lt;/a&gt; github 專案並且建立一個 Dockerfile 檔案，內容就是以 jenkins/jnlp-slave 為基底，加上安裝 C++ 編譯環境，最後記得啟動 slave&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;FROM jenkins/jnlp-slave:3.26-1
+
+RUN apt update &amp;amp;&amp;amp; apt install build-essential -y
+
+ENTRYPOINT [&quot;jenkins-slave&quot;]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;接著在 dockerhub 建立 &lt;a href=&quot;https://hub.docker.com/r/allyusd/jenkins-jnlp-slave-cpp/&quot;&gt;jenkins-jnlp-slave-cpp&lt;/a&gt; 自動建置專案，並且手動觸發一次，結果失敗了，查詢一下 &lt;a href=&quot;https://hub.docker.com/r/allyusd/jenkins-jnlp-slave-cpp/builds/baavigxpyfscewc3e63nbvh/&quot;&gt;Log&lt;/a&gt; 居然是 &lt;code class=&quot;highlighter-rouge&quot;&gt;List directory /var/lib/apt/lists/partial is missing. - Acquire (13: Permission denied)&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;權限不足？這沒道理啊，docker 預設是 root，怎麼會有權限問題呢？等等，剛剛是不是提到了&lt;code class=&quot;highlighter-rouge&quot;&gt;預設&lt;/code&gt;兩個字。嗯，既然如此，那有可能是被改掉，但是剛剛參考的 Dockerfile 很乾淨，難道是再上一層繼承的 image？&lt;/p&gt;
+
+&lt;p&gt;從 Dockerfile 可以看到 jenkins/jnlp-slave 是繼承 jenkins/slave來的，那來看一下 Dockerfile &lt;a href=&quot;https://github.com/jenkinsci/docker-slave/blob/3.26-1/Dockerfile&quot;&gt;(source)&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;FROM openjdk:8-jdk
+MAINTAINER Oleg Nenashev &amp;lt;o.v.nenashev@gmail.com&amp;gt;
+
+ARG user=jenkins
+ARG group=jenkins
+ARG uid=10000
+ARG gid=10000
+
+ENV HOME /home/${user}
+RUN groupadd -g ${gid} ${group}
+RUN useradd -c &quot;Jenkins user&quot; -d $HOME -u ${uid} -g ${gid} -m ${user}
+LABEL Description=&quot;This is a base image, which provides the Jenkins agent executable (slave.jar)&quot; Vendor=&quot;Jenkins project&quot; Version=&quot;3.23&quot;
+
+ARG VERSION=3.26
+ARG AGENT_WORKDIR=/home/${user}/agent
+
+RUN curl --create-dirs -sSLo /usr/share/jenkins/slave.jar https://repo.jenkins-ci.org/public/org/jenkins-ci/main/remoting/${VERSION}/remoting-${VERSION}.jar \
+  &amp;amp;&amp;amp; chmod 755 /usr/share/jenkins \
+  &amp;amp;&amp;amp; chmod 644 /usr/share/jenkins/slave.jar
+
+USER ${user}
+ENV AGENT_WORKDIR=${AGENT_WORKDIR}
+RUN mkdir /home/${user}/.jenkins &amp;amp;&amp;amp; mkdir -p ${AGENT_WORKDIR}
+
+VOLUME /home/${user}/.jenkins
+VOLUME ${AGENT_WORKDIR}
+WORKDIR /home/${user}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;抓到了！其中有一行是 &lt;code class=&quot;highlighter-rouge&quot;&gt;USER ${user}&lt;/code&gt;，這個指令改變了目前的使用者為 jenkins，造成權限不足以安裝套件。既然如此，那我們就把使用者改回來試試看。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;FROM jenkins/jnlp-slave:3.26-1
+
+USER root
+RUN apt update &amp;amp;&amp;amp; apt install build-essential -y
+USER jenkins
+
+ENTRYPOINT [&quot;jenkins-slave&quot;]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;這 Github 更新 Dockerfile 之後，Dockerhub 自動開始了建置映像檔的動作，我們可以上個廁所、泡泡茶再回來看看建置結果。&lt;/p&gt;
+
+&lt;p&gt;很好，這次成功了！&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-13-create-cpp-compiler-with-jenkins-agent-docker-image-part-2/2018-10-13_21-07-50.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;接下來就是啟動一個新的 agent，如果忘記的話可以參考 &lt;a href=&quot;https://twblog.hongjianching.com/2018/10/10/install-jenkins-agent-with-docker/&quot;&gt;使用 Docker 安裝 Jenkins Agent&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;這次不同的是，標籤設定為 &lt;code class=&quot;highlighter-rouge&quot;&gt;cpp&lt;/code&gt;，使用方式設為&lt;code class=&quot;highlighter-rouge&quot;&gt;只保留給限定節點的作業&lt;/code&gt;，因為有些專案不需要 C++ 環境，所以我們為了區隔，讓這個 agent 只跑需要 C++ 的專案。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-13-create-cpp-compiler-with-jenkins-agent-docker-image-part-2/2018-10-13_21-10-33.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;接著啟動 C++ Agent&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    --name jenkins_agent_cpp &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    -d --restart always &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    allyusd/jenkins-jnlp-slave-cpp &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    -url http://192.168.43.140:8080 &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    951ac478b69131e43fb2cfb6d201ecf789ba388a759ea946d7ab62aac55227a7 &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    agent-cpp
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;接著修改上一篇建立的 &lt;code class=&quot;highlighter-rouge&quot;&gt;test_cpp&lt;/code&gt; 專案設定，選取&lt;code class=&quot;highlighter-rouge&quot;&gt;限制專案執行節點&lt;/code&gt;，在&lt;code class=&quot;highlighter-rouge&quot;&gt;標籤表示式&lt;/code&gt;輸入 &lt;code class=&quot;highlighter-rouge&quot;&gt;cpp&lt;/code&gt;，按下儲存之後點擊&lt;code class=&quot;highlighter-rouge&quot;&gt;馬上建置&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-13-create-cpp-compiler-with-jenkins-agent-docker-image-part-2/2018-10-13_22-28-48.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;這一次順利的建置成功啦！&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-13-create-cpp-compiler-with-jenkins-agent-docker-image-part-2/2018-10-13_22-31-40.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Cpp" /><category term="Docker" /><category term="Jenkins" /><summary type="html">前一篇發現預設的 Jenkins Agent 沒有 C++ 編譯環境，所以我們要來解決這個問題。</summary></entry><entry><title type="html">建立擁有 C++ 編譯環境及 Jenkins Agent 的 Docker Image - Part 1</title><link href="https://twblog.hongjianching.com/2018/10/12/create-cpp-compiler-with-jenkins-agent-docker-image-part-1/" rel="alternate" type="text/html" title="建立擁有 C++ 編譯環境及 Jenkins Agent 的 Docker Image - Part 1" /><published>2018-10-12T00:00:00+08:00</published><updated>2018-10-12T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/12/create-cpp-compiler-with-jenkins-agent-docker-image-part-1</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/12/create-cpp-compiler-with-jenkins-agent-docker-image-part-1/">&lt;p&gt;介紹如何建立一個有 C++ 編譯環境及 Jenkins Agent 的 Docker Image。&lt;/p&gt;
 
 &lt;p&gt;在 &lt;a href=&quot;https://twblog.hongjianching.com/2018/10/10/install-jenkins-agent-with-docker/&quot;&gt;使用 Docker 安裝 Jenkins Agent&lt;/a&gt; 我們已經建立了一個有 Agent 的 Jenkins CI 系統，先建立一個小小的專案，單純確認 Jenkins Agent 是否正常運作。&lt;/p&gt;
 
@@ -489,68 +592,4 @@ service nginx start
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-04-run-docker-service/2018-10-04_22-09-23.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Docker" /><summary type="html">接著使用 Docker - 基本操作</summary></entry><entry><title type="html">使用 Docker - 基本操作</title><link href="https://twblog.hongjianching.com/2018/10/03/run-docker-basic/" rel="alternate" type="text/html" title="使用 Docker - 基本操作" /><published>2018-10-03T00:00:00+08:00</published><updated>2018-10-03T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/03/run-docker-basic</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/03/run-docker-basic/">&lt;p&gt;上一篇講&lt;a href=&quot;https://twblog.hongjianching.com/2018/10/02/install-docker/&quot;&gt;安裝 Docker&lt;/a&gt;，&lt;/p&gt;
-
-&lt;p&gt;這篇進入正題，開始使用 Docker&lt;/p&gt;
-
-&lt;h1 id=&quot;ps---顯示容器清單&quot;&gt;ps - 顯示容器清單&lt;/h1&gt;
-&lt;p&gt;首先是 ps，列出目前執行中的容器。雖然沒有明確說明，猜想是 linux 的 ps 指令，也就是 process status&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker ps
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;如果想要看到全部，包含已停止的，加上 -a 參數，代表 all 全部&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker ps -a
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;如果有照著之前執行過 hello-world，就會發現他出現在清單上，而且是 Exit 狀態。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-03-run-docker/2018-10-03_20-50-15.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;rm---刪除容器&quot;&gt;rm - 刪除容器&lt;/h1&gt;
-&lt;p&gt;使用 rm 指令，代表 remove 移除，可以使用 id 或者 name 來刪除&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker rm trusting_wozniak
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;執行成功會顯示被刪除的名字，再用 ps -a 查詢會發現之前的容器已經消失嘍&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-03-run-docker/2018-10-03_20-58-52.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;預設 rm 指令只能刪除停止的容器，如果要強制刪除執行中的容器，就要使用 -f 參數，代表 force 強制&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker rm -f running_container
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h1 id=&quot;run---執行容器&quot;&gt;run - 執行容器&lt;/h1&gt;
-
-&lt;h2 id=&quot;hello-wrold&quot;&gt;hello-wrold&lt;/h2&gt;
-&lt;p&gt;使用 run 執行容器，上一篇已經偷跑執行 hello world&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run hello-world
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;如果確認是跑完就不再使用的，可以在執行時加上 –rm 參數，當容器終止時會自動刪除，很方便&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run --rm hello-world
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-03-run-docker/2018-10-03_21-07-43.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;ubuntu&quot;&gt;ubuntu&lt;/h2&gt;
-&lt;p&gt;只能跑 hello world 絕對不夠，接著來執行 ubuntu 吧。沒錯，在 ubuntu 上面執行 ubuntu 容器，這次 ubuntu 18.04 版本的 image 只有 &lt;a href=&quot;https://microbadger.com/images/ubuntu:18.04&quot;&gt;30.3 MB&lt;/a&gt;，比前一版 16.04 還少了 11 MB&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run --rm ubuntu:18.04
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;執行後，docker 開始下載 ubuntu 18.04 的 image，然後，沒有然後，什麼事都沒發生。這是一開始容易卡關的地方，實際上，容器執行後因為沒事做就終止了，然後被自動刪除 (–rm)。&lt;/p&gt;
-
-&lt;p&gt;如果想要跟容器互動，可以加上 -it&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run --rm -it ubuntu:18.04
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-03-run-docker/2018-10-03_21-25-43.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;這次因為 image 已經在本機了，所以馬上就進入容器內，可以開始大玩特玩喔。雖然 ubuntu docker image 為了最小化，所以很多套件都沒有預裝，但是有 apt-get 可以使用，不用太擔心，想要什麼自己裝就好了。&lt;/p&gt;
-
-&lt;p&gt;如果玩膩了，只要輸入 exit 就會退出容器，同時容器就會終止，然後自動刪除嘍。&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Docker" /><summary type="html">上一篇講安裝 Docker，</summary></entry></feed>
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-04-run-docker-service/2018-10-04_22-09-23.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Docker" /><summary type="html">接著使用 Docker - 基本操作</summary></entry></feed>

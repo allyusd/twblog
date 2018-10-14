@@ -24,7 +24,7 @@
 
 
 
-<meta name="description" content="Jenkins 是個歷史悠久的 CD 工具，從 Jenkins 2.0 開始正式推展 Pipeline，有別於以往使用 Web UI 操作的特性，導向 Pipeline as Code 的實踐。透過在原始碼專案新增一個 Jenkinsfile 的檔案，將 Pipeline 的流程都寫在檔案內。">
+<meta name="description" content="Jenkins 是個歷史悠久的 CI / CD 工具，從 Jenkins 2.0 開始正式推展 Pipeline，有別於以往使用 Web UI 操作的特性，導向 Pipeline as Code 的實踐。透過在原始碼專案新增一個 Jenkinsfile 的檔案，將 Pipeline 的流程都寫在檔案內。">
 
 
 
@@ -41,7 +41,7 @@
 
 
 
-  <meta property="og:description" content="Jenkins 是個歷史悠久的 CD 工具，從 Jenkins 2.0 開始正式推展 Pipeline，有別於以往使用 Web UI 操作的特性，導向 Pipeline as Code 的實踐。透過在原始碼專案新增一個 Jenkinsfile 的檔案，將 Pipeline 的流程都寫在檔案內。">
+  <meta property="og:description" content="Jenkins 是個歷史悠久的 CI / CD 工具，從 Jenkins 2.0 開始正式推展 Pipeline，有別於以往使用 Web UI 操作的特性，導向 Pipeline as Code 的實踐。透過在原始碼專案新增一個 Jenkinsfile 的檔案，將 Pipeline 的流程都寫在檔案內。">
 
 
 
@@ -279,7 +279,7 @@
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
     <meta itemprop="headline" content="Jenkins - Pipeline as Code - 簡介">
-    <meta itemprop="description" content="Jenkins 是個歷史悠久的 CD 工具，從 Jenkins 2.0 開始正式推展 Pipeline，有別於以往使用 Web UI 操作的特性，導向 Pipeline as Code 的實踐。透過在原始碼專案新增一個 Jenkinsfile 的檔案，將 Pipeline 的流程都寫在檔案內。">
+    <meta itemprop="description" content="Jenkins 是個歷史悠久的 CI / CD 工具，從 Jenkins 2.0 開始正式推展 Pipeline，有別於以往使用 Web UI 操作的特性，導向 Pipeline as Code 的實踐。透過在原始碼專案新增一個 Jenkinsfile 的檔案，將 Pipeline 的流程都寫在檔案內。">
     <meta itemprop="datePublished" content="October 14, 2018">
     
 
@@ -293,13 +293,13 @@
       
 
       <section class="page__content" itemprop="text">
-        <p>Jenkins 是個歷史悠久的 CD 工具，從 Jenkins 2.0 開始正式推展 Pipeline，有別於以往使用 Web UI 操作的特性，導向 Pipeline as Code 的實踐。透過在原始碼專案新增一個 Jenkinsfile 的檔案，將 Pipeline 的流程都寫在檔案內。</p>
+        <p>Jenkins 是個歷史悠久的 CI / CD 工具，從 Jenkins 2.0 開始正式推展 Pipeline，有別於以往使用 Web UI 操作的特性，導向 Pipeline as Code 的實踐。透過在原始碼專案新增一個 Jenkinsfile 的檔案，將 Pipeline 的流程都寫在檔案內。</p>
 
-<p>Pipeline 就是流水線的意思，在這裡指 CD 流水線，一個完整的 CD 流程可以包含 Build (建置)、 Test (測試)、Deploy (部署) 三個 state (階段)，每個公司或產品的 CD 流程所包含的 state 可能不同，可以依需要各別調整。</p>
+<p>Pipeline 就是流水線的意思，一個完整的流程可以包含 Build (建置)、 Test (測試)、Deploy (部署) 三個 state (階段)，每個公司或產品的 CD 流程所包含的 state 可能不同，可以依需要各別調整。</p>
 
 <p>簡單 Pipeline 範例 <a href="https://jenkins.io/doc/book/pipeline/jenkinsfile/">(source)</a></p>
 
-<pre><code class="language-Jenkinsfile">pipeline {
+<div class="highlighter-rouge"><pre class="highlight"><code>pipeline {
     agent any
 
     stages {
@@ -321,6 +321,7 @@
     }
 }
 </code></pre>
+</div>
 
 <h1 id="pipeline">pipeline</h1>
 <p>Jenkinsfile 的開頭宣告</p>

@@ -19,12 +19,12 @@
 
 
 
-<title>Jenkins - Pipeline as Code - 簡介 - Jian-Ching 記事本</title>
+<title>Jenkins - Pipeline as Code - 第一個專案 - Jian-Ching 記事本</title>
 
 
 
 
-<meta name="description" content="Jenkins 是個歷史悠久的 CI / CD 工具，從 Jenkins 2.0 開始正式推展 Pipeline，有別於以往使用 Web UI 操作的特性，導向 Pipeline as Code 的實踐。透過在原始碼專案新增一個 Jenkinsfile 的檔案，將 Pipeline 的流程都寫在檔案內。">
+<meta name="description" content="Jenkins - Pipeline as Code - 簡介說明完簡單範例，接著來實際建立專案執行看看">
 
 
 
@@ -33,15 +33,15 @@
 
 <meta property="og:locale" content="zh_TW">
 <meta property="og:site_name" content="Jian-Ching 記事本">
-<meta property="og:title" content="Jenkins - Pipeline as Code - 簡介">
+<meta property="og:title" content="Jenkins - Pipeline as Code - 第一個專案">
 
 
-  <link rel="canonical" href="https://twblog.HongJianChing.com/2018/10/14/jenkins-pipeline-as-code-introduction/">
-  <meta property="og:url" content="https://twblog.HongJianChing.com/2018/10/14/jenkins-pipeline-as-code-introduction/">
+  <link rel="canonical" href="https://twblog.HongJianChing.com/2018/10/15/jenkins-pipeline-as-code-first-project/">
+  <meta property="og:url" content="https://twblog.HongJianChing.com/2018/10/15/jenkins-pipeline-as-code-first-project/">
 
 
 
-  <meta property="og:description" content="Jenkins 是個歷史悠久的 CI / CD 工具，從 Jenkins 2.0 開始正式推展 Pipeline，有別於以往使用 Web UI 操作的特性，導向 Pipeline as Code 的實踐。透過在原始碼專案新增一個 Jenkinsfile 的檔案，將 Pipeline 的流程都寫在檔案內。">
+  <meta property="og:description" content="Jenkins - Pipeline as Code - 簡介說明完簡單範例，接著來實際建立專案執行看看">
 
 
 
@@ -56,7 +56,7 @@
 
 
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2018-10-14T00:00:00+08:00">
+  <meta property="article:published_time" content="2018-10-15T00:00:00+08:00">
 
 
 
@@ -278,73 +278,59 @@
 
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Jenkins - Pipeline as Code - 簡介">
-    <meta itemprop="description" content="Jenkins 是個歷史悠久的 CI / CD 工具，從 Jenkins 2.0 開始正式推展 Pipeline，有別於以往使用 Web UI 操作的特性，導向 Pipeline as Code 的實踐。透過在原始碼專案新增一個 Jenkinsfile 的檔案，將 Pipeline 的流程都寫在檔案內。">
-    <meta itemprop="datePublished" content="October 14, 2018">
+    <meta itemprop="headline" content="Jenkins - Pipeline as Code - 第一個專案">
+    <meta itemprop="description" content="Jenkins - Pipeline as Code - 簡介說明完簡單範例，接著來實際建立專案執行看看">
+    <meta itemprop="datePublished" content="October 15, 2018">
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 class="page__title" itemprop="headline">Jenkins - Pipeline as Code - 簡介
+          <h1 class="page__title" itemprop="headline">Jenkins - Pipeline as Code - 第一個專案
 </h1>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        <p>Jenkins 是個歷史悠久的 CI / CD 工具，從 Jenkins 2.0 開始正式推展 Pipeline，有別於以往使用 Web UI 操作的特性，導向 Pipeline as Code 的實踐。透過在原始碼專案新增一個 Jenkinsfile 的檔案，將 Pipeline 的流程都寫在檔案內。</p>
+        <p><a href="https://twblog.hongjianching.com/2018/10/14/jenkins-pipeline-as-code-introduction/">Jenkins - Pipeline as Code - 簡介</a>說明完簡單範例，接著來實際建立專案執行看看</p>
 
-<p>Pipeline 就是流水線的意思，一個完整的流程可以包含 Build (建置)、 Test (測試)、Deploy (部署) 三個 state (階段)，每個公司或產品的 CD 流程所包含的 state 可能不同，可以依需要各別調整。</p>
+<p>以<a href="https://twblog.hongjianching.com/2018/10/10/install-jenkins-agent-with-docker/">使用 Docker 安裝 Jenkins Agent</a>為執行環境</p>
 
-<p>簡單 Pipeline 範例 <a href="https://jenkins.io/doc/book/pipeline/jenkinsfile/">(source)</a></p>
+<p>在左邊功能列點擊<code class="highlighter-rouge">新增作業</code>，然後名稱輸入 <code class="highlighter-rouge">jenkins-pipeline</code>，下方選擇 <code class="highlighter-rouge">Pipeline</code> 後按下 <code class="highlighter-rouge">OK</code></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>pipeline {
-    agent any
+<p><img src="/assets/images/2018-10-15-jenkins-pipeline-as-code-first-project/2018-10-15_21-09-42.png" alt="" /></p>
 
-    stages {
-        stage('Build') {
-            steps {
-                echo 'Building..'
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
-            }
-        }
+<p>然後在 <code class="highlighter-rouge">Pipeline</code> 的 <code class="highlighter-rouge">Definition</code> 選擇 <code class="highlighter-rouge">Pipeline script from SCM</code>，接荖輸入 Jenkinsfile 所在的 Git 網址，單純想測試的話可以用已經建立好的這個路徑 <code class="highlighter-rouge">https://github.com/allyusd/jenkins-pipeline.git</code>，下方的 branch 選擇 <code class="highlighter-rouge">sample</code>，最後按下儲存。</p>
+
+<p><img src="/assets/images/2018-10-15-jenkins-pipeline-as-code-first-project/2018-10-15_21-15-41.png" alt="" /></p>
+
+<p>在左方功能列選擇<code class="highlighter-rouge">馬上建置</code>，等他執行一會兒，會看到專案主頁會出現 <code class="highlighter-rouge">Stage View</code></p>
+
+<p><img src="/assets/images/2018-10-15-jenkins-pipeline-as-code-first-project/2018-10-15_21-20-10.png" alt="" /></p>
+
+<p>從畫面可以看出來我們在 Jenkinsfile 定義的 Pipeline 流程，除了一開始要 Checkout SCM 才能讀取 Jenkinsfile 這一步驟外，就是 Build、Test、Deploy 三個階段。</p>
+
+<p>接下來我們故意讓 Pipeline 失敗看看結果是什麼。在 Test 這一個階段故意以非 0 結束 shell，讓 Jenkins 判定此階段執行失敗</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>stage('Test') {
+    steps {
+        echo 'Testing..'
+        sh 'exit 1'
     }
 }
 </code></pre>
 </div>
 
-<h1 id="pipeline">pipeline</h1>
-<p>Jenkinsfile 的開頭宣告</p>
+<p>如果要使用建立好的檔案，請把 branch 改為 <code class="highlighter-rouge">sample-fail</code>，按下建置後，同樣等結果執行完成。</p>
 
-<h1 id="agent">agent</h1>
-<p>指定什麼條件的 agent 可以執行這個專案，any 表示不指定，任意 agent 都可以執行，這個設定相當於 UI 上的<code class="highlighter-rouge">限制專案執行節點</code>，可以用 label 指定 agent 標籤，假如指定 <code class="highlighter-rouge">test</code> 的話</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>agent { 
-    label 'test'
-}
-</code></pre>
-</div>
-<p>另一種情況，如果在不同 state 要分別指定不同 agent 的時候，最上層的 agent 會指定為 none，然後在各自 state 要指定 agent</p>
+<p>從執行的結果可以看到，Test、Deploy 是 failed 的狀態，基於 Pipeline 的概念，實際上 Deploy 是因為前一個 Test 階段失敗，所以跳過沒有執行。</p>
 
-<h1 id="stagesstage">stages、stage</h1>
-<p>代表流水線的各個階段，範例中為 Build, Test, Deploy，這個設定單純為文字，可以依自己的需要命名。主要用在網頁的視覺化效果，像是流水線失敗是在哪一個階段看一眼就可以掌握。或是流水線需要在不同 agent 上執行的時候，就可以透過 stages 分別設定。</p>
+<p><img src="/assets/images/2018-10-15-jenkins-pipeline-as-code-first-project/2018-10-15_21-38-11.png" alt="" /></p>
 
-<h1 id="steps">steps</h1>
-<p>主要執行步驟，常見的是使用 echo 輸出訊息，或是 sh 執行命令。</p>
+<p>在真實場景中，Test 階段失敗是 Unit Test fail 的關係，要去檢查程式碼的邏輯是否正確，或是 Unit Test 已經過時該修正了。如果 fail 在 Build 階段，正常是程式碼寫錯，但是如果有使用 IDE 的話，大多數則是有程式碼忘記上傳造成建置失敗。</p>
 
-<h1 id="ref">ref</h1>
-<p><a href="https://jenkins.io/doc/book/pipeline/jenkinsfile/">Using a Jenkinsfile</a></p>
-
-<p><a href="https://jenkins.io/doc/book/pipeline/syntax/#stages">Pipeline Syntax</a></p>
+<p>總結來說，Pipeline 視覺化的 Stage View 可以提供開發者第一時間要往哪個方向去解決問題做出提示。</p>
 
         
       </section>
@@ -378,7 +364,7 @@
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2018-10-14T00:00:00+08:00">October 14, 2018</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2018-10-15T00:00:00+08:00">October 15, 2018</time></p>
         
       </footer>
 
@@ -387,25 +373,24 @@
     <h4 class="page__share-title">分享到</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=Jenkins - Pipeline as Code - 簡介 https://twblog.hongjianching.com/2018/10/14/jenkins-pipeline-as-code-introduction/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=Jenkins - Pipeline as Code - 第一個專案 https://twblog.hongjianching.com/2018/10/15/jenkins-pipeline-as-code-first-project/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2018/10/14/jenkins-pipeline-as-code-introduction/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2018/10/15/jenkins-pipeline-as-code-first-project/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2018/10/14/jenkins-pipeline-as-code-introduction/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2018/10/15/jenkins-pipeline-as-code-first-project/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2018/10/14/jenkins-pipeline-as-code-introduction/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2018/10/15/jenkins-pipeline-as-code-first-project/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="https://twblog.hongjianching.com/2018/10/13/create-cpp-compiler-with-jenkins-agent-docker-image-part-2/" class="pagination--pager" title="建立擁有 C++ 編譯環境及 Jenkins Agent 的 Docker Image - Part 2
+      <a href="https://twblog.hongjianching.com/2018/10/14/jenkins-pipeline-as-code-introduction/" class="pagination--pager" title="Jenkins - Pipeline as Code - 簡介
 ">較舊</a>
     
     
-      <a href="https://twblog.hongjianching.com/2018/10/15/jenkins-pipeline-as-code-first-project/" class="pagination--pager" title="Jenkins - Pipeline as Code - 第一個專案
-">較新</a>
+      <a href="#" class="pagination--pager disabled">較新</a>
     
   </nav>
 

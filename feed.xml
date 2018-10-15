@@ -1,4 +1,41 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-14T23:44:27+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">Jenkins - Pipeline as Code - 簡介</title><link href="https://twblog.hongjianching.com/2018/10/14/jenkins-pipeline-as-code-introduction/" rel="alternate" type="text/html" title="Jenkins - Pipeline as Code - 簡介" /><published>2018-10-14T00:00:00+08:00</published><updated>2018-10-14T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/14/jenkins-pipeline-as-code-introduction</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/14/jenkins-pipeline-as-code-introduction/">&lt;p&gt;Jenkins 是個歷史悠久的 CI / CD 工具，從 Jenkins 2.0 開始正式推展 Pipeline，有別於以往使用 Web UI 操作的特性，導向 Pipeline as Code 的實踐。透過在原始碼專案新增一個 Jenkinsfile 的檔案，將 Pipeline 的流程都寫在檔案內。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-15T21:47:53+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">Jenkins - Pipeline as Code - 第一個專案</title><link href="https://twblog.hongjianching.com/2018/10/15/jenkins-pipeline-as-code-first-project/" rel="alternate" type="text/html" title="Jenkins - Pipeline as Code - 第一個專案" /><published>2018-10-15T00:00:00+08:00</published><updated>2018-10-15T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/15/jenkins-pipeline-as-code-first-project</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/15/jenkins-pipeline-as-code-first-project/">&lt;p&gt;&lt;a href=&quot;https://twblog.hongjianching.com/2018/10/14/jenkins-pipeline-as-code-introduction/&quot;&gt;Jenkins - Pipeline as Code - 簡介&lt;/a&gt;說明完簡單範例，接著來實際建立專案執行看看&lt;/p&gt;
+
+&lt;p&gt;以&lt;a href=&quot;https://twblog.hongjianching.com/2018/10/10/install-jenkins-agent-with-docker/&quot;&gt;使用 Docker 安裝 Jenkins Agent&lt;/a&gt;為執行環境&lt;/p&gt;
+
+&lt;p&gt;在左邊功能列點擊&lt;code class=&quot;highlighter-rouge&quot;&gt;新增作業&lt;/code&gt;，然後名稱輸入 &lt;code class=&quot;highlighter-rouge&quot;&gt;jenkins-pipeline&lt;/code&gt;，下方選擇 &lt;code class=&quot;highlighter-rouge&quot;&gt;Pipeline&lt;/code&gt; 後按下 &lt;code class=&quot;highlighter-rouge&quot;&gt;OK&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-15-jenkins-pipeline-as-code-first-project/2018-10-15_21-09-42.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;然後在 &lt;code class=&quot;highlighter-rouge&quot;&gt;Pipeline&lt;/code&gt; 的 &lt;code class=&quot;highlighter-rouge&quot;&gt;Definition&lt;/code&gt; 選擇 &lt;code class=&quot;highlighter-rouge&quot;&gt;Pipeline script from SCM&lt;/code&gt;，接荖輸入 Jenkinsfile 所在的 Git 網址，單純想測試的話可以用已經建立好的這個路徑 &lt;code class=&quot;highlighter-rouge&quot;&gt;https://github.com/allyusd/jenkins-pipeline.git&lt;/code&gt;，下方的 branch 選擇 &lt;code class=&quot;highlighter-rouge&quot;&gt;sample&lt;/code&gt;，最後按下儲存。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-15-jenkins-pipeline-as-code-first-project/2018-10-15_21-15-41.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;在左方功能列選擇&lt;code class=&quot;highlighter-rouge&quot;&gt;馬上建置&lt;/code&gt;，等他執行一會兒，會看到專案主頁會出現 &lt;code class=&quot;highlighter-rouge&quot;&gt;Stage View&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-15-jenkins-pipeline-as-code-first-project/2018-10-15_21-20-10.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;從畫面可以看出來我們在 Jenkinsfile 定義的 Pipeline 流程，除了一開始要 Checkout SCM 才能讀取 Jenkinsfile 這一步驟外，就是 Build、Test、Deploy 三個階段。&lt;/p&gt;
+
+&lt;p&gt;接下來我們故意讓 Pipeline 失敗看看結果是什麼。在 Test 這一個階段故意以非 0 結束 shell，讓 Jenkins 判定此階段執行失敗&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;stage('Test') {
+    steps {
+        echo 'Testing..'
+        sh 'exit 1'
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;如果要使用建立好的檔案，請把 branch 改為 &lt;code class=&quot;highlighter-rouge&quot;&gt;sample-fail&lt;/code&gt;，按下建置後，同樣等結果執行完成。&lt;/p&gt;
+
+&lt;p&gt;從執行的結果可以看到，Test、Deploy 是 failed 的狀態，基於 Pipeline 的概念，實際上 Deploy 是因為前一個 Test 階段失敗，所以跳過沒有執行。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-15-jenkins-pipeline-as-code-first-project/2018-10-15_21-38-11.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;在真實場景中，Test 階段失敗是 Unit Test fail 的關係，要去檢查程式碼的邏輯是否正確，或是 Unit Test 已經過時該修正了。如果 fail 在 Build 階段，正常是程式碼寫錯，但是如果有使用 IDE 的話，大多數則是有程式碼忘記上傳造成建置失敗。&lt;/p&gt;
+
+&lt;p&gt;總結來說，Pipeline 視覺化的 Stage View 可以提供開發者第一時間要往哪個方向去解決問題做出提示。&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Jenkins" /><summary type="html">Jenkins - Pipeline as Code - 簡介說明完簡單範例，接著來實際建立專案執行看看</summary></entry><entry><title type="html">Jenkins - Pipeline as Code - 簡介</title><link href="https://twblog.hongjianching.com/2018/10/14/jenkins-pipeline-as-code-introduction/" rel="alternate" type="text/html" title="Jenkins - Pipeline as Code - 簡介" /><published>2018-10-14T00:00:00+08:00</published><updated>2018-10-14T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/14/jenkins-pipeline-as-code-introduction</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/14/jenkins-pipeline-as-code-introduction/">&lt;p&gt;Jenkins 是個歷史悠久的 CI / CD 工具，從 Jenkins 2.0 開始正式推展 Pipeline，有別於以往使用 Web UI 操作的特性，導向 Pipeline as Code 的實踐。透過在原始碼專案新增一個 Jenkinsfile 的檔案，將 Pipeline 的流程都寫在檔案內。&lt;/p&gt;
 
 &lt;p&gt;Pipeline 就是流水線的意思，一個完整的流程可以包含 Build (建置)、 Test (測試)、Deploy (部署) 三個 state (階段)，每個公司或產品的 CD 流程所包含的 state 可能不同，可以依需要各別調整。&lt;/p&gt;
 
@@ -533,52 +570,4 @@ CMD service nginx start &amp;amp;&amp;amp; /bin/bash
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;這次不再需要進入容器，也不用啟動 nginx，直接可以在 http://localhost 出現網頁嘍！&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Docker" /><category term="Dockerfile" /><summary type="html">這篇寫簡單 Dockerfile 來建立自己的 Docker Image</summary></entry><entry><title type="html">使用 Docker - Port 及 Volume</title><link href="https://twblog.hongjianching.com/2018/10/05/run-docker-port-volume/" rel="alternate" type="text/html" title="使用 Docker - Port 及 Volume" /><published>2018-10-05T00:00:00+08:00</published><updated>2018-10-05T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/05/run-docker-port-volume</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/05/run-docker-port-volume/">&lt;p&gt;這篇講一下設定 Port 及 Volume，也是網路及硬碟最簡單的用法&lt;/p&gt;
-
-&lt;p&gt;上一篇 &lt;a href=&quot;https://twblog.hongjianching.com/2018/10/04/run-docker-service/&quot;&gt;使用 Docker - 背景服務&lt;/a&gt; 已經提到如何啟動背景服務執行的方法，這次直接進到容器內，安裝並啟動 nginx。&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;apt update &amp;amp;&amp;amp; apt install nginx -y
-service nginx start
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;然後在 chrome 上面輸入 localhost，就會出現
-&lt;img src=&quot;/assets/images/2018-10-05-run-docker-port-volume/2018-10-05_22-33-14.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;這是因為容器是個獨立的環境，預設是沒有任何 Port 對外開放的。&lt;/p&gt;
-
-&lt;h1 id=&quot;-p-port-對映&quot;&gt;-p Port 對映&lt;/h1&gt;
-
-&lt;p&gt;使用 -p 參數，左邊是 host 的 port 號，右邊是 container 的 port 號。在這個例子中都是 80 port，完整的指令如下(這串指串越來越長了呢…)&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run --restart&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;always -d -it -p 80:80 ubuntu:18.04
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;執行後可以用 ps 看一下，會發現在 PORTS 欄位多了剛剛加上的設定喔
-&lt;img src=&quot;/assets/images/2018-10-05-run-docker-port-volume/2018-10-05_22-27-42.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;接著再次安裝並啟動 nginx，並且在 chrome 按下 F5 更新，這次成功出現網頁了&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-05-run-docker-port-volume/2018-10-05_22-32-34.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;-v-volume-對映&quot;&gt;-v Volume 對映&lt;/h1&gt;
-&lt;p&gt;接著，我們想要修改網頁，但是容器內沒有編輯器而且不想安裝，能不能直接在 Host 上面修改，然後直接反應在容器呢？&lt;/p&gt;
-
-&lt;p&gt;接著利用 Volume 對映，就好像前面講到可以指定 Port 一樣，只是這次換成了硬碟路徑對映，使用 -v 參數，左邊是 Host 路徑，右邊是 container 路徑。在這個例子中，設定在家目錄的 www，對應到 container 內 nginx 的預設路徑 /usr/share/nginx/html，完整的指令如下&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run --restart&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;always -d -it -p 80:80 -v ~/www:/var/www/html ubuntu:18.04
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;已經變得超級長了，這時候在 script 或 Dockerfile 中為了方便閱讀，可能會寫成這樣，意思是一樣的&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run \
-    --restart=always \
-    -d \
-    -it \
-    -p 80:80 \
-    -v ~/www:/var/www/html \
-    ubuntu:18.04
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;安裝並啟動 nginx，退出容器並且修改 host 的 html 檔案，在 chrome 按下 F5 更新後可以看到網頁已經是修改後的樣子了&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-05-run-docker-port-volume/2018-10-05_23-35-16.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Docker" /><summary type="html">這篇講一下設定 Port 及 Volume，也是網路及硬碟最簡單的用法</summary></entry></feed>
+&lt;p&gt;這次不再需要進入容器，也不用啟動 nginx，直接可以在 http://localhost 出現網頁嘍！&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Docker" /><category term="Dockerfile" /><summary type="html">這篇寫簡單 Dockerfile 來建立自己的 Docker Image</summary></entry></feed>

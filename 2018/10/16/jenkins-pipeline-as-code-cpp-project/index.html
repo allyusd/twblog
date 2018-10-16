@@ -19,12 +19,12 @@
 
 
 
-<title>Jenkins - Pipeline as Code - 第一個專案 - Jian-Ching 記事本</title>
+<title>Jenkins - Pipeline as Code - C++ 專案 - Jian-Ching 記事本</title>
 
 
 
 
-<meta name="description" content="Jenkins - Pipeline as Code - 簡介說明完簡單範例，接著來實際建立專案執行看看">
+<meta name="description" content="接續前一篇 Jenkins - Pipeline as Code - 第一個專案，這次來建立 C++ 專案">
 
 
 
@@ -33,15 +33,15 @@
 
 <meta property="og:locale" content="zh_TW">
 <meta property="og:site_name" content="Jian-Ching 記事本">
-<meta property="og:title" content="Jenkins - Pipeline as Code - 第一個專案">
+<meta property="og:title" content="Jenkins - Pipeline as Code - C++ 專案">
 
 
-  <link rel="canonical" href="https://twblog.HongJianChing.com/2018/10/15/jenkins-pipeline-as-code-first-project/">
-  <meta property="og:url" content="https://twblog.HongJianChing.com/2018/10/15/jenkins-pipeline-as-code-first-project/">
+  <link rel="canonical" href="https://twblog.HongJianChing.com/2018/10/16/jenkins-pipeline-as-code-cpp-project/">
+  <meta property="og:url" content="https://twblog.HongJianChing.com/2018/10/16/jenkins-pipeline-as-code-cpp-project/">
 
 
 
-  <meta property="og:description" content="Jenkins - Pipeline as Code - 簡介說明完簡單範例，接著來實際建立專案執行看看">
+  <meta property="og:description" content="接續前一篇 Jenkins - Pipeline as Code - 第一個專案，這次來建立 C++ 專案">
 
 
 
@@ -56,7 +56,7 @@
 
 
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2018-10-15T00:00:00+08:00">
+  <meta property="article:published_time" content="2018-10-16T00:00:00+08:00">
 
 
 
@@ -278,59 +278,69 @@
 
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Jenkins - Pipeline as Code - 第一個專案">
-    <meta itemprop="description" content="Jenkins - Pipeline as Code - 簡介說明完簡單範例，接著來實際建立專案執行看看">
-    <meta itemprop="datePublished" content="October 15, 2018">
+    <meta itemprop="headline" content="Jenkins - Pipeline as Code - C++ 專案">
+    <meta itemprop="description" content="接續前一篇 Jenkins - Pipeline as Code - 第一個專案，這次來建立 C++ 專案">
+    <meta itemprop="datePublished" content="October 16, 2018">
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 class="page__title" itemprop="headline">Jenkins - Pipeline as Code - 第一個專案
+          <h1 class="page__title" itemprop="headline">Jenkins - Pipeline as Code - C++ 專案
 </h1>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        <p><a href="https://twblog.hongjianching.com/2018/10/14/jenkins-pipeline-as-code-introduction/">Jenkins - Pipeline as Code - 簡介</a>說明完簡單範例，接著來實際建立專案執行看看</p>
+        <p>接續前一篇 <a href="https://twblog.hongjianching.com/2018/10/15/jenkins-pipeline-as-code-first-project/">Jenkins - Pipeline as Code - 第一個專案</a>，這次來建立 C++ 專案</p>
 
-<p>以<a href="https://twblog.hongjianching.com/2018/10/10/install-jenkins-agent-with-docker/">使用 Docker 安裝 Jenkins Agent</a>為執行環境</p>
+<p>因為要編譯 C++，使用 <a href="https://twblog.hongjianching.com/2018/10/13/create-cpp-compiler-with-jenkins-agent-docker-image-part-2/">建立擁有 C++ 編譯環境及 Jenkins Agent 的 Docker Image - Part 2</a> 這篇所建立的環境</p>
 
-<p>在左邊功能列點擊<code class="highlighter-rouge">新增作業</code>，然後名稱輸入 <code class="highlighter-rouge">jenkins-pipeline</code>，下方選擇 <code class="highlighter-rouge">Pipeline</code> 後按下 <code class="highlighter-rouge">OK</code></p>
+<p>首先要修改的是 agent 的部份，這次要指定有 <code class="highlighter-rouge">cpp</code> 標籤的 agent 才能執行這個 pipeline，所以修改原本的 <code class="highlighter-rouge">agent any</code> 為</p>
 
-<p><img src="/assets/images/2018-10-15-jenkins-pipeline-as-code-first-project/2018-10-15_21-09-42.png" alt="" /></p>
+<div class="highlighter-rouge"><pre class="highlight"><code>agent {
+    label 'cpp'
+}
+</code></pre>
+</div>
 
-<p>然後在 <code class="highlighter-rouge">Pipeline</code> 的 <code class="highlighter-rouge">Definition</code> 選擇 <code class="highlighter-rouge">Pipeline script from SCM</code>，接荖輸入 Jenkinsfile 所在的 Git 網址，單純想測試的話可以用已經建立好的這個路徑 <code class="highlighter-rouge">https://github.com/allyusd/jenkins-pipeline.git</code>，下方的 branch 選擇 <code class="highlighter-rouge">sample</code>，最後按下儲存。</p>
+<p>接著是使用 git 取得原始碼，這邊同樣以 <code class="highlighter-rouge">https://github.com/allyusd/helloworld.cpp.git</code> 為例，接著執行編譯，修改後的 Build 階段為</p>
 
-<p><img src="/assets/images/2018-10-15-jenkins-pipeline-as-code-first-project/2018-10-15_21-15-41.png" alt="" /></p>
-
-<p>在左方功能列選擇<code class="highlighter-rouge">馬上建置</code>，等他執行一會兒，會看到專案主頁會出現 <code class="highlighter-rouge">Stage View</code></p>
-
-<p><img src="/assets/images/2018-10-15-jenkins-pipeline-as-code-first-project/2018-10-15_21-20-10.png" alt="" /></p>
-
-<p>從畫面可以看出來我們在 Jenkinsfile 定義的 Pipeline 流程，除了一開始要 Checkout SCM 才能讀取 Jenkinsfile 這一步驟外，就是 Build、Test、Deploy 三個階段。</p>
-
-<p>接下來我們故意讓 Pipeline 失敗看看結果是什麼。在 Test 這一個階段故意以非 0 結束 shell，讓 Jenkins 判定此階段執行失敗</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>stage('Test') {
+<div class="highlighter-rouge"><pre class="highlight"><code>stage('Build') {
     steps {
-        echo 'Testing..'
-        sh 'exit 1'
+        echo 'Building..'
+        git 'https://github.com/allyusd/helloworld.cpp.git'
+        sh 'g++ helloworld.cpp -o helloworld'
     }
 }
 </code></pre>
 </div>
 
-<p>如果要使用建立好的檔案，請把 branch 改為 <code class="highlighter-rouge">sample-fail</code>，按下建置後，同樣等結果執行完成。</p>
+<p>因為這個簡單的範例沒有 unit test，所以透過執行代替一下</p>
 
-<p>從執行的結果可以看到，Test、Deploy 是 failed 的狀態，基於 Pipeline 的概念，實際上 Deploy 是因為前一個 Test 階段失敗，所以跳過沒有執行。</p>
+<p>stage(‘Test’) {
+    steps {
+        echo ‘Testing..’
+        sh ‘./helloworld’
+    }
+}</p>
 
-<p><img src="/assets/images/2018-10-15-jenkins-pipeline-as-code-first-project/2018-10-15_21-38-11.png" alt="" /></p>
+<p>如果要使用建立好的檔案，把 branch 改為 <code class="highlighter-rouge">cpp</code>，按下建置後，會看到所有階段都成功完成</p>
 
-<p>在真實場景中，Test 階段失敗是 Unit Test fail 的關係，要去檢查程式碼的邏輯是否正確，或是 Unit Test 已經過時該修正了。如果 fail 在 Build 階段，正常是程式碼寫錯，但是如果有使用 IDE 的話，大多數則是有程式碼忘記上傳造成建置失敗。</p>
+<p><img src="/assets/images/2018-10-16-jenkins-pipeline-as-code-cpp-project/2018-10-16_22-00-34.png" alt="" /></p>
 
-<p>總結來說，Pipeline 視覺化的 Stage View 可以提供開發者第一時間要往哪個方向去解決問題做出提示。</p>
+<p>接著把滑鼠移到 Build 的區域，也就是顯示 Build 花費時間 5s 的地方，會出現 Success，下方有個 <code class="highlighter-rouge">Logs</code> 可以點選</p>
+
+<p><img src="/assets/images/2018-10-16-jenkins-pipeline-as-code-cpp-project/2018-10-16_22-04-33.png" alt="" /></p>
+
+<p>點擊後會發現紀錄依據 Jenkinsfile 所描述的三個步驟分別折疊起來，可以依自己有興趣的部份去檢視</p>
+
+<p><img src="/assets/images/2018-10-16-jenkins-pipeline-as-code-cpp-project/2018-10-16_22-06-02.png" alt="" /></p>
+
+<p>像是 Test 階段我們有執行程式，從這裡就可以看到有輸出 <code class="highlighter-rouge">Hello World</code> 的結果。</p>
+
+<p><img src="/assets/images/2018-10-16-jenkins-pipeline-as-code-cpp-project/2018-10-16_22-08-08.png" alt="" /></p>
 
         
       </section>
@@ -364,7 +374,7 @@
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2018-10-15T00:00:00+08:00">October 15, 2018</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2018-10-16T00:00:00+08:00">October 16, 2018</time></p>
         
       </footer>
 
@@ -373,25 +383,24 @@
     <h4 class="page__share-title">分享到</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=Jenkins - Pipeline as Code - 第一個專案 https://twblog.hongjianching.com/2018/10/15/jenkins-pipeline-as-code-first-project/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=Jenkins - Pipeline as Code - C++ 專案 https://twblog.hongjianching.com/2018/10/16/jenkins-pipeline-as-code-cpp-project/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2018/10/15/jenkins-pipeline-as-code-first-project/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2018/10/16/jenkins-pipeline-as-code-cpp-project/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2018/10/15/jenkins-pipeline-as-code-first-project/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2018/10/16/jenkins-pipeline-as-code-cpp-project/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2018/10/15/jenkins-pipeline-as-code-first-project/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2018/10/16/jenkins-pipeline-as-code-cpp-project/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="https://twblog.hongjianching.com/2018/10/14/jenkins-pipeline-as-code-introduction/" class="pagination--pager" title="Jenkins - Pipeline as Code - 簡介
+      <a href="https://twblog.hongjianching.com/2018/10/15/jenkins-pipeline-as-code-first-project/" class="pagination--pager" title="Jenkins - Pipeline as Code - 第一個專案
 ">較舊</a>
     
     
-      <a href="https://twblog.hongjianching.com/2018/10/16/jenkins-pipeline-as-code-cpp-project/" class="pagination--pager" title="Jenkins - Pipeline as Code - C++ 專案
-">較新</a>
+      <a href="#" class="pagination--pager disabled">較新</a>
     
   </nav>
 

@@ -1,4 +1,51 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-15T21:47:53+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">Jenkins - Pipeline as Code - 第一個專案</title><link href="https://twblog.hongjianching.com/2018/10/15/jenkins-pipeline-as-code-first-project/" rel="alternate" type="text/html" title="Jenkins - Pipeline as Code - 第一個專案" /><published>2018-10-15T00:00:00+08:00</published><updated>2018-10-15T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/15/jenkins-pipeline-as-code-first-project</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/15/jenkins-pipeline-as-code-first-project/">&lt;p&gt;&lt;a href=&quot;https://twblog.hongjianching.com/2018/10/14/jenkins-pipeline-as-code-introduction/&quot;&gt;Jenkins - Pipeline as Code - 簡介&lt;/a&gt;說明完簡單範例，接著來實際建立專案執行看看&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-16T22:12:30+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">Jenkins - Pipeline as Code - C++ 專案</title><link href="https://twblog.hongjianching.com/2018/10/16/jenkins-pipeline-as-code-cpp-project/" rel="alternate" type="text/html" title="Jenkins - Pipeline as Code - C++ 專案" /><published>2018-10-16T00:00:00+08:00</published><updated>2018-10-16T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/16/jenkins-pipeline-as-code-cpp-project</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/16/jenkins-pipeline-as-code-cpp-project/">&lt;p&gt;接續前一篇 &lt;a href=&quot;https://twblog.hongjianching.com/2018/10/15/jenkins-pipeline-as-code-first-project/&quot;&gt;Jenkins - Pipeline as Code - 第一個專案&lt;/a&gt;，這次來建立 C++ 專案&lt;/p&gt;
+
+&lt;p&gt;因為要編譯 C++，使用 &lt;a href=&quot;https://twblog.hongjianching.com/2018/10/13/create-cpp-compiler-with-jenkins-agent-docker-image-part-2/&quot;&gt;建立擁有 C++ 編譯環境及 Jenkins Agent 的 Docker Image - Part 2&lt;/a&gt; 這篇所建立的環境&lt;/p&gt;
+
+&lt;p&gt;首先要修改的是 agent 的部份，這次要指定有 &lt;code class=&quot;highlighter-rouge&quot;&gt;cpp&lt;/code&gt; 標籤的 agent 才能執行這個 pipeline，所以修改原本的 &lt;code class=&quot;highlighter-rouge&quot;&gt;agent any&lt;/code&gt; 為&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;agent {
+    label 'cpp'
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;接著是使用 git 取得原始碼，這邊同樣以 &lt;code class=&quot;highlighter-rouge&quot;&gt;https://github.com/allyusd/helloworld.cpp.git&lt;/code&gt; 為例，接著執行編譯，修改後的 Build 階段為&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;stage('Build') {
+    steps {
+        echo 'Building..'
+        git 'https://github.com/allyusd/helloworld.cpp.git'
+        sh 'g++ helloworld.cpp -o helloworld'
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;因為這個簡單的範例沒有 unit test，所以透過執行代替一下&lt;/p&gt;
+
+&lt;p&gt;stage(‘Test’) {
+    steps {
+        echo ‘Testing..’
+        sh ‘./helloworld’
+    }
+}&lt;/p&gt;
+
+&lt;p&gt;如果要使用建立好的檔案，把 branch 改為 &lt;code class=&quot;highlighter-rouge&quot;&gt;cpp&lt;/code&gt;，按下建置後，會看到所有階段都成功完成&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-16-jenkins-pipeline-as-code-cpp-project/2018-10-16_22-00-34.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;接著把滑鼠移到 Build 的區域，也就是顯示 Build 花費時間 5s 的地方，會出現 Success，下方有個 &lt;code class=&quot;highlighter-rouge&quot;&gt;Logs&lt;/code&gt; 可以點選&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-16-jenkins-pipeline-as-code-cpp-project/2018-10-16_22-04-33.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;點擊後會發現紀錄依據 Jenkinsfile 所描述的三個步驟分別折疊起來，可以依自己有興趣的部份去檢視&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-16-jenkins-pipeline-as-code-cpp-project/2018-10-16_22-06-02.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;像是 Test 階段我們有執行程式，從這裡就可以看到有輸出 &lt;code class=&quot;highlighter-rouge&quot;&gt;Hello World&lt;/code&gt; 的結果。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-16-jenkins-pipeline-as-code-cpp-project/2018-10-16_22-08-08.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Jenkins" /><summary type="html">接續前一篇 Jenkins - Pipeline as Code - 第一個專案，這次來建立 C++ 專案</summary></entry><entry><title type="html">Jenkins - Pipeline as Code - 第一個專案</title><link href="https://twblog.hongjianching.com/2018/10/15/jenkins-pipeline-as-code-first-project/" rel="alternate" type="text/html" title="Jenkins - Pipeline as Code - 第一個專案" /><published>2018-10-15T00:00:00+08:00</published><updated>2018-10-15T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/15/jenkins-pipeline-as-code-first-project</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/15/jenkins-pipeline-as-code-first-project/">&lt;p&gt;&lt;a href=&quot;https://twblog.hongjianching.com/2018/10/14/jenkins-pipeline-as-code-introduction/&quot;&gt;Jenkins - Pipeline as Code - 簡介&lt;/a&gt;說明完簡單範例，接著來實際建立專案執行看看&lt;/p&gt;
 
 &lt;p&gt;以&lt;a href=&quot;https://twblog.hongjianching.com/2018/10/10/install-jenkins-agent-with-docker/&quot;&gt;使用 Docker 安裝 Jenkins Agent&lt;/a&gt;為執行環境&lt;/p&gt;
 
@@ -501,73 +548,4 @@ sudo chown -R &lt;span class=&quot;nv&quot;&gt;$USER&lt;/span&gt;:&lt;span class
 &lt;/div&gt;
 &lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-07-push-image-to-dockerhub/2018-10-07_22-18-26.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;這麼一來，我們就可以在任何電腦啟動我們自己做的映像檔&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Docker" /><category term="Dockerhub" /><summary type="html">這篇會說明如何將 Image 發佈到 Docker Hub。</summary></entry><entry><title type="html">使用 Dockerfile 建立自己的 Docker Image</title><link href="https://twblog.hongjianching.com/2018/10/06/using-dockerfile-build-docker-image/" rel="alternate" type="text/html" title="使用 Dockerfile 建立自己的 Docker Image" /><published>2018-10-06T00:00:00+08:00</published><updated>2018-10-06T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/06/using-dockerfile-build-docker-image</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/06/using-dockerfile-build-docker-image/">&lt;p&gt;這篇寫簡單 Dockerfile 來建立自己的 Docker Image&lt;/p&gt;
-
-&lt;p&gt;在前一篇 &lt;a href=&quot;https://twblog.hongjianching.com/2018/10/05/run-docker-port-volume/&quot;&gt;使用 Docker - Port 及 Volume&lt;/a&gt;中，如果有照著每個動作來做的話，一定會發現一件事。&lt;/p&gt;
-
-&lt;p&gt;那就是，安裝 nginx 的動作重覆很多次而且很久(因為每次都要重新下載)&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;apt update &amp;amp;&amp;amp; apt install nginx -y
-service nginx start
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;就是上面兩行指令，一再的重覆&lt;/p&gt;
-
-&lt;h1 id=&quot;dockerfile&quot;&gt;Dockerfile&lt;/h1&gt;
-&lt;p&gt;在 &lt;a href=&quot;https://twblog.hongjianching.com/2018/10/02/install-docker/&quot;&gt;安裝 Docker&lt;/a&gt; 時有提過，使用 Docker 其中一個優勢就是繼承，這個特性在 Dockerfile 可以體現出來。&lt;/p&gt;
-
-&lt;p&gt;Dockerfile 最基本的指令是 FROM，也就是這個 Dockerfile 是繼承哪個 image 的。有一行就可以視為合格的 Dockerfile，像是我們用 ubuntu 當基底。&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;FROM ubuntu:18.04
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;當然，這樣產生的 image 會跟 ubuntu:18.04 一模一樣，所以我們要加上我們想要的，安裝 nginx 動作。透過 RUN 指令，可以幫我們做到這件事&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;FROM ubuntu:18.04
-
-RUN apt update &amp;amp;&amp;amp; apt install nginx -y
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;最後，別忘了啟動 nginx，畢竟能自動完成的事情，又何必自己來呢？透過 CMD 指令，告訴 Docker 啟動容器後應該做什麼事情。&lt;/p&gt;
-
-&lt;p&gt;這邊特別說明一下，如果 CMD 後面指定的是不會結束的程式，那就沒有問題，但是之前是透過 service 命令啟動的，因為這個命令一執行就結束了，接著容器就結束了，為了避免這種情況，後面加上了 /bin/bash 維持運作。(當然也可以直接執行 nginx 就不用這個動作)&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;FROM ubuntu:18.04
-
-RUN apt update &amp;amp;&amp;amp; apt install nginx -y
-
-CMD service nginx start &amp;amp;&amp;amp; /bin/bash
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h1 id=&quot;build---建置映像檔&quot;&gt;build - 建置映像檔&lt;/h1&gt;
-
-&lt;p&gt;寫完 Dockerfile，就可以建置 image 了，透過 build 指令，後面接 Dockerfile 所在的路徑，最好加上 -t 參數給個名字&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker build . -t webserver
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;等他建置完，我們可以透過 images 指令來查詢本機目前有哪些 image&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker images
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-06-using-dockerfile-build-docker-image/2018-10-06_22-09-13.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;從圖片中可以看到，除了我們之前用到的 hello-wrold 和 ubuntu:18.04 之外，還多了一個 webserver 的 image，這就是剛剛建立好的映像檔。這麼一來我們把之前的指令改用 webserver 來啟動吧。&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    --restart&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;always &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    -d &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    -it &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    -p 80:80 &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    -v ~/www:/var/www/html &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    webserver
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;這次不再需要進入容器，也不用啟動 nginx，直接可以在 http://localhost 出現網頁嘍！&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Docker" /><category term="Dockerfile" /><summary type="html">這篇寫簡單 Dockerfile 來建立自己的 Docker Image</summary></entry></feed>
+&lt;p&gt;這麼一來，我們就可以在任何電腦啟動我們自己做的映像檔&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Docker" /><category term="Dockerhub" /><summary type="html">這篇會說明如何將 Image 發佈到 Docker Hub。</summary></entry></feed>

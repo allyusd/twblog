@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-16T22:18:43+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">Jenkins - Pipeline as Code - C++ 專案</title><link href="https://twblog.hongjianching.com/2018/10/16/jenkins-pipeline-as-code-cpp-project/" rel="alternate" type="text/html" title="Jenkins - Pipeline as Code - C++ 專案" /><published>2018-10-16T00:00:00+08:00</published><updated>2018-10-16T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/16/jenkins-pipeline-as-code-cpp-project</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/16/jenkins-pipeline-as-code-cpp-project/">&lt;p&gt;接續前一篇 &lt;a href=&quot;https://twblog.hongjianching.com/2018/10/15/jenkins-pipeline-as-code-first-project/&quot;&gt;Jenkins - Pipeline as Code - 第一個專案&lt;/a&gt;，這次來建立 C++ 專案&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-16T22:21:27+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">Jenkins - Pipeline as Code - C++ 專案</title><link href="https://twblog.hongjianching.com/2018/10/16/jenkins-pipeline-as-code-cpp-project/" rel="alternate" type="text/html" title="Jenkins - Pipeline as Code - C++ 專案" /><published>2018-10-16T00:00:00+08:00</published><updated>2018-10-16T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/16/jenkins-pipeline-as-code-cpp-project</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/16/jenkins-pipeline-as-code-cpp-project/">&lt;p&gt;接續前一篇 &lt;a href=&quot;https://twblog.hongjianching.com/2018/10/15/jenkins-pipeline-as-code-first-project/&quot;&gt;Jenkins - Pipeline as Code - 第一個專案&lt;/a&gt;，這次來建立 C++ 專案&lt;/p&gt;
 
 &lt;p&gt;因為要編譯 C++，使用 &lt;a href=&quot;https://twblog.hongjianching.com/2018/10/13/create-cpp-compiler-with-jenkins-agent-docker-image-part-2/&quot;&gt;建立擁有 C++ 編譯環境及 Jenkins Agent 的 Docker Image - Part 2&lt;/a&gt; 這篇所建立的環境&lt;/p&gt;
 
@@ -10,7 +10,7 @@
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;接著是使用 git 取得原始碼，這邊同樣以 &lt;code class=&quot;highlighter-rouge&quot;&gt;https://github.com/allyusd/helloworld.cpp.git&lt;/code&gt; 為例，接著執行編譯，修改後的 Build 階段為&lt;/p&gt;
+&lt;p&gt;接著是透過 &lt;code class=&quot;highlighter-rouge&quot;&gt;git&lt;/code&gt; 指令取得原始碼，這邊同樣以 &lt;code class=&quot;highlighter-rouge&quot;&gt;https://github.com/allyusd/helloworld.cpp.git&lt;/code&gt; 為例，然後透過 &lt;code class=&quot;highlighter-rouge&quot;&gt;sh&lt;/code&gt; 執行編譯，修改後的 Build 階段為&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;stage('Build') {
     steps {
@@ -33,7 +33,7 @@
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;如果要使用建立好的檔案，把 branch 改為 &lt;code class=&quot;highlighter-rouge&quot;&gt;cpp&lt;/code&gt;，按下建置後，會看到所有階段都成功完成&lt;/p&gt;
+&lt;p&gt;如果要使用建立好的檔案，直接把 branch 改為 &lt;code class=&quot;highlighter-rouge&quot;&gt;cpp&lt;/code&gt;，按下建置後，會看到所有階段都成功完成&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-16-jenkins-pipeline-as-code-cpp-project/2018-10-16_22-00-34.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 

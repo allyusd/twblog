@@ -1,4 +1,120 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-16T22:21:27+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">Jenkins - Pipeline as Code - C++ 專案</title><link href="https://twblog.hongjianching.com/2018/10/16/jenkins-pipeline-as-code-cpp-project/" rel="alternate" type="text/html" title="Jenkins - Pipeline as Code - C++ 專案" /><published>2018-10-16T00:00:00+08:00</published><updated>2018-10-16T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/16/jenkins-pipeline-as-code-cpp-project</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/16/jenkins-pipeline-as-code-cpp-project/">&lt;p&gt;接續前一篇 &lt;a href=&quot;https://twblog.hongjianching.com/2018/10/15/jenkins-pipeline-as-code-first-project/&quot;&gt;Jenkins - Pipeline as Code - 第一個專案&lt;/a&gt;，這次來建立 C++ 專案&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-17T22:34:20+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">Jenkins - Pipeline as Code - 封存檔案</title><link href="https://twblog.hongjianching.com/2018/10/17/jenkins-pipeline-as-code-artifacts/" rel="alternate" type="text/html" title="Jenkins - Pipeline as Code - 封存檔案" /><published>2018-10-17T00:00:00+08:00</published><updated>2018-10-17T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/17/jenkins-pipeline-as-code-artifacts</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/17/jenkins-pipeline-as-code-artifacts/">&lt;p&gt;接續前一篇 &lt;a href=&quot;https://twblog.hongjianching.com/2018/10/16/jenkins-pipeline-as-code-cpp-project/&quot;&gt;Jenkins - Pipeline as Code - C++ 專案&lt;/a&gt;，這篇的主題是封存檔案&lt;/p&gt;
+
+&lt;p&gt;封存檔案功能可以把編譯完成的檔案存起來，這樣之後要用就可以直接使用，不需要再次編譯&lt;/p&gt;
+
+&lt;p&gt;在講封存檔案之前，先來講一下 Pipeline 在不同 Agent 之間進行作業的情況吧&lt;/p&gt;
+
+&lt;p&gt;這次&lt;a href=&quot;https://twblog.hongjianching.com/2018/10/13/create-cpp-compiler-with-jenkins-agent-docker-image-part-2/&quot;&gt;使用的環境&lt;/a&gt;加上一點點的修改，在原本的 &lt;code class=&quot;highlighter-rouge&quot;&gt;agent&lt;/code&gt; 的&lt;code class=&quot;highlighter-rouge&quot;&gt;設定&lt;/code&gt;的&lt;code class=&quot;highlighter-rouge&quot;&gt;標籤&lt;/code&gt; 加上 &lt;code class=&quot;highlighter-rouge&quot;&gt;test&lt;/code&gt;，用來跟 &lt;code class=&quot;highlighter-rouge&quot;&gt;agent-cpp&lt;/code&gt; 的 &lt;code class=&quot;highlighter-rouge&quot;&gt;cpp&lt;/code&gt; 標籤作出明確區隔。&lt;/p&gt;
+
+&lt;p&gt;首先要在 Build、Test 階段分別指定不同的 Agent，在 Build 使用有 C++ 編釋環境的 &lt;code class=&quot;highlighter-rouge&quot;&gt;cpp&lt;/code&gt; 標籤，在 Test 則使用沒有 C++ 編釋環境的 &lt;code class=&quot;highlighter-rouge&quot;&gt;test&lt;/code&gt; 標籤，這樣的設定可以確保編釋完成的檔案可以順利的發佈，避免只能在開發環境執行的情況。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;stage('Build') {
+    agent {
+        label 'test'
+    }
+    steps {
+        ... (略)
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;stage('Test') {
+    agent {
+        label 'cpp'
+    }
+    steps {
+        ... (略)
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;除了上面兩個設定之外，別忘了在最一開始&lt;a href=&quot;https://twblog.hongjianching.com/2018/10/14/jenkins-pipeline-as-code-introduction/&quot;&gt;介紹&lt;/a&gt;的時候說過，當各個 state 使用各自的 agent 宣告時，最頂級的 agent 要宣告為 none&lt;/p&gt;
+
+&lt;p&gt;完整的 Jenkinsfile 為下&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pipeline {
+    agent none
+    stages {
+        stage('Build') {
+            agent {
+                label 'cpp'
+            }
+            steps {
+                echo 'Building..'
+                git 'https://github.com/allyusd/helloworld.cpp.git'
+                sh 'g++ helloworld.cpp -o helloworld'
+            }
+        }
+        stage('Test') {
+            agent {
+                label 'test'
+            }
+            steps {
+                echo 'Testing..'
+                sh './helloworld'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
+            }
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;如果要使用預建立的檔案，同樣在 &lt;code class=&quot;highlighter-rouge&quot;&gt;https://github.com/allyusd/jenkins-pipeline.git&lt;/code&gt;，這次是 &lt;code class=&quot;highlighter-rouge&quot;&gt;different-agent&lt;/code&gt; branch。&lt;/p&gt;
+
+&lt;p&gt;修改後啟動建置，會發現失敗了。首先檢查我們的設定是否正確生效
+首先 Build 是執行在 agent-cpp，接著 Test 是執行在 agent&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-17-jenkins-pipeline-as-code-artifacts/2018-10-17_22-04-06.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-17-jenkins-pipeline-as-code-artifacts/2018-10-17_22-05-31.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;從 Logs 來看設定是正確的，那錯誤是什麼呢？&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-17-jenkins-pipeline-as-code-artifacts/2018-10-17_22-07-15.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;發現錯誤訊息是找不到執行檔 helloworld，為什麼之前可以正常執行，現在卻找不到？跟我們剛剛做的變更有關嗎？&lt;/p&gt;
+
+&lt;p&gt;原因是原本我們都在同一個 agnet 上執行，所以編釋後可以直接執行。但是現在我們在 agent-cpp 上編釋，當想要在 agent 執行的時候，是沒有檔案可以執行的。該怎麼辦呢？&lt;/p&gt;
+
+&lt;p&gt;好的，回到主題，我們可以利用封存檔案的功能來取得 agent-cpp 編譯完成的 helloworld 檔案&lt;/p&gt;
+
+&lt;p&gt;首先在 Build 階段將檔案封存，跟建置無關的動作，要在 &lt;code class=&quot;highlighter-rouge&quot;&gt;post&lt;/code&gt; 區段內宣告，只有成功才進行封存，封存的指令是 &lt;code class=&quot;highlighter-rouge&quot;&gt;archiveArtifacts&lt;/code&gt;，後面接著 &lt;code class=&quot;highlighter-rouge&quot;&gt;artifacts&lt;/code&gt; 參數加上檔案名稱&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;post {
+    success {
+        archiveArtifacts artifacts: 'helloworld'
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;同時在 Test 階段要取得已封存的檔案，這裡可以透過 &lt;code class=&quot;highlighter-rouge&quot;&gt;BUILD_URL&lt;/code&gt; 環境變數來取得要下載的網址。然後將下載後的檔案加上執行的權限，最後才是執行檔案&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;steps {
+    echo 'Testing..'
+    sh '''#!/bin/bash
+    curl -O ${BUILD_URL}artifact/helloworld
+    chmod +x helloworld
+    ./helloworld
+    '''
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;要使用預建立的檔案，branch 是 &lt;code class=&quot;highlighter-rouge&quot;&gt;artifacts&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;重新建置之後，這次成功執行了，從 Logs 中可以看到有下載檔案的紀錄及執行的結果&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-17-jenkins-pipeline-as-code-artifacts/2018-10-17_22-30-20.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;對了，當我們成功封存檔案，在 Stage View 也可以找到下載的連結喔！雖然不怎麼明顯呢&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-17-jenkins-pipeline-as-code-artifacts/2018-10-17_22-31-31.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Jenkins" /><summary type="html">接續前一篇 Jenkins - Pipeline as Code - C++ 專案，這篇的主題是封存檔案</summary></entry><entry><title type="html">Jenkins - Pipeline as Code - C++ 專案</title><link href="https://twblog.hongjianching.com/2018/10/16/jenkins-pipeline-as-code-cpp-project/" rel="alternate" type="text/html" title="Jenkins - Pipeline as Code - C++ 專案" /><published>2018-10-16T00:00:00+08:00</published><updated>2018-10-16T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/16/jenkins-pipeline-as-code-cpp-project</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/16/jenkins-pipeline-as-code-cpp-project/">&lt;p&gt;接續前一篇 &lt;a href=&quot;https://twblog.hongjianching.com/2018/10/15/jenkins-pipeline-as-code-first-project/&quot;&gt;Jenkins - Pipeline as Code - 第一個專案&lt;/a&gt;，這次來建立 C++ 專案&lt;/p&gt;
 
 &lt;p&gt;因為要編譯 C++，使用 &lt;a href=&quot;https://twblog.hongjianching.com/2018/10/13/create-cpp-compiler-with-jenkins-agent-docker-image-part-2/&quot;&gt;建立擁有 C++ 編譯環境及 Jenkins Agent 的 Docker Image - Part 2&lt;/a&gt; 這篇所建立的環境&lt;/p&gt;
 
@@ -489,65 +605,4 @@ sudo chown -R &lt;span class=&quot;nv&quot;&gt;$USER&lt;/span&gt;:&lt;span class
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-08-create-dockerhub-automated-build/2018-10-08_21-55-15.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;而且之後只要 Github 有 push 的動作，就會自動觸發建置喔，這麼一來我們只要專心寫好 Dockerfile，就可以等著使用自動建置好的 image 嘍！&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Docker" /><category term="Dockerhub" /><category term="Github" /><category term="Dockerfile" /><summary type="html">今天要談論如何使用 GitHub 和 DockerHub 建立自動建置 Image，功能強大，但是反而非常的簡單喔！</summary></entry><entry><title type="html">將 Image 發佈到 Docker Hub</title><link href="https://twblog.hongjianching.com/2018/10/07/push-image-to-dockerhub/" rel="alternate" type="text/html" title="將 Image 發佈到 Docker Hub" /><published>2018-10-07T00:00:00+08:00</published><updated>2018-10-07T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/07/push-image-to-dockerhub</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/07/push-image-to-dockerhub/">&lt;p&gt;這篇會說明如何將 Image 發佈到 Docker Hub。&lt;/p&gt;
-
-&lt;p&gt;在前一篇 &lt;a href=&quot;https://twblog.hongjianching.com/2018/10/06/using-dockerfile-build-docker-image/&quot;&gt;使用 Dockerfile 建立自己的 Docker Image&lt;/a&gt; 已經知道如何建立自己的 image，但是建立的 image 只能本機使用，除非手動復製，否則不能在其它電腦使用。&lt;/p&gt;
-
-&lt;p&gt;在這之前有個疑問，那之前我們使用的 image，像是 hello-world、ubuntu:18.04 是從哪裡來的呢？&lt;/p&gt;
-
-&lt;h1 id=&quot;docker-hub&quot;&gt;Docker Hub&lt;/h1&gt;
-&lt;p&gt;來源其實就是 &lt;a href=&quot;https://hub.docker.com/&quot;&gt;Docker Hub&lt;/a&gt;，目前是 Docker 預設的 image 來源，像是 &lt;a href=&quot;https://hub.docker.com/_/hello-world/&quot;&gt;hello-world&lt;/a&gt;、&lt;a href=&quot;https://hub.docker.com/_/ubuntu/&quot;&gt;ubuntu&lt;/a&gt;。從網站上可以找看看自己有興趣的 image，或者上傳自己的 image。&lt;/p&gt;
-
-&lt;p&gt;我們建立好 Docker Hub 帳號之後，就可以建立 image repository，按右上角的 Create，然後選擇 Create Repository&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-07-push-image-to-dockerhub/2018-10-07_21-28-11.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;接著在 name 的欄位輸入想要的 image 名稱，這個範例中命名為 ithelp-webserver，在下面的 description 可以輸入想要說明的資訊。Visibility 決定這個 image 是不是公開的，公開的話每個人都可以使用，私有的話只有自己能用，但是免費帳號只能有個一個私有倉庫，想要多一些的話就要付費。選擇後按下 Create。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-07-push-image-to-dockerhub/2018-10-07_21-32-50.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;完成後就會看到這個畫面，這樣一個映像檔倉庫就建立完成了，左上方就是這個 image 的名稱，因為 docker hub 是全球的人共用的，所以個人建立的 image 都會放在該帳號下，這個例子中就是 allyusd/ithelp-webserver。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-07-push-image-to-dockerhub/2018-10-07_21-37-31.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;然後回到 console，利用 build 指令重新命名 allyusd/ithelp-webserver 映像檔，因為跟前一個完全一樣，所以動作很快完成。&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker build . -t allyusd/ithelp-webserver
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;在將做好的 image 發佈到 docker hub 之前，需要先證明自己是這個倉庫的擁有者，需要透過 login 指令登入，接著輸入帳號、密碼&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker login
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;完成登入後，就可以使用 push 指令發佈 image 到 docker hub&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker push allyusd/ithelp-webserver
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-07-push-image-to-dockerhub/2018-10-07_22-11-55.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;完成後可以回到 dockerhub 專案的位置，選擇 Tags 就可以看到剛剛上傳的資訊&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-07-push-image-to-dockerhub/2018-10-07_22-13-23.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;最後我們可以先用 rmi 指令刪除本地的 image，然後再用新的指令啟動 webserver&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker rmi allyusd/ithelp-webserver
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    --restart&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;always &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    -d &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    -it &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    -p 80:80 &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    -v ~/www:/var/www/html &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    allyusd/ithelp-webserver
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-07-push-image-to-dockerhub/2018-10-07_22-18-26.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;這麼一來，我們就可以在任何電腦啟動我們自己做的映像檔&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Docker" /><category term="Dockerhub" /><summary type="html">這篇會說明如何將 Image 發佈到 Docker Hub。</summary></entry></feed>
+&lt;p&gt;而且之後只要 Github 有 push 的動作，就會自動觸發建置喔，這麼一來我們只要專心寫好 Dockerfile，就可以等著使用自動建置好的 image 嘍！&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Docker" /><category term="Dockerhub" /><category term="Github" /><category term="Dockerfile" /><summary type="html">今天要談論如何使用 GitHub 和 DockerHub 建立自動建置 Image，功能強大，但是反而非常的簡單喔！</summary></entry></feed>

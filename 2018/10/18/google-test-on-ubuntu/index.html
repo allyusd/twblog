@@ -19,12 +19,12 @@
 
 
 
-<title>Jenkins - Pipeline as Code - 封存檔案 - Jian-Ching 記事本</title>
+<title>在 Ubuntu 使用 Google Test - Jian-Ching 記事本</title>
 
 
 
 
-<meta name="description" content="接續前一篇 Jenkins - Pipeline as Code - C++ 專案，這篇的主題是封存檔案">
+<meta name="description" content="要使用 Google Test，首先要取得程式碼">
 
 
 
@@ -33,15 +33,15 @@
 
 <meta property="og:locale" content="zh_TW">
 <meta property="og:site_name" content="Jian-Ching 記事本">
-<meta property="og:title" content="Jenkins - Pipeline as Code - 封存檔案">
+<meta property="og:title" content="在 Ubuntu 使用 Google Test">
 
 
-  <link rel="canonical" href="https://twblog.HongJianChing.com/2018/10/17/jenkins-pipeline-as-code-artifacts/">
-  <meta property="og:url" content="https://twblog.HongJianChing.com/2018/10/17/jenkins-pipeline-as-code-artifacts/">
+  <link rel="canonical" href="https://twblog.HongJianChing.com/2018/10/18/google-test-on-ubuntu/">
+  <meta property="og:url" content="https://twblog.HongJianChing.com/2018/10/18/google-test-on-ubuntu/">
 
 
 
-  <meta property="og:description" content="接續前一篇 Jenkins - Pipeline as Code - C++ 專案，這篇的主題是封存檔案">
+  <meta property="og:description" content="要使用 Google Test，首先要取得程式碼">
 
 
 
@@ -56,7 +56,7 @@
 
 
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2018-10-17T00:00:00+08:00">
+  <meta property="article:published_time" content="2018-10-18T00:00:00+08:00">
 
 
 
@@ -278,138 +278,85 @@
 
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Jenkins - Pipeline as Code - 封存檔案">
-    <meta itemprop="description" content="接續前一篇 Jenkins - Pipeline as Code - C++ 專案，這篇的主題是封存檔案">
-    <meta itemprop="datePublished" content="October 17, 2018">
+    <meta itemprop="headline" content="在 Ubuntu 使用 Google Test">
+    <meta itemprop="description" content="要使用 Google Test，首先要取得程式碼">
+    <meta itemprop="datePublished" content="October 18, 2018">
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 class="page__title" itemprop="headline">Jenkins - Pipeline as Code - 封存檔案
+          <h1 class="page__title" itemprop="headline">在 Ubuntu 使用 Google Test
 </h1>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        <p>接續前一篇 <a href="https://twblog.hongjianching.com/2018/10/16/jenkins-pipeline-as-code-cpp-project/">Jenkins - Pipeline as Code - C++ 專案</a>，這篇的主題是封存檔案</p>
+        <p>要使用 Google Test，首先要取得程式碼</p>
 
-<p>封存檔案功能可以把編譯完成的檔案存起來，這樣之後要用就可以直接使用，不需要再次編譯</p>
+<p>原始碼可以在 <a href="https://github.com/google/googletest/releases">Releases · google/googletest</a> 下載，在 Ubuntu 則可以透過 libgtest-dev 套件取得</p>
 
-<p>在講封存檔案之前，先來講一下 Pipeline 在不同 Agent 之間進行作業的情況吧</p>
-
-<p>這次<a href="https://twblog.hongjianching.com/2018/10/13/create-cpp-compiler-with-jenkins-agent-docker-image-part-2/">使用的環境</a>加上一點點的修改，在原本的 <code class="highlighter-rouge">agent</code> 的<code class="highlighter-rouge">設定</code>的<code class="highlighter-rouge">標籤</code> 加上 <code class="highlighter-rouge">test</code>，用來跟 <code class="highlighter-rouge">agent-cpp</code> 的 <code class="highlighter-rouge">cpp</code> 標籤作出明確區隔。</p>
-
-<p>首先要在 Build、Test 階段分別指定不同的 Agent，在 Build 使用有 C++ 編釋環境的 <code class="highlighter-rouge">cpp</code> 標籤，在 Test 則使用沒有 C++ 編釋環境的 <code class="highlighter-rouge">test</code> 標籤，這樣的設定可以確保編釋完成的檔案可以順利的發佈，避免只能在開發環境執行的情況。</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>stage('Build') {
-    agent {
-        label 'test'
-    }
-    steps {
-        ... (略)
-    }
-}
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>apt install libgtest-dev -y
 </code></pre>
 </div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>stage('Test') {
-    agent {
-        label 'cpp'
-    }
-    steps {
-        ... (略)
-    }
-}
+<p>套件會安裝在 <code class="highlighter-rouge">/usr/src/gtest</code> 目錄下</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="nb">cd</span> /usr/src/gtest
 </code></pre>
 </div>
 
-<p>除了上面兩個設定之外，別忘了在最一開始<a href="https://twblog.hongjianching.com/2018/10/14/jenkins-pipeline-as-code-introduction/">介紹</a>的時候說過，當各個 state 使用各自的 agent 宣告時，最頂級的 agent 要宣告為 none</p>
-
-<p>完整的 Jenkinsfile 為下</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>pipeline {
-    agent none
-    stages {
-        stage('Build') {
-            agent {
-                label 'cpp'
-            }
-            steps {
-                echo 'Building..'
-                git 'https://github.com/allyusd/helloworld.cpp.git'
-                sh 'g++ helloworld.cpp -o helloworld'
-            }
-        }
-        stage('Test') {
-            agent {
-                label 'test'
-            }
-            steps {
-                echo 'Testing..'
-                sh './helloworld'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
-            }
-        }
-    }
-}
+<p>透過 cmake 進行建置設定，產生 makefile</p>
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>cmake CMakeLists.txt
 </code></pre>
 </div>
 
-<p>如果要使用預建立的檔案，同樣在 <code class="highlighter-rouge">https://github.com/allyusd/jenkins-pipeline.git</code>，這次是 <code class="highlighter-rouge">different-agent</code> branch。</p>
-
-<p>修改後啟動建置，會發現失敗了。首先檢查我們的設定是否正確生效
-首先 Build 是執行在 agent-cpp，接著 Test 是執行在 agent</p>
-
-<p><img src="/assets/images/2018-10-17-jenkins-pipeline-as-code-artifacts/2018-10-17_22-04-06.png" alt="" /></p>
-
-<p><img src="/assets/images/2018-10-17-jenkins-pipeline-as-code-artifacts/2018-10-17_22-05-31.png" alt="" /></p>
-
-<p>從 Logs 來看設定是正確的，那錯誤是什麼呢？</p>
-
-<p><img src="/assets/images/2018-10-17-jenkins-pipeline-as-code-artifacts/2018-10-17_22-07-15.png" alt="" /></p>
-
-<p>發現錯誤訊息是找不到執行檔 helloworld，為什麼之前可以正常執行，現在卻找不到？跟我們剛剛做的變更有關嗎？</p>
-
-<p>原因是原本我們都在同一個 agnet 上執行，所以編釋後可以直接執行。但是現在我們在 agent-cpp 上編釋，當想要在 agent 執行的時候，是沒有檔案可以執行的。該怎麼辦呢？</p>
-
-<p>好的，回到主題，我們可以利用封存檔案的功能來取得 agent-cpp 編譯完成的 helloworld 檔案</p>
-
-<p>首先在 Build 階段將檔案封存，跟建置無關的動作，要在 <code class="highlighter-rouge">post</code> 區段內宣告，只有成功才進行封存，封存的指令是 <code class="highlighter-rouge">archiveArtifacts</code>，後面接著 <code class="highlighter-rouge">artifacts</code> 參數加上檔案名稱</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>post {
-    success {
-        archiveArtifacts artifacts: 'helloworld'
-    }
-}
-</code></pre>
-</div>
-<p>同時在 Test 階段要取得已封存的檔案，這裡可以透過 <code class="highlighter-rouge">BUILD_URL</code> 環境變數來取得要下載的網址。然後將下載後的檔案加上執行的權限，最後才是執行檔案</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>steps {
-    echo 'Testing..'
-    sh '''#!/bin/bash
-    curl -O ${BUILD_URL}artifact/helloworld
-    chmod +x helloworld
-    ./helloworld
-    '''
-}
+<p>最後進行建置</p>
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>make
 </code></pre>
 </div>
 
-<p>要使用預建立的檔案，branch 是 <code class="highlighter-rouge">artifacts</code></p>
+<p>成功建置後會產生 libgtest.a 及 libgtest_main.a 兩個檔案</p>
 
-<p>重新建置之後，這次成功執行了，從 Logs 中可以看到有下載檔案的紀錄及執行的結果</p>
+<p>接著建立一個檔案測試一下</p>
 
-<p><img src="/assets/images/2018-10-17-jenkins-pipeline-as-code-artifacts/2018-10-17_22-30-20.png" alt="" /></p>
+<p>unittest.cpp</p>
+<div class="language-cpp highlighter-rouge"><pre class="highlight"><code><span class="cp">#include &lt;gtest/gtest.h&gt;
+</span>
+<span class="cp">#define HELLOWORLD "Hello World"
+</span> 
+<span class="n">TEST</span><span class="p">(</span><span class="n">GoogleTest</span><span class="p">,</span> <span class="n">HelloWorld</span><span class="p">)</span> <span class="p">{</span> 
+    <span class="n">ASSERT_EQ</span><span class="p">(</span><span class="s">"Hello World"</span><span class="p">,</span> <span class="n">HELLOWORLD</span><span class="p">);</span>
+<span class="p">}</span>
 
-<p>對了，當我們成功封存檔案，在 Stage View 也可以找到下載的連結喔！雖然不怎麼明顯呢</p>
+<span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">testing</span><span class="o">::</span><span class="n">InitGoogleTest</span><span class="p">(</span><span class="o">&amp;</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">RUN_ALL_TESTS</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre>
+</div>
 
-<p><img src="/assets/images/2018-10-17-jenkins-pipeline-as-code-artifacts/2018-10-17_22-31-31.png" alt="" /></p>
+<p>第一行引用 gtest 的 header，接著定義 HELLOWORLD 代表實際結果</p>
+
+<p>Test 代表一個測試案例，HelloWorld 代表此測試案例的名稱，GoogleTest 則為多個測試案例的群組名稱，常見用法是以測試對象的 class 名稱命名。測試案例的內容可以用 ASSERT_EQ 來判斷期望值與實際值是否相等</p>
+
+<p>最後一段是初始化 Google Test 及執行所有的測試案例。</p>
+
+<p>寫好測試檔案，就可以進行測試程式的建置</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>g++ unittest.cpp -o unittest -Igtest/include -Lgtest/lib -lgtest -lpthread
+</code></pre>
+</div>
+
+<p>建置成功後，執行測試程式</p>
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>./unittest
+</code></pre>
+</div>
+
+<p>測試結果</p>
+
+<p><img src="/assets/images/2018-10-18-google-test-on-ubuntu/2018-10-18_22-46-15.png" alt="" /></p>
 
         
       </section>
@@ -434,7 +381,11 @@
     
       
       
-      <a href="https://twblog.hongjianching.com/tags/#jenkins" class="page__taxonomy-item" rel="tag">Jenkins</a>
+      <a href="https://twblog.hongjianching.com/tags/#google-test" class="page__taxonomy-item" rel="tag">Google-Test</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://twblog.hongjianching.com/tags/#ubuntu" class="page__taxonomy-item" rel="tag">Ubuntu</a>
     
     </span>
   </p>
@@ -443,7 +394,7 @@
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2018-10-17T00:00:00+08:00">October 17, 2018</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2018-10-18T00:00:00+08:00">October 18, 2018</time></p>
         
       </footer>
 
@@ -452,25 +403,24 @@
     <h4 class="page__share-title">分享到</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=Jenkins - Pipeline as Code - 封存檔案 https://twblog.hongjianching.com/2018/10/17/jenkins-pipeline-as-code-artifacts/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=在 Ubuntu 使用 Google Test https://twblog.hongjianching.com/2018/10/18/google-test-on-ubuntu/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2018/10/17/jenkins-pipeline-as-code-artifacts/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2018/10/18/google-test-on-ubuntu/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2018/10/17/jenkins-pipeline-as-code-artifacts/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2018/10/18/google-test-on-ubuntu/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2018/10/17/jenkins-pipeline-as-code-artifacts/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2018/10/18/google-test-on-ubuntu/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="https://twblog.hongjianching.com/2018/10/16/jenkins-pipeline-as-code-cpp-project/" class="pagination--pager" title="Jenkins - Pipeline as Code - C++ 專案
+      <a href="https://twblog.hongjianching.com/2018/10/17/jenkins-pipeline-as-code-artifacts/" class="pagination--pager" title="Jenkins - Pipeline as Code - 封存檔案
 ">較舊</a>
     
     
-      <a href="https://twblog.hongjianching.com/2018/10/18/google-test-on-ubuntu/" class="pagination--pager" title="在 Ubuntu 使用 Google Test
-">較新</a>
+      <a href="#" class="pagination--pager disabled">較新</a>
     
   </nav>
 
@@ -534,7 +484,9 @@
   
     ga('send', 'event', 'taggedPost', 'view', '2019-iT-邦幫忙鐵人賽');
   
-    ga('send', 'event', 'taggedPost', 'view', 'Jenkins');
+    ga('send', 'event', 'taggedPost', 'view', 'Google-Test');
+  
+    ga('send', 'event', 'taggedPost', 'view', 'Ubuntu');
   
   
 </script>

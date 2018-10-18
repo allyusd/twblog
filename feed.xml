@@ -1,4 +1,67 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-17T22:34:20+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">Jenkins - Pipeline as Code - 封存檔案</title><link href="https://twblog.hongjianching.com/2018/10/17/jenkins-pipeline-as-code-artifacts/" rel="alternate" type="text/html" title="Jenkins - Pipeline as Code - 封存檔案" /><published>2018-10-17T00:00:00+08:00</published><updated>2018-10-17T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/17/jenkins-pipeline-as-code-artifacts</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/17/jenkins-pipeline-as-code-artifacts/">&lt;p&gt;接續前一篇 &lt;a href=&quot;https://twblog.hongjianching.com/2018/10/16/jenkins-pipeline-as-code-cpp-project/&quot;&gt;Jenkins - Pipeline as Code - C++ 專案&lt;/a&gt;，這篇的主題是封存檔案&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-18T22:48:42+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">在 Ubuntu 使用 Google Test</title><link href="https://twblog.hongjianching.com/2018/10/18/google-test-on-ubuntu/" rel="alternate" type="text/html" title="在 Ubuntu 使用 Google Test" /><published>2018-10-18T00:00:00+08:00</published><updated>2018-10-18T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/18/google-test-on-ubuntu</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/18/google-test-on-ubuntu/">&lt;p&gt;要使用 Google Test，首先要取得程式碼&lt;/p&gt;
+
+&lt;p&gt;原始碼可以在 &lt;a href=&quot;https://github.com/google/googletest/releases&quot;&gt;Releases · google/googletest&lt;/a&gt; 下載，在 Ubuntu 則可以透過 libgtest-dev 套件取得&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;apt install libgtest-dev -y
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;套件會安裝在 &lt;code class=&quot;highlighter-rouge&quot;&gt;/usr/src/gtest&lt;/code&gt; 目錄下&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /usr/src/gtest
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;透過 cmake 進行建置設定，產生 makefile&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;cmake CMakeLists.txt
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;最後進行建置&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;make
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;成功建置後會產生 libgtest.a 及 libgtest_main.a 兩個檔案&lt;/p&gt;
+
+&lt;p&gt;接著建立一個檔案測試一下&lt;/p&gt;
+
+&lt;p&gt;unittest.cpp&lt;/p&gt;
+&lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;#include &amp;lt;gtest/gtest.h&amp;gt;
+&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;#define HELLOWORLD &quot;Hello World&quot;
+&lt;/span&gt; 
+&lt;span class=&quot;n&quot;&gt;TEST&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GoogleTest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HelloWorld&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; 
+    &lt;span class=&quot;n&quot;&gt;ASSERT_EQ&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Hello World&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HELLOWORLD&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;argc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;**&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;argv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;testing&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;InitGoogleTest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;argc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;argv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;RUN_ALL_TESTS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;第一行引用 gtest 的 header，接著定義 HELLOWORLD 代表實際結果&lt;/p&gt;
+
+&lt;p&gt;Test 代表一個測試案例，HelloWorld 代表此測試案例的名稱，GoogleTest 則為多個測試案例的群組名稱，常見用法是以測試對象的 class 名稱命名。測試案例的內容可以用 ASSERT_EQ 來判斷期望值與實際值是否相等&lt;/p&gt;
+
+&lt;p&gt;最後一段是初始化 Google Test 及執行所有的測試案例。&lt;/p&gt;
+
+&lt;p&gt;寫好測試檔案，就可以進行測試程式的建置&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;g++ unittest.cpp -o unittest -Igtest/include -Lgtest/lib -lgtest -lpthread
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;建置成功後，執行測試程式&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;./unittest
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;測試結果&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-18-google-test-on-ubuntu/2018-10-18_22-46-15.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Google-Test" /><category term="Ubuntu" /><summary type="html">要使用 Google Test，首先要取得程式碼</summary></entry><entry><title type="html">Jenkins - Pipeline as Code - 封存檔案</title><link href="https://twblog.hongjianching.com/2018/10/17/jenkins-pipeline-as-code-artifacts/" rel="alternate" type="text/html" title="Jenkins - Pipeline as Code - 封存檔案" /><published>2018-10-17T00:00:00+08:00</published><updated>2018-10-17T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/17/jenkins-pipeline-as-code-artifacts</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/17/jenkins-pipeline-as-code-artifacts/">&lt;p&gt;接續前一篇 &lt;a href=&quot;https://twblog.hongjianching.com/2018/10/16/jenkins-pipeline-as-code-cpp-project/&quot;&gt;Jenkins - Pipeline as Code - C++ 專案&lt;/a&gt;，這篇的主題是封存檔案&lt;/p&gt;
 
 &lt;p&gt;封存檔案功能可以把編譯完成的檔案存起來，這樣之後要用就可以直接使用，不需要再次編譯&lt;/p&gt;
 
@@ -561,48 +624,4 @@ sudo chown -R &lt;span class=&quot;nv&quot;&gt;$USER&lt;/span&gt;:&lt;span class
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-09-install-jenkins-with-docker/2018-10-09_21-53-11.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Jenkins 建置完成嘍！&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Docker" /><category term="Jenkins" /><summary type="html">Jenkins 是 CI 老牌工具，透過新的 Docker 技術，快速建立自己的 CI 環境。</summary></entry><entry><title type="html">使用 GitHub 在 DockerHub 自動建置 Docker Image</title><link href="https://twblog.hongjianching.com/2018/10/08/create-dockerhub-automated-build/" rel="alternate" type="text/html" title="使用 GitHub 在 DockerHub 自動建置 Docker Image" /><published>2018-10-08T00:00:00+08:00</published><updated>2018-10-08T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/08/create-dockerhub-automated-build</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/08/create-dockerhub-automated-build/">&lt;p&gt;今天要談論如何使用 GitHub 和 DockerHub 建立自動建置 Image，功能強大，但是反而非常的簡單喔！&lt;/p&gt;
-
-&lt;p&gt;前一篇 &lt;a href=&quot;https://twblog.hongjianching.com/2018/10/07/push-image-to-dockerhub/&quot;&gt;將 Image 發佈到 Docker Hub&lt;/a&gt; 已經學會手動將做好的 Image 放到 DockerHub 上，但是製作的動作很多，而且如果是想給別人用會有疑慮，因為不知道你的映像檔做了哪些修改，或者會不會加什麼料進去呢？&lt;/p&gt;
-
-&lt;p&gt;為了 &lt;del&gt;世界和平&lt;/del&gt; 讓其它人可以安心下載你製作的 image，也為了節省自己的時間，我們就利用 GitHub 和 DockerHub 來自動建置映像檔吧。&lt;/p&gt;
-
-&lt;h1 id=&quot;github&quot;&gt;GitHub&lt;/h1&gt;
-&lt;p&gt;首先要有 GitHub 帳號，接著建立一個 git 倉庫，這邊命名為 docker-ithelp-webserver-auto，命名沒有規範，叫什麼都可以，個人為了跟一般程式碼專案區隔，所以會加上 docker 前缀字，或者可以考慮單獨申請一個獨立帳號來集中 docker 專案。&lt;/p&gt;
-
-&lt;p&gt;重要的一點，為了直接在 GitHub 網頁操作，請將 &lt;em&gt;Initialize this repository with a README&lt;/em&gt; 打勾喔！(想直接用 git 操作的人就可以無視沒關係)&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-08-create-dockerhub-automated-build/2018-10-08_21-30-16.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;然後就有一個 Git 倉庫了，接著按下右上角的 &lt;em&gt;Create new file&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-08-create-dockerhub-automated-build/2018-10-08_21-32-44.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;輸入檔名 Dockerfile，和前一篇 Dockerfile 的內容，接著按下 &lt;em&gt;Commit new file&lt;/em&gt; 就完成 Git 倉庫的準備了。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-08-create-dockerhub-automated-build/2018-10-08_21-34-47.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;dockerhub&quot;&gt;DockerHub&lt;/h1&gt;
-&lt;p&gt;接著到 DockerHub，選擇右上角的 &lt;em&gt;Create&lt;/em&gt; 及 &lt;em&gt;Create Automated Build&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-08-create-dockerhub-automated-build/2018-10-08_21-37-44.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;第一次因為還沒有連結 GitHub，所以會需要授權，按下 &lt;em&gt;Link Accounts&lt;/em&gt; 及 &lt;em&gt;Link Github&lt;/em&gt; 及 &lt;em&gt;Select&lt;/em&gt;，完成授權後，重覆 &lt;em&gt;Create Automated Build&lt;/em&gt; 的動作會看到 &lt;em&gt;Create Auto-build Github&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-08-create-dockerhub-automated-build/2018-10-08_21-41-52.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;然後就會出現你 Github 所有的專案，選擇剛剛建立的 docker-ithelp-webserver-auto，接著給 Dockerhub 的倉庫命名，個人習慣會把 docker 前缀字拿掉，這個例子為 ithelp-webserver-auto，輸入 Description 後按下 &lt;em&gt;Cretae&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-08-create-dockerhub-automated-build/2018-10-08_21-43-32.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;這麼一來 DockerHub 倉庫也建立完成了，從首頁可以看完最大的不同是會顯示這個 image 的來源，還有選單多了 &lt;em&gt;Dockerfile&lt;/em&gt;、&lt;em&gt;Build Details&lt;/em&gt; 和 &lt;em&gt;Build Settings&lt;/em&gt;，這邊有兩個網頁可以比較一下 &lt;a href=&quot;https://hub.docker.com/r/allyusd/ithelp-webserver/&quot;&gt;allyusd/ithelp-webserver&lt;/a&gt; 和 &lt;a href=&quot;https://hub.docker.com/r/allyusd/ithelp-webserver-auto/&quot;&gt;allyusd/ithelp-webserver-auto&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-08-create-dockerhub-automated-build/2018-10-08_21-46-47.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-08-create-dockerhub-automated-build/2018-10-08_21-48-42.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;選擇 &lt;em&gt;Build Settings&lt;/em&gt; 按下 &lt;em&gt;Trigger&lt;/em&gt; 之後 Dockerhub 就會依照 Github 上面的 Dockerfile 開始建置嘍！建置的狀態或 Logs 可以在 &lt;em&gt;Build Details&lt;/em&gt; 查詢。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-08-create-dockerhub-automated-build/2018-10-08_21-55-15.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;而且之後只要 Github 有 push 的動作，就會自動觸發建置喔，這麼一來我們只要專心寫好 Dockerfile，就可以等著使用自動建置好的 image 嘍！&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Docker" /><category term="Dockerhub" /><category term="Github" /><category term="Dockerfile" /><summary type="html">今天要談論如何使用 GitHub 和 DockerHub 建立自動建置 Image，功能強大，但是反而非常的簡單喔！</summary></entry></feed>
+&lt;p&gt;Jenkins 建置完成嘍！&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Docker" /><category term="Jenkins" /><summary type="html">Jenkins 是 CI 老牌工具，透過新的 Docker 技術，快速建立自己的 CI 環境。</summary></entry></feed>

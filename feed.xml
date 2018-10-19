@@ -1,4 +1,89 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-18T22:48:42+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">在 Ubuntu 使用 Google Test</title><link href="https://twblog.hongjianching.com/2018/10/18/google-test-on-ubuntu/" rel="alternate" type="text/html" title="在 Ubuntu 使用 Google Test" /><published>2018-10-18T00:00:00+08:00</published><updated>2018-10-18T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/18/google-test-on-ubuntu</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/18/google-test-on-ubuntu/">&lt;p&gt;要使用 Google Test，首先要取得程式碼&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-19T22:21:29+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">Jenkins - Pipeline as Code - 測試報告</title><link href="https://twblog.hongjianching.com/2018/10/19/jenkins-pipeline-as-code-test-report/" rel="alternate" type="text/html" title="Jenkins - Pipeline as Code - 測試報告" /><published>2018-10-19T00:00:00+08:00</published><updated>2018-10-19T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/19/jenkins-pipeline-as-code-test-report</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/19/jenkins-pipeline-as-code-test-report/">&lt;p&gt;這篇的主題是測試報告，接續 &lt;a href=&quot;https://twblog.hongjianching.com/2018/10/17/jenkins-pipeline-as-code-artifacts/&quot;&gt;Jenkins - Pipeline as Code - 封存檔案&lt;/a&gt;及&lt;a href=&quot;https://twblog.hongjianching.com/2018/10/18/google-test-on-ubuntu/&quot;&gt;在 Ubuntu 使用 Google Test&lt;/a&gt;兩篇文章，這篇要整合起來&lt;/p&gt;
+
+&lt;h1 id=&quot;build&quot;&gt;Build&lt;/h1&gt;
+&lt;p&gt;首先，原本的 C++ 專案，新增 Google Test 在 git branch &lt;code class=&quot;highlighter-rouge&quot;&gt;gtest&lt;/code&gt;，所以要修改原本 Jenkinsfile 指定 branch&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git branch: 'gtest', url: 'https://github.com/allyusd/helloworld.cpp.git'
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;同時新增建置 unit test 的部份&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sh 'g++ unittest.cpp -o unittest -Igtest/include -Lgtest/lib -lgtest -lpthread'
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;別忘了也要封裝 unittest 檔案，才能在另一個 agent 中執行&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;archiveArtifacts artifacts: 'helloworld,unittest'
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&quot;test&quot;&gt;Test&lt;/h1&gt;
+&lt;p&gt;接著修改 Test 階段，將原本執行 helloworld 換成 unittest，並且加上參數  –gtest_output=”xml:report.xml” 產生測試報告&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;./unittest --gtest_output=&quot;xml:report.xml&quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;接著就要將測試報告上傳到 Jenkins，才能在 Web UI 出現結果&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;post {
+    always {
+        junit '*.xml'
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&quot;結果&quot;&gt;結果&lt;/h1&gt;
+&lt;p&gt;完整修改後的內容如下&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pipeline {
+    agent none
+    stages {
+        stage('Build') {
+            agent {
+                label 'cpp'
+            }
+            steps {
+                echo 'Building..'
+                git branch: 'gtest', url: 'https://github.com/allyusd/helloworld.cpp.git'
+                sh 'g++ helloworld.cpp -o helloworld'
+                sh 'g++ unittest.cpp -o unittest -Igtest/include -Lgtest/lib -lgtest -lpthread'
+            }
+            post {
+                success {
+                    archiveArtifacts artifacts: 'helloworld,unittest'
+                }
+            }
+        }
+        stage('Test') {
+            agent {
+                label 'test'
+            }
+            steps {
+                echo 'Testing..'
+                sh '''#!/bin/bash
+                curl -O ${BUILD_URL}artifact/unittest
+                chmod +x unittest
+                ./unittest --gtest_output=&quot;xml:report.xml&quot;
+                '''
+            }
+            post {
+                always {
+                    junit '*.xml'
+                }
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
+            }
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;如果要使用已建立好的檔案，同樣在 &lt;code class=&quot;highlighter-rouge&quot;&gt;https://github.com/allyusd/jenkins-pipeline.git&lt;/code&gt;，這次是 &lt;code class=&quot;highlighter-rouge&quot;&gt;test-report&lt;/code&gt; branch&lt;/p&gt;
+
+&lt;p&gt;執行後，在專案主頁會出現&lt;code class=&quot;highlighter-rouge&quot;&gt;測試結果趨勢&lt;/code&gt;圖&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-19-jenkins-pipeline-as-code-test-report/2018-10-19_22-17-01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;並且在建置頁面會出現&lt;code class=&quot;highlighter-rouge&quot;&gt;測試結果&lt;/code&gt;，如果有失敗的測試，這邊可以查閱
+&lt;img src=&quot;/assets/images/2018-10-19-jenkins-pipeline-as-code-test-report/2018-10-19_22-18-53.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Jenkins" /><summary type="html">這篇的主題是測試報告，接續 Jenkins - Pipeline as Code - 封存檔案及在 Ubuntu 使用 Google Test兩篇文章，這篇要整合起來</summary></entry><entry><title type="html">在 Ubuntu 使用 Google Test</title><link href="https://twblog.hongjianching.com/2018/10/18/google-test-on-ubuntu/" rel="alternate" type="text/html" title="在 Ubuntu 使用 Google Test" /><published>2018-10-18T00:00:00+08:00</published><updated>2018-10-18T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/18/google-test-on-ubuntu</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/18/google-test-on-ubuntu/">&lt;p&gt;要使用 Google Test，首先要取得程式碼&lt;/p&gt;
 
 &lt;p&gt;原始碼可以在 &lt;a href=&quot;https://github.com/google/googletest/releases&quot;&gt;Releases · google/googletest&lt;/a&gt; 下載，在 Ubuntu 則可以透過 libgtest-dev 套件取得&lt;/p&gt;
 
@@ -581,47 +666,4 @@ apt install build-essential -y
 &lt;h1 id=&quot;ref&quot;&gt;ref&lt;/h1&gt;
 &lt;p&gt;&lt;a href=&quot;https://hub.docker.com/r/jenkins/jnlp-slave/&quot;&gt;jenkins/jnlp-slave - Docker Hub&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://support.cloudbees.com/hc/en-us/articles/115001771692-How-to-Create-Permanent-Agents-with-Docker&quot;&gt;How to Create Permanent Agents with Docker – CloudBees Support&lt;/a&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Docker" /><category term="Jenkins" /><summary type="html">讓 Jenkins Master 專心在 CI Server 的任務，剩下的工作交給 Jenkins Agent 處理，這樣可以降低環境的複雜度，也可以增加維護的方便性。</summary></entry><entry><title type="html">使用 Docker 安裝 Jenkins</title><link href="https://twblog.hongjianching.com/2018/10/09/install-jenkins-with-docker/" rel="alternate" type="text/html" title="使用 Docker 安裝 Jenkins" /><published>2018-10-09T00:00:00+08:00</published><updated>2018-10-09T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/09/install-jenkins-with-docker</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/09/install-jenkins-with-docker/">&lt;p&gt;Jenkins 是 CI 老牌工具，透過新的 Docker 技術，快速建立自己的 CI 環境。&lt;/p&gt;
-
-&lt;p&gt;如果還沒有 Docker 執行環境，可以參考 &lt;a href=&quot;https://twblog.hongjianching.com/2018/10/02/install-docker/&quot;&gt;安裝 Docker&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;第一步先在 host 建立存放 Jenkins 的目錄，放在 /data/jenkins&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo mkdir -p /data/jenkins
-sudo chown -R &lt;span class=&quot;nv&quot;&gt;$USER&lt;/span&gt;:&lt;span class=&quot;nv&quot;&gt;$GROUP&lt;/span&gt; /data
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;透過 docker 啟動 jenkins&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run \
-    --name jenkins \
-    -d --restart always \
-    -p 8080:8080 -p 50000:50000 \
-    -v /data/jenkins:/var/jenkins_home \
-    jenkins/jenkins:lts
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;然後可以在 http://localhost:8080 看到 jenkins 準備上工了&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-09-install-jenkins-with-docker/2018-10-09_21-19-05.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;等一段時候之後，jenkins 就會要求輸入預設管理員密碼，畫面上提示 &lt;code class=&quot;highlighter-rouge&quot;&gt;/var/jenkins_home/secrets/initialAdminPassword&lt;/code&gt;，但是我們有將容器的 &lt;code class=&quot;highlighter-rouge&quot;&gt;/var/jenkins_home&lt;/code&gt; 對映到 host 的 &lt;code class=&quot;highlighter-rouge&quot;&gt;/data/jenkins&lt;/code&gt;，所以我們可以在 &lt;code class=&quot;highlighter-rouge&quot;&gt;/data/jenkins/secrets/initialAdminPassword&lt;/code&gt; 找到預設密碼&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;cat /data/jenkins/secrets/initialAdminPassword
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;按下確認後，選擇 install suggested plugins，plugins 可以之後再依需要安裝&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-09-install-jenkins-with-docker/2018-10-09_21-31-09.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;等待 plugin 安裝完成後，建立第一個管理員帳號，接著輸入 Jenkins URL，如果只是測試用可以保持 losthost 沒關係，但是如果要正式使用，記得改為真實 IP 喔。最後可以看到 &lt;strong&gt;Jenkins is ready&lt;/strong&gt;。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-09-install-jenkins-with-docker/2018-10-09_21-51-52.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;按下 &lt;em&gt;Start using Jenkins&lt;/em&gt; 之後就會看到 Jenkins 主頁面了&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-09-install-jenkins-with-docker/2018-10-09_21-53-11.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Jenkins 建置完成嘍！&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Docker" /><category term="Jenkins" /><summary type="html">Jenkins 是 CI 老牌工具，透過新的 Docker 技術，快速建立自己的 CI 環境。</summary></entry></feed>
+&lt;p&gt;&lt;a href=&quot;https://support.cloudbees.com/hc/en-us/articles/115001771692-How-to-Create-Permanent-Agents-with-Docker&quot;&gt;How to Create Permanent Agents with Docker – CloudBees Support&lt;/a&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Docker" /><category term="Jenkins" /><summary type="html">讓 Jenkins Master 專心在 CI Server 的任務，剩下的工作交給 Jenkins Agent 處理，這樣可以降低環境的複雜度，也可以增加維護的方便性。</summary></entry></feed>

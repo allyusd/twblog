@@ -24,7 +24,7 @@
 
 
 
-<meta name="description" content="這篇的主題是測試報告，接續 Jenkins - Pipeline as Code - 封存檔案及在 Ubuntu 使用 Google Test兩篇文章，這篇要整合起來">
+<meta name="description" content="這次要讓 Jenkins 可以顯示程式碼的變更">
 
 
 
@@ -36,12 +36,12 @@
 <meta property="og:title" content="Jenkins - Pipeline as Code - 測試報告">
 
 
-  <link rel="canonical" href="https://twblog.HongJianChing.com/2018/10/19/jenkins-pipeline-as-code-test-report/">
-  <meta property="og:url" content="https://twblog.HongJianChing.com/2018/10/19/jenkins-pipeline-as-code-test-report/">
+  <link rel="canonical" href="https://twblog.HongJianChing.com/2018/10/20/jenkins-pipeline-as-code-last-changes/">
+  <meta property="og:url" content="https://twblog.HongJianChing.com/2018/10/20/jenkins-pipeline-as-code-last-changes/">
 
 
 
-  <meta property="og:description" content="這篇的主題是測試報告，接續 Jenkins - Pipeline as Code - 封存檔案及在 Ubuntu 使用 Google Test兩篇文章，這篇要整合起來">
+  <meta property="og:description" content="這次要讓 Jenkins 可以顯示程式碼的變更">
 
 
 
@@ -56,7 +56,7 @@
 
 
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2018-10-19T00:00:00+08:00">
+  <meta property="article:published_time" content="2018-10-20T00:00:00+08:00">
 
 
 
@@ -279,8 +279,8 @@
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
     <meta itemprop="headline" content="Jenkins - Pipeline as Code - 測試報告">
-    <meta itemprop="description" content="這篇的主題是測試報告，接續 Jenkins - Pipeline as Code - 封存檔案及在 Ubuntu 使用 Google Test兩篇文章，這篇要整合起來">
-    <meta itemprop="datePublished" content="October 19, 2018">
+    <meta itemprop="description" content="這次要讓 Jenkins 可以顯示程式碼的變更">
+    <meta itemprop="datePublished" content="October 20, 2018">
     
 
     <div class="page__inner-wrap">
@@ -293,92 +293,63 @@
       
 
       <section class="page__content" itemprop="text">
-        <p>這篇的主題是測試報告，接續 <a href="https://twblog.hongjianching.com/2018/10/17/jenkins-pipeline-as-code-artifacts/">Jenkins - Pipeline as Code - 封存檔案</a>及<a href="https://twblog.hongjianching.com/2018/10/18/google-test-on-ubuntu/">在 Ubuntu 使用 Google Test</a>兩篇文章，這篇要整合起來</p>
+        <p>這次要讓 Jenkins 可以顯示程式碼的變更</p>
 
-<h1 id="build">Build</h1>
-<p>首先，原本的 C++ 專案，新增 Google Test 在 git branch <code class="highlighter-rouge">gtest</code>，所以要修改原本 Jenkinsfile 指定 branch</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>git branch: 'gtest', url: 'https://github.com/allyusd/helloworld.cpp.git'
-</code></pre>
-</div>
-<p>同時新增建置 unit test 的部份</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>sh 'g++ unittest.cpp -o unittest -Igtest/include -Lgtest/lib -lgtest -lpthread'
-</code></pre>
-</div>
-<p>別忘了也要封裝 unittest 檔案，才能在另一個 agent 中執行</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>archiveArtifacts artifacts: 'helloworld,unittest'
-</code></pre>
-</div>
+<p>這個功能要透過 plugin 來完成，所以要先安裝 plugin，在 Jenkins 首頁選擇<code class="highlighter-rouge">管理 Jenkins</code></p>
 
-<h1 id="test">Test</h1>
-<p>接著修改 Test 階段，將原本執行 helloworld 換成 unittest，並且加上參數  –gtest_output=”xml:report.xml” 產生測試報告</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>./unittest --gtest_output="xml:report.xml"
-</code></pre>
-</div>
-<p>接著就要將測試報告上傳到 Jenkins，才能在 Web UI 出現結果</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>post {
-    always {
-        junit '*.xml'
-    }
+<p><img src="/assets/images/2018-10-20-jenkins-pipeline-as-code-last-changes/2018-10-20_22-33-28.png" alt="" /></p>
+
+<p>在管理 Jenkins 頁面，選擇<code class="highlighter-rouge">管理外掛程式</code>，這邊的外掛程式指的就是 Jenkins plugin</p>
+
+<p><img src="/assets/images/2018-10-20-jenkins-pipeline-as-code-last-changes/2018-10-20_22-36-41.png" alt="" /></p>
+
+<p>在管理外掛程式頁面，會有四個分頁</p>
+<ul>
+  <li>更新
+代表你已安裝的 plugin 有更新的版本可以安裝</li>
+  <li>可用的
+代表你未安裝的 plugin</li>
+  <li>已安裝
+代表你已安裝的 plugin</li>
+  <li>進階
+關於 plugin 安裝的相關設定，HTTP Proxy設定、上傳外掛程式、更新網址等等</li>
+</ul>
+
+<p>在這裡我們選擇<code class="highlighter-rouge">可用的</code>分頁</p>
+
+<p><img src="/assets/images/2018-10-20-jenkins-pipeline-as-code-last-changes/2018-10-20_22-39-00.png" alt="" /></p>
+
+<p>接著在一大堆的 plugin 中找到 <code class="highlighter-rouge">Last Changes</code>，可以透過 Ctrl + F 之類的機制會比較快找到喔</p>
+
+<p><img src="/assets/images/2018-10-20-jenkins-pipeline-as-code-last-changes/2018-10-20_22-40-16.png" alt="" /></p>
+
+<p>接著選擇下方的<code class="highlighter-rouge">下載並於重新啟動後安裝</code></p>
+
+<p><img src="/assets/images/2018-10-20-jenkins-pipeline-as-code-last-changes/2018-10-20_22-45-39.png" alt="" /></p>
+
+<p>正在安裝/升級 Plugins 頁面，把下方的<code class="highlighter-rouge">當安裝完成且沒有工作正在執行時，重啟 Jenkins</code>打勾，這樣 Jenkins 就會自動重啟喔</p>
+
+<p><img src="/assets/images/2018-10-20-jenkins-pipeline-as-code-last-changes/2018-10-20_22-49-20.png" alt="" /></p>
+
+<p>Jenkins 重啟之後，plugin 就可以使用了，接下來修改 Jenkinsfile。關鍵字是 <code class="highlighter-rouge">lastChanges</code>，<code class="highlighter-rouge">format</code> 選擇 <code class="highlighter-rouge">side-by-side</code>，會將兩個版本分別顯示在左邊跟右邊，個人習慣這種方式。因為差異不論建置成功或失敗都會想看，所以我們放在 <code class="highlighter-rouge">always</code> 宣告內，有別於 archiveArtifacts 的 <code class="highlighter-rouge">success</code> 宣告只有在建置成功才執行，在 always 內的動作無論如何都會執行。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>always {
+    lastChanges format:'SIDE', matching: 'LINE'
 }
 </code></pre>
 </div>
 
-<h1 id="結果">結果</h1>
-<p>完整修改後的內容如下</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>pipeline {
-    agent none
-    stages {
-        stage('Build') {
-            agent {
-                label 'cpp'
-            }
-            steps {
-                echo 'Building..'
-                git branch: 'gtest', url: 'https://github.com/allyusd/helloworld.cpp.git'
-                sh 'g++ helloworld.cpp -o helloworld'
-                sh 'g++ unittest.cpp -o unittest -Igtest/include -Lgtest/lib -lgtest -lpthread'
-            }
-            post {
-                success {
-                    archiveArtifacts artifacts: 'helloworld,unittest'
-                }
-            }
-        }
-        stage('Test') {
-            agent {
-                label 'test'
-            }
-            steps {
-                echo 'Testing..'
-                sh '''#!/bin/bash
-                curl -O ${BUILD_URL}artifact/unittest
-                chmod +x unittest
-                ./unittest --gtest_output="xml:report.xml"
-                '''
-            }
-            post {
-                always {
-                    junit '*.xml'
-                }
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
-            }
-        }
-    }
-}
-</code></pre>
-</div>
-<p>如果要使用已建立好的檔案，同樣在 <code class="highlighter-rouge">https://github.com/allyusd/jenkins-pipeline.git</code>，這次是 <code class="highlighter-rouge">test-report</code> branch</p>
+<p>這次的程式碼同樣在 <code class="highlighter-rouge">https://github.com/allyusd/jenkins-pipeline.git</code>，branch 是 <code class="highlighter-rouge">last-changes</code></p>
 
-<p>執行後，在專案主頁會出現<code class="highlighter-rouge">測試結果趨勢</code>圖</p>
+<p>執行後，在左邊選單列會出現 <code class="highlighter-rouge">View Last Changes</code></p>
 
-<p><img src="/assets/images/2018-10-19-jenkins-pipeline-as-code-test-report/2018-10-19_22-17-01.png" alt="" /></p>
+<p><img src="/assets/images/2018-10-20-jenkins-pipeline-as-code-last-changes/2018-10-20_23-06-40.png" alt="" /></p>
 
-<p>並且在建置頁面會出現<code class="highlighter-rouge">測試結果</code>，如果有失敗的測試，這邊可以查閱
-<img src="/assets/images/2018-10-19-jenkins-pipeline-as-code-test-report/2018-10-19_22-18-53.png" alt="" /></p>
+<p>View Last Changes 的結果如下</p>
+
+<p><img src="/assets/images/2018-10-20-jenkins-pipeline-as-code-last-changes/2018-10-20_23-11-50.png" alt="" /></p>
+
+<p>從上圖可以明顯的知道這次的程式碼修改了什麼，幫助判斷是什麼部份可以造成建置的錯誤</p>
 
         
       </section>
@@ -412,7 +383,7 @@
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2018-10-19T00:00:00+08:00">October 19, 2018</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2018-10-20T00:00:00+08:00">October 20, 2018</time></p>
         
       </footer>
 
@@ -421,25 +392,24 @@
     <h4 class="page__share-title">分享到</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=Jenkins - Pipeline as Code - 測試報告 https://twblog.hongjianching.com/2018/10/19/jenkins-pipeline-as-code-test-report/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=Jenkins - Pipeline as Code - 測試報告 https://twblog.hongjianching.com/2018/10/20/jenkins-pipeline-as-code-last-changes/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2018/10/19/jenkins-pipeline-as-code-test-report/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2018/10/20/jenkins-pipeline-as-code-last-changes/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2018/10/19/jenkins-pipeline-as-code-test-report/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2018/10/20/jenkins-pipeline-as-code-last-changes/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2018/10/19/jenkins-pipeline-as-code-test-report/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2018/10/20/jenkins-pipeline-as-code-last-changes/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="https://twblog.hongjianching.com/2018/10/18/google-test-on-ubuntu/" class="pagination--pager" title="在 Ubuntu 使用 Google Test
+      <a href="https://twblog.hongjianching.com/2018/10/19/jenkins-pipeline-as-code-test-report/" class="pagination--pager" title="Jenkins - Pipeline as Code - 測試報告
 ">較舊</a>
     
     
-      <a href="https://twblog.hongjianching.com/2018/10/20/jenkins-pipeline-as-code-last-changes/" class="pagination--pager" title="Jenkins - Pipeline as Code - 測試報告
-">較新</a>
+      <a href="#" class="pagination--pager disabled">較新</a>
     
   </nav>
 

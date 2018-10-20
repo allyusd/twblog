@@ -1,4 +1,60 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-19T22:21:29+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">Jenkins - Pipeline as Code - 測試報告</title><link href="https://twblog.hongjianching.com/2018/10/19/jenkins-pipeline-as-code-test-report/" rel="alternate" type="text/html" title="Jenkins - Pipeline as Code - 測試報告" /><published>2018-10-19T00:00:00+08:00</published><updated>2018-10-19T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/19/jenkins-pipeline-as-code-test-report</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/19/jenkins-pipeline-as-code-test-report/">&lt;p&gt;這篇的主題是測試報告，接續 &lt;a href=&quot;https://twblog.hongjianching.com/2018/10/17/jenkins-pipeline-as-code-artifacts/&quot;&gt;Jenkins - Pipeline as Code - 封存檔案&lt;/a&gt;及&lt;a href=&quot;https://twblog.hongjianching.com/2018/10/18/google-test-on-ubuntu/&quot;&gt;在 Ubuntu 使用 Google Test&lt;/a&gt;兩篇文章，這篇要整合起來&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-20T23:16:14+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">Jenkins - Pipeline as Code - 測試報告</title><link href="https://twblog.hongjianching.com/2018/10/20/jenkins-pipeline-as-code-last-changes/" rel="alternate" type="text/html" title="Jenkins - Pipeline as Code - 測試報告" /><published>2018-10-20T00:00:00+08:00</published><updated>2018-10-20T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/20/jenkins-pipeline-as-code-last-changes</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/20/jenkins-pipeline-as-code-last-changes/">&lt;p&gt;這次要讓 Jenkins 可以顯示程式碼的變更&lt;/p&gt;
+
+&lt;p&gt;這個功能要透過 plugin 來完成，所以要先安裝 plugin，在 Jenkins 首頁選擇&lt;code class=&quot;highlighter-rouge&quot;&gt;管理 Jenkins&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-20-jenkins-pipeline-as-code-last-changes/2018-10-20_22-33-28.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;在管理 Jenkins 頁面，選擇&lt;code class=&quot;highlighter-rouge&quot;&gt;管理外掛程式&lt;/code&gt;，這邊的外掛程式指的就是 Jenkins plugin&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-20-jenkins-pipeline-as-code-last-changes/2018-10-20_22-36-41.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;在管理外掛程式頁面，會有四個分頁&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;更新
+代表你已安裝的 plugin 有更新的版本可以安裝&lt;/li&gt;
+  &lt;li&gt;可用的
+代表你未安裝的 plugin&lt;/li&gt;
+  &lt;li&gt;已安裝
+代表你已安裝的 plugin&lt;/li&gt;
+  &lt;li&gt;進階
+關於 plugin 安裝的相關設定，HTTP Proxy設定、上傳外掛程式、更新網址等等&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;在這裡我們選擇&lt;code class=&quot;highlighter-rouge&quot;&gt;可用的&lt;/code&gt;分頁&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-20-jenkins-pipeline-as-code-last-changes/2018-10-20_22-39-00.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;接著在一大堆的 plugin 中找到 &lt;code class=&quot;highlighter-rouge&quot;&gt;Last Changes&lt;/code&gt;，可以透過 Ctrl + F 之類的機制會比較快找到喔&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-20-jenkins-pipeline-as-code-last-changes/2018-10-20_22-40-16.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;接著選擇下方的&lt;code class=&quot;highlighter-rouge&quot;&gt;下載並於重新啟動後安裝&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-20-jenkins-pipeline-as-code-last-changes/2018-10-20_22-45-39.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;正在安裝/升級 Plugins 頁面，把下方的&lt;code class=&quot;highlighter-rouge&quot;&gt;當安裝完成且沒有工作正在執行時，重啟 Jenkins&lt;/code&gt;打勾，這樣 Jenkins 就會自動重啟喔&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-20-jenkins-pipeline-as-code-last-changes/2018-10-20_22-49-20.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Jenkins 重啟之後，plugin 就可以使用了，接下來修改 Jenkinsfile。關鍵字是 &lt;code class=&quot;highlighter-rouge&quot;&gt;lastChanges&lt;/code&gt;，&lt;code class=&quot;highlighter-rouge&quot;&gt;format&lt;/code&gt; 選擇 &lt;code class=&quot;highlighter-rouge&quot;&gt;side-by-side&lt;/code&gt;，會將兩個版本分別顯示在左邊跟右邊，個人習慣這種方式。因為差異不論建置成功或失敗都會想看，所以我們放在 &lt;code class=&quot;highlighter-rouge&quot;&gt;always&lt;/code&gt; 宣告內，有別於 archiveArtifacts 的 &lt;code class=&quot;highlighter-rouge&quot;&gt;success&lt;/code&gt; 宣告只有在建置成功才執行，在 always 內的動作無論如何都會執行。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;always {
+    lastChanges format:'SIDE', matching: 'LINE'
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;這次的程式碼同樣在 &lt;code class=&quot;highlighter-rouge&quot;&gt;https://github.com/allyusd/jenkins-pipeline.git&lt;/code&gt;，branch 是 &lt;code class=&quot;highlighter-rouge&quot;&gt;last-changes&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;執行後，在左邊選單列會出現 &lt;code class=&quot;highlighter-rouge&quot;&gt;View Last Changes&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-20-jenkins-pipeline-as-code-last-changes/2018-10-20_23-06-40.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;View Last Changes 的結果如下&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-20-jenkins-pipeline-as-code-last-changes/2018-10-20_23-11-50.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;從上圖可以明顯的知道這次的程式碼修改了什麼，幫助判斷是什麼部份可以造成建置的錯誤&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Jenkins" /><summary type="html">這次要讓 Jenkins 可以顯示程式碼的變更</summary></entry><entry><title type="html">Jenkins - Pipeline as Code - 測試報告</title><link href="https://twblog.hongjianching.com/2018/10/19/jenkins-pipeline-as-code-test-report/" rel="alternate" type="text/html" title="Jenkins - Pipeline as Code - 測試報告" /><published>2018-10-19T00:00:00+08:00</published><updated>2018-10-19T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/19/jenkins-pipeline-as-code-test-report</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/19/jenkins-pipeline-as-code-test-report/">&lt;p&gt;這篇的主題是測試報告，接續 &lt;a href=&quot;https://twblog.hongjianching.com/2018/10/17/jenkins-pipeline-as-code-artifacts/&quot;&gt;Jenkins - Pipeline as Code - 封存檔案&lt;/a&gt;及&lt;a href=&quot;https://twblog.hongjianching.com/2018/10/18/google-test-on-ubuntu/&quot;&gt;在 Ubuntu 使用 Google Test&lt;/a&gt;兩篇文章，這篇要整合起來&lt;/p&gt;
 
 &lt;h1 id=&quot;build&quot;&gt;Build&lt;/h1&gt;
 &lt;p&gt;首先，原本的 C++ 專案，新增 Google Test 在 git branch &lt;code class=&quot;highlighter-rouge&quot;&gt;gtest&lt;/code&gt;，所以要修改原本 Jenkinsfile 指定 branch&lt;/p&gt;
@@ -597,73 +653,4 @@ apt install build-essential -y
 
 &lt;p&gt;看到 Hello Wolrd 就代表我們完成環境建置啦！&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-11-install-cpp-compiler-on-ubuntu/2018-10-11_22-31-48.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Cpp" /><category term="Ubuntu" /><summary type="html">Ubuntu 預設沒有 C++ 編譯環境，但是可以自己安裝</summary></entry><entry><title type="html">使用 Docker 安裝 Jenkins Agent</title><link href="https://twblog.hongjianching.com/2018/10/10/install-jenkins-agent-with-docker/" rel="alternate" type="text/html" title="使用 Docker 安裝 Jenkins Agent" /><published>2018-10-10T00:00:00+08:00</published><updated>2018-10-10T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/10/install-jenkins-agent-with-docker</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/10/install-jenkins-agent-with-docker/">&lt;p&gt;讓 Jenkins Master 專心在 CI Server 的任務，剩下的工作交給 Jenkins Agent 處理，這樣可以降低環境的複雜度，也可以增加維護的方便性。&lt;/p&gt;
-
-&lt;p&gt;如果還沒有安裝 Jenkins Master 的話可以先參考 &lt;a href=&quot;https://twblog.hongjianching.com/2018/10/09/install-jenkins-with-docker-on-ubuntu/&quot;&gt;使用 Docker 安裝 Jenkins&lt;/a&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;jenkins-master-設定&quot;&gt;Jenkins Master 設定&lt;/h1&gt;
-
-&lt;p&gt;首先在 Jenkins 網頁選擇 &lt;em&gt;管理 Jenkins&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-10-install-jenkins-agent-with-docker/2018-10-10_21-41-38.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;接著往下找到 &lt;em&gt;管理節點&lt;/em&gt;，然後點擊 &lt;em&gt;Master&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-10-install-jenkins-agent-with-docker/2018-10-10_21-44-34.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-10-install-jenkins-agent-with-docker/2018-10-10_21-45-56.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;這個節點就是 Jenkins Master，也是目前操作網站所在的位置，選擇左方的 &lt;em&gt;設定&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-10-install-jenkins-agent-with-docker/2018-10-10_21-47-13.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;為了避免有任何的工作在 Master 上面執行，把 &lt;em&gt;執行程式數&lt;/em&gt; 設為 &lt;strong&gt;0&lt;/strong&gt; 然後儲存&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-10-install-jenkins-agent-with-docker/2018-10-10_21-49-25.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;我們可以在左下方看到原本的兩個執行程式狀態消失了，接著點左上方的 &lt;em&gt;節點&lt;/em&gt; 回到管理節點頁面&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-10-install-jenkins-agent-with-docker/2018-10-10_21-51-31.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;這次選擇 &lt;em&gt;新增節點&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-10-install-jenkins-agent-with-docker/2018-10-10_21-53-30.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;輸入節點名稱為 &lt;em&gt;agent&lt;/em&gt; 並且按下 &lt;em&gt;Permanent Agent&lt;/em&gt; 之後按下 OK&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-10-install-jenkins-agent-with-docker/2018-10-10_21-54-33.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;在新節點的設定頁面，保持預設值不變，直接按下儲存，然後回到管理節點頁面&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-10-install-jenkins-agent-with-docker/2018-10-10_21-56-11.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;在管理節點頁面按下剛剛新增的 &lt;em&gt;agnet&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-10-install-jenkins-agent-with-docker/2018-10-10_21-57-36.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;在 agent 節點會有一行教你怎麼執行 Jenkins agnet 的指令，這邊我們只要拿 secret 後面的參數就好，這個例子是 &lt;strong&gt;1cdcff34b6ddadf38ca3ca42869ae0ad68e62d0274fbad43798b749e3f840884&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-10-install-jenkins-agent-with-docker/2018-10-10_21-58-37.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;jenkins-agent-安裝&quot;&gt;Jenkins Agent 安裝&lt;/h1&gt;
-
-&lt;p&gt;使用 Docker 啟動 Jenkins Agent，需要三個參數，分別是 Jenkins 的網址、剛剛拿到的 secret token 還有 agent 名稱&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    --name jenkins_agent &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    -d --restart always &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    jenkins/jnlp-slave &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    -url http://192.168.5.20:8080 &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    1cdcff34b6ddadf38ca3ca42869ae0ad68e62d0274fbad43798b749e3f840884 &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    agent
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;是的，這樣 Jenkins Agent 就完成啟動，回到剛剛的 Agent 頁面按下 F5 重新更新，會發現 Agent 已經上線並且準備工作了。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-10-install-jenkins-agent-with-docker/2018-10-10_22-12-40.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;ref&quot;&gt;ref&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&quot;https://hub.docker.com/r/jenkins/jnlp-slave/&quot;&gt;jenkins/jnlp-slave - Docker Hub&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://support.cloudbees.com/hc/en-us/articles/115001771692-How-to-Create-Permanent-Agents-with-Docker&quot;&gt;How to Create Permanent Agents with Docker – CloudBees Support&lt;/a&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Docker" /><category term="Jenkins" /><summary type="html">讓 Jenkins Master 專心在 CI Server 的任務，剩下的工作交給 Jenkins Agent 處理，這樣可以降低環境的複雜度，也可以增加維護的方便性。</summary></entry></feed>
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-11-install-cpp-compiler-on-ubuntu/2018-10-11_22-31-48.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Cpp" /><category term="Ubuntu" /><summary type="html">Ubuntu 預設沒有 C++ 編譯環境，但是可以自己安裝</summary></entry></feed>

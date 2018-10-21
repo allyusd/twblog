@@ -1,4 +1,74 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-20T23:18:19+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">Jenkins - Pipeline as Code - Last Changes</title><link href="https://twblog.hongjianching.com/2018/10/20/jenkins-pipeline-as-code-last-changes/" rel="alternate" type="text/html" title="Jenkins - Pipeline as Code - Last Changes" /><published>2018-10-20T00:00:00+08:00</published><updated>2018-10-20T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/20/jenkins-pipeline-as-code-last-changes</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/20/jenkins-pipeline-as-code-last-changes/">&lt;p&gt;這次要讓 Jenkins 可以顯示程式碼的變更&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-21T22:59:46+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">Jenkins - Pipeline as Code - Slack Notifier</title><link href="https://twblog.hongjianching.com/2018/10/21/jenkins-pipeline-as-code-slack-notifier/" rel="alternate" type="text/html" title="Jenkins - Pipeline as Code - Slack Notifier" /><published>2018-10-21T00:00:00+08:00</published><updated>2018-10-21T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/21/jenkins-pipeline-as-code-slack-notifier</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/21/jenkins-pipeline-as-code-slack-notifier/">&lt;p&gt;希望在 Pipeline 異常的時候通知你？透過 Slack Notifier 完成目的&lt;/p&gt;
+
+&lt;h1 id=&quot;jenkins-slack-integration&quot;&gt;Jenkins Slack Integration&lt;/h1&gt;
+
+&lt;p&gt;首先要到 slack 的 apps 管理頁面，&lt;code class=&quot;highlighter-rouge&quot;&gt;https://xxx.slack.com/apps/manage&lt;/code&gt;，其中 xxx 請代入自己的組織名稱，接著在上方搜尋的地方輸入 &lt;code class=&quot;highlighter-rouge&quot;&gt;jenkins&lt;/code&gt; 會出現 &lt;code class=&quot;highlighter-rouge&quot;&gt;Jenkins CI&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-21-jenkins-pipeline-as-code-slack-notifier/2018-10-21_21-46-24.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;點選進入 Jenkins CI Apps 頁面，左方有個 &lt;code class=&quot;highlighter-rouge&quot;&gt;Install&lt;/code&gt; 按下去&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-21-jenkins-pipeline-as-code-slack-notifier/2018-10-21_21-46-46.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;接著會問你想要發訊息到哪一個 Channel，其實隨便選都可以，之後可以在 Jenkins 修改，這邊我選了 &lt;code class=&quot;highlighter-rouge&quot;&gt;#general&lt;/code&gt; 頻道&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-21-jenkins-pipeline-as-code-slack-notifier/2018-10-21_21-47-30.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;按下之後會有完整的圖文教學，首先要到 Jenkins 管理頁面安裝 &lt;strong&gt;Slack Notification Plugin&lt;/strong&gt;，我使用的 Jenkins 版本跟教學的圖片不一樣，會省略 Plugin 文字，所以要搜尋的話最好只用前面的 &lt;strong&gt;Slack Notification&lt;/strong&gt; 會比較好找到。&lt;/p&gt;
+
+&lt;p&gt;安裝完外掛之後，要到&lt;strong&gt;管理 Jenkins&lt;/strong&gt;，&lt;strong&gt;設定系統&lt;/strong&gt;的&lt;strong&gt;Global Slack Notifier Settings&lt;/strong&gt; 貼上從 Jenkins CI App 教學頁面給的設定&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;設定 Base URL 為https://xxx.slack.com/services/hooks/jenkins-ci/&lt;/li&gt;
+  &lt;li&gt;設定 Integration Token 為 Mursq71aDfDJke4cvUWx9n2f&lt;/li&gt;
+  &lt;li&gt;設定 Channel 為 general&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;設定後可以按一下 &lt;strong&gt;Test Connection&lt;/strong&gt;，成功時 Slack 會出現測試訊息&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-21-jenkins-pipeline-as-code-slack-notifier/2018-10-21_22-46-03.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;jenkinsfile&quot;&gt;Jenkinsfile&lt;/h1&gt;
+
+&lt;p&gt;因為訊息的發佈應該是跨越 stage 的，所以我們在 stages 平行新增一個 post 宣告。當 pipeline 失敗的時候，使用 &lt;strong&gt;failure&lt;/strong&gt; 宣告發送失敗的訊息&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;color&lt;/strong&gt; 可以定義發佈訊息旁的顏色標示，失敗時用紅色
+&lt;strong&gt;message&lt;/strong&gt; 就是發佈的訊息內容，為了提醒所有人注意到東西壞掉了，可以加上 @channel，太吵的話可以拿掉，或是討論一下為什麼常常壞掉。還可以透過 Jenkins 的變數提供有用的訊息，像是 &lt;strong&gt;env.JOB_BASE_NAME&lt;/strong&gt; 可以提供專案名稱，&lt;strong&gt;env.BUILD_URL&lt;/strong&gt; 則是提供本次建置的網址&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;failure {
+    slackSend color: '#FF0000',
+    message: &quot;@channel ${env.JOB_BASE_NAME} failure. (${env.BUILD_URL})&quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;除了壞掉的時候發出訊息通知外，我們也可以發送一些好消息，像是 &lt;strong&gt;fixed&lt;/strong&gt; 代表東西修好了，也就是原先建置失敗的專案，第一次建置成功的時候發出通知。這次的顏色用綠色，訊息則簡單的說明哪個專案回到建置成功的狀態&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;fixed {
+    slackSend color: '#00FF00',
+    message: &quot;@channel ${env.JOB_BASE_NAME} back to success.&quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;因為完整的 Jenkinsfile 很長，這次不貼到文章上，直接給&lt;a href=&quot;https://github.com/allyusd/jenkins-pipeline/blob/slack-notifier/Jenkinsfile&quot;&gt;連結&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;因為成功的建置不會發送訊息，所以我們先故意用一個壞掉的來建置&lt;/p&gt;
+
+&lt;p&gt;同樣是 &lt;strong&gt;https://github.com/allyusd/jenkins-pipeline.git&lt;/strong&gt;，branch 是 &lt;strong&gt;slack-notifier-fail&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;建置失敗，slack 收到了失敗通知&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-21-jenkins-pipeline-as-code-slack-notifier/2018-10-21_22-52-10.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;接著換成正確的 branch &lt;strong&gt;slack-notifier&lt;/strong&gt; 然後再建置一次&lt;/p&gt;
+
+&lt;p&gt;這次建置成功，因為前一個建置失敗，所以 slack 收到修復通知&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-21-jenkins-pipeline-as-code-slack-notifier/2018-10-21_22-57-32.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;ref&quot;&gt;ref&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://jenkins.io/doc/pipeline/steps/slack/#slack-notification-plugin&quot;&gt;Slack Notification Plugin&lt;/a&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Jenkins" /><summary type="html">希望在 Pipeline 異常的時候通知你？透過 Slack Notifier 完成目的</summary></entry><entry><title type="html">Jenkins - Pipeline as Code - Last Changes</title><link href="https://twblog.hongjianching.com/2018/10/20/jenkins-pipeline-as-code-last-changes/" rel="alternate" type="text/html" title="Jenkins - Pipeline as Code - Last Changes" /><published>2018-10-20T00:00:00+08:00</published><updated>2018-10-20T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/20/jenkins-pipeline-as-code-last-changes</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/20/jenkins-pipeline-as-code-last-changes/">&lt;p&gt;這次要讓 Jenkins 可以顯示程式碼的變更&lt;/p&gt;
 
 &lt;p&gt;這個功能要透過 plugin 來完成，所以要先安裝 plugin，在 Jenkins 首頁選擇&lt;code class=&quot;highlighter-rouge&quot;&gt;管理 Jenkins&lt;/code&gt;&lt;/p&gt;
 
@@ -608,49 +678,4 @@ ENTRYPOINT [&quot;jenkins-slave&quot;]
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-12-create-cpp-compiler-with-jenkins-agent-docker-image-part-1/2018-10-12_23-31-05.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;錯誤訊息 &lt;code class=&quot;highlighter-rouge&quot;&gt;g++: not found&lt;/code&gt; 代表我們的 Agent 沒有 C++ 編譯環境，在下一篇我們來解決這個問題&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Cpp" /><category term="Docker" /><category term="Jenkins" /><summary type="html">介紹如何建立一個有 C++ 編譯環境及 Jenkins Agent 的 Docker Image。</summary></entry><entry><title type="html">在 Ubuntu 安裝 C++ 編譯環境</title><link href="https://twblog.hongjianching.com/2018/10/11/install-cpp-compiler-on-ubuntu/" rel="alternate" type="text/html" title="在 Ubuntu 安裝 C++ 編譯環境" /><published>2018-10-11T00:00:00+08:00</published><updated>2018-10-11T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/11/install-cpp-compiler-on-ubuntu</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/11/install-cpp-compiler-on-ubuntu/">&lt;p&gt;Ubuntu 預設沒有 C++ 編譯環境，但是可以自己安裝&lt;/p&gt;
-
-&lt;p&gt;不想影響現有的 host，所以叫 docker 建一個 ubuntu 出來&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run -it ubuntu:18.04
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;安裝 C++ 編譯環境套件&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;apt update
-apt install build-essential -y
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;可以選擇手動建立一個檔案存為 helloworld.cpp&lt;/p&gt;
-&lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;#include &amp;lt;iostream&amp;gt;
-&lt;/span&gt;
-&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;argc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;argv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[])&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cout&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Hello World&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;endl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;或是直接透過 git clone 一份&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git clone https://github.com/allyusd/helloworld.cpp.git
-&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;helloworld.cpp
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;如果要使用 git 的話，因為 docker 版本的 ubuntu 預設沒有安裝，記得先安裝 git 套件。&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;apt install git -y
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;程式碼內容很單純，就是顯示 &lt;strong&gt;Hello World&lt;/strong&gt; 文字而己，只是驗證我們的 C++ 環境已經準備好了&lt;/p&gt;
-
-&lt;p&gt;接著透過 C++ 的編譯器 g++ 來編譯&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;g++ helloworld.cpp -o helloworld
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;建置後會產生一個 &lt;strong&gt;helloworld&lt;/strong&gt; 的檔案，就可以執行了&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;./helloworld
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;看到 Hello Wolrd 就代表我們完成環境建置啦！&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-11-install-cpp-compiler-on-ubuntu/2018-10-11_22-31-48.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Cpp" /><category term="Ubuntu" /><summary type="html">Ubuntu 預設沒有 C++ 編譯環境，但是可以自己安裝</summary></entry></feed>
+&lt;p&gt;錯誤訊息 &lt;code class=&quot;highlighter-rouge&quot;&gt;g++: not found&lt;/code&gt; 代表我們的 Agent 沒有 C++ 編譯環境，在下一篇我們來解決這個問題&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Cpp" /><category term="Docker" /><category term="Jenkins" /><summary type="html">介紹如何建立一個有 C++ 編譯環境及 Jenkins Agent 的 Docker Image。</summary></entry></feed>

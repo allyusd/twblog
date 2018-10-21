@@ -19,12 +19,12 @@
 
 
 
-<title>Jenkins - Pipeline as Code - Last Changes - Jian-Ching 記事本</title>
+<title>Jenkins - Pipeline as Code - Slack Notifier - Jian-Ching 記事本</title>
 
 
 
 
-<meta name="description" content="這次要讓 Jenkins 可以顯示程式碼的變更">
+<meta name="description" content="希望在 Pipeline 異常的時候通知你？透過 Slack Notifier 完成目的">
 
 
 
@@ -33,15 +33,15 @@
 
 <meta property="og:locale" content="zh_TW">
 <meta property="og:site_name" content="Jian-Ching 記事本">
-<meta property="og:title" content="Jenkins - Pipeline as Code - Last Changes">
+<meta property="og:title" content="Jenkins - Pipeline as Code - Slack Notifier">
 
 
-  <link rel="canonical" href="https://twblog.HongJianChing.com/2018/10/20/jenkins-pipeline-as-code-last-changes/">
-  <meta property="og:url" content="https://twblog.HongJianChing.com/2018/10/20/jenkins-pipeline-as-code-last-changes/">
+  <link rel="canonical" href="https://twblog.HongJianChing.com/2018/10/21/jenkins-pipeline-as-code-slack-notifier/">
+  <meta property="og:url" content="https://twblog.HongJianChing.com/2018/10/21/jenkins-pipeline-as-code-slack-notifier/">
 
 
 
-  <meta property="og:description" content="這次要讓 Jenkins 可以顯示程式碼的變更">
+  <meta property="og:description" content="希望在 Pipeline 異常的時候通知你？透過 Slack Notifier 完成目的">
 
 
 
@@ -56,7 +56,7 @@
 
 
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2018-10-20T00:00:00+08:00">
+  <meta property="article:published_time" content="2018-10-21T00:00:00+08:00">
 
 
 
@@ -278,78 +278,92 @@
 
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Jenkins - Pipeline as Code - Last Changes">
-    <meta itemprop="description" content="這次要讓 Jenkins 可以顯示程式碼的變更">
-    <meta itemprop="datePublished" content="October 20, 2018">
+    <meta itemprop="headline" content="Jenkins - Pipeline as Code - Slack Notifier">
+    <meta itemprop="description" content="希望在 Pipeline 異常的時候通知你？透過 Slack Notifier 完成目的">
+    <meta itemprop="datePublished" content="October 21, 2018">
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 class="page__title" itemprop="headline">Jenkins - Pipeline as Code - Last Changes
+          <h1 class="page__title" itemprop="headline">Jenkins - Pipeline as Code - Slack Notifier
 </h1>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        <p>這次要讓 Jenkins 可以顯示程式碼的變更</p>
+        <p>希望在 Pipeline 異常的時候通知你？透過 Slack Notifier 完成目的</p>
 
-<p>這個功能要透過 plugin 來完成，所以要先安裝 plugin，在 Jenkins 首頁選擇<code class="highlighter-rouge">管理 Jenkins</code></p>
+<h1 id="jenkins-slack-integration">Jenkins Slack Integration</h1>
 
-<p><img src="/assets/images/2018-10-20-jenkins-pipeline-as-code-last-changes/2018-10-20_22-33-28.png" alt="" /></p>
+<p>首先要到 slack 的 apps 管理頁面，<code class="highlighter-rouge">https://xxx.slack.com/apps/manage</code>，其中 xxx 請代入自己的組織名稱，接著在上方搜尋的地方輸入 <code class="highlighter-rouge">jenkins</code> 會出現 <code class="highlighter-rouge">Jenkins CI</code></p>
 
-<p>在管理 Jenkins 頁面，選擇<code class="highlighter-rouge">管理外掛程式</code>，這邊的外掛程式指的就是 Jenkins plugin</p>
+<p><img src="/assets/images/2018-10-21-jenkins-pipeline-as-code-slack-notifier/2018-10-21_21-46-24.png" alt="" /></p>
 
-<p><img src="/assets/images/2018-10-20-jenkins-pipeline-as-code-last-changes/2018-10-20_22-36-41.png" alt="" /></p>
+<p>點選進入 Jenkins CI Apps 頁面，左方有個 <code class="highlighter-rouge">Install</code> 按下去</p>
 
-<p>在管理外掛程式頁面，會有四個分頁</p>
+<p><img src="/assets/images/2018-10-21-jenkins-pipeline-as-code-slack-notifier/2018-10-21_21-46-46.png" alt="" /></p>
+
+<p>接著會問你想要發訊息到哪一個 Channel，其實隨便選都可以，之後可以在 Jenkins 修改，這邊我選了 <code class="highlighter-rouge">#general</code> 頻道</p>
+
+<p><img src="/assets/images/2018-10-21-jenkins-pipeline-as-code-slack-notifier/2018-10-21_21-47-30.png" alt="" /></p>
+
+<p>按下之後會有完整的圖文教學，首先要到 Jenkins 管理頁面安裝 <strong>Slack Notification Plugin</strong>，我使用的 Jenkins 版本跟教學的圖片不一樣，會省略 Plugin 文字，所以要搜尋的話最好只用前面的 <strong>Slack Notification</strong> 會比較好找到。</p>
+
+<p>安裝完外掛之後，要到<strong>管理 Jenkins</strong>，<strong>設定系統</strong>的<strong>Global Slack Notifier Settings</strong> 貼上從 Jenkins CI App 教學頁面給的設定</p>
 <ul>
-  <li>更新
-代表你已安裝的 plugin 有更新的版本可以安裝</li>
-  <li>可用的
-代表你未安裝的 plugin</li>
-  <li>已安裝
-代表你已安裝的 plugin</li>
-  <li>進階
-關於 plugin 安裝的相關設定，HTTP Proxy設定、上傳外掛程式、更新網址等等</li>
+  <li>設定 Base URL 為https://xxx.slack.com/services/hooks/jenkins-ci/</li>
+  <li>設定 Integration Token 為 Mursq71aDfDJke4cvUWx9n2f</li>
+  <li>設定 Channel 為 general</li>
 </ul>
 
-<p>在這裡我們選擇<code class="highlighter-rouge">可用的</code>分頁</p>
+<p>設定後可以按一下 <strong>Test Connection</strong>，成功時 Slack 會出現測試訊息</p>
 
-<p><img src="/assets/images/2018-10-20-jenkins-pipeline-as-code-last-changes/2018-10-20_22-39-00.png" alt="" /></p>
+<p><img src="/assets/images/2018-10-21-jenkins-pipeline-as-code-slack-notifier/2018-10-21_22-46-03.png" alt="" /></p>
 
-<p>接著在一大堆的 plugin 中找到 <code class="highlighter-rouge">Last Changes</code>，可以透過 Ctrl + F 之類的機制會比較快找到喔</p>
+<h1 id="jenkinsfile">Jenkinsfile</h1>
 
-<p><img src="/assets/images/2018-10-20-jenkins-pipeline-as-code-last-changes/2018-10-20_22-40-16.png" alt="" /></p>
+<p>因為訊息的發佈應該是跨越 stage 的，所以我們在 stages 平行新增一個 post 宣告。當 pipeline 失敗的時候，使用 <strong>failure</strong> 宣告發送失敗的訊息</p>
 
-<p>接著選擇下方的<code class="highlighter-rouge">下載並於重新啟動後安裝</code></p>
+<p><strong>color</strong> 可以定義發佈訊息旁的顏色標示，失敗時用紅色
+<strong>message</strong> 就是發佈的訊息內容，為了提醒所有人注意到東西壞掉了，可以加上 @channel，太吵的話可以拿掉，或是討論一下為什麼常常壞掉。還可以透過 Jenkins 的變數提供有用的訊息，像是 <strong>env.JOB_BASE_NAME</strong> 可以提供專案名稱，<strong>env.BUILD_URL</strong> 則是提供本次建置的網址</p>
 
-<p><img src="/assets/images/2018-10-20-jenkins-pipeline-as-code-last-changes/2018-10-20_22-45-39.png" alt="" /></p>
-
-<p>正在安裝/升級 Plugins 頁面，把下方的<code class="highlighter-rouge">當安裝完成且沒有工作正在執行時，重啟 Jenkins</code>打勾，這樣 Jenkins 就會自動重啟喔</p>
-
-<p><img src="/assets/images/2018-10-20-jenkins-pipeline-as-code-last-changes/2018-10-20_22-49-20.png" alt="" /></p>
-
-<p>Jenkins 重啟之後，plugin 就可以使用了，接下來修改 Jenkinsfile。關鍵字是 <code class="highlighter-rouge">lastChanges</code>，<code class="highlighter-rouge">format</code> 選擇 <code class="highlighter-rouge">side-by-side</code>，會將兩個版本分別顯示在左邊跟右邊，個人習慣這種方式。因為差異不論建置成功或失敗都會想看，所以我們放在 <code class="highlighter-rouge">always</code> 宣告內，有別於 archiveArtifacts 的 <code class="highlighter-rouge">success</code> 宣告只有在建置成功才執行，在 always 內的動作無論如何都會執行。</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>always {
-    lastChanges format:'SIDE', matching: 'LINE'
+<div class="highlighter-rouge"><pre class="highlight"><code>failure {
+    slackSend color: '#FF0000',
+    message: "@channel ${env.JOB_BASE_NAME} failure. (${env.BUILD_URL})"
 }
 </code></pre>
 </div>
 
-<p>這次的程式碼同樣在 <code class="highlighter-rouge">https://github.com/allyusd/jenkins-pipeline.git</code>，branch 是 <code class="highlighter-rouge">last-changes</code></p>
+<p>除了壞掉的時候發出訊息通知外，我們也可以發送一些好消息，像是 <strong>fixed</strong> 代表東西修好了，也就是原先建置失敗的專案，第一次建置成功的時候發出通知。這次的顏色用綠色，訊息則簡單的說明哪個專案回到建置成功的狀態</p>
 
-<p>執行後，在左邊選單列會出現 <code class="highlighter-rouge">View Last Changes</code></p>
+<div class="highlighter-rouge"><pre class="highlight"><code>fixed {
+    slackSend color: '#00FF00',
+    message: "@channel ${env.JOB_BASE_NAME} back to success."
+}
+</code></pre>
+</div>
 
-<p><img src="/assets/images/2018-10-20-jenkins-pipeline-as-code-last-changes/2018-10-20_23-06-40.png" alt="" /></p>
+<p>因為完整的 Jenkinsfile 很長，這次不貼到文章上，直接給<a href="https://github.com/allyusd/jenkins-pipeline/blob/slack-notifier/Jenkinsfile">連結</a></p>
 
-<p>View Last Changes 的結果如下</p>
+<p>因為成功的建置不會發送訊息，所以我們先故意用一個壞掉的來建置</p>
 
-<p><img src="/assets/images/2018-10-20-jenkins-pipeline-as-code-last-changes/2018-10-20_23-11-50.png" alt="" /></p>
+<p>同樣是 <strong>https://github.com/allyusd/jenkins-pipeline.git</strong>，branch 是 <strong>slack-notifier-fail</strong></p>
 
-<p>從上圖可以明顯的知道這次的程式碼修改了什麼，幫助判斷是什麼部份可以造成建置的錯誤</p>
+<p>建置失敗，slack 收到了失敗通知</p>
+
+<p><img src="/assets/images/2018-10-21-jenkins-pipeline-as-code-slack-notifier/2018-10-21_22-52-10.png" alt="" /></p>
+
+<p>接著換成正確的 branch <strong>slack-notifier</strong> 然後再建置一次</p>
+
+<p>這次建置成功，因為前一個建置失敗，所以 slack 收到修復通知</p>
+
+<p><img src="/assets/images/2018-10-21-jenkins-pipeline-as-code-slack-notifier/2018-10-21_22-57-32.png" alt="" /></p>
+
+<h1 id="ref">ref</h1>
+
+<p><a href="https://jenkins.io/doc/pipeline/steps/slack/#slack-notification-plugin">Slack Notification Plugin</a></p>
 
         
       </section>
@@ -383,7 +397,7 @@
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2018-10-20T00:00:00+08:00">October 20, 2018</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2018-10-21T00:00:00+08:00">October 21, 2018</time></p>
         
       </footer>
 
@@ -392,25 +406,24 @@
     <h4 class="page__share-title">分享到</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=Jenkins - Pipeline as Code - Last Changes https://twblog.hongjianching.com/2018/10/20/jenkins-pipeline-as-code-last-changes/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=Jenkins - Pipeline as Code - Slack Notifier https://twblog.hongjianching.com/2018/10/21/jenkins-pipeline-as-code-slack-notifier/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2018/10/20/jenkins-pipeline-as-code-last-changes/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2018/10/21/jenkins-pipeline-as-code-slack-notifier/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2018/10/20/jenkins-pipeline-as-code-last-changes/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2018/10/21/jenkins-pipeline-as-code-slack-notifier/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2018/10/20/jenkins-pipeline-as-code-last-changes/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2018/10/21/jenkins-pipeline-as-code-slack-notifier/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="https://twblog.hongjianching.com/2018/10/19/jenkins-pipeline-as-code-test-report/" class="pagination--pager" title="Jenkins - Pipeline as Code - 測試報告
+      <a href="https://twblog.hongjianching.com/2018/10/20/jenkins-pipeline-as-code-last-changes/" class="pagination--pager" title="Jenkins - Pipeline as Code - Last Changes
 ">較舊</a>
     
     
-      <a href="https://twblog.hongjianching.com/2018/10/21/jenkins-pipeline-as-code-slack-notifier/" class="pagination--pager" title="Jenkins - Pipeline as Code - Slack Notifier
-">較新</a>
+      <a href="#" class="pagination--pager disabled">較新</a>
     
   </nav>
 

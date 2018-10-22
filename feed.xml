@@ -1,4 +1,51 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-21T22:59:46+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">Jenkins - Pipeline as Code - Slack Notifier</title><link href="https://twblog.hongjianching.com/2018/10/21/jenkins-pipeline-as-code-slack-notifier/" rel="alternate" type="text/html" title="Jenkins - Pipeline as Code - Slack Notifier" /><published>2018-10-21T00:00:00+08:00</published><updated>2018-10-21T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/21/jenkins-pipeline-as-code-slack-notifier</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/21/jenkins-pipeline-as-code-slack-notifier/">&lt;p&gt;希望在 Pipeline 異常的時候通知你？透過 Slack Notifier 完成目的&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-22T22:15:03+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">在 Ubuntu 安裝 Jenkins Agent</title><link href="https://twblog.hongjianching.com/2018/10/22/install-jenkins-agent-on-ubuntu/" rel="alternate" type="text/html" title="在 Ubuntu 安裝 Jenkins Agent" /><published>2018-10-22T00:00:00+08:00</published><updated>2018-10-22T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/22/install-jenkins-agent-on-ubuntu</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/22/install-jenkins-agent-on-ubuntu/">&lt;p&gt;之前介紹過&lt;a href=&quot;https://twblog.hongjianching.com/2018/10/10/install-jenkins-agent-with-docker/&quot;&gt;使用 Docker 安裝 Jenkins Agent&lt;/a&gt;，這次要講不使用 Docker 直接在 Ubuntu 安裝 Agent 的方法&lt;/p&gt;
+
+&lt;p&gt;在 Jenkins 主頁，選擇&lt;strong&gt;管理 Jenkins&lt;/strong&gt; &amp;gt; &lt;strong&gt;管理節點&lt;/strong&gt; &amp;gt; &lt;strong&gt;新增節點&lt;/strong&gt; &amp;gt;
+&lt;strong&gt;節點名稱&lt;/strong&gt;輸入 &lt;strong&gt;ubuntu-18.04&lt;/strong&gt;，按下 OK&lt;/p&gt;
+
+&lt;p&gt;接著在設定頁輸入&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;遠端檔案系統根目錄：&lt;strong&gt;/data/jenkins&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;啟動模式：&lt;strong&gt;透過 SSH 啟動 Unitx 主機上的 agnet代理程式&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;主機：輸入 IP&lt;/li&gt;
+  &lt;li&gt;Credentials：輸入登入主機的 SSH 帳號及密碼&lt;/li&gt;
+  &lt;li&gt;Host Key Verification Strategy：圖方便跳過驗證，選擇&lt;strong&gt;Non verifying Verification Strategy&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-22-install-jenkins-agent-on-ubuntu/2018-10-22_21-43-37.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;按下儲存之後可以看到 Agent 啟動 Logs，進去看一下發現失敗&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-22-install-jenkins-agent-on-ubuntu/2018-10-22_21-40-20.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;訊息上看到提示安裝 java 8，我們透過 ssh 登入 Ubuntu 18.04，確認是不是沒有安裝 java&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-22-install-jenkins-agent-on-ubuntu/2018-10-22_21-02-00.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;確實沒有安裝後，接著透過 apt 安裝 java 套件&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt update &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; sudo apt install openjdk-8-jre -y
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-22-install-jenkins-agent-on-ubuntu/2018-10-22_21-36-56.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;回到 Jenkins Web 再啟動一次，結果又有錯誤發生&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-22-install-jenkins-agent-on-ubuntu/2018-10-22_21-52-49.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;檢查紀錄原來是 &lt;strong&gt;/data/jenkins&lt;/strong&gt; 目錄不存在，這個好處理。建立一下目鍵，別忘了設定權限&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo mkdir -p /data/jenkins
+sudo chown ubuntu:ubuntu /data -R
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;回到頁面再次啟動 Agent&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-22-install-jenkins-agent-on-ubuntu/2018-10-22_21-56-01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;終於成功完成 Jenkins Agent 連線&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Jenkins" /><category term="Ubuntu" /><summary type="html">之前介紹過使用 Docker 安裝 Jenkins Agent，這次要講不使用 Docker 直接在 Ubuntu 安裝 Agent 的方法</summary></entry><entry><title type="html">Jenkins - Pipeline as Code - Slack Notifier</title><link href="https://twblog.hongjianching.com/2018/10/21/jenkins-pipeline-as-code-slack-notifier/" rel="alternate" type="text/html" title="Jenkins - Pipeline as Code - Slack Notifier" /><published>2018-10-21T00:00:00+08:00</published><updated>2018-10-21T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/21/jenkins-pipeline-as-code-slack-notifier</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/21/jenkins-pipeline-as-code-slack-notifier/">&lt;p&gt;希望在 Pipeline 異常的時候通知你？透過 Slack Notifier 完成目的&lt;/p&gt;
 
 &lt;h1 id=&quot;jenkins-slack-integration&quot;&gt;Jenkins Slack Integration&lt;/h1&gt;
 
@@ -629,53 +676,4 @@ ENTRYPOINT [&quot;jenkins-slave&quot;]
 
 &lt;p&gt;這一次順利的建置成功啦！&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-13-create-cpp-compiler-with-jenkins-agent-docker-image-part-2/2018-10-13_22-31-40.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Cpp" /><category term="Docker" /><category term="Jenkins" /><summary type="html">前一篇發現預設的 Jenkins Agent 沒有 C++ 編譯環境，所以我們要來解決這個問題。</summary></entry><entry><title type="html">建立擁有 C++ 編譯環境及 Jenkins Agent 的 Docker Image - Part 1</title><link href="https://twblog.hongjianching.com/2018/10/12/create-cpp-compiler-with-jenkins-agent-docker-image-part-1/" rel="alternate" type="text/html" title="建立擁有 C++ 編譯環境及 Jenkins Agent 的 Docker Image - Part 1" /><published>2018-10-12T00:00:00+08:00</published><updated>2018-10-12T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/12/create-cpp-compiler-with-jenkins-agent-docker-image-part-1</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/12/create-cpp-compiler-with-jenkins-agent-docker-image-part-1/">&lt;p&gt;介紹如何建立一個有 C++ 編譯環境及 Jenkins Agent 的 Docker Image。&lt;/p&gt;
-
-&lt;p&gt;在 &lt;a href=&quot;https://twblog.hongjianching.com/2018/10/10/install-jenkins-agent-with-docker/&quot;&gt;使用 Docker 安裝 Jenkins Agent&lt;/a&gt; 我們已經建立了一個有 Agent 的 Jenkins CI 系統，先建立一個小小的專案，單純確認 Jenkins Agent 是否正常運作。&lt;/p&gt;
-
-&lt;p&gt;選擇左方選單的&lt;code class=&quot;highlighter-rouge&quot;&gt;新增作業&lt;/code&gt;，然後名稱輸入 &lt;code class=&quot;highlighter-rouge&quot;&gt;test&lt;/code&gt; 並且選擇建置 &lt;code class=&quot;highlighter-rouge&quot;&gt;Free-Style 軟體專案&lt;/code&gt; 之後按下 OK&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-12-create-cpp-compiler-with-jenkins-agent-docker-image-part-1/2018-10-12_22-57-50.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-12-create-cpp-compiler-with-jenkins-agent-docker-image-part-1/2018-10-12_23-11-45.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;之後會自動進入 test 專案的設定，拉到最下方的&lt;code class=&quot;highlighter-rouge&quot;&gt;建置&lt;/code&gt;，選擇&lt;code class=&quot;highlighter-rouge&quot;&gt;新增建置步驟&lt;/code&gt;後按下&lt;code class=&quot;highlighter-rouge&quot;&gt;執行 Shell&lt;/code&gt;，在指令欄位輸入&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;cat /etc/&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;-release
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;按下儲存後，自動切換到專案主頁，點擊左方&lt;code class=&quot;highlighter-rouge&quot;&gt;馬上建置&lt;/code&gt;一下，然後點擊左下角&lt;code class=&quot;highlighter-rouge&quot;&gt;建置歷程&lt;/code&gt;出現的&lt;code class=&quot;highlighter-rouge&quot;&gt;#1&lt;/code&gt;，再選擇左方的 &lt;code class=&quot;highlighter-rouge&quot;&gt;Console Output&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-12-create-cpp-compiler-with-jenkins-agent-docker-image-part-1/2018-10-12_23-19-09.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-12-create-cpp-compiler-with-jenkins-agent-docker-image-part-1/2018-10-12_23-20-07.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;在右邊就會出現在 Agent 上執行的結果&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-12-create-cpp-compiler-with-jenkins-agent-docker-image-part-1/2018-10-12_23-21-26.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;看到這個結果，代表我們的 Jenkins 系統正確的運作喔。&lt;/p&gt;
-
-&lt;p&gt;接著 &lt;a href=&quot;https://twblog.hongjianching.com/2018/10/11/install-cpp-compiler-on-ubuntu/&quot;&gt;在 Ubuntu 安裝 C++ 編譯環境&lt;/a&gt; 這篇也已經知道如何編譯 C++ 程式，讓我們試著在 Jenkins 上完成這個件事吧。&lt;/p&gt;
-
-&lt;p&gt;照著上面的流程，再新增一個專案，命名為 test_cpp，這次在&lt;code class=&quot;highlighter-rouge&quot;&gt;原始碼管理&lt;/code&gt;選擇 &lt;code class=&quot;highlighter-rouge&quot;&gt;Git&lt;/code&gt; 並且輸入 git 網址 &lt;code class=&quot;highlighter-rouge&quot;&gt;https://github.com/allyusd/helloworld.cpp.git&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-12-create-cpp-compiler-with-jenkins-agent-docker-image-part-1/2018-10-12_23-25-37.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;然後在&lt;code class=&quot;highlighter-rouge&quot;&gt;執行 Shell&lt;/code&gt;輸入編譯跟執行的動作，&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;g++ helloworld.cpp -o helloworld
-./helloworld
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;按下儲存後，點選馬上建置，但是，我們得到一個紅燈，代表建置失敗&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-12-create-cpp-compiler-with-jenkins-agent-docker-image-part-1/2018-10-12_23-29-19.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;讓我們看一下錯誤訊息&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-12-create-cpp-compiler-with-jenkins-agent-docker-image-part-1/2018-10-12_23-31-05.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;錯誤訊息 &lt;code class=&quot;highlighter-rouge&quot;&gt;g++: not found&lt;/code&gt; 代表我們的 Agent 沒有 C++ 編譯環境，在下一篇我們來解決這個問題&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Cpp" /><category term="Docker" /><category term="Jenkins" /><summary type="html">介紹如何建立一個有 C++ 編譯環境及 Jenkins Agent 的 Docker Image。</summary></entry></feed>
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-13-create-cpp-compiler-with-jenkins-agent-docker-image-part-2/2018-10-13_22-31-40.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Cpp" /><category term="Docker" /><category term="Jenkins" /><summary type="html">前一篇發現預設的 Jenkins Agent 沒有 C++ 編譯環境，所以我們要來解決這個問題。</summary></entry></feed>

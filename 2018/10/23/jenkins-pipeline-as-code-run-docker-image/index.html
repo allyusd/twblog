@@ -19,12 +19,12 @@
 
 
 
-<title>在 Ubuntu 安裝 Jenkins Agent - Jian-Ching 記事本</title>
+<title>Jenkins - Pipeline as Code - 啟動 Docker Image - Jian-Ching 記事本</title>
 
 
 
 
-<meta name="description" content="之前介紹過使用 Docker 安裝 Jenkins Agent，這次要講不使用 Docker 直接在 Ubuntu 安裝 Agent 的方法">
+<meta name="description" content="這篇要介紹透過 Jenkinsfile 直接啟動 Docker Image 來執行">
 
 
 
@@ -33,15 +33,15 @@
 
 <meta property="og:locale" content="zh_TW">
 <meta property="og:site_name" content="Jian-Ching 記事本">
-<meta property="og:title" content="在 Ubuntu 安裝 Jenkins Agent">
+<meta property="og:title" content="Jenkins - Pipeline as Code - 啟動 Docker Image">
 
 
-  <link rel="canonical" href="https://twblog.HongJianChing.com/2018/10/22/install-jenkins-agent-on-ubuntu/">
-  <meta property="og:url" content="https://twblog.HongJianChing.com/2018/10/22/install-jenkins-agent-on-ubuntu/">
+  <link rel="canonical" href="https://twblog.HongJianChing.com/2018/10/23/jenkins-pipeline-as-code-run-docker-image/">
+  <meta property="og:url" content="https://twblog.HongJianChing.com/2018/10/23/jenkins-pipeline-as-code-run-docker-image/">
 
 
 
-  <meta property="og:description" content="之前介紹過使用 Docker 安裝 Jenkins Agent，這次要講不使用 Docker 直接在 Ubuntu 安裝 Agent 的方法">
+  <meta property="og:description" content="這篇要介紹透過 Jenkinsfile 直接啟動 Docker Image 來執行">
 
 
 
@@ -56,7 +56,7 @@
 
 
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2018-10-22T00:00:00+08:00">
+  <meta property="article:published_time" content="2018-10-23T00:00:00+08:00">
 
 
 
@@ -278,69 +278,122 @@
 
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
-    <meta itemprop="headline" content="在 Ubuntu 安裝 Jenkins Agent">
-    <meta itemprop="description" content="之前介紹過使用 Docker 安裝 Jenkins Agent，這次要講不使用 Docker 直接在 Ubuntu 安裝 Agent 的方法">
-    <meta itemprop="datePublished" content="October 22, 2018">
+    <meta itemprop="headline" content="Jenkins - Pipeline as Code - 啟動 Docker Image">
+    <meta itemprop="description" content="這篇要介紹透過 Jenkinsfile 直接啟動 Docker Image 來執行">
+    <meta itemprop="datePublished" content="October 23, 2018">
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 class="page__title" itemprop="headline">在 Ubuntu 安裝 Jenkins Agent
+          <h1 class="page__title" itemprop="headline">Jenkins - Pipeline as Code - 啟動 Docker Image
 </h1>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        <p>之前介紹過<a href="https://twblog.hongjianching.com/2018/10/10/install-jenkins-agent-with-docker/">使用 Docker 安裝 Jenkins Agent</a>，這次要講不使用 Docker 直接在 Ubuntu 安裝 Agent 的方法</p>
+        <p>這篇要介紹透過 Jenkinsfile 直接啟動 Docker Image 來執行</p>
 
-<p>在 Jenkins 主頁，選擇<strong>管理 Jenkins</strong> &gt; <strong>管理節點</strong> &gt; <strong>新增節點</strong> &gt;
-<strong>節點名稱</strong>輸入 <strong>ubuntu-18.04</strong>，按下 OK</p>
+<p>早前介紹過<a href="https://twblog.hongjianching.com/2018/10/10/install-jenkins-agent-with-docker/">使用 Docker 安裝 Jenkins Agent</a>，但是這個方法，每個環境都要建立一次該環境的 agent docker image，其實有點麻煩，難道不能讓我直接拿 docker image 來執行呢？</p>
 
-<p>接著在設定頁輸入</p>
-<ul>
-  <li>遠端檔案系統根目錄：<strong>/data/jenkins</strong></li>
-  <li>啟動模式：<strong>透過 SSH 啟動 Unitx 主機上的 agnet代理程式</strong></li>
-  <li>主機：輸入 IP</li>
-  <li>Credentials：輸入登入主機的 SSH 帳號及密碼</li>
-  <li>Host Key Verification Strategy：圖方便跳過驗證，選擇<strong>Non verifying Verification Strategy</strong></li>
-</ul>
+<p>答案是可以的，所以前一篇介紹<a href="https://twblog.hongjianching.com/2018/10/22/install-jenkins-agent-on-ubuntu/">在 Ubuntu 安裝 Jenkins Agent</a>，目的是使用該 ubuntu 上的 docker 執行環境。如果還沒有安裝 docker 的話，請參考這篇完成<a href="https://twblog.hongjianching.com/2018/10/02/install-docker/">安裝 Docker</a></p>
 
-<p><img src="/assets/images/2018-10-22-install-jenkins-agent-on-ubuntu/2018-10-22_21-43-37.png" alt="" /></p>
+<p>首先將 ubuntu agent 加上 <strong>docker</strong> 標籤，避免跑到其它沒有 docker 環境的 agent 上，那就會不能執行了喔</p>
 
-<p>按下儲存之後可以看到 Agent 啟動 Logs，進去看一下發現失敗</p>
+<p><img src="/assets/images/2018-10-23-jenkins-pipeline-as-code-run-docker-image/2018-10-23_21-21-51.png" alt="" /></p>
 
-<p><img src="/assets/images/2018-10-22-install-jenkins-agent-on-ubuntu/2018-10-22_21-40-20.png" alt="" /></p>
+<p>接著修改 Jenkinsfile 關於 agent 的宣告，原本是限制執行在有 <strong>cpp</strong> 標籤上的像這樣</p>
 
-<p>訊息上看到提示安裝 java 8，我們透過 ssh 登入 Ubuntu 18.04，確認是不是沒有安裝 java</p>
-
-<p><img src="/assets/images/2018-10-22-install-jenkins-agent-on-ubuntu/2018-10-22_21-02-00.png" alt="" /></p>
-
-<p>確實沒有安裝後，接著透過 apt 安裝 java 套件</p>
-
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>sudo apt update <span class="o">&amp;&amp;</span> sudo apt install openjdk-8-jre -y
+<div class="highlighter-rouge"><pre class="highlight"><code>agent {
+    label 'cpp'
+}
 </code></pre>
 </div>
 
-<p><img src="/assets/images/2018-10-22-install-jenkins-agent-on-ubuntu/2018-10-22_21-36-56.png" alt="" /></p>
+<p>改為限制執行在 <strong>docker</strong> 標籤上，而且要啟動 docker image <strong>maven:3-alpine</strong></p>
 
-<p>回到 Jenkins Web 再啟動一次，結果又有錯誤發生</p>
-
-<p><img src="/assets/images/2018-10-22-install-jenkins-agent-on-ubuntu/2018-10-22_21-52-49.png" alt="" /></p>
-
-<p>檢查紀錄原來是 <strong>/data/jenkins</strong> 目錄不存在，這個好處理。建立一下目鍵，別忘了設定權限</p>
-
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>sudo mkdir -p /data/jenkins
-sudo chown ubuntu:ubuntu /data -R
+<div class="highlighter-rouge"><pre class="highlight"><code>agent {
+    docker {
+        label 'docker'
+        image 'maven:3-alpine'
+    }
+}
 </code></pre>
 </div>
 
-<p>回到頁面再次啟動 Agent</p>
+<p>為了展示在不同 docker image 上執行的能力，我們顯示執行環境的版本資訊</p>
 
-<p><img src="/assets/images/2018-10-22-install-jenkins-agent-on-ubuntu/2018-10-22_21-56-01.png" alt="" /></p>
+<div class="highlighter-rouge"><pre class="highlight"><code>steps {
+    sh 'cat /etc/*-release'
+}
+</code></pre>
+</div>
 
-<p>終於成功完成 Jenkins Agent 連線</p>
+<p>除了 alpine 之外，我們額外新增 ubuntu 及 archlinux 來示範</p>
+
+<p>完整的 Jenkinsfile 如下</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>pipeline {
+    agent none
+    stages {
+        stage('alpine') {
+            agent {
+                docker {
+                    label 'docker'
+                    image 'maven:3-alpine'
+                }
+            }
+            steps {
+                sh 'cat /etc/*-release'
+            }
+        }
+        stage('ubuntu') {
+            agent {
+                docker {
+                    label 'docker'
+                    image 'ubuntu:18.04'
+                }
+            }
+            steps {
+                sh 'cat /etc/*-release'
+            }
+        }
+        stage('archlinux') {
+            agent {
+                docker {
+                    label 'docker'
+                    image 'base/archlinux'
+                }
+            }
+            steps {
+                sh 'cat /etc/*-release'
+            }
+        }
+    }
+}
+</code></pre>
+</div>
+
+<p>要使用預建立的檔案，同樣在 <strong>https://github.com/allyusd/jenkins-pipeline.git</strong>，branch 是 <strong>different-agent-docker</strong></p>
+
+<p>成功建置之後會出現三個 stage</p>
+
+<p><img src="/assets/images/2018-10-23-jenkins-pipeline-as-code-run-docker-image/2018-10-23_21-31-20.png" alt="" /></p>
+
+<p>alpine 執行結果</p>
+
+<p><img src="/assets/images/2018-10-23-jenkins-pipeline-as-code-run-docker-image/2018-10-23_21-32-40.png" alt="" /></p>
+
+<p>ubuntu 執行結果</p>
+
+<p><img src="/assets/images/2018-10-23-jenkins-pipeline-as-code-run-docker-image/2018-10-23_21-33-15.png" alt="" /></p>
+
+<p>archlinux 執行結果</p>
+
+<p><img src="/assets/images/2018-10-23-jenkins-pipeline-as-code-run-docker-image/2018-10-23_21-34-24.png" alt="" /></p>
+
+<p>透過 docker image 啟動不同環境是不是很有彈性呢？</p>
 
         
       </section>
@@ -365,11 +418,11 @@ sudo chown ubuntu:ubuntu /data -R
     
       
       
-      <a href="https://twblog.hongjianching.com/tags/#jenkins" class="page__taxonomy-item" rel="tag">Jenkins</a><span class="sep">, </span>
+      <a href="https://twblog.hongjianching.com/tags/#docker" class="page__taxonomy-item" rel="tag">Docker</a><span class="sep">, </span>
     
       
       
-      <a href="https://twblog.hongjianching.com/tags/#ubuntu" class="page__taxonomy-item" rel="tag">Ubuntu</a>
+      <a href="https://twblog.hongjianching.com/tags/#jenkins" class="page__taxonomy-item" rel="tag">Jenkins</a>
     
     </span>
   </p>
@@ -378,7 +431,7 @@ sudo chown ubuntu:ubuntu /data -R
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2018-10-22T00:00:00+08:00">October 22, 2018</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2018-10-23T00:00:00+08:00">October 23, 2018</time></p>
         
       </footer>
 
@@ -387,25 +440,24 @@ sudo chown ubuntu:ubuntu /data -R
     <h4 class="page__share-title">分享到</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=在 Ubuntu 安裝 Jenkins Agent https://twblog.hongjianching.com/2018/10/22/install-jenkins-agent-on-ubuntu/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=Jenkins - Pipeline as Code - 啟動 Docker Image https://twblog.hongjianching.com/2018/10/23/jenkins-pipeline-as-code-run-docker-image/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2018/10/22/install-jenkins-agent-on-ubuntu/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2018/10/23/jenkins-pipeline-as-code-run-docker-image/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2018/10/22/install-jenkins-agent-on-ubuntu/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2018/10/23/jenkins-pipeline-as-code-run-docker-image/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2018/10/22/install-jenkins-agent-on-ubuntu/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2018/10/23/jenkins-pipeline-as-code-run-docker-image/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="https://twblog.hongjianching.com/2018/10/21/jenkins-pipeline-as-code-slack-notifier/" class="pagination--pager" title="Jenkins - Pipeline as Code - Slack Notifier
+      <a href="https://twblog.hongjianching.com/2018/10/22/install-jenkins-agent-on-ubuntu/" class="pagination--pager" title="在 Ubuntu 安裝 Jenkins Agent
 ">較舊</a>
     
     
-      <a href="https://twblog.hongjianching.com/2018/10/23/jenkins-pipeline-as-code-run-docker-image/" class="pagination--pager" title="Jenkins - Pipeline as Code - 啟動 Docker Image
-">較新</a>
+      <a href="#" class="pagination--pager disabled">較新</a>
     
   </nav>
 
@@ -471,7 +523,7 @@ sudo chown ubuntu:ubuntu /data -R
   
     ga('send', 'event', 'taggedPost', 'view', 'Jenkins');
   
-    ga('send', 'event', 'taggedPost', 'view', 'Ubuntu');
+    ga('send', 'event', 'taggedPost', 'view', 'Docker');
   
   
 </script>

@@ -1,4 +1,104 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-22T22:15:03+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">在 Ubuntu 安裝 Jenkins Agent</title><link href="https://twblog.hongjianching.com/2018/10/22/install-jenkins-agent-on-ubuntu/" rel="alternate" type="text/html" title="在 Ubuntu 安裝 Jenkins Agent" /><published>2018-10-22T00:00:00+08:00</published><updated>2018-10-22T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/22/install-jenkins-agent-on-ubuntu</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/22/install-jenkins-agent-on-ubuntu/">&lt;p&gt;之前介紹過&lt;a href=&quot;https://twblog.hongjianching.com/2018/10/10/install-jenkins-agent-with-docker/&quot;&gt;使用 Docker 安裝 Jenkins Agent&lt;/a&gt;，這次要講不使用 Docker 直接在 Ubuntu 安裝 Agent 的方法&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-23T22:00:20+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">Jenkins - Pipeline as Code - 啟動 Docker Image</title><link href="https://twblog.hongjianching.com/2018/10/23/jenkins-pipeline-as-code-run-docker-image/" rel="alternate" type="text/html" title="Jenkins - Pipeline as Code - 啟動 Docker Image" /><published>2018-10-23T00:00:00+08:00</published><updated>2018-10-23T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/23/jenkins-pipeline-as-code-run-docker-image</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/23/jenkins-pipeline-as-code-run-docker-image/">&lt;p&gt;這篇要介紹透過 Jenkinsfile 直接啟動 Docker Image 來執行&lt;/p&gt;
+
+&lt;p&gt;早前介紹過&lt;a href=&quot;https://twblog.hongjianching.com/2018/10/10/install-jenkins-agent-with-docker/&quot;&gt;使用 Docker 安裝 Jenkins Agent&lt;/a&gt;，但是這個方法，每個環境都要建立一次該環境的 agent docker image，其實有點麻煩，難道不能讓我直接拿 docker image 來執行呢？&lt;/p&gt;
+
+&lt;p&gt;答案是可以的，所以前一篇介紹&lt;a href=&quot;https://twblog.hongjianching.com/2018/10/22/install-jenkins-agent-on-ubuntu/&quot;&gt;在 Ubuntu 安裝 Jenkins Agent&lt;/a&gt;，目的是使用該 ubuntu 上的 docker 執行環境。如果還沒有安裝 docker 的話，請參考這篇完成&lt;a href=&quot;https://twblog.hongjianching.com/2018/10/02/install-docker/&quot;&gt;安裝 Docker&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;首先將 ubuntu agent 加上 &lt;strong&gt;docker&lt;/strong&gt; 標籤，避免跑到其它沒有 docker 環境的 agent 上，那就會不能執行了喔&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-23-jenkins-pipeline-as-code-run-docker-image/2018-10-23_21-21-51.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;接著修改 Jenkinsfile 關於 agent 的宣告，原本是限制執行在有 &lt;strong&gt;cpp&lt;/strong&gt; 標籤上的像這樣&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;agent {
+    label 'cpp'
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;改為限制執行在 &lt;strong&gt;docker&lt;/strong&gt; 標籤上，而且要啟動 docker image &lt;strong&gt;maven:3-alpine&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;agent {
+    docker {
+        label 'docker'
+        image 'maven:3-alpine'
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;為了展示在不同 docker image 上執行的能力，我們顯示執行環境的版本資訊&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;steps {
+    sh 'cat /etc/*-release'
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;除了 alpine 之外，我們額外新增 ubuntu 及 archlinux 來示範&lt;/p&gt;
+
+&lt;p&gt;完整的 Jenkinsfile 如下&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pipeline {
+    agent none
+    stages {
+        stage('alpine') {
+            agent {
+                docker {
+                    label 'docker'
+                    image 'maven:3-alpine'
+                }
+            }
+            steps {
+                sh 'cat /etc/*-release'
+            }
+        }
+        stage('ubuntu') {
+            agent {
+                docker {
+                    label 'docker'
+                    image 'ubuntu:18.04'
+                }
+            }
+            steps {
+                sh 'cat /etc/*-release'
+            }
+        }
+        stage('archlinux') {
+            agent {
+                docker {
+                    label 'docker'
+                    image 'base/archlinux'
+                }
+            }
+            steps {
+                sh 'cat /etc/*-release'
+            }
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;要使用預建立的檔案，同樣在 &lt;strong&gt;https://github.com/allyusd/jenkins-pipeline.git&lt;/strong&gt;，branch 是 &lt;strong&gt;different-agent-docker&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;成功建置之後會出現三個 stage&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-23-jenkins-pipeline-as-code-run-docker-image/2018-10-23_21-31-20.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;alpine 執行結果&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-23-jenkins-pipeline-as-code-run-docker-image/2018-10-23_21-32-40.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;ubuntu 執行結果&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-23-jenkins-pipeline-as-code-run-docker-image/2018-10-23_21-33-15.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;archlinux 執行結果&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-23-jenkins-pipeline-as-code-run-docker-image/2018-10-23_21-34-24.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;透過 docker image 啟動不同環境是不是很有彈性呢？&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Jenkins" /><category term="Docker" /><summary type="html">這篇要介紹透過 Jenkinsfile 直接啟動 Docker Image 來執行</summary></entry><entry><title type="html">在 Ubuntu 安裝 Jenkins Agent</title><link href="https://twblog.hongjianching.com/2018/10/22/install-jenkins-agent-on-ubuntu/" rel="alternate" type="text/html" title="在 Ubuntu 安裝 Jenkins Agent" /><published>2018-10-22T00:00:00+08:00</published><updated>2018-10-22T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/22/install-jenkins-agent-on-ubuntu</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/22/install-jenkins-agent-on-ubuntu/">&lt;p&gt;之前介紹過&lt;a href=&quot;https://twblog.hongjianching.com/2018/10/10/install-jenkins-agent-with-docker/&quot;&gt;使用 Docker 安裝 Jenkins Agent&lt;/a&gt;，這次要講不使用 Docker 直接在 Ubuntu 安裝 Agent 的方法&lt;/p&gt;
 
 &lt;p&gt;在 Jenkins 主頁，選擇&lt;strong&gt;管理 Jenkins&lt;/strong&gt; &amp;gt; &lt;strong&gt;管理節點&lt;/strong&gt; &amp;gt; &lt;strong&gt;新增節點&lt;/strong&gt; &amp;gt;
 &lt;strong&gt;節點名稱&lt;/strong&gt;輸入 &lt;strong&gt;ubuntu-18.04&lt;/strong&gt;，按下 OK&lt;/p&gt;
@@ -572,108 +672,4 @@ sudo chown ubuntu:ubuntu /data -R
 &lt;h1 id=&quot;ref&quot;&gt;ref&lt;/h1&gt;
 &lt;p&gt;&lt;a href=&quot;https://jenkins.io/doc/book/pipeline/jenkinsfile/&quot;&gt;Using a Jenkinsfile&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://jenkins.io/doc/book/pipeline/syntax/#stages&quot;&gt;Pipeline Syntax&lt;/a&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Jenkins" /><summary type="html">Jenkins 是個歷史悠久的 CI / CD 工具，從 Jenkins 2.0 開始正式推展 Pipeline，有別於以往使用 Web UI 操作的特性，導向 Pipeline as Code 的實踐。透過在原始碼專案新增一個 Jenkinsfile 的檔案，將 Pipeline 的流程都寫在檔案內。</summary></entry><entry><title type="html">建立擁有 C++ 編譯環境及 Jenkins Agent 的 Docker Image - Part 2</title><link href="https://twblog.hongjianching.com/2018/10/13/create-cpp-compiler-with-jenkins-agent-docker-image-part-2/" rel="alternate" type="text/html" title="建立擁有 C++ 編譯環境及 Jenkins Agent 的 Docker Image - Part 2" /><published>2018-10-13T00:00:00+08:00</published><updated>2018-10-13T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/13/create-cpp-compiler-with-jenkins-agent-docker-image-part-2</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/13/create-cpp-compiler-with-jenkins-agent-docker-image-part-2/">&lt;p&gt;前一篇發現預設的 Jenkins Agent 沒有 C++ 編譯環境，所以我們要來解決這個問題。&lt;/p&gt;
-
-&lt;p&gt;在 &lt;a href=&quot;https://twblog.hongjianching.com/2018/10/10/install-jenkins-agent-with-docker/&quot;&gt;使用 Docker 安裝 Jenkins Agent&lt;/a&gt; 中提到使用的 agent docker image 是 jenkins/jnlp-slave，所以我們先參考一下原本的 Dockerfile 是怎麼寫的 &lt;a href=&quot;https://github.com/jenkinsci/docker-jnlp-slave/blob/3.26-1/Dockerfile&quot;&gt;(source)&lt;/a&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;FROM jenkins/slave:3.26-1
-MAINTAINER Oleg Nenashev &amp;lt;o.v.nenashev@gmail.com&amp;gt;
-LABEL Description=&quot;This is a base image, which allows connecting Jenkins agents via JNLP protocols&quot; Vendor=&quot;Jenkins project&quot; Version=&quot;3.23&quot;
-
-COPY jenkins-slave /usr/local/bin/jenkins-slave
-
-ENTRYPOINT [&quot;jenkins-slave&quot;]
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;從內容中可以知道，先複製了 slave 檔案然後啟動 slave，因為複製做一次就好，所以我們只需要啟動 slave。&lt;/p&gt;
-
-&lt;p&gt;利用 &lt;a href=&quot;https://twblog.hongjianching.com/2018/10/08/create-dockerhub-automated-build/&quot;&gt;使用 GitHub 在 DockerHub 自動建置 Docker Image&lt;/a&gt; 的方法，建立一個 &lt;a href=&quot;https://github.com/allyusd/docker-jenkins-jnlp-slave-cpp&quot;&gt;docker-jenkins-jnlp-slave-cpp&lt;/a&gt; github 專案並且建立一個 Dockerfile 檔案，內容就是以 jenkins/jnlp-slave 為基底，加上安裝 C++ 編譯環境，最後記得啟動 slave&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;FROM jenkins/jnlp-slave:3.26-1
-
-RUN apt update &amp;amp;&amp;amp; apt install build-essential -y
-
-ENTRYPOINT [&quot;jenkins-slave&quot;]
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;接著在 dockerhub 建立 &lt;a href=&quot;https://hub.docker.com/r/allyusd/jenkins-jnlp-slave-cpp/&quot;&gt;jenkins-jnlp-slave-cpp&lt;/a&gt; 自動建置專案，並且手動觸發一次，等著拿建置好的 image 來用，&lt;/p&gt;
-
-&lt;p&gt;但是建置結果卻失敗了，來檢查一下 &lt;a href=&quot;https://hub.docker.com/r/allyusd/jenkins-jnlp-slave-cpp/builds/baavigxpyfscewc3e63nbvh/&quot;&gt;Log&lt;/a&gt;，錯誤訊息居然是 &lt;code class=&quot;highlighter-rouge&quot;&gt;List directory /var/lib/apt/lists/partial is missing. - Acquire (13: Permission denied)&lt;/code&gt;
-權限不足？這沒道理啊，docker 預設是 root，怎麼會有權限問題呢？等等，剛剛是不是提到了&lt;code class=&quot;highlighter-rouge&quot;&gt;預設&lt;/code&gt;兩個字。既然如此，那有可能是被改掉了，但是剛剛參考的 Dockerfile 很乾淨，難道是再上一層繼承的 image？&lt;/p&gt;
-
-&lt;p&gt;從 Dockerfile 可以看到 jenkins/jnlp-slave 是繼承 jenkins/slave來的，那來看一下 Dockerfile &lt;a href=&quot;https://github.com/jenkinsci/docker-slave/blob/3.26-1/Dockerfile&quot;&gt;(source)&lt;/a&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;FROM openjdk:8-jdk
-MAINTAINER Oleg Nenashev &amp;lt;o.v.nenashev@gmail.com&amp;gt;
-
-ARG user=jenkins
-ARG group=jenkins
-ARG uid=10000
-ARG gid=10000
-
-ENV HOME /home/${user}
-RUN groupadd -g ${gid} ${group}
-RUN useradd -c &quot;Jenkins user&quot; -d $HOME -u ${uid} -g ${gid} -m ${user}
-LABEL Description=&quot;This is a base image, which provides the Jenkins agent executable (slave.jar)&quot; Vendor=&quot;Jenkins project&quot; Version=&quot;3.23&quot;
-
-ARG VERSION=3.26
-ARG AGENT_WORKDIR=/home/${user}/agent
-
-RUN curl --create-dirs -sSLo /usr/share/jenkins/slave.jar https://repo.jenkins-ci.org/public/org/jenkins-ci/main/remoting/${VERSION}/remoting-${VERSION}.jar \
-  &amp;amp;&amp;amp; chmod 755 /usr/share/jenkins \
-  &amp;amp;&amp;amp; chmod 644 /usr/share/jenkins/slave.jar
-
-USER ${user}
-ENV AGENT_WORKDIR=${AGENT_WORKDIR}
-RUN mkdir /home/${user}/.jenkins &amp;amp;&amp;amp; mkdir -p ${AGENT_WORKDIR}
-
-VOLUME /home/${user}/.jenkins
-VOLUME ${AGENT_WORKDIR}
-WORKDIR /home/${user}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;抓到了！其中有一行是 &lt;code class=&quot;highlighter-rouge&quot;&gt;USER ${user}&lt;/code&gt;，這個指令改變了目前的使用者為 jenkins，造成權限不足以安裝套件。既然如此，那我們就把使用者改回來試試看。&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;FROM jenkins/jnlp-slave:3.26-1
-
-USER root
-RUN apt update &amp;amp;&amp;amp; apt install build-essential -y
-USER jenkins
-
-ENTRYPOINT [&quot;jenkins-slave&quot;]
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;這 Github 更新 Dockerfile 之後，Dockerhub 自動開始了建置映像檔的動作，我們可以上個廁所、泡泡茶再回來看看建置結果。&lt;/p&gt;
-
-&lt;p&gt;很好，這次成功了！&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-13-create-cpp-compiler-with-jenkins-agent-docker-image-part-2/2018-10-13_21-07-50.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;接下來就是啟動一個新的 agent，如果忘記的話可以參考 &lt;a href=&quot;https://twblog.hongjianching.com/2018/10/10/install-jenkins-agent-with-docker/&quot;&gt;使用 Docker 安裝 Jenkins Agent&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;這次不同的是，標籤設定為 &lt;code class=&quot;highlighter-rouge&quot;&gt;cpp&lt;/code&gt;，使用方式設為&lt;code class=&quot;highlighter-rouge&quot;&gt;只保留給限定節點的作業&lt;/code&gt;，因為有些專案不需要 C++ 環境，所以我們為了區隔，讓這個 agent 只跑需要 C++ 的專案。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-13-create-cpp-compiler-with-jenkins-agent-docker-image-part-2/2018-10-13_21-10-33.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;接著啟動 C++ Agent&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    --name jenkins_agent_cpp &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    -d --restart always &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    allyusd/jenkins-jnlp-slave-cpp &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    -url http://192.168.43.140:8080 &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    951ac478b69131e43fb2cfb6d201ecf789ba388a759ea946d7ab62aac55227a7 &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    agent-cpp
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;接著修改上一篇建立的 &lt;code class=&quot;highlighter-rouge&quot;&gt;test_cpp&lt;/code&gt; 專案設定，選取&lt;code class=&quot;highlighter-rouge&quot;&gt;限制專案執行節點&lt;/code&gt;，在&lt;code class=&quot;highlighter-rouge&quot;&gt;標籤表示式&lt;/code&gt;輸入 &lt;code class=&quot;highlighter-rouge&quot;&gt;cpp&lt;/code&gt;，按下儲存之後點擊&lt;code class=&quot;highlighter-rouge&quot;&gt;馬上建置&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-13-create-cpp-compiler-with-jenkins-agent-docker-image-part-2/2018-10-13_22-28-48.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;這一次順利的建置成功啦！&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-13-create-cpp-compiler-with-jenkins-agent-docker-image-part-2/2018-10-13_22-31-40.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Cpp" /><category term="Docker" /><category term="Jenkins" /><summary type="html">前一篇發現預設的 Jenkins Agent 沒有 C++ 編譯環境，所以我們要來解決這個問題。</summary></entry></feed>
+&lt;p&gt;&lt;a href=&quot;https://jenkins.io/doc/book/pipeline/syntax/#stages&quot;&gt;Pipeline Syntax&lt;/a&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Jenkins" /><summary type="html">Jenkins 是個歷史悠久的 CI / CD 工具，從 Jenkins 2.0 開始正式推展 Pipeline，有別於以往使用 Web UI 操作的特性，導向 Pipeline as Code 的實踐。透過在原始碼專案新增一個 Jenkinsfile 的檔案，將 Pipeline 的流程都寫在檔案內。</summary></entry></feed>

@@ -19,12 +19,12 @@
 
 
 
-<title>Jenkins - Pipeline as Code - 啟動 Docker Image - Jian-Ching 記事本</title>
+<title>Jenkins - Pipeline as Code - 平行工作 - Jian-Ching 記事本</title>
 
 
 
 
-<meta name="description" content="這篇要介紹透過 Jenkinsfile 直接啟動 Docker Image 來執行">
+<meta name="description" content="在之前的範例中，我們都是使用連續流程 pipeline，當某一個 stage 失敗，則剩餘的 stage 直接跳過不再執行，以流水線來說這是正確的。">
 
 
 
@@ -33,15 +33,15 @@
 
 <meta property="og:locale" content="zh_TW">
 <meta property="og:site_name" content="Jian-Ching 記事本">
-<meta property="og:title" content="Jenkins - Pipeline as Code - 啟動 Docker Image">
+<meta property="og:title" content="Jenkins - Pipeline as Code - 平行工作">
 
 
-  <link rel="canonical" href="https://twblog.HongJianChing.com/2018/10/23/jenkins-pipeline-as-code-run-docker-image/">
-  <meta property="og:url" content="https://twblog.HongJianChing.com/2018/10/23/jenkins-pipeline-as-code-run-docker-image/">
+  <link rel="canonical" href="https://twblog.HongJianChing.com/2018/10/24/jenkins-pipeline-as-code-parallel/">
+  <meta property="og:url" content="https://twblog.HongJianChing.com/2018/10/24/jenkins-pipeline-as-code-parallel/">
 
 
 
-  <meta property="og:description" content="這篇要介紹透過 Jenkinsfile 直接啟動 Docker Image 來執行">
+  <meta property="og:description" content="在之前的範例中，我們都是使用連續流程 pipeline，當某一個 stage 失敗，則剩餘的 stage 直接跳過不再執行，以流水線來說這是正確的。">
 
 
 
@@ -56,7 +56,7 @@
 
 
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2018-10-23T00:00:00+08:00">
+  <meta property="article:published_time" content="2018-10-24T00:00:00+08:00">
 
 
 
@@ -278,96 +278,83 @@
 
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Jenkins - Pipeline as Code - 啟動 Docker Image">
-    <meta itemprop="description" content="這篇要介紹透過 Jenkinsfile 直接啟動 Docker Image 來執行">
-    <meta itemprop="datePublished" content="October 23, 2018">
+    <meta itemprop="headline" content="Jenkins - Pipeline as Code - 平行工作">
+    <meta itemprop="description" content="在之前的範例中，我們都是使用連續流程 pipeline，當某一個 stage 失敗，則剩餘的 stage 直接跳過不再執行，以流水線來說這是正確的。">
+    <meta itemprop="datePublished" content="October 24, 2018">
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 class="page__title" itemprop="headline">Jenkins - Pipeline as Code - 啟動 Docker Image
+          <h1 class="page__title" itemprop="headline">Jenkins - Pipeline as Code - 平行工作
 </h1>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        <p>這篇要介紹透過 Jenkinsfile 直接啟動 Docker Image 來執行</p>
+        <p>在之前的範例中，我們都是使用連續流程 pipeline，當某一個 stage 失敗，則剩餘的 stage 直接跳過不再執行，以流水線來說這是正確的。</p>
 
-<p>早前介紹過<a href="https://twblog.hongjianching.com/2018/10/10/install-jenkins-agent-with-docker/">使用 Docker 安裝 Jenkins Agent</a>，但是這個方法，每個環境都要建立一次該環境的 agent docker image，其實有點麻煩，難道不能讓我直接拿 docker image 來執行呢？</p>
+<p>一般流水線的基本 stage 是 build, test, deploy，當 build 失敗的時候，意味著下一個 test stage 勢必沒有辦法執行，所以直接跳過這個 stage。而 test 失敗的時候，表示沒有通過測試，不應該進行 deploy。</p>
 
-<p>答案是可以的，所以前一篇介紹<a href="https://twblog.hongjianching.com/2018/10/22/install-jenkins-agent-on-ubuntu/">在 Ubuntu 安裝 Jenkins Agent</a>，目的是使用該 ubuntu 上的 docker 執行環境。如果還沒有安裝 docker 的話，請參考這篇完成<a href="https://twblog.hongjianching.com/2018/10/02/install-docker/">安裝 Docker</a></p>
+<p>但是，有個情況是，假如我是一個網頁程式，想要測試時跑在 chrome, firefox, ie 等環境，這時三者之間獨立存在，彼此沒有關聯。假如在 chrome 失敗了，並不代表在 firefox 及 ie 會失敗，所以不應該直接跳過，這時三個 stage 就應該是平行工作。</p>
 
-<p>首先將 ubuntu agent 加上 <strong>docker</strong> 標籤，避免跑到其它沒有 docker 環境的 agent 上，那就會不能執行了喔</p>
+<p>接下來的測試借用前一篇<a href="https://twblog.hongjianching.com/2018/10/23/jenkins-pipeline-as-code-run-docker-image/">Jenkins - Pipeline as Code - 啟動 Docker Image</a>的範例來示範，原先執行了三個 docker image，我們現在故意讓第一個失敗，把 image 改為不存在的 <strong>non-exist:fail</strong> 看看結果</p>
 
-<p><img src="/assets/images/2018-10-23-jenkins-pipeline-as-code-run-docker-image/2018-10-23_21-21-51.png" alt="" /></p>
+<p>(已建立的檔案在 <strong>https://github.com/allyusd/jenkins-pipeline.git</strong>，故意失敗的 branch 為 <strong>agent-docker-fail</strong>)</p>
 
-<p>接著修改 Jenkinsfile 關於 agent 的宣告，原本是限制執行在有 <strong>cpp</strong> 標籤上的像這樣</p>
+<p>從 Stage View 來看，只知道三個 stage 都是 failed 的結果</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>agent {
-    label 'cpp'
-}
-</code></pre>
-</div>
+<p><img src="/assets/images/2018-10-24-jenkins-pipeline-as-code-parallel/2018-10-24_22-41-14.png" alt="" /></p>
 
-<p>改為限制執行在 <strong>docker</strong> 標籤上，而且要啟動 docker image <strong>maven:3-alpine</strong></p>
+<p>實際到 Logs 確認後，可以發現第一個 stage 失敗之後，後續兩個 stage 直接跳過了</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>agent {
-    docker {
-        label 'docker'
-        image 'maven:3-alpine'
-    }
-}
-</code></pre>
-</div>
+<p><img src="/assets/images/2018-10-24-jenkins-pipeline-as-code-parallel/2018-10-24_22-39-29.png" alt="" /></p>
 
-<p>為了展示在不同 docker image 上執行的能力，我們顯示執行環境的版本資訊</p>
+<p>為了達到平行工作的目的，我們可以使用 <strong>parallel</strong> 關鍵字，透過平行宣告，讓這三個 stage 不再有上下流的關係。</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>steps {
-    sh 'cat /etc/*-release'
-}
-</code></pre>
-</div>
+<p>原本的 Jenkinsfile 修改後如下</p>
 
-<p>除了 alpine 之外，我們額外新增 ubuntu 及 archlinux 來示範</p>
-
-<p>完整的 Jenkinsfile 如下</p>
+<p>(branch 為 <strong>agent-docker-parallel</strong>)</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>pipeline {
     agent none
     stages {
-        stage('alpine') {
-            agent {
-                docker {
-                    label 'docker'
-                    image 'maven:3-alpine'
+        stage('parallel') {
+            parallel {
+                stage('alpine') {
+                    agent {
+                        docker {
+                            label 'docker'
+                            image 'maven:3-alpine'
+                        }
+                    }
+                    steps {
+                        sh 'cat /etc/*-release'
+                    }
                 }
-            }
-            steps {
-                sh 'cat /etc/*-release'
-            }
-        }
-        stage('ubuntu') {
-            agent {
-                docker {
-                    label 'docker'
-                    image 'ubuntu:18.04'
+                stage('ubuntu') {
+                    agent {
+                        docker {
+                            label 'docker'
+                            image 'ubuntu:18.04'
+                        }
+                    }
+                    steps {
+                        sh 'cat /etc/*-release'
+                    }
                 }
-            }
-            steps {
-                sh 'cat /etc/*-release'
-            }
-        }
-        stage('archlinux') {
-            agent {
-                docker {
-                    label 'docker'
-                    image 'base/archlinux'
+                stage('archlinux') {
+                    agent {
+                        docker {
+                            label 'docker'
+                            image 'base/archlinux'
+                        }
+                    }
+                    steps {
+                        sh 'cat /etc/*-release'
+                    }
                 }
-            }
-            steps {
-                sh 'cat /etc/*-release'
             }
         }
     }
@@ -375,25 +362,27 @@
 </code></pre>
 </div>
 
-<p>要使用預建立的檔案，同樣在 <strong>https://github.com/allyusd/jenkins-pipeline.git</strong>，branch 是 <strong>different-agent-docker</strong></p>
+<p>成功執行的情況跟原本的沒太大差別，只是多了一個 parallel stage，事實上沒有做什麼事情。</p>
 
-<p>成功建置之後會出現三個 stage</p>
+<p><img src="/assets/images/2018-10-24-jenkins-pipeline-as-code-parallel/2018-10-24_22-47-42.png" alt="" /></p>
 
-<p><img src="/assets/images/2018-10-23-jenkins-pipeline-as-code-run-docker-image/2018-10-23_21-31-20.png" alt="" /></p>
+<p>接著把平行版本給弄壞，同樣讓第一個 stage 改成不存在的 image</p>
 
-<p>alpine 執行結果</p>
+<p>(branch 為 <strong>agent-docker-parallel-fail</strong>)</p>
 
-<p><img src="/assets/images/2018-10-23-jenkins-pipeline-as-code-run-docker-image/2018-10-23_21-32-40.png" alt="" /></p>
+<p>執行後的 Stage View 明顯看出只有第一個 stage 是 failed，其它兩個 stage 都有順利執行，如果是在程式除錯的情況下，就會往第一個環境與其它不同的部份去 debug，為開發人員提供很好的判斷資訊</p>
 
-<p>ubuntu 執行結果</p>
+<p><img src="/assets/images/2018-10-24-jenkins-pipeline-as-code-parallel/2018-10-24_22-51-23.png" alt="" /></p>
 
-<p><img src="/assets/images/2018-10-23-jenkins-pipeline-as-code-run-docker-image/2018-10-23_21-33-15.png" alt="" /></p>
+<p>改成平行工作，除了讓 stage 消除上下流關係，提供開發人員除錯資訊外，因為彼此獨立，所以如果在有多個可使用 agent 的情況下，是真的可以平行進行的喔。</p>
 
-<p>archlinux 執行結果</p>
+<p><img src="/assets/images/2018-10-24-jenkins-pipeline-as-code-parallel/2018-10-24_22-56-02.png" alt="" /></p>
 
-<p><img src="/assets/images/2018-10-23-jenkins-pipeline-as-code-run-docker-image/2018-10-23_21-34-24.png" alt="" /></p>
+<p>上圖表示同樣是 #6，但是一個在執行的時候，還有兩個在佇列中等候，如果幫 Jenkins 再安裝兩個 agent，就可以看到同時進行喔！</p>
 
-<p>透過 docker image 啟動不同環境是不是很有彈性呢？</p>
+<p>等等，突然想到目前的執行環境是使用 docker image，環境互不影響，那我只要將 ubuntu-18.04 agent <strong>執行程式數量</strong> 設定為 3 就可以展示效果</p>
+
+<p><img src="/assets/images/2018-10-24-jenkins-pipeline-as-code-parallel/2018-10-24_22-59-36.png" alt="" /></p>
 
         
       </section>
@@ -418,10 +407,6 @@
     
       
       
-      <a href="https://twblog.hongjianching.com/tags/#docker" class="page__taxonomy-item" rel="tag">Docker</a><span class="sep">, </span>
-    
-      
-      
       <a href="https://twblog.hongjianching.com/tags/#jenkins" class="page__taxonomy-item" rel="tag">Jenkins</a>
     
     </span>
@@ -431,7 +416,7 @@
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2018-10-23T00:00:00+08:00">October 23, 2018</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2018-10-24T00:00:00+08:00">October 24, 2018</time></p>
         
       </footer>
 
@@ -440,25 +425,24 @@
     <h4 class="page__share-title">分享到</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=Jenkins - Pipeline as Code - 啟動 Docker Image https://twblog.hongjianching.com/2018/10/23/jenkins-pipeline-as-code-run-docker-image/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=Jenkins - Pipeline as Code - 平行工作 https://twblog.hongjianching.com/2018/10/24/jenkins-pipeline-as-code-parallel/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2018/10/23/jenkins-pipeline-as-code-run-docker-image/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2018/10/24/jenkins-pipeline-as-code-parallel/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2018/10/23/jenkins-pipeline-as-code-run-docker-image/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2018/10/24/jenkins-pipeline-as-code-parallel/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2018/10/23/jenkins-pipeline-as-code-run-docker-image/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2018/10/24/jenkins-pipeline-as-code-parallel/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="https://twblog.hongjianching.com/2018/10/22/install-jenkins-agent-on-ubuntu/" class="pagination--pager" title="在 Ubuntu 安裝 Jenkins Agent
+      <a href="https://twblog.hongjianching.com/2018/10/23/jenkins-pipeline-as-code-run-docker-image/" class="pagination--pager" title="Jenkins - Pipeline as Code - 啟動 Docker Image
 ">較舊</a>
     
     
-      <a href="https://twblog.hongjianching.com/2018/10/24/jenkins-pipeline-as-code-parallel/" class="pagination--pager" title="Jenkins - Pipeline as Code - 平行工作
-">較新</a>
+      <a href="#" class="pagination--pager disabled">較新</a>
     
   </nav>
 
@@ -523,8 +507,6 @@
     ga('send', 'event', 'taggedPost', 'view', '2019-iT-邦幫忙鐵人賽');
   
     ga('send', 'event', 'taggedPost', 'view', 'Jenkins');
-  
-    ga('send', 'event', 'taggedPost', 'view', 'Docker');
   
   
 </script>

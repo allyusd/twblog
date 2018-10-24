@@ -1,4 +1,93 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-23T22:00:20+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">Jenkins - Pipeline as Code - 啟動 Docker Image</title><link href="https://twblog.hongjianching.com/2018/10/23/jenkins-pipeline-as-code-run-docker-image/" rel="alternate" type="text/html" title="Jenkins - Pipeline as Code - 啟動 Docker Image" /><published>2018-10-23T00:00:00+08:00</published><updated>2018-10-23T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/23/jenkins-pipeline-as-code-run-docker-image</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/23/jenkins-pipeline-as-code-run-docker-image/">&lt;p&gt;這篇要介紹透過 Jenkinsfile 直接啟動 Docker Image 來執行&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-24T23:15:24+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">Jenkins - Pipeline as Code - 平行工作</title><link href="https://twblog.hongjianching.com/2018/10/24/jenkins-pipeline-as-code-parallel/" rel="alternate" type="text/html" title="Jenkins - Pipeline as Code - 平行工作" /><published>2018-10-24T00:00:00+08:00</published><updated>2018-10-24T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/24/jenkins-pipeline-as-code-parallel</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/24/jenkins-pipeline-as-code-parallel/">&lt;p&gt;在之前的範例中，我們都是使用連續流程 pipeline，當某一個 stage 失敗，則剩餘的 stage 直接跳過不再執行，以流水線來說這是正確的。&lt;/p&gt;
+
+&lt;p&gt;一般流水線的基本 stage 是 build, test, deploy，當 build 失敗的時候，意味著下一個 test stage 勢必沒有辦法執行，所以直接跳過這個 stage。而 test 失敗的時候，表示沒有通過測試，不應該進行 deploy。&lt;/p&gt;
+
+&lt;p&gt;但是，有個情況是，假如我是一個網頁程式，想要測試時跑在 chrome, firefox, ie 等環境，這時三者之間獨立存在，彼此沒有關聯。假如在 chrome 失敗了，並不代表在 firefox 及 ie 會失敗，所以不應該直接跳過，這時三個 stage 就應該是平行工作。&lt;/p&gt;
+
+&lt;p&gt;接下來的測試借用前一篇&lt;a href=&quot;https://twblog.hongjianching.com/2018/10/23/jenkins-pipeline-as-code-run-docker-image/&quot;&gt;Jenkins - Pipeline as Code - 啟動 Docker Image&lt;/a&gt;的範例來示範，原先執行了三個 docker image，我們現在故意讓第一個失敗，把 image 改為不存在的 &lt;strong&gt;non-exist:fail&lt;/strong&gt; 看看結果&lt;/p&gt;
+
+&lt;p&gt;(已建立的檔案在 &lt;strong&gt;https://github.com/allyusd/jenkins-pipeline.git&lt;/strong&gt;，故意失敗的 branch 為 &lt;strong&gt;agent-docker-fail&lt;/strong&gt;)&lt;/p&gt;
+
+&lt;p&gt;從 Stage View 來看，只知道三個 stage 都是 failed 的結果&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-24-jenkins-pipeline-as-code-parallel/2018-10-24_22-41-14.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;實際到 Logs 確認後，可以發現第一個 stage 失敗之後，後續兩個 stage 直接跳過了&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-24-jenkins-pipeline-as-code-parallel/2018-10-24_22-39-29.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;為了達到平行工作的目的，我們可以使用 &lt;strong&gt;parallel&lt;/strong&gt; 關鍵字，透過平行宣告，讓這三個 stage 不再有上下流的關係。&lt;/p&gt;
+
+&lt;p&gt;原本的 Jenkinsfile 修改後如下&lt;/p&gt;
+
+&lt;p&gt;(branch 為 &lt;strong&gt;agent-docker-parallel&lt;/strong&gt;)&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pipeline {
+    agent none
+    stages {
+        stage('parallel') {
+            parallel {
+                stage('alpine') {
+                    agent {
+                        docker {
+                            label 'docker'
+                            image 'maven:3-alpine'
+                        }
+                    }
+                    steps {
+                        sh 'cat /etc/*-release'
+                    }
+                }
+                stage('ubuntu') {
+                    agent {
+                        docker {
+                            label 'docker'
+                            image 'ubuntu:18.04'
+                        }
+                    }
+                    steps {
+                        sh 'cat /etc/*-release'
+                    }
+                }
+                stage('archlinux') {
+                    agent {
+                        docker {
+                            label 'docker'
+                            image 'base/archlinux'
+                        }
+                    }
+                    steps {
+                        sh 'cat /etc/*-release'
+                    }
+                }
+            }
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;成功執行的情況跟原本的沒太大差別，只是多了一個 parallel stage，事實上沒有做什麼事情。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-24-jenkins-pipeline-as-code-parallel/2018-10-24_22-47-42.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;接著把平行版本給弄壞，同樣讓第一個 stage 改成不存在的 image&lt;/p&gt;
+
+&lt;p&gt;(branch 為 &lt;strong&gt;agent-docker-parallel-fail&lt;/strong&gt;)&lt;/p&gt;
+
+&lt;p&gt;執行後的 Stage View 明顯看出只有第一個 stage 是 failed，其它兩個 stage 都有順利執行，如果是在程式除錯的情況下，就會往第一個環境與其它不同的部份去 debug，為開發人員提供很好的判斷資訊&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-24-jenkins-pipeline-as-code-parallel/2018-10-24_22-51-23.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;改成平行工作，除了讓 stage 消除上下流關係，提供開發人員除錯資訊外，因為彼此獨立，所以如果在有多個可使用 agent 的情況下，是真的可以平行進行的喔。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-24-jenkins-pipeline-as-code-parallel/2018-10-24_22-56-02.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;上圖表示同樣是 #6，但是一個在執行的時候，還有兩個在佇列中等候，如果幫 Jenkins 再安裝兩個 agent，就可以看到同時進行喔！&lt;/p&gt;
+
+&lt;p&gt;等等，突然想到目前的執行環境是使用 docker image，環境互不影響，那我只要將 ubuntu-18.04 agent &lt;strong&gt;執行程式數量&lt;/strong&gt; 設定為 3 就可以展示效果&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-24-jenkins-pipeline-as-code-parallel/2018-10-24_22-59-36.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Jenkins" /><summary type="html">在之前的範例中，我們都是使用連續流程 pipeline，當某一個 stage 失敗，則剩餘的 stage 直接跳過不再執行，以流水線來說這是正確的。</summary></entry><entry><title type="html">Jenkins - Pipeline as Code - 啟動 Docker Image</title><link href="https://twblog.hongjianching.com/2018/10/23/jenkins-pipeline-as-code-run-docker-image/" rel="alternate" type="text/html" title="Jenkins - Pipeline as Code - 啟動 Docker Image" /><published>2018-10-23T00:00:00+08:00</published><updated>2018-10-23T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/23/jenkins-pipeline-as-code-run-docker-image</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/23/jenkins-pipeline-as-code-run-docker-image/">&lt;p&gt;這篇要介紹透過 Jenkinsfile 直接啟動 Docker Image 來執行&lt;/p&gt;
 
 &lt;p&gt;早前介紹過&lt;a href=&quot;https://twblog.hongjianching.com/2018/10/10/install-jenkins-agent-with-docker/&quot;&gt;使用 Docker 安裝 Jenkins Agent&lt;/a&gt;，但是這個方法，每個環境都要建立一次該環境的 agent docker image，其實有點麻煩，難道不能讓我直接拿 docker image 來執行呢？&lt;/p&gt;
 
@@ -621,55 +710,4 @@ sudo chown ubuntu:ubuntu /data -R
 
 &lt;p&gt;在真實場景中，Test 階段失敗是 Unit Test fail 的關係，要去檢查程式碼的邏輯是否正確，或是 Unit Test 已經過時該修正了。如果 fail 在 Build 階段，正常是程式碼寫錯，但是如果有使用 IDE 的話，大多數則是有程式碼忘記上傳造成建置失敗。&lt;/p&gt;
 
-&lt;p&gt;總結來說，Pipeline 視覺化的 Stage View 可以提供開發者第一時間要往哪個方向去解決問題做出提示。&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Jenkins" /><summary type="html">Jenkins - Pipeline as Code - 簡介說明完簡單範例，接著來實際建立專案執行看看</summary></entry><entry><title type="html">Jenkins - Pipeline as Code - 簡介</title><link href="https://twblog.hongjianching.com/2018/10/14/jenkins-pipeline-as-code-introduction/" rel="alternate" type="text/html" title="Jenkins - Pipeline as Code - 簡介" /><published>2018-10-14T00:00:00+08:00</published><updated>2018-10-14T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/14/jenkins-pipeline-as-code-introduction</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/14/jenkins-pipeline-as-code-introduction/">&lt;p&gt;Jenkins 是個歷史悠久的 CI / CD 工具，從 Jenkins 2.0 開始正式推展 Pipeline，有別於以往使用 Web UI 操作的特性，導向 Pipeline as Code 的實踐。透過在原始碼專案新增一個 Jenkinsfile 的檔案，將 Pipeline 的流程都寫在檔案內。&lt;/p&gt;
-
-&lt;p&gt;Pipeline 就是流水線的意思，一個完整的流程可以包含 Build (建置)、 Test (測試)、Deploy (部署) 三個 state (階段)，每個公司或產品的 CD 流程所包含的 state 可能不同，可以依需要各別調整。&lt;/p&gt;
-
-&lt;p&gt;簡單 Pipeline 範例 &lt;a href=&quot;https://jenkins.io/doc/book/pipeline/jenkinsfile/&quot;&gt;(source)&lt;/a&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pipeline {
-    agent any
-
-    stages {
-        stage('Build') {
-            steps {
-                echo 'Building..'
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
-            }
-        }
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h1 id=&quot;pipeline&quot;&gt;pipeline&lt;/h1&gt;
-&lt;p&gt;Jenkinsfile 的開頭宣告&lt;/p&gt;
-
-&lt;h1 id=&quot;agent&quot;&gt;agent&lt;/h1&gt;
-&lt;p&gt;指定什麼條件的 agent 可以執行這個專案，any 表示不指定，任意 agent 都可以執行，這個設定相當於 UI 上的&lt;code class=&quot;highlighter-rouge&quot;&gt;限制專案執行節點&lt;/code&gt;，可以用 label 指定 agent 標籤，假如指定 &lt;code class=&quot;highlighter-rouge&quot;&gt;test&lt;/code&gt; 的話&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;agent { 
-    label 'test'
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;另一種情況，如果在不同 state 要分別指定不同 agent 的時候，最上層的 agent 會指定為 none，然後在各自 state 要指定 agent&lt;/p&gt;
-
-&lt;h1 id=&quot;stagesstage&quot;&gt;stages、stage&lt;/h1&gt;
-&lt;p&gt;代表流水線的各個階段，範例中為 Build, Test, Deploy，這個設定單純為文字，可以依自己的需要命名。主要用在網頁的視覺化效果，像是流水線失敗是在哪一個階段看一眼就可以掌握。或是流水線需要在不同 agent 上執行的時候，就可以透過 stages 分別設定。&lt;/p&gt;
-
-&lt;h1 id=&quot;steps&quot;&gt;steps&lt;/h1&gt;
-&lt;p&gt;主要執行步驟，常見的是使用 echo 輸出訊息，或是 sh 執行命令。&lt;/p&gt;
-
-&lt;h1 id=&quot;ref&quot;&gt;ref&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&quot;https://jenkins.io/doc/book/pipeline/jenkinsfile/&quot;&gt;Using a Jenkinsfile&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://jenkins.io/doc/book/pipeline/syntax/#stages&quot;&gt;Pipeline Syntax&lt;/a&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Jenkins" /><summary type="html">Jenkins 是個歷史悠久的 CI / CD 工具，從 Jenkins 2.0 開始正式推展 Pipeline，有別於以往使用 Web UI 操作的特性，導向 Pipeline as Code 的實踐。透過在原始碼專案新增一個 Jenkinsfile 的檔案，將 Pipeline 的流程都寫在檔案內。</summary></entry></feed>
+&lt;p&gt;總結來說，Pipeline 視覺化的 Stage View 可以提供開發者第一時間要往哪個方向去解決問題做出提示。&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Jenkins" /><summary type="html">Jenkins - Pipeline as Code - 簡介說明完簡單範例，接著來實際建立專案執行看看</summary></entry></feed>

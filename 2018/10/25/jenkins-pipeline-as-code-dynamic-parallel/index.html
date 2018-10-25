@@ -19,12 +19,12 @@
 
 
 
-<title>Jenkins - Pipeline as Code - 平行工作 - Jian-Ching 記事本</title>
+<title>Jenkins - Pipeline as Code - 動態平行工作 - Jian-Ching 記事本</title>
 
 
 
 
-<meta name="description" content="在之前的範例中，我們都是使用連續流程 pipeline，當某一個 stage 失敗，則剩餘的 stage 直接跳過不再執行，以流水線來說這是正確的。">
+<meta name="description" content="前一篇介紹平行工作，但是每個 stage 其實是一樣的東西，明明重覆的事情要寫好幾遍很討厭，能不能動態產生呢？">
 
 
 
@@ -33,15 +33,15 @@
 
 <meta property="og:locale" content="zh_TW">
 <meta property="og:site_name" content="Jian-Ching 記事本">
-<meta property="og:title" content="Jenkins - Pipeline as Code - 平行工作">
+<meta property="og:title" content="Jenkins - Pipeline as Code - 動態平行工作">
 
 
-  <link rel="canonical" href="https://twblog.HongJianChing.com/2018/10/24/jenkins-pipeline-as-code-parallel/">
-  <meta property="og:url" content="https://twblog.HongJianChing.com/2018/10/24/jenkins-pipeline-as-code-parallel/">
+  <link rel="canonical" href="https://twblog.HongJianChing.com/2018/10/25/jenkins-pipeline-as-code-dynamic-parallel/">
+  <meta property="og:url" content="https://twblog.HongJianChing.com/2018/10/25/jenkins-pipeline-as-code-dynamic-parallel/">
 
 
 
-  <meta property="og:description" content="在之前的範例中，我們都是使用連續流程 pipeline，當某一個 stage 失敗，則剩餘的 stage 直接跳過不再執行，以流水線來說這是正確的。">
+  <meta property="og:description" content="前一篇介紹平行工作，但是每個 stage 其實是一樣的東西，明明重覆的事情要寫好幾遍很討厭，能不能動態產生呢？">
 
 
 
@@ -56,7 +56,7 @@
 
 
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2018-10-24T00:00:00+08:00">
+  <meta property="article:published_time" content="2018-10-25T00:00:00+08:00">
 
 
 
@@ -278,82 +278,42 @@
 
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Jenkins - Pipeline as Code - 平行工作">
-    <meta itemprop="description" content="在之前的範例中，我們都是使用連續流程 pipeline，當某一個 stage 失敗，則剩餘的 stage 直接跳過不再執行，以流水線來說這是正確的。">
-    <meta itemprop="datePublished" content="October 24, 2018">
+    <meta itemprop="headline" content="Jenkins - Pipeline as Code - 動態平行工作">
+    <meta itemprop="description" content="前一篇介紹平行工作，但是每個 stage 其實是一樣的東西，明明重覆的事情要寫好幾遍很討厭，能不能動態產生呢？">
+    <meta itemprop="datePublished" content="October 25, 2018">
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 class="page__title" itemprop="headline">Jenkins - Pipeline as Code - 平行工作
+          <h1 class="page__title" itemprop="headline">Jenkins - Pipeline as Code - 動態平行工作
 </h1>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        <p>在之前的範例中，我們都是使用連續流程 pipeline，當某一個 stage 失敗，則剩餘的 stage 直接跳過不再執行，以流水線來說這是正確的。</p>
+        <p>前一篇介紹<a href="https://twblog.hongjianching.com/2018/10/24/jenkins-pipeline-as-code-parallel/">平行工作</a>，但是每個 stage 其實是一樣的東西，明明重覆的事情要寫好幾遍很討厭，能不能動態產生呢？</p>
 
-<p>一般流水線的基本 stage 是 build, test, deploy，當 build 失敗的時候，意味著下一個 test stage 勢必沒有辦法執行，所以直接跳過這個 stage。而 test 失敗的時候，表示沒有通過測試，不應該進行 deploy。</p>
+<p>先消除重覆的部份，透過 script 來執成</p>
 
-<p>但是，有個情況是，假如我是一個網頁程式，想要測試時跑在 chrome, firefox, ie 等環境，這時三者之間獨立存在，彼此沒有關聯。假如在 chrome 失敗了，並不代表在 firefox 及 ie 會失敗，所以不應該直接跳過，這時三個 stage 就應該是平行工作。</p>
+<p>宣告兩個變數，分別是存放平行工作的 tasks 及存放 image 列表的 imagelist</p>
 
-<p>接下來的測試借用前一篇<a href="https://twblog.hongjianching.com/2018/10/23/jenkins-pipeline-as-code-run-docker-image/">Jenkins - Pipeline as Code - 啟動 Docker Image</a>的範例來示範，原先執行了三個 docker image，我們現在故意讓第一個失敗，把 image 改為不存在的 <strong>non-exist:fail</strong> 看看結果</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>def tasks = [:]
+def imagelist = ['maven:3-alpine', 'ubuntu:18.04', 'base/archlinux']
+</code></pre>
+</div>
 
-<p>(已建立的檔案在 <strong>https://github.com/allyusd/jenkins-pipeline.git</strong>，故意失敗的 branch 為 <strong>agent-docker-fail</strong>)</p>
+<p>接著透過 for 迴圈將 imagelist 都執行一遍，內容是定義每個 task 要做的事情</p>
 
-<p>從 Stage View 來看，只知道三個 stage 都是 failed 的結果</p>
-
-<p><img src="/assets/images/2018-10-24-jenkins-pipeline-as-code-parallel/2018-10-24_22-41-14.png" alt="" /></p>
-
-<p>實際到 Logs 確認後，可以發現第一個 stage 失敗之後，後續兩個 stage 直接跳過了</p>
-
-<p><img src="/assets/images/2018-10-24-jenkins-pipeline-as-code-parallel/2018-10-24_22-39-29.png" alt="" /></p>
-
-<p>為了達到平行工作的目的，我們可以使用 <strong>parallel</strong> 關鍵字，透過平行宣告，讓這三個 stage 不再有上下流的關係。</p>
-
-<p>原本的 Jenkinsfile 修改後如下</p>
-
-<p>(branch 為 <strong>agent-docker-parallel</strong>)</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>pipeline {
-    agent none
-    stages {
-        stage('parallel') {
-            parallel {
-                stage('alpine') {
-                    agent {
-                        docker {
-                            label 'docker'
-                            image 'maven:3-alpine'
-                        }
-                    }
-                    steps {
-                        sh 'cat /etc/*-release'
-                    }
-                }
-                stage('ubuntu') {
-                    agent {
-                        docker {
-                            label 'docker'
-                            image 'ubuntu:18.04'
-                        }
-                    }
-                    steps {
-                        sh 'cat /etc/*-release'
-                    }
-                }
-                stage('archlinux') {
-                    agent {
-                        docker {
-                            label 'docker'
-                            image 'base/archlinux'
-                        }
-                    }
-                    steps {
-                        sh 'cat /etc/*-release'
-                    }
+<div class="highlighter-rouge"><pre class="highlight"><code>for (image in imagelist) {
+    def image_inside = "${image}"
+    tasks["${image}"] = {
+        node('docker') {
+            stage("${image_inside}") {
+                docker.image("${image_inside}").inside {
+                    sh "echo ${image_inside}"
+                    sh 'cat /etc/*-release'
                 }
             }
         }
@@ -362,27 +322,38 @@
 </code></pre>
 </div>
 
-<p>成功執行的情況跟原本的沒太大差別，只是多了一個 parallel stage，事實上沒有做什麼事情。</p>
+<p>上面這段程式要特別注意的是其中 <strong>def image_inside = “${image}”</strong>，這是不能拿掉的喔！另外 <strong>docker.image</strong> 這段是為了執行在 docker image 內，如果是一般的 agent 是不需要這段的。</p>
 
-<p><img src="/assets/images/2018-10-24-jenkins-pipeline-as-code-parallel/2018-10-24_22-47-42.png" alt="" /></p>
+<p>雖然這樣已經達到目的了，但是之後要增加 image 還要需要修改 Jenkinsfile，可能的話當然是希望將可能變動的部份抽離出來。</p>
 
-<p>接著把平行版本給弄壞，同樣讓第一個 stage 改成不存在的 image</p>
+<p>要讓 Jenkinfile 不需要修改，可以透過外部檔案來設定 imagelist，所以我們要讀取檔案，並且設定到 imagelist 陣列中</p>
 
-<p>(branch 為 <strong>agent-docker-parallel-fail</strong>)</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>def imagelist = readFile('imagelist').replace("\n", "").split(',')
+</code></pre>
+</div>
 
-<p>執行後的 Stage View 明顯看出只有第一個 stage 是 failed，其它兩個 stage 都有順利執行，如果是在程式除錯的情況下，就會往第一個環境與其它不同的部份去 debug，為開發人員提供很好的判斷資訊</p>
+<p>上面的指令，先是讀取 imagelist 檔案，移除換行符號之後，依照逗號分隔項目，最後存進 imagelist</p>
 
-<p><img src="/assets/images/2018-10-24-jenkins-pipeline-as-code-parallel/2018-10-24_22-51-23.png" alt="" /></p>
+<p>而 imagelist 檔案的內容則是</p>
 
-<p>改成平行工作，除了讓 stage 消除上下流關係，提供開發人員除錯資訊外，因為彼此獨立，所以如果在有多個可使用 agent 的情況下，是真的可以平行進行的喔。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>maven:3-alpine,ubuntu:18.04,base/archlinux
+</code></pre>
+</div>
 
-<p><img src="/assets/images/2018-10-24-jenkins-pipeline-as-code-parallel/2018-10-24_22-56-02.png" alt="" /></p>
+<p>完整的檔案在 <a href="https://github.com/allyusd/jenkins-pipeline/tree/agent-docker-dynamic-parallel">這裡</a></p>
 
-<p>上圖表示同樣是 #6，但是一個在執行的時候，還有兩個在佇列中等候，如果幫 Jenkins 再安裝兩個 agent，就可以看到同時進行喔！</p>
+<h1 id="ref">ref</h1>
+<p><a href="https://devops.stackexchange.com/questions/3073/how-to-properly-achieve-dynamic-parallel-action-with-a-declarative-pipeline/3090#3090">jenkins - How to properly achieve dynamic parallel action with a declarative pipeline? - DevOps Stack Exchange</a></p>
 
-<p>等等，突然想到目前的執行環境是使用 docker image，環境互不影響，那我只要將 ubuntu-18.04 agent <strong>執行程式數量</strong> 設定為 3 就可以展示效果</p>
+<p><a href="https://stackoverflow.com/questions/42652533/limiting-jenkins-pipeline-to-running-only-on-specific-nodes?rq=1">Limiting Jenkins pipeline to running only on specific nodes - Stack Overflow</a></p>
 
-<p><img src="/assets/images/2018-10-24-jenkins-pipeline-as-code-parallel/2018-10-24_22-59-36.png" alt="" /></p>
+<p><a href="https://issues.jenkins-ci.org/browse/JENKINS-44086">[JENKINS-44086] Parallel nodes for scripted pipelines cannot be clicked - Jenkins JIRA</a></p>
+
+<p><a href="https://stackoverflow.com/questions/37594635/why-an-each-loop-in-a-jenkinsfile-stops-at-first-iteration">jenkins - Why an each loop in a Jenkinsfile stops at first iteration - Stack Overflow</a></p>
+
+<p><a href="https://stackoverflow.com/questions/22917491/reading-file-from-workspace-in-jenkins-with-groovy-script">Reading file from Workspace in Jenkins with Groovy script - Stack Overflow</a></p>
+
+<p><a href="https://jenkins.io/doc/book/pipeline/docker/">Using Docker with Pipeline</a></p>
 
         
       </section>
@@ -416,7 +387,7 @@
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2018-10-24T00:00:00+08:00">October 24, 2018</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2018-10-25T00:00:00+08:00">October 25, 2018</time></p>
         
       </footer>
 
@@ -425,25 +396,24 @@
     <h4 class="page__share-title">分享到</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=Jenkins - Pipeline as Code - 平行工作 https://twblog.hongjianching.com/2018/10/24/jenkins-pipeline-as-code-parallel/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=Jenkins - Pipeline as Code - 動態平行工作 https://twblog.hongjianching.com/2018/10/25/jenkins-pipeline-as-code-dynamic-parallel/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2018/10/24/jenkins-pipeline-as-code-parallel/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2018/10/25/jenkins-pipeline-as-code-dynamic-parallel/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2018/10/24/jenkins-pipeline-as-code-parallel/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2018/10/25/jenkins-pipeline-as-code-dynamic-parallel/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2018/10/24/jenkins-pipeline-as-code-parallel/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2018/10/25/jenkins-pipeline-as-code-dynamic-parallel/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="https://twblog.hongjianching.com/2018/10/23/jenkins-pipeline-as-code-run-docker-image/" class="pagination--pager" title="Jenkins - Pipeline as Code - 啟動 Docker Image
+      <a href="https://twblog.hongjianching.com/2018/10/24/jenkins-pipeline-as-code-parallel/" class="pagination--pager" title="Jenkins - Pipeline as Code - 平行工作
 ">較舊</a>
     
     
-      <a href="https://twblog.hongjianching.com/2018/10/25/jenkins-pipeline-as-code-dynamic-parallel/" class="pagination--pager" title="Jenkins - Pipeline as Code - 動態平行工作
-">較新</a>
+      <a href="#" class="pagination--pager disabled">較新</a>
     
   </nav>
 

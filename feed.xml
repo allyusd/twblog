@@ -1,6 +1,41 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-26T23:48:12+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">Jenkins - Pipeline as Code - Shared Libraries</title><link href="https://twblog.hongjianching.com/2018/10/26/jenkins-pipeline-as-code-shared-libraries/" rel="alternate" type="text/html" title="Jenkins - Pipeline as Code - Shared Libraries" /><published>2018-10-26T00:00:00+08:00</published><updated>2018-10-26T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/26/jenkins-pipeline-as-code-shared-libraries</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/26/jenkins-pipeline-as-code-shared-libraries/">&lt;p&gt;&lt;a href=&quot;https://twblog.hongjianching.com/2018/10/25/jenkins-pipeline-as-code-dynamic-parallel/&quot;&gt;前一篇&lt;/a&gt;將 Jenkinsfile 內共用的部份重構為一份，那如果是不同的專案之間要共用呢？像這一連串文章，Jenkinsfile 改了無數次，如果有十幾個甚至幾十個專案不就要一直復制貼上，重覆這個動作好幾次？&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-26T23:51:08+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">Jenkins - Pipeline as Code - Shared Libraries</title><link href="https://twblog.hongjianching.com/2018/10/26/jenkins-pipeline-as-code-shared-libraries/" rel="alternate" type="text/html" title="Jenkins - Pipeline as Code - Shared Libraries" /><published>2018-10-26T00:00:00+08:00</published><updated>2018-10-26T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/26/jenkins-pipeline-as-code-shared-libraries</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/26/jenkins-pipeline-as-code-shared-libraries/">&lt;p&gt;&lt;a href=&quot;https://twblog.hongjianching.com/2018/10/25/jenkins-pipeline-as-code-dynamic-parallel/&quot;&gt;前一篇&lt;/a&gt;將 Jenkinsfile 內共用的部份重構為一份，那如果是不同的專案之間要共用呢？像這一連串文章，Jenkinsfile 改了無數次，如果有十幾個甚至幾十個專案不就要一直復制貼上，重覆這個動作好幾次？&lt;/p&gt;
 
-&lt;p&gt;我們可以透過 Jenkins Shared Libraries 機制來達到程式碼共用，這邊我們示範單純把整個 Jenkinsfile 封裝起來的方法&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Jenkins" /><summary type="html">前一篇將 Jenkinsfile 內共用的部份重構為一份，那如果是不同的專案之間要共用呢？像這一連串文章，Jenkinsfile 改了無數次，如果有十幾個甚至幾十個專案不就要一直復制貼上，重覆這個動作好幾次？</summary></entry><entry><title type="html">Jenkins - Pipeline as Code - 動態平行工作</title><link href="https://twblog.hongjianching.com/2018/10/25/jenkins-pipeline-as-code-dynamic-parallel/" rel="alternate" type="text/html" title="Jenkins - Pipeline as Code - 動態平行工作" /><published>2018-10-25T00:00:00+08:00</published><updated>2018-10-25T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/25/jenkins-pipeline-as-code-dynamic-parallel</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/25/jenkins-pipeline-as-code-dynamic-parallel/">&lt;p&gt;前一篇介紹&lt;a href=&quot;https://twblog.hongjianching.com/2018/10/24/jenkins-pipeline-as-code-parallel/&quot;&gt;平行工作&lt;/a&gt;，但是每個 stage 其實是一樣的東西，明明重覆的事情要寫好幾遍很討厭，能不能動態產生呢？&lt;/p&gt;
+&lt;p&gt;我們可以透過 Jenkins Shared Libraries 機制來達到程式碼共用，這邊我們示範單純把整個 Jenkinsfile 封裝起來的方法&lt;/p&gt;
+
+&lt;p&gt;首先將原本的 Jenkinsfile 復制到新的檔案 &lt;strong&gt;vars/commonPipeline.groovy&lt;/strong&gt; 並且用 def call() 包起來，像這樣&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def call() {
+    pipeline {
+        agent none
+        stages {
+
+… 略 …
+
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;接著要把 shared libraries 註冊到 Jenkins，在主頁 &amp;gt; 管理 Jenkins &amp;gt; 設定系統 &amp;gt; Global Pipeline Libraries 新增一組 libary，設定如下&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Name: pipeline-library&lt;/li&gt;
+  &lt;li&gt;Default version: shared-libraries&lt;/li&gt;
+  &lt;li&gt;選擇 Modern SCM&lt;/li&gt;
+  &lt;li&gt;選擇 Git&lt;/li&gt;
+  &lt;li&gt;Project Repository: https://github.com/allyusd/jenkins-pipeline.git&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;填完之後按下儲存，這樣 Jenkins 就知道要去哪裡取得 libary&lt;/p&gt;
+
+&lt;p&gt;接著修改 Jenkinsfile，先載入 libary，再呼叫 commonPipeline&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@Library('pipeline-library') _
+
+commonPipeline()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;這麼一來，所有的專案的 Jenkinsfile 就只是轉呼叫 commonPipeline，之後只要修改 commonPipeline，所有的專案都會一起更新的，因為他們使用同一份 libary&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Jenkins" /><summary type="html">前一篇將 Jenkinsfile 內共用的部份重構為一份，那如果是不同的專案之間要共用呢？像這一連串文章，Jenkinsfile 改了無數次，如果有十幾個甚至幾十個專案不就要一直復制貼上，重覆這個動作好幾次？</summary></entry><entry><title type="html">Jenkins - Pipeline as Code - 動態平行工作</title><link href="https://twblog.hongjianching.com/2018/10/25/jenkins-pipeline-as-code-dynamic-parallel/" rel="alternate" type="text/html" title="Jenkins - Pipeline as Code - 動態平行工作" /><published>2018-10-25T00:00:00+08:00</published><updated>2018-10-25T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/25/jenkins-pipeline-as-code-dynamic-parallel</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/25/jenkins-pipeline-as-code-dynamic-parallel/">&lt;p&gt;前一篇介紹&lt;a href=&quot;https://twblog.hongjianching.com/2018/10/24/jenkins-pipeline-as-code-parallel/&quot;&gt;平行工作&lt;/a&gt;，但是每個 stage 其實是一樣的東西，明明重覆的事情要寫好幾遍很討厭，能不能動態產生呢？&lt;/p&gt;
 
 &lt;p&gt;先消除重覆的部份，透過 script 來執成&lt;/p&gt;
 
@@ -366,7 +401,9 @@ sudo chown ubuntu:ubuntu /data -R
 
 &lt;h1 id=&quot;ref&quot;&gt;ref&lt;/h1&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://jenkins.io/doc/pipeline/steps/slack/#slack-notification-plugin&quot;&gt;Slack Notification Plugin&lt;/a&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Jenkins" /><summary type="html">希望在 Pipeline 異常的時候通知你？透過 Slack Notifier 完成目的</summary></entry><entry><title type="html">Jenkins - Pipeline as Code - Last Changes</title><link href="https://twblog.hongjianching.com/2018/10/20/jenkins-pipeline-as-code-last-changes/" rel="alternate" type="text/html" title="Jenkins - Pipeline as Code - Last Changes" /><published>2018-10-20T00:00:00+08:00</published><updated>2018-10-20T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/20/jenkins-pipeline-as-code-last-changes</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/20/jenkins-pipeline-as-code-last-changes/">&lt;p&gt;這次要讓 Jenkins 可以顯示程式碼的變更&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://jenkins.io/doc/pipeline/steps/slack/#slack-notification-plugin&quot;&gt;Slack Notification Plugin&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://jenkins.io/doc/pipeline/tour/post/&quot;&gt;Cleaning up and notifications&lt;/a&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Jenkins" /><summary type="html">希望在 Pipeline 異常的時候通知你？透過 Slack Notifier 完成目的</summary></entry><entry><title type="html">Jenkins - Pipeline as Code - Last Changes</title><link href="https://twblog.hongjianching.com/2018/10/20/jenkins-pipeline-as-code-last-changes/" rel="alternate" type="text/html" title="Jenkins - Pipeline as Code - Last Changes" /><published>2018-10-20T00:00:00+08:00</published><updated>2018-10-20T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/20/jenkins-pipeline-as-code-last-changes</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/20/jenkins-pipeline-as-code-last-changes/">&lt;p&gt;這次要讓 Jenkins 可以顯示程式碼的變更&lt;/p&gt;
 
 &lt;p&gt;這個功能要透過 plugin 來完成，所以要先安裝 plugin，在 Jenkins 首頁選擇&lt;code class=&quot;highlighter-rouge&quot;&gt;管理 Jenkins&lt;/code&gt;&lt;/p&gt;
 

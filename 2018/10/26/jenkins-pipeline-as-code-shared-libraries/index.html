@@ -297,6 +297,41 @@
 
 <p>我們可以透過 Jenkins Shared Libraries 機制來達到程式碼共用，這邊我們示範單純把整個 Jenkinsfile 封裝起來的方法</p>
 
+<p>首先將原本的 Jenkinsfile 復制到新的檔案 <strong>vars/commonPipeline.groovy</strong> 並且用 def call() 包起來，像這樣</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>def call() {
+    pipeline {
+        agent none
+        stages {
+
+… 略 …
+
+    }
+}
+</code></pre>
+</div>
+
+<p>接著要把 shared libraries 註冊到 Jenkins，在主頁 &gt; 管理 Jenkins &gt; 設定系統 &gt; Global Pipeline Libraries 新增一組 libary，設定如下</p>
+<ul>
+  <li>Name: pipeline-library</li>
+  <li>Default version: shared-libraries</li>
+  <li>選擇 Modern SCM</li>
+  <li>選擇 Git</li>
+  <li>Project Repository: https://github.com/allyusd/jenkins-pipeline.git</li>
+</ul>
+
+<p>填完之後按下儲存，這樣 Jenkins 就知道要去哪裡取得 libary</p>
+
+<p>接著修改 Jenkinsfile，先載入 libary，再呼叫 commonPipeline</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>@Library('pipeline-library') _
+
+commonPipeline()
+</code></pre>
+</div>
+
+<p>這麼一來，所有的專案的 Jenkinsfile 就只是轉呼叫 commonPipeline，之後只要修改 commonPipeline，所有的專案都會一起更新的，因為他們使用同一份 libary</p>
+
         
       </section>
 

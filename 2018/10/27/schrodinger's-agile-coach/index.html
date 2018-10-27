@@ -19,12 +19,12 @@
 
 
 
-<title>Jenkins - Pipeline as Code - Shared Libraries - Jian-Ching 記事本</title>
+<title>薛丁格的敏捷教練 - Jian-Ching 記事本</title>
 
 
 
 
-<meta name="description" content="前一篇將 Jenkinsfile 內共用的部份重構為一份，那如果是不同的專案之間要共用呢？像這一連串文章，Jenkinsfile 改了無數次，如果有十幾個甚至幾十個專案不就要一直復制貼上，重覆這個動作好幾次？">
+<meta name="description" content="這是參加 Agile Summit 2018 其中一場，由 Evelyn Tian 演講的敏捷、蘑菇和西藏之旅其中的一張圖片">
 
 
 
@@ -33,15 +33,15 @@
 
 <meta property="og:locale" content="zh_TW">
 <meta property="og:site_name" content="Jian-Ching 記事本">
-<meta property="og:title" content="Jenkins - Pipeline as Code - Shared Libraries">
+<meta property="og:title" content="薛丁格的敏捷教練">
 
 
-  <link rel="canonical" href="https://twblog.HongJianChing.com/2018/10/26/jenkins-pipeline-as-code-shared-libraries/">
-  <meta property="og:url" content="https://twblog.HongJianChing.com/2018/10/26/jenkins-pipeline-as-code-shared-libraries/">
+  <link rel="canonical" href="https://twblog.HongJianChing.com/2018/10/27/schrodinger's-agile-coach/">
+  <meta property="og:url" content="https://twblog.HongJianChing.com/2018/10/27/schrodinger's-agile-coach/">
 
 
 
-  <meta property="og:description" content="前一篇將 Jenkinsfile 內共用的部份重構為一份，那如果是不同的專案之間要共用呢？像這一連串文章，Jenkinsfile 改了無數次，如果有十幾個甚至幾十個專案不就要一直復制貼上，重覆這個動作好幾次？">
+  <meta property="og:description" content="這是參加 Agile Summit 2018 其中一場，由 Evelyn Tian 演講的敏捷、蘑菇和西藏之旅其中的一張圖片">
 
 
 
@@ -56,7 +56,7 @@
 
 
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2018-10-26T00:00:00+08:00">
+  <meta property="article:published_time" content="2018-10-27T00:00:00+08:00">
 
 
 
@@ -278,59 +278,40 @@
 
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Jenkins - Pipeline as Code - Shared Libraries">
-    <meta itemprop="description" content="前一篇將 Jenkinsfile 內共用的部份重構為一份，那如果是不同的專案之間要共用呢？像這一連串文章，Jenkinsfile 改了無數次，如果有十幾個甚至幾十個專案不就要一直復制貼上，重覆這個動作好幾次？">
-    <meta itemprop="datePublished" content="October 26, 2018">
+    <meta itemprop="headline" content="薛丁格的敏捷教練">
+    <meta itemprop="description" content="這是參加 Agile Summit 2018 其中一場，由 Evelyn Tian 演講的敏捷、蘑菇和西藏之旅其中的一張圖片">
+    <meta itemprop="datePublished" content="October 27, 2018">
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 class="page__title" itemprop="headline">Jenkins - Pipeline as Code - Shared Libraries
+          <h1 class="page__title" itemprop="headline">薛丁格的敏捷教練
 </h1>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        <p><a href="https://twblog.hongjianching.com/2018/10/25/jenkins-pipeline-as-code-dynamic-parallel/">前一篇</a>將 Jenkinsfile 內共用的部份重構為一份，那如果是不同的專案之間要共用呢？像這一連串文章，Jenkinsfile 改了無數次，如果有十幾個甚至幾十個專案不就要一直復制貼上，重覆這個動作好幾次？</p>
+        <p>這是參加 <a href="https://summit.ithome.com.tw/agile/">Agile Summit 2018</a> 其中一場，由 Evelyn Tian 演講的<a href="https://s.itho.me/summit/2018/agile/pdf/Day2-K-03.pdf">敏捷、蘑菇和西藏之旅</a>其中的一張圖片</p>
 
-<p>我們可以透過 Jenkins Shared Libraries 機制來達到程式碼共用，這邊我們示範單純把整個 Jenkinsfile 封裝起來的方法</p>
+<p><img src="/assets/images/2018-10-27-schrodinger's-agile-coach/2018-10-27_22-31-38.png" alt="" /></p>
 
-<p>首先將原本的 Jenkinsfile 復制到新的檔案 <strong>vars/commonPipeline.groovy</strong> 並且用 def call() 包起來，像這樣</p>
+<p>我將這三條線從上到下理解為「成功的敏捷教練的團隊成效」、「失敗的敏捷教練的團隊成效」、「沒有敏捷教練的團隊成效」</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>def call() {
-    pipeline {
-        agent none
-        stages {
+<p>其中「沒有敏捷教練的團隊成效」是最常聽到「敏捷無用、Scrum 試過無效」最常發生的情況，往往自學自通，甚至是「Scurm 自助餐」，只挑幾個不太需要變革的事情來做，有種柿子挑軟的吃的感覺。結果就是雖然短期似乎有些微改善，但是長期來說沒有變化。</p>
 
-… 略 …
+<p>「失敗的敏捷教練的團隊成效」則是成功的帶領團隊成長，突破，達到了之前不能及的高度。但是，在敏捷教練離開之後，團隊的成果開始下降，雖然短期有所突破，但是卻是長期向下的趨勢。</p>
 
-    }
-}
-</code></pre>
-</div>
+<p>最後「成功的敏捷教練的團隊成效」同樣是成功的帶領團隊成長，不同的是當教練離開之後，團隊還能持續的突破，一次一次的邁向新的高峰。</p>
 
-<p>接著要把 shared libraries 註冊到 Jenkins，在主頁 &gt; 管理 Jenkins &gt; 設定系統 &gt; Global Pipeline Libraries 新增一組 libary，設定如下</p>
-<ul>
-  <li>Name: pipeline-library</li>
-  <li>Default version: shared-libraries</li>
-  <li>選擇 Modern SCM</li>
-  <li>選擇 Git</li>
-  <li>Project Repository: https://github.com/allyusd/jenkins-pipeline.git</li>
-</ul>
+<p>成功和失敗的團隊，其中很重要的差別在於是否只是單純學到招式，而非心法。真實的環境中一直在改變，如果只是學了招式，雖然短期內成效很好，但是無法應對變化。當明白了每件事背後為什麼要做，就可以自在的變化，面對未來的挑戰</p>
 
-<p>填完之後按下儲存，這樣 Jenkins 就知道要去哪裡取得 libary</p>
+<p>看圖說故事很簡單，如果要你挑一個教練，當然會想挑上面那個，但是讓我們離開上帝視角，看看下面這張圖</p>
 
-<p>接著修改 Jenkinsfile，先載入 libary，再呼叫 commonPipeline</p>
+<p><img src="/assets/images/2018-10-27-schrodinger's-agile-coach/2018-10-27_22-31-38-2.png" alt="" /></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>@Library('pipeline-library') _
-
-commonPipeline()
-</code></pre>
-</div>
-
-<p>這麼一來，所有的專案的 Jenkinsfile 就只是轉呼叫 commonPipeline，之後只要修改 commonPipeline，所有的專案都會一起更新的，因為他們使用同一份 libary</p>
+<p>當計劃進行中，其實我們是無法分辨兩者的差異，在這個時間點，成功的敏捷教練跟失敗的敏捷教練同時存在，所謂的「薛丁格的敏捷教練」</p>
 
         
       </section>
@@ -351,11 +332,7 @@ commonPipeline()
     
       
       
-      <a href="https://twblog.hongjianching.com/tags/#2019-it-%E9%82%A6%E5%B9%AB%E5%BF%99%E9%90%B5%E4%BA%BA%E8%B3%BD" class="page__taxonomy-item" rel="tag">2019-iT-邦幫忙鐵人賽</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://twblog.hongjianching.com/tags/#jenkins" class="page__taxonomy-item" rel="tag">Jenkins</a>
+      <a href="https://twblog.hongjianching.com/tags/#2019-it-%E9%82%A6%E5%B9%AB%E5%BF%99%E9%90%B5%E4%BA%BA%E8%B3%BD" class="page__taxonomy-item" rel="tag">2019-iT-邦幫忙鐵人賽</a>
     
     </span>
   </p>
@@ -364,7 +341,7 @@ commonPipeline()
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2018-10-26T00:00:00+08:00">October 26, 2018</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2018-10-27T00:00:00+08:00">October 27, 2018</time></p>
         
       </footer>
 
@@ -373,25 +350,24 @@ commonPipeline()
     <h4 class="page__share-title">分享到</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=Jenkins - Pipeline as Code - Shared Libraries https://twblog.hongjianching.com/2018/10/26/jenkins-pipeline-as-code-shared-libraries/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=薛丁格的敏捷教練 https://twblog.hongjianching.com/2018/10/27/schrodinger's-agile-coach/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2018/10/26/jenkins-pipeline-as-code-shared-libraries/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2018/10/27/schrodinger's-agile-coach/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2018/10/26/jenkins-pipeline-as-code-shared-libraries/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2018/10/27/schrodinger's-agile-coach/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2018/10/26/jenkins-pipeline-as-code-shared-libraries/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2018/10/27/schrodinger's-agile-coach/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="https://twblog.hongjianching.com/2018/10/25/jenkins-pipeline-as-code-dynamic-parallel/" class="pagination--pager" title="Jenkins - Pipeline as Code - 動態平行工作
+      <a href="https://twblog.hongjianching.com/2018/10/26/jenkins-pipeline-as-code-shared-libraries/" class="pagination--pager" title="Jenkins - Pipeline as Code - Shared Libraries
 ">較舊</a>
     
     
-      <a href="https://twblog.hongjianching.com/2018/10/27/schrodinger's-agile-coach/" class="pagination--pager" title="薛丁格的敏捷教練
-">較新</a>
+      <a href="#" class="pagination--pager disabled">較新</a>
     
   </nav>
 
@@ -454,8 +430,6 @@ commonPipeline()
   
   
     ga('send', 'event', 'taggedPost', 'view', '2019-iT-邦幫忙鐵人賽');
-  
-    ga('send', 'event', 'taggedPost', 'view', 'Jenkins');
   
   
 </script>

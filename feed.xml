@@ -1,14 +1,20 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-28T21:20:23+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">利用程式設計原則解釋職場困境</title><link href="https://twblog.hongjianching.com/2018/10/28/using-principles-of-programming-analysis-real-world/" rel="alternate" type="text/html" title="利用程式設計原則解釋職場困境" /><published>2018-10-28T00:00:00+08:00</published><updated>2018-10-28T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/28/using-principles-of-programming-analysis-real-world</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/28/using-principles-of-programming-analysis-real-world/">&lt;p&gt;正當我在麥當勞吃著嫩煎雞腿堡配著無糖綠邊看漫畫「關於我轉生變成史萊姆這檔事」時，突然耳朵不由自主的補捉到了後方不遠處傳來的一段對話&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-28T21:25:06+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">利用程式設計原則解釋職場困境</title><link href="https://twblog.hongjianching.com/2018/10/28/using-principles-of-programming-analysis-real-world/" rel="alternate" type="text/html" title="利用程式設計原則解釋職場困境" /><published>2018-10-28T00:00:00+08:00</published><updated>2018-10-28T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/28/using-principles-of-programming-analysis-real-world</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/28/using-principles-of-programming-analysis-real-world/">&lt;p&gt;正當我在麥當勞吃著嫩煎雞腿堡配著無糖綠邊看漫畫「關於我轉生變成史萊姆這檔事」時，突然耳朵不由自主的補捉到了後方不遠處傳來的一段對話&lt;/p&gt;
 
-&lt;p&gt;小明：「唉~我真搞不懂 PM 在幹嘛，整天只會出張嘴，啥都不管，死都死其它人」
-小華：「總會安排需求跟時程管理吧？」
-小明：「需求就是客戶說的照單全收，問為什麼要這功能不清楚，問使用的情境也說不明白；時程就是說下星期要給，要大家儘量趕；唉，常常連規格書都沒有」
-小華：「疑？那老闆不管的嗎？」
-小明：「老闆只聽他的啊，還幫他說話呢，說都他一個人在承擔客戶的壓力，要多幫忙他」
-小華：「有個狀況外的老闆當他靠山，那我想沒救了」
-小明：「唉，別提了，再講下去我都要哭了」&lt;/p&gt;
+&lt;p&gt;小明：「唉~我真搞不懂 PM 在幹嘛，整天只會出張嘴，啥都不管，死都死其它人」&lt;/p&gt;
 
-&lt;p&gt;聽完對話，感覺就是一個無能的 PM 加上一個可憐的工程師，面對這種情況，我想身為工程師是無能為力的。正當準備將注意力拉回手邊的漫畫時，突然靈光一閃，想到了程式設計原則，下面為了方便說明，給對話中的 PM 起了小王這個名字。&lt;/p&gt;
+&lt;p&gt;小華：「總會安排需求跟時程管理吧？」&lt;/p&gt;
+
+&lt;p&gt;小明：「需求就是客戶說的照單全收，問為什麼要這功能不清楚，問使用的情境也說不明白；時程就是說下星期要給，要大家儘量趕；唉，常常連規格書都沒有」&lt;/p&gt;
+
+&lt;p&gt;小華：「疑？那老闆不管的嗎？」&lt;/p&gt;
+
+&lt;p&gt;小明：「老闆只聽他的啊，還幫他說話呢，說都他一個人在承擔客戶的壓力，要多幫忙他」&lt;/p&gt;
+
+&lt;p&gt;小華：「有個狀況外的老闆當他靠山，那我想沒救了」&lt;/p&gt;
+
+&lt;p&gt;小明：「唉，別提了，再講下去我都要哭了」&lt;/p&gt;
+
+&lt;p&gt;聽完對話，感覺就是一個無能的 PM 加上一個可憐的工程師，面對這種情況，我想身為工程師是無能為力的。&lt;del&gt;反正是別人的事&lt;/del&gt;，正當準備將注意力拉回手邊的漫畫時，突然靈光一閃，想到了程式設計原則，下面為了方便說明，給對話中的 PM 起了小王這個名字。&lt;/p&gt;
 
 &lt;p&gt;從對話中分析，小王有六個功能&lt;/p&gt;
 &lt;ul&gt;

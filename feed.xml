@@ -1,4 +1,51 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-27T22:51:48+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">薛丁格的敏捷教練</title><link href="https://twblog.hongjianching.com/2018/10/27/schrodinger's-agile-coach/" rel="alternate" type="text/html" title="薛丁格的敏捷教練" /><published>2018-10-27T00:00:00+08:00</published><updated>2018-10-27T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/27/schrodinger's-agile-coach</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/27/schrodinger's-agile-coach/">&lt;p&gt;這是參加 &lt;a href=&quot;https://summit.ithome.com.tw/agile/&quot;&gt;Agile Summit 2018&lt;/a&gt; 其中一場，由 Evelyn Tian 演講的&lt;a href=&quot;https://s.itho.me/summit/2018/agile/pdf/Day2-K-03.pdf&quot;&gt;敏捷、蘑菇和西藏之旅&lt;/a&gt;其中的一張圖片&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-28T21:20:23+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">利用程式設計原則解釋職場困境</title><link href="https://twblog.hongjianching.com/2018/10/28/using-principles-of-programming-analysis-real-world/" rel="alternate" type="text/html" title="利用程式設計原則解釋職場困境" /><published>2018-10-28T00:00:00+08:00</published><updated>2018-10-28T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/28/using-principles-of-programming-analysis-real-world</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/28/using-principles-of-programming-analysis-real-world/">&lt;p&gt;正當我在麥當勞吃著嫩煎雞腿堡配著無糖綠邊看漫畫「關於我轉生變成史萊姆這檔事」時，突然耳朵不由自主的補捉到了後方不遠處傳來的一段對話&lt;/p&gt;
+
+&lt;p&gt;小明：「唉~我真搞不懂 PM 在幹嘛，整天只會出張嘴，啥都不管，死都死其它人」
+小華：「總會安排需求跟時程管理吧？」
+小明：「需求就是客戶說的照單全收，問為什麼要這功能不清楚，問使用的情境也說不明白；時程就是說下星期要給，要大家儘量趕；唉，常常連規格書都沒有」
+小華：「疑？那老闆不管的嗎？」
+小明：「老闆只聽他的啊，還幫他說話呢，說都他一個人在承擔客戶的壓力，要多幫忙他」
+小華：「有個狀況外的老闆當他靠山，那我想沒救了」
+小明：「唉，別提了，再講下去我都要哭了」&lt;/p&gt;
+
+&lt;p&gt;聽完對話，感覺就是一個無能的 PM 加上一個可憐的工程師，面對這種情況，我想身為工程師是無能為力的。正當準備將注意力拉回手邊的漫畫時，突然靈光一閃，想到了程式設計原則，下面為了方便說明，給對話中的 PM 起了小王這個名字。&lt;/p&gt;
+
+&lt;p&gt;從對話中分析，小王有六個功能&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;完成專案&lt;/li&gt;
+  &lt;li&gt;需求管理&lt;/li&gt;
+  &lt;li&gt;時程管理&lt;/li&gt;
+  &lt;li&gt;規格書撰寫&lt;/li&gt;
+  &lt;li&gt;需求訪談&lt;/li&gt;
+  &lt;li&gt;處理客訴&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;小明有一個功能&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;實作需求&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;畫成 UML 是這個樣子&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-28-using-principles-of-programming-analysis-real-world/2018-10-28_21-15-05.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;基於單一責任原則，我們可以把面對客戶的部份跟面對專案的部份分開，小王被拆成小王1跟小王2&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-28-using-principles-of-programming-analysis-real-world/2018-10-28_21-15-29.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;一個人怎麼可能會變成兩個？這明顯不可能。幸好，我們還有接口隔離原則，將功能從人上抽離出來建立角色，小王1是面對專案的部份，角色為專案經理，小王2是面對客戶的部份，角色為業務，小明的角色是工程師&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-28-using-principles-of-programming-analysis-real-world/2018-10-28_21-15-40.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;好的，就算拆解完 UML 圖，好棒好厲害，那對這件事情有什麼幫助？&lt;/p&gt;
+
+&lt;p&gt;因為上面這張圖是理想中的畫面，回頭看對話，其實會發現小王對於 PM 這個角色的功能實現幾乎沒有&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-28-using-principles-of-programming-analysis-real-world/2018-10-28_21-15-52.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;看到這邊，也許你會發現，原來小王根本不是 PM 啊！這是在程式設計中很常發現的壞味道，一個類別做的事情跟名稱不符，這時候就會需要進行最簡單但重要的重構，rename&lt;/p&gt;
+
+&lt;p&gt;不過這還不是我想表達的重點。分析完畢後，我的疑問是，小明真的無能為力嗎？&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><summary type="html">正當我在麥當勞吃著嫩煎雞腿堡配著無糖綠邊看漫畫「關於我轉生變成史萊姆這檔事」時，突然耳朵不由自主的補捉到了後方不遠處傳來的一段對話</summary></entry><entry><title type="html">薛丁格的敏捷教練</title><link href="https://twblog.hongjianching.com/2018/10/27/schrodinger's-agile-coach/" rel="alternate" type="text/html" title="薛丁格的敏捷教練" /><published>2018-10-27T00:00:00+08:00</published><updated>2018-10-27T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/27/schrodinger's-agile-coach</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/27/schrodinger's-agile-coach/">&lt;p&gt;這是參加 &lt;a href=&quot;https://summit.ithome.com.tw/agile/&quot;&gt;Agile Summit 2018&lt;/a&gt; 其中一場，由 Evelyn Tian 演講的&lt;a href=&quot;https://s.itho.me/summit/2018/agile/pdf/Day2-K-03.pdf&quot;&gt;敏捷、蘑菇和西藏之旅&lt;/a&gt;其中的一張圖片&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-27-schrodinger's-agile-coach/2018-10-27_22-31-38.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
@@ -562,67 +609,4 @@ sudo chown ubuntu:ubuntu /data -R
 &lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-19-jenkins-pipeline-as-code-test-report/2018-10-19_22-17-01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;並且在建置頁面會出現&lt;code class=&quot;highlighter-rouge&quot;&gt;測試結果&lt;/code&gt;，如果有失敗的測試，這邊可以查閱
-&lt;img src=&quot;/assets/images/2018-10-19-jenkins-pipeline-as-code-test-report/2018-10-19_22-18-53.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Jenkins" /><summary type="html">這篇的主題是測試報告，接續 Jenkins - Pipeline as Code - 封存檔案及在 Ubuntu 使用 Google Test兩篇文章，這篇要整合起來</summary></entry><entry><title type="html">在 Ubuntu 使用 Google Test</title><link href="https://twblog.hongjianching.com/2018/10/18/google-test-on-ubuntu/" rel="alternate" type="text/html" title="在 Ubuntu 使用 Google Test" /><published>2018-10-18T00:00:00+08:00</published><updated>2018-10-18T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/18/google-test-on-ubuntu</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/18/google-test-on-ubuntu/">&lt;p&gt;要使用 Google Test，首先要取得程式碼&lt;/p&gt;
-
-&lt;p&gt;原始碼可以在 &lt;a href=&quot;https://github.com/google/googletest/releases&quot;&gt;Releases · google/googletest&lt;/a&gt; 下載，在 Ubuntu 則可以透過 libgtest-dev 套件取得&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;apt install libgtest-dev -y
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;套件會安裝在 &lt;code class=&quot;highlighter-rouge&quot;&gt;/usr/src/gtest&lt;/code&gt; 目錄下&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /usr/src/gtest
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;透過 cmake 進行建置設定，產生 makefile&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;cmake CMakeLists.txt
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;最後進行建置&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;make
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;成功建置後會產生 libgtest.a 及 libgtest_main.a 兩個檔案&lt;/p&gt;
-
-&lt;p&gt;接著建立一個檔案測試一下&lt;/p&gt;
-
-&lt;p&gt;unittest.cpp&lt;/p&gt;
-&lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;#include &amp;lt;gtest/gtest.h&amp;gt;
-&lt;/span&gt;
-&lt;span class=&quot;cp&quot;&gt;#define HELLOWORLD &quot;Hello World&quot;
-&lt;/span&gt; 
-&lt;span class=&quot;n&quot;&gt;TEST&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GoogleTest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HelloWorld&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; 
-    &lt;span class=&quot;n&quot;&gt;ASSERT_EQ&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Hello World&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HELLOWORLD&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;argc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;**&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;argv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;testing&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;InitGoogleTest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;argc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;argv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;RUN_ALL_TESTS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;第一行引用 gtest 的 header，接著定義 HELLOWORLD 代表實際結果&lt;/p&gt;
-
-&lt;p&gt;Test 代表一個測試案例，HelloWorld 代表此測試案例的名稱，GoogleTest 則為多個測試案例的群組名稱，常見用法是以測試對象的 class 名稱命名。測試案例的內容可以用 ASSERT_EQ 來判斷期望值與實際值是否相等&lt;/p&gt;
-
-&lt;p&gt;最後一段是初始化 Google Test 及執行所有的測試案例。&lt;/p&gt;
-
-&lt;p&gt;寫好測試檔案，就可以進行測試程式的建置&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;g++ unittest.cpp -o unittest -Igtest/include -Lgtest/lib -lgtest -lpthread
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;建置成功後，執行測試程式&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;./unittest
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;測試結果&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-18-google-test-on-ubuntu/2018-10-18_22-46-15.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Google-Test" /><category term="Ubuntu" /><summary type="html">要使用 Google Test，首先要取得程式碼</summary></entry></feed>
+&lt;img src=&quot;/assets/images/2018-10-19-jenkins-pipeline-as-code-test-report/2018-10-19_22-18-53.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Jenkins" /><summary type="html">這篇的主題是測試報告，接續 Jenkins - Pipeline as Code - 封存檔案及在 Ubuntu 使用 Google Test兩篇文章，這篇要整合起來</summary></entry></feed>

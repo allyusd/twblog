@@ -19,12 +19,12 @@
 
 
 
-<title>薛丁格的敏捷教練 - Jian-Ching 記事本</title>
+<title>利用程式設計原則解釋職場困境 - Jian-Ching 記事本</title>
 
 
 
 
-<meta name="description" content="這是參加 Agile Summit 2018 其中一場，由 Evelyn Tian 演講的敏捷、蘑菇和西藏之旅其中的一張圖片">
+<meta name="description" content="正當我在麥當勞吃著嫩煎雞腿堡配著無糖綠邊看漫畫「關於我轉生變成史萊姆這檔事」時，突然耳朵不由自主的補捉到了後方不遠處傳來的一段對話">
 
 
 
@@ -33,15 +33,15 @@
 
 <meta property="og:locale" content="zh_TW">
 <meta property="og:site_name" content="Jian-Ching 記事本">
-<meta property="og:title" content="薛丁格的敏捷教練">
+<meta property="og:title" content="利用程式設計原則解釋職場困境">
 
 
-  <link rel="canonical" href="https://twblog.HongJianChing.com/2018/10/27/schrodinger's-agile-coach/">
-  <meta property="og:url" content="https://twblog.HongJianChing.com/2018/10/27/schrodinger's-agile-coach/">
+  <link rel="canonical" href="https://twblog.HongJianChing.com/2018/10/28/using-principles-of-programming-analysis-real-world/">
+  <meta property="og:url" content="https://twblog.HongJianChing.com/2018/10/28/using-principles-of-programming-analysis-real-world/">
 
 
 
-  <meta property="og:description" content="這是參加 Agile Summit 2018 其中一場，由 Evelyn Tian 演講的敏捷、蘑菇和西藏之旅其中的一張圖片">
+  <meta property="og:description" content="正當我在麥當勞吃著嫩煎雞腿堡配著無糖綠邊看漫畫「關於我轉生變成史萊姆這檔事」時，突然耳朵不由自主的補捉到了後方不遠處傳來的一段對話">
 
 
 
@@ -56,7 +56,7 @@
 
 
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2018-10-27T00:00:00+08:00">
+  <meta property="article:published_time" content="2018-10-28T00:00:00+08:00">
 
 
 
@@ -278,40 +278,69 @@
 
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
-    <meta itemprop="headline" content="薛丁格的敏捷教練">
-    <meta itemprop="description" content="這是參加 Agile Summit 2018 其中一場，由 Evelyn Tian 演講的敏捷、蘑菇和西藏之旅其中的一張圖片">
-    <meta itemprop="datePublished" content="October 27, 2018">
+    <meta itemprop="headline" content="利用程式設計原則解釋職場困境">
+    <meta itemprop="description" content="正當我在麥當勞吃著嫩煎雞腿堡配著無糖綠邊看漫畫「關於我轉生變成史萊姆這檔事」時，突然耳朵不由自主的補捉到了後方不遠處傳來的一段對話">
+    <meta itemprop="datePublished" content="October 28, 2018">
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 class="page__title" itemprop="headline">薛丁格的敏捷教練
+          <h1 class="page__title" itemprop="headline">利用程式設計原則解釋職場困境
 </h1>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        <p>這是參加 <a href="https://summit.ithome.com.tw/agile/">Agile Summit 2018</a> 其中一場，由 Evelyn Tian 演講的<a href="https://s.itho.me/summit/2018/agile/pdf/Day2-K-03.pdf">敏捷、蘑菇和西藏之旅</a>其中的一張圖片</p>
+        <p>正當我在麥當勞吃著嫩煎雞腿堡配著無糖綠邊看漫畫「關於我轉生變成史萊姆這檔事」時，突然耳朵不由自主的補捉到了後方不遠處傳來的一段對話</p>
 
-<p><img src="/assets/images/2018-10-27-schrodinger's-agile-coach/2018-10-27_22-31-38.png" alt="" /></p>
+<p>小明：「唉~我真搞不懂 PM 在幹嘛，整天只會出張嘴，啥都不管，死都死其它人」
+小華：「總會安排需求跟時程管理吧？」
+小明：「需求就是客戶說的照單全收，問為什麼要這功能不清楚，問使用的情境也說不明白；時程就是說下星期要給，要大家儘量趕；唉，常常連規格書都沒有」
+小華：「疑？那老闆不管的嗎？」
+小明：「老闆只聽他的啊，還幫他說話呢，說都他一個人在承擔客戶的壓力，要多幫忙他」
+小華：「有個狀況外的老闆當他靠山，那我想沒救了」
+小明：「唉，別提了，再講下去我都要哭了」</p>
 
-<p>我將這三條線從上到下理解為「成功的敏捷教練的團隊成效」、「失敗的敏捷教練的團隊成效」、「沒有敏捷教練的團隊成效」</p>
+<p>聽完對話，感覺就是一個無能的 PM 加上一個可憐的工程師，面對這種情況，我想身為工程師是無能為力的。正當準備將注意力拉回手邊的漫畫時，突然靈光一閃，想到了程式設計原則，下面為了方便說明，給對話中的 PM 起了小王這個名字。</p>
 
-<p>其中「沒有敏捷教練的團隊成效」是最常聽到「敏捷無用、Scrum 試過無效」最常發生的情況，往往自學自通，甚至是「Scurm 自助餐」，只挑幾個不太需要變革的事情來做，有種柿子挑軟的吃的感覺。結果就是雖然短期似乎有些微改善，但是長期來說沒有變化。</p>
+<p>從對話中分析，小王有六個功能</p>
+<ul>
+  <li>完成專案</li>
+  <li>需求管理</li>
+  <li>時程管理</li>
+  <li>規格書撰寫</li>
+  <li>需求訪談</li>
+  <li>處理客訴</li>
+</ul>
 
-<p>「失敗的敏捷教練的團隊成效」則是成功的帶領團隊成長，突破，達到了之前不能及的高度。但是，在敏捷教練離開之後，團隊的成果開始下降，雖然短期有所突破，但是卻是長期向下的趨勢。</p>
+<p>小明有一個功能</p>
+<ul>
+  <li>實作需求</li>
+</ul>
 
-<p>最後「成功的敏捷教練的團隊成效」同樣是成功的帶領團隊成長，不同的是當教練離開之後，團隊還能持續的突破，一次一次的邁向新的高峰。</p>
+<p>畫成 UML 是這個樣子</p>
 
-<p>成功和失敗的團隊，其中很重要的差別在於是否只是單純學到招式，而非心法。真實的環境中一直在改變，如果只是學了招式，雖然短期內成效很好，但是無法應對變化。當明白了每件事背後為什麼要做，就可以自在的變化，面對未來的挑戰</p>
+<p><img src="/assets/images/2018-10-28-using-principles-of-programming-analysis-real-world/2018-10-28_21-15-05.png" alt="" /></p>
 
-<p>看圖說故事很簡單，如果要你挑一個教練，當然會想挑上面那個，但是讓我們離開上帝視角，看看下面這張圖</p>
+<p>基於單一責任原則，我們可以把面對客戶的部份跟面對專案的部份分開，小王被拆成小王1跟小王2</p>
 
-<p><img src="/assets/images/2018-10-27-schrodinger's-agile-coach/2018-10-27_22-31-38-2.png" alt="" /></p>
+<p><img src="/assets/images/2018-10-28-using-principles-of-programming-analysis-real-world/2018-10-28_21-15-29.png" alt="" /></p>
 
-<p>當計劃進行中，其實我們是無法分辨兩者的差異，在這個時間點，成功的敏捷教練跟失敗的敏捷教練同時存在，所謂的「薛丁格的敏捷教練」</p>
+<p>一個人怎麼可能會變成兩個？這明顯不可能。幸好，我們還有接口隔離原則，將功能從人上抽離出來建立角色，小王1是面對專案的部份，角色為專案經理，小王2是面對客戶的部份，角色為業務，小明的角色是工程師</p>
+
+<p><img src="/assets/images/2018-10-28-using-principles-of-programming-analysis-real-world/2018-10-28_21-15-40.png" alt="" /></p>
+
+<p>好的，就算拆解完 UML 圖，好棒好厲害，那對這件事情有什麼幫助？</p>
+
+<p>因為上面這張圖是理想中的畫面，回頭看對話，其實會發現小王對於 PM 這個角色的功能實現幾乎沒有</p>
+
+<p><img src="/assets/images/2018-10-28-using-principles-of-programming-analysis-real-world/2018-10-28_21-15-52.png" alt="" /></p>
+
+<p>看到這邊，也許你會發現，原來小王根本不是 PM 啊！這是在程式設計中很常發現的壞味道，一個類別做的事情跟名稱不符，這時候就會需要進行最簡單但重要的重構，rename</p>
+
+<p>不過這還不是我想表達的重點。分析完畢後，我的疑問是，小明真的無能為力嗎？</p>
 
         
       </section>
@@ -341,7 +370,7 @@
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2018-10-27T00:00:00+08:00">October 27, 2018</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2018-10-28T00:00:00+08:00">October 28, 2018</time></p>
         
       </footer>
 
@@ -350,25 +379,24 @@
     <h4 class="page__share-title">分享到</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=薛丁格的敏捷教練 https://twblog.hongjianching.com/2018/10/27/schrodinger's-agile-coach/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=利用程式設計原則解釋職場困境 https://twblog.hongjianching.com/2018/10/28/using-principles-of-programming-analysis-real-world/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2018/10/27/schrodinger's-agile-coach/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2018/10/28/using-principles-of-programming-analysis-real-world/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2018/10/27/schrodinger's-agile-coach/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2018/10/28/using-principles-of-programming-analysis-real-world/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2018/10/27/schrodinger's-agile-coach/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2018/10/28/using-principles-of-programming-analysis-real-world/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="https://twblog.hongjianching.com/2018/10/26/jenkins-pipeline-as-code-shared-libraries/" class="pagination--pager" title="Jenkins - Pipeline as Code - Shared Libraries
+      <a href="https://twblog.hongjianching.com/2018/10/27/schrodinger's-agile-coach/" class="pagination--pager" title="薛丁格的敏捷教練
 ">較舊</a>
     
     
-      <a href="https://twblog.hongjianching.com/2018/10/28/using-principles-of-programming-analysis-real-world/" class="pagination--pager" title="利用程式設計原則解釋職場困境
-">較新</a>
+      <a href="#" class="pagination--pager disabled">較新</a>
     
   </nav>
 

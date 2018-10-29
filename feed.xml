@@ -1,4 +1,38 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-29T22:43:15+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">利用程式設計原則解釋職場困境</title><link href="https://twblog.hongjianching.com/2018/10/28/using-principles-of-programming-analysis-real-world/" rel="alternate" type="text/html" title="利用程式設計原則解釋職場困境" /><published>2018-10-28T00:00:00+08:00</published><updated>2018-10-28T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/28/using-principles-of-programming-analysis-real-world</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/28/using-principles-of-programming-analysis-real-world/">&lt;p&gt;正當我在麥當勞吃著嫩煎雞腿堡配著無糖綠邊看漫畫「關於我轉生變成史萊姆這檔事」時，突然耳朵不由自主的補捉到了後方不遠處傳來的一段對話&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-29T22:46:33+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">溝通，為什麼老闆聽不懂我說的</title><link href="https://twblog.hongjianching.com/2018/10/29/communication-why-the-boss-can't-understand-what-I-said/" rel="alternate" type="text/html" title="溝通，為什麼老闆聽不懂我說的" /><published>2018-10-29T00:00:00+08:00</published><updated>2018-10-29T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/29/communication-why-the-boss-can't-understand-what-I-said</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/29/communication-why-the-boss-can't-understand-what-I-said/">&lt;p&gt;有一天，在路邊&lt;del&gt;發呆&lt;/del&gt;玩寶可夢的時候，聽到這樣的對話&lt;/p&gt;
+
+&lt;p&gt;小明：「跟你說喔，明明跟老闆說用這個方法比較好，但是他總是不同意」
+小華：「會不會老闆不懂你說的方法是什麼」
+小明：「對啊，我也想過這個可能，所以我有跟他說明這個方法如何如何」
+小華：「你說的很清楚很詳細啊，跟著外行老闆真可憐，辛苦你了」
+小明：「就是說啊，本來以為升職之後能夠大展身手的，沒想到反而受制連連，這個不好那個不行的」
+小華：「這樣還不如回到之前單純當個工程師更好」
+小明：「沒錯沒錯，可惜回不去了」
+小華：「那個老闆明明沒能力還不授權，這公司我看前景堪慮啊」
+小明：「唉，別提了，再講下去我都要哭了」&lt;/p&gt;
+
+&lt;p&gt;上述的例子，可能很多人都聽過類似的對話，真實世界中，這些「故事」幾乎天天上演，很多人都想問「為什麼老闆聽不懂我說的呢？」&lt;/p&gt;
+
+&lt;p&gt;這個劇情一再的上演，有些人可能會唉聲嘆氣，怨天尤人或者覺得老闆無所謂我又何必在乎。然後也有些人會自我檢討，開始研究如何訓練口才、製作簡報、提供專業能力，試著改善溝通能力。&lt;/p&gt;
+
+&lt;p&gt;前者就不提了，可惜的是，就算是後者，也常常是屢戰屢敗，熱情漸漸的消磨。這些行動之所以沒有作用，在自己的經驗中，慢慢的領會了其中盲點，&lt;/p&gt;
+
+&lt;p&gt;那就是「無效溝通」&lt;/p&gt;
+
+&lt;p&gt;以實際的例子來說，目前軟體開發顯學 DevOps，當開發者想導入時，往往要向老闆提出建議，主題會放在 DevOps 的解釋，CI / CD 的解釋，Jenkins 工具的運用，帶來的好處及成本。&lt;/p&gt;
+
+&lt;p&gt;如果得到的回覆是「需要更詳細的資訊」，或是「你說的很好，『但是』……」，「再考慮考慮」，雖然表面聽起來有機會，需要進一步努力，但其實代表著「無效溝通」。如果你的老闆夠「真實」的話，他會這麼回答你的「我對這個沒有興趣」，或者更直接的「這樣能夠幫公司賺錢嗎？」&lt;/p&gt;
+
+&lt;p&gt;雖然聽到後面的說法衝擊非常大，但是這是進入真實世界的一記猛擊，也真正的代表之前的都是「無效溝通」，無效溝通之所以會被我覺得可怕的一點，就是很難有自覺。&lt;/p&gt;
+
+&lt;p&gt;「無效溝通」常見的情況就是一昧的陳述自己想說的，而非理解對方的理念或處境。在無自覺的情況下，往往誤以為自己表達的能力不足，所以努力強化展示自己的意圖這個層面。&lt;/p&gt;
+
+&lt;p&gt;「無效溝通」常發現在專業領域及非專業領域的衝突上，專業領域的人會努力的用各種專業術語來表達自己的意圖，但往往收到的成效很低。用一種最簡單的方法比喻，好比兩個說著不同語言的人在溝通，一個說中文一個說英文，當說中文的人發現對方不理解自己意圖時，拼了命了在中文文法上、字詞選擇上作強化，但是卻沒有效果。我想這個比喻大家都能簡單的明白，應該努力的方向很明顯，就是學習英文，只有學習對方的語言，才能進行有效溝通。&lt;/p&gt;
+
+&lt;p&gt;從上面的比喻已經明白，要進行有效溝通，應該要學習「對方的語言」。有沒有想過，老闆的語言是什麼呢？如果你正面臨同樣的處境，身為專業的開發者，是否該跨出舒適圈，往外探索你所不曾踏入的區域呢？&lt;/p&gt;
+
+&lt;h1 id=&quot;延深閱讀&quot;&gt;延深閱讀&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.projectup.net/article/view/id/5424&quot;&gt;向上管理的五個原則 - 專案管理生活思維&lt;/a&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><summary type="html">有一天，在路邊發呆玩寶可夢的時候，聽到這樣的對話</summary></entry><entry><title type="html">利用程式設計原則解釋職場困境</title><link href="https://twblog.hongjianching.com/2018/10/28/using-principles-of-programming-analysis-real-world/" rel="alternate" type="text/html" title="利用程式設計原則解釋職場困境" /><published>2018-10-28T00:00:00+08:00</published><updated>2018-10-28T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/28/using-principles-of-programming-analysis-real-world</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/28/using-principles-of-programming-analysis-real-world/">&lt;p&gt;正當我在麥當勞吃著嫩煎雞腿堡配著無糖綠邊看漫畫「關於我轉生變成史萊姆這檔事」時，突然耳朵不由自主的補捉到了後方不遠處傳來的一段對話&lt;/p&gt;
 
 &lt;p&gt;小明：「唉~我真搞不懂 PM 在幹嘛，整天只會出張嘴，啥都不管，死都死其它人」&lt;/p&gt;
 
@@ -530,89 +564,4 @@ sudo chown ubuntu:ubuntu /data -R
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-20-jenkins-pipeline-as-code-last-changes/2018-10-20_23-11-50.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;從上圖可以明顯的知道這次的程式碼修改了什麼，幫助判斷是什麼部份可以造成建置的錯誤&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Jenkins" /><summary type="html">這次要讓 Jenkins 可以顯示程式碼的變更</summary></entry><entry><title type="html">Jenkins - Pipeline as Code - 測試報告</title><link href="https://twblog.hongjianching.com/2018/10/19/jenkins-pipeline-as-code-test-report/" rel="alternate" type="text/html" title="Jenkins - Pipeline as Code - 測試報告" /><published>2018-10-19T00:00:00+08:00</published><updated>2018-10-19T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/19/jenkins-pipeline-as-code-test-report</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/19/jenkins-pipeline-as-code-test-report/">&lt;p&gt;這篇的主題是測試報告，接續 &lt;a href=&quot;https://twblog.hongjianching.com/2018/10/17/jenkins-pipeline-as-code-artifacts/&quot;&gt;Jenkins - Pipeline as Code - 封存檔案&lt;/a&gt;及&lt;a href=&quot;https://twblog.hongjianching.com/2018/10/18/google-test-on-ubuntu/&quot;&gt;在 Ubuntu 使用 Google Test&lt;/a&gt;兩篇文章，這篇要整合起來&lt;/p&gt;
-
-&lt;h1 id=&quot;build&quot;&gt;Build&lt;/h1&gt;
-&lt;p&gt;首先，原本的 C++ 專案，新增 Google Test 在 git branch &lt;code class=&quot;highlighter-rouge&quot;&gt;gtest&lt;/code&gt;，所以要修改原本 Jenkinsfile 指定 branch&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git branch: 'gtest', url: 'https://github.com/allyusd/helloworld.cpp.git'
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;同時新增建置 unit test 的部份&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sh 'g++ unittest.cpp -o unittest -Igtest/include -Lgtest/lib -lgtest -lpthread'
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;別忘了也要封裝 unittest 檔案，才能在另一個 agent 中執行&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;archiveArtifacts artifacts: 'helloworld,unittest'
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h1 id=&quot;test&quot;&gt;Test&lt;/h1&gt;
-&lt;p&gt;接著修改 Test 階段，將原本執行 helloworld 換成 unittest，並且加上參數  –gtest_output=”xml:report.xml” 產生測試報告&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;./unittest --gtest_output=&quot;xml:report.xml&quot;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;接著就要將測試報告上傳到 Jenkins，才能在 Web UI 出現結果&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;post {
-    always {
-        junit '*.xml'
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h1 id=&quot;結果&quot;&gt;結果&lt;/h1&gt;
-&lt;p&gt;完整修改後的內容如下&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pipeline {
-    agent none
-    stages {
-        stage('Build') {
-            agent {
-                label 'cpp'
-            }
-            steps {
-                echo 'Building..'
-                git branch: 'gtest', url: 'https://github.com/allyusd/helloworld.cpp.git'
-                sh 'g++ helloworld.cpp -o helloworld'
-                sh 'g++ unittest.cpp -o unittest -Igtest/include -Lgtest/lib -lgtest -lpthread'
-            }
-            post {
-                success {
-                    archiveArtifacts artifacts: 'helloworld,unittest'
-                }
-            }
-        }
-        stage('Test') {
-            agent {
-                label 'test'
-            }
-            steps {
-                echo 'Testing..'
-                sh '''#!/bin/bash
-                curl -O ${BUILD_URL}artifact/unittest
-                chmod +x unittest
-                ./unittest --gtest_output=&quot;xml:report.xml&quot;
-                '''
-            }
-            post {
-                always {
-                    junit '*.xml'
-                }
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
-            }
-        }
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;如果要使用已建立好的檔案，同樣在 &lt;code class=&quot;highlighter-rouge&quot;&gt;https://github.com/allyusd/jenkins-pipeline.git&lt;/code&gt;，這次是 &lt;code class=&quot;highlighter-rouge&quot;&gt;test-report&lt;/code&gt; branch&lt;/p&gt;
-
-&lt;p&gt;執行後，在專案主頁會出現&lt;code class=&quot;highlighter-rouge&quot;&gt;測試結果趨勢&lt;/code&gt;圖&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-19-jenkins-pipeline-as-code-test-report/2018-10-19_22-17-01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;並且在建置頁面會出現&lt;code class=&quot;highlighter-rouge&quot;&gt;測試結果&lt;/code&gt;，如果有失敗的測試，這邊可以查閱
-&lt;img src=&quot;/assets/images/2018-10-19-jenkins-pipeline-as-code-test-report/2018-10-19_22-18-53.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Jenkins" /><summary type="html">這篇的主題是測試報告，接續 Jenkins - Pipeline as Code - 封存檔案及在 Ubuntu 使用 Google Test兩篇文章，這篇要整合起來</summary></entry></feed>
+&lt;p&gt;從上圖可以明顯的知道這次的程式碼修改了什麼，幫助判斷是什麼部份可以造成建置的錯誤&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Jenkins" /><summary type="html">這次要讓 Jenkins 可以顯示程式碼的變更</summary></entry></feed>

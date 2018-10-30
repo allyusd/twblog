@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-30T22:17:08+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">2019 iT 邦幫忙鐵人賽 完賽心得</title><link href="https://twblog.hongjianching.com/2018/10/30/2019-ithelp-ironman-30-days-challenge-review/" rel="alternate" type="text/html" title="2019 iT 邦幫忙鐵人賽 完賽心得" /><published>2018-10-30T00:00:00+08:00</published><updated>2018-10-30T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/30/2019-ithelp-ironman-30-days-challenge-review</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/30/2019-ithelp-ironman-30-days-challenge-review/">&lt;p&gt;第 30 天，很高興自己完成這個目標，一開始是想要有個經驗才臨時參賽的，不知道能不能順利完成，幸好有持續的堅持下去。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2018-10-30T22:24:01+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">2019 iT 邦幫忙鐵人賽 完賽心得</title><link href="https://twblog.hongjianching.com/2018/10/30/2019-ithelp-ironman-30-days-challenge-review/" rel="alternate" type="text/html" title="2019 iT 邦幫忙鐵人賽 完賽心得" /><published>2018-10-30T00:00:00+08:00</published><updated>2018-10-30T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/30/2019-ithelp-ironman-30-days-challenge-review</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/30/2019-ithelp-ironman-30-days-challenge-review/">&lt;p&gt;第 30 天，很高興自己完成這個目標，一開始是想要有個經驗才臨時參賽的，不知道能不能順利完成，幸好有持續的堅持下去。&lt;/p&gt;
 
 &lt;p&gt;一開始覺得 30 天很漫長，因為不知道要寫什麼，雖然有寫過部落格的經驗，加上手邊還有一些草稿筆記，總是會擔心很多狀況。決定 10/01 就開始發文則是因為跟文章數跟日期一樣比較好倒數這個理由，不然先用一個星期累積一定文章再發表的話，壓力應該會比較小一點。&lt;/p&gt;
 
@@ -35,16 +35,7 @@
 &lt;p&gt;有一天突然發現，明明覺得是做 “同樣” 的事情，但是因為目標(KPI)不同，所以做的方法也跟著不同。以前是單純把一個主題寫完，可以分好幾天寫，也可以簡單幾個程式碼就完成一篇文章；但是這次挑戰有每日限制、字數限制，確實讓我的行為有所改變，像是文章要拆成兩篇不然寫不完，簡單的案例要額外補充資訊不然不到字數限制等等。&lt;/p&gt;
 
 &lt;h3 id=&quot;當機事件&quot;&gt;當機事件&lt;/h3&gt;
-&lt;p&gt;因為我沿用寫部落格的習慣，會先上傳到 Github，透過 GitLab CI 產生網頁，然後才把圖片網址貼到 iT 邦幫忙，結果中途遇到 Github 當機事件，還有 GitLab CI 忙錄的情況，都讓我覺得很緊張。&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;[GitHub資料庫全球大當機24小時，MySQL資料庫異常，波及Issue、合併請求功能失效&lt;/td&gt;
-      &lt;td&gt;iThome](https://www.ithome.com.tw/news/126544)&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
+&lt;p&gt;因為我沿用寫部落格的習慣，會先上傳到 Github，透過 GitLab CI 產生網頁，然後才把圖片網址貼到 iT 邦幫忙，結果中途遇到 &lt;a href=&quot;https://www.ithome.com.tw/news/126544&quot;&gt;Github 當機事件&lt;/a&gt;，還有 GitLab CI 忙錄的情況，都讓我覺得很緊張。&lt;/p&gt;
 
 &lt;h3 id=&quot;總結&quot;&gt;總結&lt;/h3&gt;
 &lt;p&gt;回顧一開始參賽目標&lt;/p&gt;

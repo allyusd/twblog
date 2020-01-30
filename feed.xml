@@ -1,4 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2019-02-12T00:36:06+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">2019 iT 邦幫忙鐵人賽 完賽心得</title><link href="https://twblog.hongjianching.com/2018/10/30/2019-ithelp-ironman-30-days-challenge-review/" rel="alternate" type="text/html" title="2019 iT 邦幫忙鐵人賽 完賽心得" /><published>2018-10-30T00:00:00+08:00</published><updated>2018-10-30T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/30/2019-ithelp-ironman-30-days-challenge-review</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/30/2019-ithelp-ironman-30-days-challenge-review/">&lt;p&gt;第 30 天，很高興自己完成這個目標，一開始是想要有個經驗才臨時參賽的，不知道能不能順利完成，幸好有持續的堅持下去。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2020-01-30T21:38:32+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">重新開張迎接新的挑戰</title><link href="https://twblog.hongjianching.com/2020/01/30/reopen-the-blog-for-new-challenge/" rel="alternate" type="text/html" title="重新開張迎接新的挑戰" /><published>2020-01-30T00:00:00+08:00</published><updated>2020-01-30T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/01/30/reopen-the-blog-for-new-challenge</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/01/30/reopen-the-blog-for-new-challenge/">&lt;p&gt;自從前年 30 天鐵人挑戰賽之後，一年沒有文章的地方，終於要重新開張啦。&lt;/p&gt;
+
+&lt;p&gt;這次參加的是 &lt;a href=&quot;https://www.hexschool.com/2019/11/14/2019-11-14-w3Hexschool-2020-challenge/&quot;&gt;六角學院舉辦的 - 鼠年全馬鐵人挑戰&lt;/a&gt; 活動，&lt;/p&gt;
+
+&lt;p&gt;每週一篇，長達一年的挑戰，相信會有不同的感受，&lt;/p&gt;
+
+&lt;p&gt;事實上，這一篇文章是用來場勘的，確認 CI / CD 是否正常，&lt;/p&gt;
+
+&lt;p&gt;免得臨時文章要上架時才發現要 debug 就麻煩了，&lt;/p&gt;
+
+&lt;p&gt;新的一年，希望挑戰成功。&lt;/p&gt;
+
+&lt;p&gt;註：絕對不是因為那個「實體獎座」才參加的喔~&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="w3HexSchool" /><summary type="html">自從前年 30 天鐵人挑戰賽之後，一年沒有文章的地方，終於要重新開張啦。</summary></entry><entry><title type="html">2019 iT 邦幫忙鐵人賽 完賽心得</title><link href="https://twblog.hongjianching.com/2018/10/30/2019-ithelp-ironman-30-days-challenge-review/" rel="alternate" type="text/html" title="2019 iT 邦幫忙鐵人賽 完賽心得" /><published>2018-10-30T00:00:00+08:00</published><updated>2018-10-30T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/30/2019-ithelp-ironman-30-days-challenge-review</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/30/2019-ithelp-ironman-30-days-challenge-review/">&lt;p&gt;第 30 天，很高興自己完成這個目標，一開始是想要有個經驗才臨時參賽的，不知道能不能順利完成，幸好有持續的堅持下去。&lt;/p&gt;
 
 &lt;p&gt;一開始覺得 30 天很漫長，因為不知道要寫什麼，雖然有寫過部落格的經驗，加上手邊還有一些草稿筆記，總是會擔心很多狀況。決定 10/01 就開始發文則是因為跟文章數跟日期一樣比較好倒數這個理由，不然先用一個星期累積一定文章再發表的話，壓力應該會比較小一點。&lt;/p&gt;
 
@@ -502,76 +514,4 @@ sudo chown ubuntu:ubuntu /data -R
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-22-install-jenkins-agent-on-ubuntu/2018-10-22_21-56-01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;終於成功完成 Jenkins Agent 連線&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Jenkins" /><category term="Ubuntu" /><summary type="html">之前介紹過使用 Docker 安裝 Jenkins Agent，這次要講不使用 Docker 直接在 Ubuntu 安裝 Agent 的方法</summary></entry><entry><title type="html">Jenkins - Pipeline as Code - Slack Notifier</title><link href="https://twblog.hongjianching.com/2018/10/21/jenkins-pipeline-as-code-slack-notifier/" rel="alternate" type="text/html" title="Jenkins - Pipeline as Code - Slack Notifier" /><published>2018-10-21T00:00:00+08:00</published><updated>2018-10-21T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/21/jenkins-pipeline-as-code-slack-notifier</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/21/jenkins-pipeline-as-code-slack-notifier/">&lt;p&gt;希望在 Pipeline 異常的時候通知你？透過 Slack Notifier 完成目的&lt;/p&gt;
-
-&lt;h1 id=&quot;jenkins-slack-integration&quot;&gt;Jenkins Slack Integration&lt;/h1&gt;
-
-&lt;p&gt;首先要到 slack 的 apps 管理頁面，&lt;code class=&quot;highlighter-rouge&quot;&gt;https://xxx.slack.com/apps/manage&lt;/code&gt;，其中 xxx 請代入自己的組織名稱，接著在上方搜尋的地方輸入 &lt;code class=&quot;highlighter-rouge&quot;&gt;jenkins&lt;/code&gt; 會出現 &lt;code class=&quot;highlighter-rouge&quot;&gt;Jenkins CI&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-21-jenkins-pipeline-as-code-slack-notifier/2018-10-21_21-46-24.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;點選進入 Jenkins CI Apps 頁面，左方有個 &lt;code class=&quot;highlighter-rouge&quot;&gt;Install&lt;/code&gt; 按下去&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-21-jenkins-pipeline-as-code-slack-notifier/2018-10-21_21-46-46.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;接著會問你想要發訊息到哪一個 Channel，其實隨便選都可以，之後可以在 Jenkins 修改，這邊我選了 &lt;code class=&quot;highlighter-rouge&quot;&gt;#general&lt;/code&gt; 頻道&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-21-jenkins-pipeline-as-code-slack-notifier/2018-10-21_21-47-30.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;按下之後會有完整的圖文教學，首先要到 Jenkins 管理頁面安裝 &lt;strong&gt;Slack Notification Plugin&lt;/strong&gt;，我使用的 Jenkins 版本跟教學的圖片不一樣，會省略 Plugin 文字，所以要搜尋的話最好只用前面的 &lt;strong&gt;Slack Notification&lt;/strong&gt; 會比較好找到。&lt;/p&gt;
-
-&lt;p&gt;安裝完外掛之後，要到&lt;strong&gt;管理 Jenkins&lt;/strong&gt;，&lt;strong&gt;設定系統&lt;/strong&gt;的&lt;strong&gt;Global Slack Notifier Settings&lt;/strong&gt; 貼上從 Jenkins CI App 教學頁面給的設定&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;設定 Base URL 為https://xxx.slack.com/services/hooks/jenkins-ci/&lt;/li&gt;
-  &lt;li&gt;設定 Integration Token 為 Mursq71aDfDJke4cvUWx9n2f&lt;/li&gt;
-  &lt;li&gt;設定 Channel 為 general&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;設定後可以按一下 &lt;strong&gt;Test Connection&lt;/strong&gt;，成功時 Slack 會出現測試訊息&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-21-jenkins-pipeline-as-code-slack-notifier/2018-10-21_22-46-03.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;jenkinsfile&quot;&gt;Jenkinsfile&lt;/h1&gt;
-
-&lt;p&gt;因為訊息的發佈應該是跨越 stage 的，所以我們在 stages 平行新增一個 post 宣告。當 pipeline 失敗的時候，使用 &lt;strong&gt;failure&lt;/strong&gt; 宣告發送失敗的訊息&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;color&lt;/strong&gt; 可以定義發佈訊息旁的顏色標示，失敗時用紅色
-&lt;strong&gt;message&lt;/strong&gt; 就是發佈的訊息內容，為了提醒所有人注意到東西壞掉了，可以加上 @channel，太吵的話可以拿掉，或是討論一下為什麼常常壞掉。還可以透過 Jenkins 的變數提供有用的訊息，像是 &lt;strong&gt;env.JOB_BASE_NAME&lt;/strong&gt; 可以提供專案名稱，&lt;strong&gt;env.BUILD_URL&lt;/strong&gt; 則是提供本次建置的網址&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;failure {
-    slackSend color: '#FF0000',
-    message: &quot;@channel ${env.JOB_BASE_NAME} failure. (${env.BUILD_URL})&quot;
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;除了壞掉的時候發出訊息通知外，我們也可以發送一些好消息，像是 &lt;strong&gt;fixed&lt;/strong&gt; 代表東西修好了，也就是原先建置失敗的專案，第一次建置成功的時候發出通知。這次的顏色用綠色，訊息則簡單的說明哪個專案回到建置成功的狀態&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;fixed {
-    slackSend color: '#00FF00',
-    message: &quot;@channel ${env.JOB_BASE_NAME} back to success.&quot;
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;因為完整的 Jenkinsfile 很長，這次不貼到文章上，直接給&lt;a href=&quot;https://github.com/allyusd/jenkins-pipeline/blob/slack-notifier/Jenkinsfile&quot;&gt;連結&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;因為成功的建置不會發送訊息，所以我們先故意用一個壞掉的來建置&lt;/p&gt;
-
-&lt;p&gt;同樣是 &lt;strong&gt;https://github.com/allyusd/jenkins-pipeline.git&lt;/strong&gt;，branch 是 &lt;strong&gt;slack-notifier-fail&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;建置失敗，slack 收到了失敗通知&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-21-jenkins-pipeline-as-code-slack-notifier/2018-10-21_22-52-10.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;接著換成正確的 branch &lt;strong&gt;slack-notifier&lt;/strong&gt; 然後再建置一次&lt;/p&gt;
-
-&lt;p&gt;這次建置成功，因為前一個建置失敗，所以 slack 收到修復通知&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-21-jenkins-pipeline-as-code-slack-notifier/2018-10-21_22-57-32.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;ref&quot;&gt;ref&lt;/h1&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://jenkins.io/doc/pipeline/steps/slack/#slack-notification-plugin&quot;&gt;Slack Notification Plugin&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://jenkins.io/doc/pipeline/tour/post/&quot;&gt;Cleaning up and notifications&lt;/a&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Jenkins" /><summary type="html">希望在 Pipeline 異常的時候通知你？透過 Slack Notifier 完成目的</summary></entry></feed>
+&lt;p&gt;終於成功完成 Jenkins Agent 連線&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Jenkins" /><category term="Ubuntu" /><summary type="html">之前介紹過使用 Docker 安裝 Jenkins Agent，這次要講不使用 Docker 直接在 Ubuntu 安裝 Agent 的方法</summary></entry></feed>

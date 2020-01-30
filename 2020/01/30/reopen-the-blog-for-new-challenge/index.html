@@ -19,12 +19,12 @@
 
 
 
-<title>Angular 使用環境變數 - Jian-Ching 記事本</title>
+<title>重新開張迎接新的挑戰 - Jian-Ching 記事本</title>
 
 
 
 
-<meta name="description" content="Angular 專案中，如果有依環境不同而需要不同的設定時，像是 apiUrl，該如何處理？">
+<meta name="description" content="自從前年 30 天鐵人挑戰賽之後，一年沒有文章的地方，終於要重新開張啦。">
 
 
 
@@ -33,15 +33,15 @@
 
 <meta property="og:locale" content="zh_TW">
 <meta property="og:site_name" content="Jian-Ching 記事本">
-<meta property="og:title" content="Angular 使用環境變數">
+<meta property="og:title" content="重新開張迎接新的挑戰">
 
 
-  <link rel="canonical" href="https://twblog.HongJianChing.com/2018/01/22/angular-using-environment-variables/">
-  <meta property="og:url" content="https://twblog.HongJianChing.com/2018/01/22/angular-using-environment-variables/">
+  <link rel="canonical" href="https://twblog.HongJianChing.com/2020/01/30/reopen-the-blog-for-new-challenge/">
+  <meta property="og:url" content="https://twblog.HongJianChing.com/2020/01/30/reopen-the-blog-for-new-challenge/">
 
 
 
-  <meta property="og:description" content="Angular 專案中，如果有依環境不同而需要不同的設定時，像是 apiUrl，該如何處理？">
+  <meta property="og:description" content="自從前年 30 天鐵人挑戰賽之後，一年沒有文章的地方，終於要重新開張啦。">
 
 
 
@@ -56,7 +56,7 @@
 
 
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2018-01-22T00:00:00+08:00">
+  <meta property="article:published_time" content="2020-01-30T00:00:00+08:00">
 
 
 
@@ -278,71 +278,34 @@
 
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Angular 使用環境變數">
-    <meta itemprop="description" content="Angular 專案中，如果有依環境不同而需要不同的設定時，像是 apiUrl，該如何處理？">
-    <meta itemprop="datePublished" content="January 22, 2018">
+    <meta itemprop="headline" content="重新開張迎接新的挑戰">
+    <meta itemprop="description" content="自從前年 30 天鐵人挑戰賽之後，一年沒有文章的地方，終於要重新開張啦。">
+    <meta itemprop="datePublished" content="January 30, 2020">
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 class="page__title" itemprop="headline">Angular 使用環境變數
+          <h1 class="page__title" itemprop="headline">重新開張迎接新的挑戰
 </h1>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        <p>Angular 專案中，如果有依環境不同而需要不同的設定時，像是 apiUrl，該如何處理？</p>
+        <p>自從前年 30 天鐵人挑戰賽之後，一年沒有文章的地方，終於要重新開張啦。</p>
 
-<h2 id="開發環境及生產環境">開發環境及生產環境</h2>
+<p>這次參加的是 <a href="https://www.hexschool.com/2019/11/14/2019-11-14-w3Hexschool-2020-challenge/">六角學院舉辦的 - 鼠年全馬鐵人挑戰</a> 活動，</p>
 
-<p>使用 <a href="https://github.com/angular/angular-cli">Angular CLI</a> 建立的專案預設會有兩個環境設定，一個是開發環境，另一個是生產環境，分別由 <strong>environment.ts</strong> 及 <strong>environment.prod.ts</strong> 兩個檔案所描述。</p>
+<p>每週一篇，長達一年的挑戰，相信會有不同的感受，</p>
 
-<p>常用的指令，像是 ng serve 時，預設使用開發環境；使用 ng build –prod 時，則會使用生產環境。</p>
+<p>事實上，這一篇文章是用來場勘的，確認 CI / CD 是否正常，</p>
 
-<h2 id="新增及使用環境變數">新增及使用環境變數</h2>
+<p>免得臨時文章要上架時才發現要 debug 就麻煩了，</p>
 
-<p>使 apiUrl 為例，設定兩個檔案</p>
+<p>新的一年，希望挑戰成功。</p>
 
-<p>environment.ts:</p>
-<div class="language-ts highlighter-rouge"><pre class="highlight"><code><span class="k">export</span> <span class="kd">const</span> <span class="nx">environment</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">production</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-  <span class="na">apiUrl</span><span class="p">:</span> <span class="s1">'http://localhost/api/'</span><span class="p">,</span>
-<span class="p">};</span>
-
-</code></pre>
-</div>
-
-<p>environment.prod.ts:</p>
-<div class="language-ts highlighter-rouge"><pre class="highlight"><code><span class="k">export</span> <span class="kd">const</span> <span class="nx">environment</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">production</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-  <span class="na">apiUrl</span><span class="p">:</span> <span class="s1">'http://demo.com/api/'</span><span class="p">,</span>
-<span class="p">};</span>
-
-</code></pre>
-</div>
-
-<p>然後編輯 foo.service.ts</p>
-
-<div class="language-ts highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">environment</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'../../environments/environment'</span><span class="p">;</span>
-<span class="err">‧‧‧</span>
-<span class="k">private</span> <span class="nx">baseUrl</span> <span class="err">:</span> <span class="kr">string</span> <span class="o">=</span> <span class="nx">environment</span><span class="p">.</span><span class="nx">apiUrl</span> <span class="o">+</span> <span class="s1">'foo'</span><span class="p">;</span>
-<span class="err">‧‧‧</span>
-</code></pre>
-</div>
-
-<p>在開發環境時，baseUrl 是 ‘http://localhost/api/foo’</p>
-
-<p>在生產環境時，baseUrl 是 ‘http://demo.com/api/foo’</p>
-
-<p>這樣就可以達到開發跟生產環境使用不同的設定。</p>
-
-<h2 id="reference">Reference</h2>
-
-<p><a href="https://medium.com/beautiful-angular/angular-2-and-environment-variables-59c57ba643be">Angular 2 and environment variables</a></p>
-
-<p><a href="https://alligator.io/angular/environment-variables/">Environment Variables in Angular</a></p>
+<p>註：絕對不是因為那個「實體獎座」才參加的喔~</p>
 
         
       </section>
@@ -363,7 +326,7 @@
     
       
       
-      <a href="https://twblog.hongjianching.com/tags/#angular" class="page__taxonomy-item" rel="tag">Angular</a>
+      <a href="https://twblog.hongjianching.com/tags/#w3hexschool" class="page__taxonomy-item" rel="tag">w3HexSchool</a>
     
     </span>
   </p>
@@ -372,7 +335,7 @@
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2018-01-22T00:00:00+08:00">January 22, 2018</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2020-01-30T00:00:00+08:00">January 30, 2020</time></p>
         
       </footer>
 
@@ -381,25 +344,24 @@
     <h4 class="page__share-title">分享到</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=Angular 使用環境變數 https://twblog.hongjianching.com/2018/01/22/angular-using-environment-variables/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=重新開張迎接新的挑戰 https://twblog.hongjianching.com/2020/01/30/reopen-the-blog-for-new-challenge/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2018/01/22/angular-using-environment-variables/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2020/01/30/reopen-the-blog-for-new-challenge/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2018/01/22/angular-using-environment-variables/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2020/01/30/reopen-the-blog-for-new-challenge/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2018/01/22/angular-using-environment-variables/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2020/01/30/reopen-the-blog-for-new-challenge/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="https://twblog.hongjianching.com/2018/01/15/asp-dotnet-core-web-api-using-entity-framework-core-and-postgresql/" class="pagination--pager" title="ASP.Net Core Web API 使用 Entity Framework Core 和 PostgreSQL
+      <a href="https://twblog.hongjianching.com/2018/10/30/2019-ithelp-ironman-30-days-challenge-review/" class="pagination--pager" title="2019 iT 邦幫忙鐵人賽 完賽心得
 ">較舊</a>
     
     
-      <a href="https://twblog.hongjianching.com/2018/01/26/css-div-problem/" class="pagination--pager" title="CSS DIV 問題
-">較新</a>
+      <a href="#" class="pagination--pager disabled">較新</a>
     
   </nav>
 
@@ -461,7 +423,7 @@
   ga('send', 'pageview');
   
   
-    ga('send', 'event', 'taggedPost', 'view', 'Angular');
+    ga('send', 'event', 'taggedPost', 'view', 'w3HexSchool');
   
   
 </script>

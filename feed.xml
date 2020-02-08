@@ -1,4 +1,62 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2020-01-30T21:38:32+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">重新開張迎接新的挑戰</title><link href="https://twblog.hongjianching.com/2020/01/30/reopen-the-blog-for-new-challenge/" rel="alternate" type="text/html" title="重新開張迎接新的挑戰" /><published>2020-01-30T00:00:00+08:00</published><updated>2020-01-30T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/01/30/reopen-the-blog-for-new-challenge</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/01/30/reopen-the-blog-for-new-challenge/">&lt;p&gt;自從前年 30 天鐵人挑戰賽之後，一年沒有文章的地方，終於要重新開張啦。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2020-02-08T21:24:28+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">使用 Vue CLI 建立 Vue.js 專案</title><link href="https://twblog.hongjianching.com/2020/02/08/use-vue-cli-create-vuejs-project/" rel="alternate" type="text/html" title="使用 Vue CLI 建立 Vue.js 專案" /><published>2020-02-08T00:00:00+08:00</published><updated>2020-02-08T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/02/08/use-vue-cli-create-vuejs-project</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/02/08/use-vue-cli-create-vuejs-project/">&lt;h2 id=&quot;安裝-vue-cli&quot;&gt;安裝 Vue CLI&lt;/h2&gt;
+&lt;p&gt;假設已經安裝好 yarn 跟 Node.js，使用 yarn 安裝 Vue CLI&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;yarn global add @vue/cli @vue/cli-service-global
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;安裝後可以透過 version 參數查詢 Vue CLI 安裝版本&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;vue --version
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-08-use-vue-cli-create-vuejs-project/2020-02-04_22-09-51.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;查詢-vue-cli&quot;&gt;查詢 Vue CLI&lt;/h2&gt;
+&lt;p&gt;想知道 Vue CLI 可以使用哪些指令，可以透過 help 參數，或是 h 短參數，什麼都沒輸入也可以，
+三種執行結果相同&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;vue --help
+vue -h
+vue
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-08-use-vue-cli-create-vuejs-project/2020-02-04_22-15-03.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;建立專案&quot;&gt;建立專案&lt;/h2&gt;
+&lt;p&gt;使用 create 指令建立專案，可以故意不帶參數查詢指令細節，或是乖乖的輸入 help 參數&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;vue create --help
+vue create -h
+vue create
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-08-use-vue-cli-create-vuejs-project/2020-02-04_22-19-03.png&quot; alt=&quot;&quot; /&gt;
+上圖除了顯示指令細節之外，最後提示缺少必要的參數 app-name&lt;/p&gt;
+
+&lt;p&gt;建立第一個叫 00_default_app 的專案&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;vue create 00_default_app
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;預設選擇 default (babel, eslint)&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-08-use-vue-cli-create-vuejs-project/2020-02-08_21-06-20.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;下一步選擇使用的套件管理工具，依個人喜好而定，這邊選擇 yarn&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-08-use-vue-cli-create-vuejs-project/2020-02-08_21-07-01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;等待專案產生完畢，依照提示啟動&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;00_default_app
+yarn serve
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;接者開啟 http://localhost:8080/ 就可以看到網頁了&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-08-use-vue-cli-create-vuejs-project/2020-02-08_21-16-49.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="w3HexSchool" /><category term="Vue.js" /><category term="Vue-CLI" /><summary type="html">安裝 Vue CLI 假設已經安裝好 yarn 跟 Node.js，使用 yarn 安裝 Vue CLI</summary></entry><entry><title type="html">重新開張迎接新的挑戰</title><link href="https://twblog.hongjianching.com/2020/01/30/reopen-the-blog-for-new-challenge/" rel="alternate" type="text/html" title="重新開張迎接新的挑戰" /><published>2020-01-30T00:00:00+08:00</published><updated>2020-01-30T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/01/30/reopen-the-blog-for-new-challenge</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/01/30/reopen-the-blog-for-new-challenge/">&lt;p&gt;自從前年 30 天鐵人挑戰賽之後，一年沒有文章的地方，終於要重新開張啦。&lt;/p&gt;
 
 &lt;p&gt;這次參加的是 &lt;a href=&quot;https://www.hexschool.com/2019/11/14/2019-11-14-w3Hexschool-2020-challenge/&quot;&gt;六角學院舉辦的 - 鼠年全馬鐵人挑戰&lt;/a&gt; 活動，&lt;/p&gt;
 
@@ -467,51 +525,4 @@ def imagelist = ['maven:3-alpine', 'ubuntu:18.04', 'base/archlinux']
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-23-jenkins-pipeline-as-code-run-docker-image/2018-10-23_21-34-24.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;透過 docker image 啟動不同環境是不是很有彈性呢？&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Jenkins" /><category term="Docker" /><summary type="html">這篇要介紹透過 Jenkinsfile 直接啟動 Docker Image 來執行</summary></entry><entry><title type="html">在 Ubuntu 安裝 Jenkins Agent</title><link href="https://twblog.hongjianching.com/2018/10/22/install-jenkins-agent-on-ubuntu/" rel="alternate" type="text/html" title="在 Ubuntu 安裝 Jenkins Agent" /><published>2018-10-22T00:00:00+08:00</published><updated>2018-10-22T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/22/install-jenkins-agent-on-ubuntu</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/22/install-jenkins-agent-on-ubuntu/">&lt;p&gt;之前介紹過&lt;a href=&quot;https://twblog.hongjianching.com/2018/10/10/install-jenkins-agent-with-docker/&quot;&gt;使用 Docker 安裝 Jenkins Agent&lt;/a&gt;，這次要講不使用 Docker 直接在 Ubuntu 安裝 Agent 的方法&lt;/p&gt;
-
-&lt;p&gt;在 Jenkins 主頁，選擇&lt;strong&gt;管理 Jenkins&lt;/strong&gt; &amp;gt; &lt;strong&gt;管理節點&lt;/strong&gt; &amp;gt; &lt;strong&gt;新增節點&lt;/strong&gt; &amp;gt;
-&lt;strong&gt;節點名稱&lt;/strong&gt;輸入 &lt;strong&gt;ubuntu-18.04&lt;/strong&gt;，按下 OK&lt;/p&gt;
-
-&lt;p&gt;接著在設定頁輸入&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;遠端檔案系統根目錄：&lt;strong&gt;/data/jenkins&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;啟動模式：&lt;strong&gt;透過 SSH 啟動 Unitx 主機上的 agnet代理程式&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;主機：輸入 IP&lt;/li&gt;
-  &lt;li&gt;Credentials：輸入登入主機的 SSH 帳號及密碼&lt;/li&gt;
-  &lt;li&gt;Host Key Verification Strategy：圖方便跳過驗證，選擇&lt;strong&gt;Non verifying Verification Strategy&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-22-install-jenkins-agent-on-ubuntu/2018-10-22_21-43-37.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;按下儲存之後可以看到 Agent 啟動 Logs，進去看一下發現失敗&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-22-install-jenkins-agent-on-ubuntu/2018-10-22_21-40-20.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;訊息上看到提示安裝 java 8，我們透過 ssh 登入 Ubuntu 18.04，確認是不是沒有安裝 java&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-22-install-jenkins-agent-on-ubuntu/2018-10-22_21-02-00.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;確實沒有安裝後，接著透過 apt 安裝 java 套件&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt update &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; sudo apt install openjdk-8-jre -y
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-22-install-jenkins-agent-on-ubuntu/2018-10-22_21-36-56.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;回到 Jenkins Web 再啟動一次，結果又有錯誤發生&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-22-install-jenkins-agent-on-ubuntu/2018-10-22_21-52-49.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;檢查紀錄原來是 &lt;strong&gt;/data/jenkins&lt;/strong&gt; 目錄不存在，這個好處理。建立一下目鍵，別忘了設定權限&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo mkdir -p /data/jenkins
-sudo chown ubuntu:ubuntu /data -R
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;回到頁面再次啟動 Agent&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-22-install-jenkins-agent-on-ubuntu/2018-10-22_21-56-01.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;終於成功完成 Jenkins Agent 連線&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Jenkins" /><category term="Ubuntu" /><summary type="html">之前介紹過使用 Docker 安裝 Jenkins Agent，這次要講不使用 Docker 直接在 Ubuntu 安裝 Agent 的方法</summary></entry></feed>
+&lt;p&gt;透過 docker image 啟動不同環境是不是很有彈性呢？&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Jenkins" /><category term="Docker" /><summary type="html">這篇要介紹透過 Jenkinsfile 直接啟動 Docker Image 來執行</summary></entry></feed>

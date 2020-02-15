@@ -321,34 +321,35 @@
 因為我們需要用到多個 slot，需要分別加上 name 用來代表不用的位置</p>
 
 <blockquote>
-  <p>Layout.vue
-```html</p>
+  <p>Layout.vue</p>
 </blockquote>
-<template>
-    <div class="box">
-        <slot name="left"></slot>
-        <slot name="center"></slot>
-        <slot name="right"></slot>
-    </div>
-</template>
-<div class="highlighter-rouge"><pre class="highlight"><code>
-接著將原本的 template 套上 Layout.vue
-```html
-&lt;template&gt;
-  &lt;div class="outside-box"&gt;
-    &lt;Layout&gt;
-      &lt;template v-slot:left&gt;
-        &lt;div class="item left"&gt;left&lt;/div&gt;            
-      &lt;/template&gt;
-      &lt;template v-slot:center&gt;
-        &lt;div class="item center"&gt;center&lt;/div&gt;
-      &lt;/template&gt;
-      &lt;template v-slot:right&gt;
-        &lt;div class="item right"&gt;right&lt;/div&gt;
-      &lt;/template&gt;
-    &lt;/Layout&gt;
-  &lt;/div&gt;
-&lt;/template&gt;
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;template&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"box"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;slot</span> <span class="na">name=</span><span class="s">"left"</span><span class="nt">&gt;&lt;/slot&gt;</span>
+        <span class="nt">&lt;slot</span> <span class="na">name=</span><span class="s">"center"</span><span class="nt">&gt;&lt;/slot&gt;</span>
+        <span class="nt">&lt;slot</span> <span class="na">name=</span><span class="s">"right"</span><span class="nt">&gt;&lt;/slot&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/template&gt;</span>
+</code></pre>
+</div>
+
+<p>接著將原本的 template 套上 Layout.vue</p>
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;template&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"outside-box"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;Layout&gt;</span>
+      <span class="nt">&lt;template</span> <span class="na">v-slot:left</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item left"</span><span class="nt">&gt;</span>left<span class="nt">&lt;/div&gt;</span>            
+      <span class="nt">&lt;/template&gt;</span>
+      <span class="nt">&lt;template</span> <span class="na">v-slot:center</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item center"</span><span class="nt">&gt;</span>center<span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;/template&gt;</span>
+      <span class="nt">&lt;template</span> <span class="na">v-slot:right</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item right"</span><span class="nt">&gt;</span>right<span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;/template&gt;</span>
+    <span class="nt">&lt;/Layout&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/template&gt;</span>
 </code></pre>
 </div>
 

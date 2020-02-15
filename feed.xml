@@ -1,4 +1,65 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2020-02-08T21:24:28+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">使用 Vue CLI 建立 Vue.js 專案</title><link href="https://twblog.hongjianching.com/2020/02/08/use-vue-cli-create-vuejs-project/" rel="alternate" type="text/html" title="使用 Vue CLI 建立 Vue.js 專案" /><published>2020-02-08T00:00:00+08:00</published><updated>2020-02-08T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/02/08/use-vue-cli-create-vuejs-project</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/02/08/use-vue-cli-create-vuejs-project/">&lt;h2 id=&quot;安裝-vue-cli&quot;&gt;安裝 Vue CLI&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2020-02-15T12:17:08+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">在 Vue 專案使用 Slot 進行 Layout</title><link href="https://twblog.hongjianching.com/2020/02/15/use-slot-in-vue-layout/" rel="alternate" type="text/html" title="在 Vue 專案使用 Slot 進行 Layout" /><published>2020-02-15T00:00:00+08:00</published><updated>2020-02-15T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/02/15/use-slot-in-vue-layout</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/02/15/use-slot-in-vue-layout/">&lt;h2 id=&quot;常見的-layout-排版範例&quot;&gt;常見的 Layout 排版範例&lt;/h2&gt;
+
+&lt;p&gt;這是常見的左中右的排版&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-15-use-slot-in-vue-layout/2020-02-15_11-43-27.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;其中的 template 如下&lt;/p&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;template&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;outside-box&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;box&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;item left&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;left&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;            
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;item center&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;center&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;item right&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;right&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/template&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;其中同時包含了排版 (Layout) 及內容 (Content)，如果要減少重覆的工作，我們可以將其中內容的部份抽離，留下單純的排版。&lt;/p&gt;
+
+&lt;h2 id=&quot;使用-slot&quot;&gt;使用 Slot&lt;/h2&gt;
+
+&lt;p&gt;透過 Vue 的 Slot 機制，將會變動的內容改用 slot 取代，建立 Layout.vue
+因為我們需要用到多個 slot，需要分別加上 name 用來代表不用的位置&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Layout.vue
+```html&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;template&gt;
+    &lt;div class=&quot;box&quot;&gt;
+        &lt;slot name=&quot;left&quot;&gt;&lt;/slot&gt;
+        &lt;slot name=&quot;center&quot;&gt;&lt;/slot&gt;
+        &lt;slot name=&quot;right&quot;&gt;&lt;/slot&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+接著將原本的 template 套上 Layout.vue
+```html
+&amp;lt;template&amp;gt;
+  &amp;lt;div class=&quot;outside-box&quot;&amp;gt;
+    &amp;lt;Layout&amp;gt;
+      &amp;lt;template v-slot:left&amp;gt;
+        &amp;lt;div class=&quot;item left&quot;&amp;gt;left&amp;lt;/div&amp;gt;            
+      &amp;lt;/template&amp;gt;
+      &amp;lt;template v-slot:center&amp;gt;
+        &amp;lt;div class=&quot;item center&quot;&amp;gt;center&amp;lt;/div&amp;gt;
+      &amp;lt;/template&amp;gt;
+      &amp;lt;template v-slot:right&amp;gt;
+        &amp;lt;div class=&quot;item right&quot;&amp;gt;right&amp;lt;/div&amp;gt;
+      &amp;lt;/template&amp;gt;
+    &amp;lt;/Layout&amp;gt;
+  &amp;lt;/div&amp;gt;
+&amp;lt;/template&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;執行結果會跟原本的一樣喔！但是擁有一個 Layout.vue 可以重覆使用排版。&lt;/p&gt;
+
+&lt;p&gt;關於更多 Slot 資料可以參考官方文件 &lt;a href=&quot;https://vuejs.org/v2/guide/components-slots.html#Named-Slots-with-the-slot-Attribute&quot;&gt;Slots — Vue.js&lt;/a&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="w3HexSchool" /><category term="Vue.js" /><category term="Slot" /><summary type="html">常見的 Layout 排版範例</summary></entry><entry><title type="html">使用 Vue CLI 建立 Vue.js 專案</title><link href="https://twblog.hongjianching.com/2020/02/08/use-vue-cli-create-vuejs-project/" rel="alternate" type="text/html" title="使用 Vue CLI 建立 Vue.js 專案" /><published>2020-02-08T00:00:00+08:00</published><updated>2020-02-08T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/02/08/use-vue-cli-create-vuejs-project</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/02/08/use-vue-cli-create-vuejs-project/">&lt;h2 id=&quot;安裝-vue-cli&quot;&gt;安裝 Vue CLI&lt;/h2&gt;
 &lt;p&gt;假設已經安裝好 yarn 跟 Node.js，使用 yarn 安裝 Vue CLI&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;yarn global add @vue/cli @vue/cli-service-global
@@ -425,104 +486,4 @@ def imagelist = ['maven:3-alpine', 'ubuntu:18.04', 'base/archlinux']
 
 &lt;p&gt;等等，突然想到目前的執行環境是使用 docker image，環境互不影響，那我只要將 ubuntu-18.04 agent &lt;strong&gt;執行程式數量&lt;/strong&gt; 設定為 3 就可以展示效果&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-24-jenkins-pipeline-as-code-parallel/2018-10-24_22-59-36.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Jenkins" /><summary type="html">在之前的範例中，我們都是使用連續流程 pipeline，當某一個 stage 失敗，則剩餘的 stage 直接跳過不再執行，以流水線來說這是正確的。</summary></entry><entry><title type="html">Jenkins - Pipeline as Code - 啟動 Docker Image</title><link href="https://twblog.hongjianching.com/2018/10/23/jenkins-pipeline-as-code-run-docker-image/" rel="alternate" type="text/html" title="Jenkins - Pipeline as Code - 啟動 Docker Image" /><published>2018-10-23T00:00:00+08:00</published><updated>2018-10-23T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/23/jenkins-pipeline-as-code-run-docker-image</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/23/jenkins-pipeline-as-code-run-docker-image/">&lt;p&gt;這篇要介紹透過 Jenkinsfile 直接啟動 Docker Image 來執行&lt;/p&gt;
-
-&lt;p&gt;早前介紹過&lt;a href=&quot;https://twblog.hongjianching.com/2018/10/10/install-jenkins-agent-with-docker/&quot;&gt;使用 Docker 安裝 Jenkins Agent&lt;/a&gt;，但是這個方法，每個環境都要建立一次該環境的 agent docker image，其實有點麻煩，難道不能讓我直接拿 docker image 來執行呢？&lt;/p&gt;
-
-&lt;p&gt;答案是可以的，所以前一篇介紹&lt;a href=&quot;https://twblog.hongjianching.com/2018/10/22/install-jenkins-agent-on-ubuntu/&quot;&gt;在 Ubuntu 安裝 Jenkins Agent&lt;/a&gt;，目的是使用該 ubuntu 上的 docker 執行環境。如果還沒有安裝 docker 的話，請參考這篇完成&lt;a href=&quot;https://twblog.hongjianching.com/2018/10/02/install-docker/&quot;&gt;安裝 Docker&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;首先將 ubuntu agent 加上 &lt;strong&gt;docker&lt;/strong&gt; 標籤，避免跑到其它沒有 docker 環境的 agent 上，那就會不能執行了喔&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-23-jenkins-pipeline-as-code-run-docker-image/2018-10-23_21-21-51.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;接著修改 Jenkinsfile 關於 agent 的宣告，原本是限制執行在有 &lt;strong&gt;cpp&lt;/strong&gt; 標籤上的像這樣&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;agent {
-    label 'cpp'
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;改為限制執行在 &lt;strong&gt;docker&lt;/strong&gt; 標籤上，而且要啟動 docker image &lt;strong&gt;maven:3-alpine&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;agent {
-    docker {
-        label 'docker'
-        image 'maven:3-alpine'
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;為了展示在不同 docker image 上執行的能力，我們顯示執行環境的版本資訊&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;steps {
-    sh 'cat /etc/*-release'
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;除了 alpine 之外，我們額外新增 ubuntu 及 archlinux 來示範&lt;/p&gt;
-
-&lt;p&gt;完整的 Jenkinsfile 如下&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pipeline {
-    agent none
-    stages {
-        stage('alpine') {
-            agent {
-                docker {
-                    label 'docker'
-                    image 'maven:3-alpine'
-                }
-            }
-            steps {
-                sh 'cat /etc/*-release'
-            }
-        }
-        stage('ubuntu') {
-            agent {
-                docker {
-                    label 'docker'
-                    image 'ubuntu:18.04'
-                }
-            }
-            steps {
-                sh 'cat /etc/*-release'
-            }
-        }
-        stage('archlinux') {
-            agent {
-                docker {
-                    label 'docker'
-                    image 'base/archlinux'
-                }
-            }
-            steps {
-                sh 'cat /etc/*-release'
-            }
-        }
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;要使用預建立的檔案，同樣在 &lt;strong&gt;https://github.com/allyusd/jenkins-pipeline.git&lt;/strong&gt;，branch 是 &lt;strong&gt;different-agent-docker&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;成功建置之後會出現三個 stage&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-23-jenkins-pipeline-as-code-run-docker-image/2018-10-23_21-31-20.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;alpine 執行結果&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-23-jenkins-pipeline-as-code-run-docker-image/2018-10-23_21-32-40.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;ubuntu 執行結果&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-23-jenkins-pipeline-as-code-run-docker-image/2018-10-23_21-33-15.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;archlinux 執行結果&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-23-jenkins-pipeline-as-code-run-docker-image/2018-10-23_21-34-24.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;透過 docker image 啟動不同環境是不是很有彈性呢？&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Jenkins" /><category term="Docker" /><summary type="html">這篇要介紹透過 Jenkinsfile 直接啟動 Docker Image 來執行</summary></entry></feed>
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-24-jenkins-pipeline-as-code-parallel/2018-10-24_22-59-36.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Jenkins" /><summary type="html">在之前的範例中，我們都是使用連續流程 pipeline，當某一個 stage 失敗，則剩餘的 stage 直接跳過不再執行，以流水線來說這是正確的。</summary></entry></feed>

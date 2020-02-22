@@ -19,12 +19,12 @@
 
 
 
-<title>在 Vue 專案使用 Slot 進行 Layout - Jian-Ching 記事本</title>
+<title>當寬度不同的時候保持置中排版 - Jian-Ching 記事本</title>
 
 
 
 
-<meta name="description" content="常見的 Layout 排版範例">
+<meta name="description" content="使用 Layout 的好處">
 
 
 
@@ -33,15 +33,15 @@
 
 <meta property="og:locale" content="zh_TW">
 <meta property="og:site_name" content="Jian-Ching 記事本">
-<meta property="og:title" content="在 Vue 專案使用 Slot 進行 Layout">
+<meta property="og:title" content="當寬度不同的時候保持置中排版">
 
 
-  <link rel="canonical" href="https://twblog.HongJianChing.com/2020/02/15/use-slot-in-vue-layout/">
-  <meta property="og:url" content="https://twblog.HongJianChing.com/2020/02/15/use-slot-in-vue-layout/">
+  <link rel="canonical" href="https://twblog.HongJianChing.com/2020/02/22/keep-the-middle-item-centered-when-side-items-have-different-widths/">
+  <meta property="og:url" content="https://twblog.HongJianChing.com/2020/02/22/keep-the-middle-item-centered-when-side-items-have-different-widths/">
 
 
 
-  <meta property="og:description" content="常見的 Layout 排版範例">
+  <meta property="og:description" content="使用 Layout 的好處">
 
 
 
@@ -56,7 +56,7 @@
 
 
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2020-02-15T00:00:00+08:00">
+  <meta property="article:published_time" content="2020-02-22T00:00:00+08:00">
 
 
 
@@ -278,74 +278,45 @@
 
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
-    <meta itemprop="headline" content="在 Vue 專案使用 Slot 進行 Layout">
-    <meta itemprop="description" content="常見的 Layout 排版範例">
-    <meta itemprop="datePublished" content="February 15, 2020">
+    <meta itemprop="headline" content="當寬度不同的時候保持置中排版">
+    <meta itemprop="description" content="使用 Layout 的好處">
+    <meta itemprop="datePublished" content="February 22, 2020">
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 class="page__title" itemprop="headline">在 Vue 專案使用 Slot 進行 Layout
+          <h1 class="page__title" itemprop="headline">當寬度不同的時候保持置中排版
 </h1>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        <h2 id="常見的-layout-排版範例">常見的 Layout 排版範例</h2>
+        <h2 id="使用-layout-的好處">使用 Layout 的好處</h2>
 
-<p>這是常見的左中右的排版</p>
+<p>接著上一篇<a href="https://twblog.hongjianching.com/2020/02/15/use-slot-in-vue-layout/">在 Vue 專案使用 Slot 進行 Layout</a>的內容，我們先加上一個置中對照組</p>
 
-<p><img src="/assets/images/2020-02-15-use-slot-in-vue-layout/2020-02-15_11-43-27.png" alt="" /></p>
+<p><img src="/assets/images/2020-02-22-keep-the-middle-item-centered-when-side-items-have-different-widths/2020-02-22_16-59-03.png" alt="" /></p>
 
-<p>其中的 template 如下</p>
+<p>當物件的寬度相同的時候，中間的元件保持置中</p>
 
-<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;template&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"outside-box"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"box"</span><span class="nt">&gt;</span>
-            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item left"</span><span class="nt">&gt;</span>left<span class="nt">&lt;/div&gt;</span>            
-            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item center"</span><span class="nt">&gt;</span>center<span class="nt">&lt;/div&gt;</span>
-            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item right"</span><span class="nt">&gt;</span>right<span class="nt">&lt;/div&gt;</span>
-        <span class="nt">&lt;/div&gt;</span>
-    <span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/template&gt;</span>
-</code></pre>
-</div>
+<p>接著我們增加把右邊的寬度增加一倍</p>
 
-<p>其中同時包含了排版 (Layout) 及內容 (Content)，如果要減少重覆的工作，我們可以將其中內容的部份抽離，留下單純的排版。</p>
-
-<h2 id="使用-slot">使用 Slot</h2>
-
-<p>透過 Vue 的 Slot 機制，將會變動的內容改用 slot 取代，建立 Layout.vue
-因為我們需要用到多個 slot，需要分別加上 name 用來代表不用的位置</p>
-
-<blockquote>
-  <p>Layout.vue</p>
-</blockquote>
-
-<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;template&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"box"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;slot</span> <span class="na">name=</span><span class="s">"left"</span><span class="nt">&gt;&lt;/slot&gt;</span>
-        <span class="nt">&lt;slot</span> <span class="na">name=</span><span class="s">"center"</span><span class="nt">&gt;&lt;/slot&gt;</span>
-        <span class="nt">&lt;slot</span> <span class="na">name=</span><span class="s">"right"</span><span class="nt">&gt;&lt;/slot&gt;</span>
-    <span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/template&gt;</span>
-</code></pre>
-</div>
-
-<p>接著將原本的 template 套上 Layout.vue</p>
 <div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;template&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"outside-box"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"box"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item center normal-wide"</span><span class="nt">&gt;</span>center<span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
     <span class="nt">&lt;Layout&gt;</span>
       <span class="nt">&lt;template</span> <span class="na">v-slot:left</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item left"</span><span class="nt">&gt;</span>left<span class="nt">&lt;/div&gt;</span>            
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item left normal-wide"</span><span class="nt">&gt;</span>left<span class="nt">&lt;/div&gt;</span>
       <span class="nt">&lt;/template&gt;</span>
       <span class="nt">&lt;template</span> <span class="na">v-slot:center</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item center"</span><span class="nt">&gt;</span>center<span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item center normal-wide"</span><span class="nt">&gt;</span>center<span class="nt">&lt;/div&gt;</span>
       <span class="nt">&lt;/template&gt;</span>
       <span class="nt">&lt;template</span> <span class="na">v-slot:right</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item right"</span><span class="nt">&gt;</span>right<span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"item right more-wide"</span><span class="nt">&gt;</span>right<span class="nt">&lt;/div&gt;</span>
       <span class="nt">&lt;/template&gt;</span>
     <span class="nt">&lt;/Layout&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
@@ -353,9 +324,64 @@
 </code></pre>
 </div>
 
-<p>執行結果會跟原本的一樣喔！但是擁有一個 Layout.vue 可以重覆使用排版。</p>
+<p><img src="/assets/images/2020-02-22-keep-the-middle-item-centered-when-side-items-have-different-widths/2020-02-22_17-01-45.png" alt="" /></p>
 
-<p>關於更多 Slot 資料可以參考官方文件 <a href="https://vuejs.org/v2/guide/components-slots.html#Named-Slots-with-the-slot-Attribute">Slots — Vue.js</a></p>
+<p>可以發現中間元件的位置，不再是原本正中間的位置，
+而是保持兩邊相同的空白距離的中間</p>
+
+<h2 id="修改-layout-元件">修改 Layout 元件</h2>
+
+<p>這個問題我們可以修改原本的 Layout 元件</p>
+
+<blockquote>
+  <p>Layout.vue</p>
+</blockquote>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;template&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"layout-box"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"inner-wrapper left"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;slot</span> <span class="na">name=</span><span class="s">"left"</span><span class="nt">&gt;&lt;/slot&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"inner-wrapper center"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;slot</span> <span class="na">name=</span><span class="s">"center"</span><span class="nt">&gt;&lt;/slot&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"inner-wrapper right"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;slot</span> <span class="na">name=</span><span class="s">"right"</span><span class="nt">&gt;&lt;/slot&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/template&gt;</span>
+</code></pre>
+</div>
+
+<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="nc">.layout-box</span> <span class="p">{</span>
+    <span class="nl">display</span> <span class="p">:</span> <span class="n">flex</span><span class="p">;</span>
+    <span class="nl">justify-content</span> <span class="p">:</span> <span class="n">space-between</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.inner-wrapper</span> <span class="p">{</span>
+    <span class="nl">display</span><span class="p">:</span> <span class="n">flex</span><span class="p">;</span>
+    <span class="nl">flex</span><span class="p">:</span> <span class="m">1</span><span class="p">;</span>
+    <span class="nl">justify-content</span><span class="p">:</span> <span class="nb">center</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.left</span> <span class="p">{</span>
+    <span class="nl">margin-right</span><span class="p">:</span> <span class="nb">auto</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.right</span> <span class="p">{</span>
+    <span class="nl">margin-left</span><span class="p">:</span> <span class="nb">auto</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>回頭看執行的結果，即使其它元件的寬度不同，也不影響中間元件置中了</p>
+
+<p><img src="/assets/images/2020-02-22-keep-the-middle-item-centered-when-side-items-have-different-widths/2020-02-22_17-05-31.png" alt="" /></p>
+
+<p>再次驗證使用 Slot 的好處，就是將排版相關的程式碼與內容分離，
+修改 Layout.vue 的時候，不需要修改使用的程式，即可正確呈現想要的結果。</p>
+
+<h4 id="參考資料">參考資料</h4>
+<p><a href="https://stackoverflow.com/questions/32378953/keep-the-middle-item-centered-when-side-items-have-different-widths">html - Keep the middle item centered when side items have different widths - Stack Overflow</a></p>
+
+<p><a href="https://stackoverflow.com/questions/32551291/in-css-flexbox-why-are-there-no-justify-items-and-justify-self-properties">In CSS Flexbox, why are there no “justify-items” and “justify-self” properties? - Stack Overflow</a></p>
 
         
       </section>
@@ -376,7 +402,7 @@
     
       
       
-      <a href="https://twblog.hongjianching.com/tags/#slot" class="page__taxonomy-item" rel="tag">Slot</a><span class="sep">, </span>
+      <a href="https://twblog.hongjianching.com/tags/#css" class="page__taxonomy-item" rel="tag">CSS</a><span class="sep">, </span>
     
       
       
@@ -393,7 +419,7 @@
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2020-02-15T00:00:00+08:00">February 15, 2020</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2020-02-22T00:00:00+08:00">February 22, 2020</time></p>
         
       </footer>
 
@@ -402,25 +428,24 @@
     <h4 class="page__share-title">分享到</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=在 Vue 專案使用 Slot 進行 Layout https://twblog.hongjianching.com/2020/02/15/use-slot-in-vue-layout/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=當寬度不同的時候保持置中排版 https://twblog.hongjianching.com/2020/02/22/keep-the-middle-item-centered-when-side-items-have-different-widths/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2020/02/15/use-slot-in-vue-layout/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2020/02/22/keep-the-middle-item-centered-when-side-items-have-different-widths/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2020/02/15/use-slot-in-vue-layout/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2020/02/22/keep-the-middle-item-centered-when-side-items-have-different-widths/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2020/02/15/use-slot-in-vue-layout/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2020/02/22/keep-the-middle-item-centered-when-side-items-have-different-widths/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="https://twblog.hongjianching.com/2020/02/08/use-vue-cli-create-vuejs-project/" class="pagination--pager" title="使用 Vue CLI 建立 Vue.js 專案
+      <a href="https://twblog.hongjianching.com/2020/02/15/use-slot-in-vue-layout/" class="pagination--pager" title="在 Vue 專案使用 Slot 進行 Layout
 ">較舊</a>
     
     
-      <a href="https://twblog.hongjianching.com/2020/02/22/keep-the-middle-item-centered-when-side-items-have-different-widths/" class="pagination--pager" title="當寬度不同的時候保持置中排版
-">較新</a>
+      <a href="#" class="pagination--pager disabled">較新</a>
     
   </nav>
 
@@ -486,7 +511,7 @@
   
     ga('send', 'event', 'taggedPost', 'view', 'Vue.js');
   
-    ga('send', 'event', 'taggedPost', 'view', 'Slot');
+    ga('send', 'event', 'taggedPost', 'view', 'CSS');
   
   
 </script>

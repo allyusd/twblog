@@ -1,4 +1,35 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2020-02-22T17:13:32+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">當寬度不同的時候保持置中排版</title><link href="https://twblog.hongjianching.com/2020/02/22/keep-the-middle-item-centered-when-side-items-have-different-widths/" rel="alternate" type="text/html" title="當寬度不同的時候保持置中排版" /><published>2020-02-22T00:00:00+08:00</published><updated>2020-02-22T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/02/22/keep-the-middle-item-centered-when-side-items-have-different-widths</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/02/22/keep-the-middle-item-centered-when-side-items-have-different-widths/">&lt;h2 id=&quot;使用-layout-的好處&quot;&gt;使用 Layout 的好處&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2020-02-29T22:13:13+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">安裝 ActionHero</title><link href="https://twblog.hongjianching.com/2020/02/29/install-actionhero/" rel="alternate" type="text/html" title="安裝 ActionHero" /><published>2020-02-29T00:00:00+08:00</published><updated>2020-02-29T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/02/29/install-actionhero</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/02/29/install-actionhero/">&lt;h2 id=&quot;安裝-actionhero&quot;&gt;安裝 ActionHero&lt;/h2&gt;
+
+&lt;p&gt;官網：&lt;a href=&quot;https://www.actionherojs.com/&quot;&gt;Actionhero&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;一開始先試著使用 yarn 安裝，但是一直卡住，最後退回官方教學&lt;/p&gt;
+
+&lt;p&gt;Quick start&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Generate a new Project&lt;/span&gt;
+npx actionhero generate
+npm install
+npm run build &lt;span class=&quot;c&quot;&gt;# &amp;lt;--- new! I compile the TS to JS&lt;/span&gt;
+npm run dev &lt;span class=&quot;c&quot;&gt;# &amp;lt;--- new! I use `ts-node` to let you develop on your ts files without compiling&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;成功啟動會試著連 Redis, 連不上則啟動失敗，所以需要有 Redis 才能使用&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;info: Redis connection `client` reconnecting
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;需要有 Redis 才能順利動，啟動 Redis 之後終於順利啟動 Server&lt;/p&gt;
+
+&lt;p&gt;執行結果&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-29/2020-02-29_22-03-31.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;範例內建 WebSocket 聊天室，可以直接使用&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-29/2020-02-29_22-07-50.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;接下來要研究一下可以用來玩些什麼&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="w3HexSchool" /><category term="ActionHero" /><summary type="html">安裝 ActionHero 官網：Actionhero 一開始先試著使用 yarn 安裝，但是一直卡住，最後退回官方教學 Quick start # Generate a new Project npx actionhero generate npm install npm run build # &amp;lt;--- new! I compile the TS to JS npm run dev # &amp;lt;--- new! I use `ts-node` to let you develop on your ts files without compiling 成功啟動會試著連 Redis, 連不上則啟動失敗，所以需要有 Redis 才能使用 info: Redis connection `client` reconnecting 需要有 Redis 才能順利動，啟動 Redis 之後終於順利啟動 Server 執行結果 範例內建 WebSocket 聊天室，可以直接使用 接下來要研究一下可以用來玩些什麼</summary></entry><entry><title type="html">當寬度不同的時候保持置中排版</title><link href="https://twblog.hongjianching.com/2020/02/22/keep-the-middle-item-centered-when-side-items-have-different-widths/" rel="alternate" type="text/html" title="當寬度不同的時候保持置中排版" /><published>2020-02-22T00:00:00+08:00</published><updated>2020-02-22T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/02/22/keep-the-middle-item-centered-when-side-items-have-different-widths</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/02/22/keep-the-middle-item-centered-when-side-items-have-different-widths/">&lt;h2 id=&quot;使用-layout-的好處&quot;&gt;使用 Layout 的好處&lt;/h2&gt;
 
 &lt;p&gt;接著上一篇&lt;a href=&quot;https://twblog.hongjianching.com/2020/02/15/use-slot-in-vue-layout/&quot;&gt;在 Vue 專案使用 Slot 進行 Layout&lt;/a&gt;的內容，我們先加上一個置中對照組&lt;/p&gt;
 
@@ -426,64 +457,4 @@ commonPipeline()
 &lt;h1 id=&quot;ref&quot;&gt;ref&lt;/h1&gt;
 &lt;p&gt;&lt;a href=&quot;https://jenkins.io/doc/book/pipeline/shared-libraries/&quot;&gt;Extending with Shared Libraries&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://jenkins.io/blog/2017/10/02/pipeline-templates-with-shared-libraries/&quot;&gt;Share a standard Pipeline across multiple projects with Shared Libraries&lt;/a&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Jenkins" /><summary type="html">前一篇將 Jenkinsfile 內共用的部份重構為一份，那如果是不同的專案之間要共用呢？像這一連串文章，Jenkinsfile 改了無數次，如果有十幾個甚至幾十個專案不就要一直復制貼上，重覆這個動作好幾次？</summary></entry><entry><title type="html">Jenkins - Pipeline as Code - 動態平行工作</title><link href="https://twblog.hongjianching.com/2018/10/25/jenkins-pipeline-as-code-dynamic-parallel/" rel="alternate" type="text/html" title="Jenkins - Pipeline as Code - 動態平行工作" /><published>2018-10-25T00:00:00+08:00</published><updated>2018-10-25T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/25/jenkins-pipeline-as-code-dynamic-parallel</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/25/jenkins-pipeline-as-code-dynamic-parallel/">&lt;p&gt;前一篇介紹&lt;a href=&quot;https://twblog.hongjianching.com/2018/10/24/jenkins-pipeline-as-code-parallel/&quot;&gt;平行工作&lt;/a&gt;，但是每個 stage 其實是一樣的東西，明明重覆的事情要寫好幾遍很討厭，能不能動態產生呢？&lt;/p&gt;
-
-&lt;p&gt;先消除重覆的部份，透過 script 來執成&lt;/p&gt;
-
-&lt;p&gt;宣告兩個變數，分別是存放平行工作的 tasks 及存放 image 列表的 imagelist&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def tasks = [:]
-def imagelist = ['maven:3-alpine', 'ubuntu:18.04', 'base/archlinux']
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;接著透過 for 迴圈將 imagelist 都執行一遍，內容是定義每個 task 要做的事情&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;for (image in imagelist) {
-    def image_inside = &quot;${image}&quot;
-    tasks[&quot;${image}&quot;] = {
-        node('docker') {
-            stage(&quot;${image_inside}&quot;) {
-                docker.image(&quot;${image_inside}&quot;).inside {
-                    sh &quot;echo ${image_inside}&quot;
-                    sh 'cat /etc/*-release'
-                }
-            }
-        }
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;上面這段程式要特別注意的是其中 &lt;strong&gt;def image_inside = “${image}”&lt;/strong&gt;，這是不能拿掉的喔！另外 &lt;strong&gt;docker.image&lt;/strong&gt; 這段是為了執行在 docker image 內，如果是一般的 agent 是不需要這段的。&lt;/p&gt;
-
-&lt;p&gt;雖然這樣已經達到目的了，但是之後要增加 image 還要需要修改 Jenkinsfile，可能的話當然是希望將可能變動的部份抽離出來。&lt;/p&gt;
-
-&lt;p&gt;要讓 Jenkinfile 不需要修改，可以透過外部檔案來設定 imagelist，所以我們要讀取檔案，並且設定到 imagelist 陣列中&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def imagelist = readFile('imagelist').replace(&quot;\n&quot;, &quot;&quot;).split(',')
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;上面的指令，先是讀取 imagelist 檔案，移除換行符號之後，依照逗號分隔項目，最後存進 imagelist&lt;/p&gt;
-
-&lt;p&gt;而 imagelist 檔案的內容則是&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;maven:3-alpine,ubuntu:18.04,base/archlinux
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;完整的檔案在 &lt;a href=&quot;https://github.com/allyusd/jenkins-pipeline/tree/agent-docker-dynamic-parallel&quot;&gt;這裡&lt;/a&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;ref&quot;&gt;ref&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&quot;https://devops.stackexchange.com/questions/3073/how-to-properly-achieve-dynamic-parallel-action-with-a-declarative-pipeline/3090#3090&quot;&gt;jenkins - How to properly achieve dynamic parallel action with a declarative pipeline? - DevOps Stack Exchange&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://stackoverflow.com/questions/42652533/limiting-jenkins-pipeline-to-running-only-on-specific-nodes?rq=1&quot;&gt;Limiting Jenkins pipeline to running only on specific nodes - Stack Overflow&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://issues.jenkins-ci.org/browse/JENKINS-44086&quot;&gt;[JENKINS-44086] Parallel nodes for scripted pipelines cannot be clicked - Jenkins JIRA&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://stackoverflow.com/questions/37594635/why-an-each-loop-in-a-jenkinsfile-stops-at-first-iteration&quot;&gt;jenkins - Why an each loop in a Jenkinsfile stops at first iteration - Stack Overflow&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://stackoverflow.com/questions/22917491/reading-file-from-workspace-in-jenkins-with-groovy-script&quot;&gt;Reading file from Workspace in Jenkins with Groovy script - Stack Overflow&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://jenkins.io/doc/book/pipeline/docker/&quot;&gt;Using Docker with Pipeline&lt;/a&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Jenkins" /><summary type="html">前一篇介紹平行工作，但是每個 stage 其實是一樣的東西，明明重覆的事情要寫好幾遍很討厭，能不能動態產生呢？</summary></entry></feed>
+&lt;p&gt;&lt;a href=&quot;https://jenkins.io/blog/2017/10/02/pipeline-templates-with-shared-libraries/&quot;&gt;Share a standard Pipeline across multiple projects with Shared Libraries&lt;/a&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><category term="Jenkins" /><summary type="html">前一篇將 Jenkinsfile 內共用的部份重構為一份，那如果是不同的專案之間要共用呢？像這一連串文章，Jenkinsfile 改了無數次，如果有十幾個甚至幾十個專案不就要一直復制貼上，重覆這個動作好幾次？</summary></entry></feed>

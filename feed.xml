@@ -1,4 +1,30 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2020-03-14T16:11:48+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">ActionHero 使用 MySQL 及 Vue 範例</title><link href="https://twblog.hongjianching.com/2020/03/14/actionhero-with-mysql-and-vue-example/" rel="alternate" type="text/html" title="ActionHero 使用 MySQL 及 Vue 範例" /><published>2020-03-14T00:00:00+08:00</published><updated>2020-03-14T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/03/14/actionhero-with-mysql-and-vue-example</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/03/14/actionhero-with-mysql-and-vue-example/">&lt;p&gt;這個範例是新增使用者到 MySQL&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2020-03-21T17:04:33+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">在 Windows 透過 nvm 安裝 Node.js</title><link href="https://twblog.hongjianching.com/2020/03/21/install-nodejs-by-nvm-on-windows/" rel="alternate" type="text/html" title="在 Windows 透過 nvm 安裝 Node.js" /><published>2020-03-21T00:00:00+08:00</published><updated>2020-03-21T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/03/21/install-nodejs-by-nvm-on-windows</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/03/21/install-nodejs-by-nvm-on-windows/">&lt;p&gt;nvm 是 Node Version Manager，用來管理各種不同的 Node.js 版本的工具，
+當各種專案需要使用不同版本的 Node.js 時，透過 nvm 可以快速切換版本&lt;/p&gt;
+
+&lt;h2 id=&quot;安裝-nvm&quot;&gt;安裝 nvm&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/coreybutler/nvm-windows&quot;&gt;coreybutler/nvm-windows: A node.js version management utility for Windows. Ironically written in Go.&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;到 Release 頁面，下載 &lt;code class=&quot;highlighter-rouge&quot;&gt;nvm-setup.zip&lt;/code&gt; 並安裝&lt;/p&gt;
+
+&lt;h2 id=&quot;安裝-nodejs&quot;&gt;安裝 Node.js&lt;/h2&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;nvm install 12.13.1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;使用指定版本&quot;&gt;使用指定版本&lt;/h3&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;nvm use 12.13.1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2020-03-21/2020-03-09_14-20-05.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;確定-nodejs-版本&quot;&gt;確定 Node.js 版本&lt;/h3&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;node -v
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="w3HexSchool" /><category term="Node.js" /><category term="nvm" /><category term="Windows" /><summary type="html">nvm 是 Node Version Manager，用來管理各種不同的 Node.js 版本的工具， 當各種專案需要使用不同版本的 Node.js 時，透過 nvm 可以快速切換版本 安裝 nvm coreybutler/nvm-windows: A node.js version management utility for Windows. Ironically written in Go. 到 Release 頁面，下載 nvm-setup.zip 並安裝 安裝 Node.js nvm install 12.13.1 使用指定版本 nvm use 12.13.1 確定 Node.js 版本 node -v</summary></entry><entry><title type="html">ActionHero 使用 MySQL 及 Vue 範例</title><link href="https://twblog.hongjianching.com/2020/03/14/actionhero-with-mysql-and-vue-example/" rel="alternate" type="text/html" title="ActionHero 使用 MySQL 及 Vue 範例" /><published>2020-03-14T00:00:00+08:00</published><updated>2020-03-14T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/03/14/actionhero-with-mysql-and-vue-example</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/03/14/actionhero-with-mysql-and-vue-example/">&lt;p&gt;這個範例是新增使用者到 MySQL&lt;/p&gt;
 
 &lt;h2 id=&quot;migrations&quot;&gt;Migrations&lt;/h2&gt;
 
@@ -703,57 +729,4 @@ yarn serve
 
 &lt;h1 id=&quot;延深閱讀&quot;&gt;延深閱讀&lt;/h1&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://www.projectup.net/article/view/id/5424&quot;&gt;向上管理的五個原則 - 專案管理生活思維&lt;/a&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><summary type="html">有一天，在路邊發呆玩寶可夢的時候，聽到這樣的對話</summary></entry><entry><title type="html">利用程式設計原則解釋職場困境</title><link href="https://twblog.hongjianching.com/2018/10/28/using-principles-of-programming-analysis-real-world/" rel="alternate" type="text/html" title="利用程式設計原則解釋職場困境" /><published>2018-10-28T00:00:00+08:00</published><updated>2018-10-28T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/28/using-principles-of-programming-analysis-real-world</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/28/using-principles-of-programming-analysis-real-world/">&lt;p&gt;正當我在麥當勞吃著嫩煎雞腿堡配著無糖綠邊看漫畫「關於我轉生變成史萊姆這檔事」時，突然耳朵不由自主的補捉到了後方不遠處傳來的一段對話&lt;/p&gt;
-
-&lt;p&gt;小明：「唉~我真搞不懂 PM 在幹嘛，整天只會出張嘴，啥都不管，死都死其它人」&lt;/p&gt;
-
-&lt;p&gt;小華：「總會安排需求跟時程管理吧？」&lt;/p&gt;
-
-&lt;p&gt;小明：「需求就是客戶說的照單全收，問為什麼要這功能不清楚，問使用的情境也說不明白；時程就是說下星期要給，要大家儘量趕；唉，常常連規格書都沒有」&lt;/p&gt;
-
-&lt;p&gt;小華：「疑？那老闆不管的嗎？」&lt;/p&gt;
-
-&lt;p&gt;小明：「老闆只聽他的啊，還幫他說話呢，說都他一個人在承擔客戶的壓力，要多幫忙他」&lt;/p&gt;
-
-&lt;p&gt;小華：「有個狀況外的老闆當他靠山，那我想沒救了」&lt;/p&gt;
-
-&lt;p&gt;小明：「唉，別提了，再講下去我都要哭了」&lt;/p&gt;
-
-&lt;p&gt;聽完對話，感覺就是一個無能的 PM 加上一個可憐的工程師，面對這種情況，我想身為工程師是無能為力的。&lt;del&gt;反正是別人的事&lt;/del&gt;，正當準備將注意力拉回手邊的漫畫時，突然靈光一閃，想到了程式設計原則，下面為了方便說明，給對話中的 PM 起了小王這個名字。&lt;/p&gt;
-
-&lt;p&gt;從對話中分析，小王有六個功能&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;完成專案&lt;/li&gt;
-  &lt;li&gt;需求管理&lt;/li&gt;
-  &lt;li&gt;時程管理&lt;/li&gt;
-  &lt;li&gt;規格書撰寫&lt;/li&gt;
-  &lt;li&gt;需求訪談&lt;/li&gt;
-  &lt;li&gt;處理客訴&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;小明有一個功能&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;實作需求&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;畫成 UML 是這個樣子&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-28-using-principles-of-programming-analysis-real-world/2018-10-28_21-15-05.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;基於單一責任原則，我們可以把面對客戶的部份跟面對專案的部份分開，小王被拆成小王1跟小王2&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-28-using-principles-of-programming-analysis-real-world/2018-10-28_21-15-29.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;一個人怎麼可能會變成兩個？這明顯不可能。幸好，我們還有接口隔離原則，將功能從人上抽離出來建立角色，小王1是面對專案的部份，角色為專案經理，小王2是面對客戶的部份，角色為業務，小明的角色是工程師&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-28-using-principles-of-programming-analysis-real-world/2018-10-28_21-15-40.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;好的，就算拆解完 UML 圖，好棒好厲害，那對這件事情有什麼幫助？&lt;/p&gt;
-
-&lt;p&gt;因為上面這張圖是理想中的畫面，回頭看對話，其實會發現小王對於 PM 這個角色的功能實現幾乎沒有&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2018-10-28-using-principles-of-programming-analysis-real-world/2018-10-28_21-15-52.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;看到這邊，也許你會發現，原來小王根本不是 PM 啊！這是在程式設計中很常發現的壞味道，一個類別做的事情跟名稱不符，這時候就會需要進行最簡單但重要的重構，rename&lt;/p&gt;
-
-&lt;p&gt;不過這還不是我想表達的重點。分析完畢後，我的疑問是，小明真的無能為力嗎？&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><summary type="html">正當我在麥當勞吃著嫩煎雞腿堡配著無糖綠邊看漫畫「關於我轉生變成史萊姆這檔事」時，突然耳朵不由自主的補捉到了後方不遠處傳來的一段對話</summary></entry></feed>
+&lt;p&gt;&lt;a href=&quot;https://www.projectup.net/article/view/id/5424&quot;&gt;向上管理的五個原則 - 專案管理生活思維&lt;/a&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><summary type="html">有一天，在路邊發呆玩寶可夢的時候，聽到這樣的對話</summary></entry></feed>

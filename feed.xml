@@ -1,4 +1,65 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2020-03-21T17:13:05+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">在 Windows 透過 nvm 安裝 Node.js</title><link href="https://twblog.hongjianching.com/2020/03/21/install-nodejs-by-nvm-on-windows/" rel="alternate" type="text/html" title="在 Windows 透過 nvm 安裝 Node.js" /><published>2020-03-21T00:00:00+08:00</published><updated>2020-03-21T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/03/21/install-nodejs-by-nvm-on-windows</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/03/21/install-nodejs-by-nvm-on-windows/">&lt;p&gt;nvm 是 Node Version Manager，用來管理各種不同的 Node.js 版本的工具，
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2020-03-28T15:43:37+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">使用 VSCode Debug ActionHero (Nodejs) with TypeScript</title><link href="https://twblog.hongjianching.com/2020/03/28/actionhero-nodejs-debug-with-typescript-on-vscode/" rel="alternate" type="text/html" title="使用 VSCode Debug ActionHero (Nodejs) with TypeScript" /><published>2020-03-28T00:00:00+08:00</published><updated>2020-03-28T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/03/28/actionhero-nodejs-debug-with-typescript-on-vscode</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/03/28/actionhero-nodejs-debug-with-typescript-on-vscode/">&lt;p&gt;2020-03-19 第一次參加 &lt;a href=&quot;https://www.actionherojs.com/&quot;&gt;Actionhero&lt;/a&gt; 的 Office Hours，詢問了如何使用 VSCode Debug ActionHero，實際上也是 Node.js with TypeScript 專案如何使用 VSCode Debug 的使用方案。會後 &lt;a href=&quot;https://www.evantahler.com/&quot;&gt;Evan Tahler&lt;/a&gt; 發了一個 &lt;a href=&quot;https://github.com/actionhero/actionhero/pull/1428&quot;&gt;Pull Request&lt;/a&gt; 新增了 Debug 相關的變更，同時也更新了&lt;a href=&quot;https://www.actionherojs.com/tutorials/repl-and-debugging&quot;&gt;官網的文件&lt;/a&gt;。&lt;/p&gt;
+
+&lt;h2 id=&quot;vscode-debug-設定&quot;&gt;VSCode Debug 設定&lt;/h2&gt;
+
+&lt;p&gt;因為原始碼會先建置後才執行，所以想要使用原始碼直接 Debug，就要靠 sourceMap 告訴 VSCode 對應執行中的程式碼及原始碼的關係，所以先確認專案中 TypeScript 的設定是否有開啟 sourceMap。&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;tsconfig.json&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s2&quot;&gt;&quot;sourceMap&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;另外在執行指令中加上&lt;code class=&quot;highlighter-rouge&quot;&gt;--inspect&lt;/code&gt;參數，以 ActionHero 為例，dev 是原本的指令，debug 是新增的指令。&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;package.json&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s2&quot;&gt;&quot;dev&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;ts-node-dev --no-deps --transpile-only ./src/server&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;debug&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;ts-node-dev --transpile-only --no-deps --inspect -- ./src/server &quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;因為在設定中開啟了 sourceMap，所以修改 build 指令關閉 sourceMap。&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;package.json&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s2&quot;&gt;&quot;build&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;rm -rf dist &amp;amp;&amp;amp; ./node_modules/.bin/tsc --sourceMap false --declaration&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;最後新增一個 VSCode 的 Debug launch 設定&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;.vscode/launch.json&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;version&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;0.2.0&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;configurations&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;node&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;request&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;attach&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Actionhero Debugger&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;protocol&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;inspector&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;port&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;9229&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;restart&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;localRoot&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;${workspaceFolder}&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;remoteRoot&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;.&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;接著只要在第一次啟動 VSCode 時，先執行 VSCode 的 Actionhero Debugger，再執行 debug 指令，像是&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;npm run debug
+
+or
+
+yarn debug
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;就可以使用 VSCode 進行 Debug 了，而且因為有設定 &lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;restart&quot;: true&lt;/code&gt; 參數，就算結束程式，只要再次啟動，就會自動進入偵錯模式喔。&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="w3HexSchool" /><category term="ActionHero" /><category term="Nodejs" /><category term="Debug" /><category term="TypeScript" /><summary type="html">2020-03-19 第一次參加 Actionhero 的 Office Hours，詢問了如何使用 VSCode Debug ActionHero，實際上也是 Node.js with TypeScript 專案如何使用 VSCode Debug 的使用方案。會後 Evan Tahler 發了一個 Pull Request 新增了 Debug 相關的變更，同時也更新了官網的文件。 VSCode Debug 設定 因為原始碼會先建置後才執行，所以想要使用原始碼直接 Debug，就要靠 sourceMap 告訴 VSCode 對應執行中的程式碼及原始碼的關係，所以先確認專案中 TypeScript 的設定是否有開啟 sourceMap。 tsconfig.json &quot;sourceMap&quot;: true 另外在執行指令中加上--inspect參數，以 ActionHero 為例，dev 是原本的指令，debug 是新增的指令。 package.json &quot;dev&quot;: &quot;ts-node-dev --no-deps --transpile-only ./src/server&quot;, &quot;debug&quot;: &quot;ts-node-dev --transpile-only --no-deps --inspect -- ./src/server &quot;, 因為在設定中開啟了 sourceMap，所以修改 build 指令關閉 sourceMap。 package.json &quot;build&quot;: &quot;rm -rf dist &amp;amp;&amp;amp; ./node_modules/.bin/tsc --sourceMap false --declaration&quot;, 最後新增一個 VSCode 的 Debug launch 設定 .vscode/launch.json { &quot;version&quot;: &quot;0.2.0&quot;, &quot;configurations&quot;: [ { &quot;type&quot;: &quot;node&quot;, &quot;request&quot;: &quot;attach&quot;, &quot;name&quot;: &quot;Actionhero Debugger&quot;, &quot;protocol&quot;: &quot;inspector&quot;, &quot;port&quot;: 9229, &quot;restart&quot;: true, &quot;localRoot&quot;: &quot;${workspaceFolder}&quot;, &quot;remoteRoot&quot;: &quot;.&quot; } ] } 接著只要在第一次啟動 VSCode 時，先執行 VSCode 的 Actionhero Debugger，再執行 debug 指令，像是 npm run debug or yarn debug 就可以使用 VSCode 進行 Debug 了，而且因為有設定 &quot;restart&quot;: true 參數，就算結束程式，只要再次啟動，就會自動進入偵錯模式喔。</summary></entry><entry><title type="html">在 Windows 透過 nvm 安裝 Node.js</title><link href="https://twblog.hongjianching.com/2020/03/21/install-nodejs-by-nvm-on-windows/" rel="alternate" type="text/html" title="在 Windows 透過 nvm 安裝 Node.js" /><published>2020-03-21T00:00:00+08:00</published><updated>2020-03-21T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/03/21/install-nodejs-by-nvm-on-windows</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/03/21/install-nodejs-by-nvm-on-windows/">&lt;p&gt;nvm 是 Node Version Manager，用來管理各種不同的 Node.js 版本的工具，
 當各種專案需要使用不同版本的 Node.js 時，透過 nvm 可以快速切換版本&lt;/p&gt;
 
 &lt;h2 id=&quot;安裝-nvm&quot;&gt;安裝 nvm&lt;/h2&gt;
@@ -394,9 +455,20 @@ npm install mysql2 --save
 
 &lt;p&gt;官網：&lt;a href=&quot;https://www.actionherojs.com/&quot;&gt;Actionhero&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;一開始先試著使用 yarn 安裝，但是一直卡住，最後退回官方教學&lt;/p&gt;
+&lt;h3 id=&quot;quick-start&quot;&gt;Quick start&lt;/h3&gt;
 
-&lt;p&gt;Quick start&lt;/p&gt;
+&lt;p&gt;2020-03-28 更新：已成功使用 yarn 安裝
+&lt;del&gt;一開始先試著使用 yarn 安裝，但是一直卡住，最後退回官方教學*&lt;/del&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;使用-yarn-安裝&quot;&gt;使用 yarn 安裝&lt;/h2&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;npx actionhero generate
+yarn install
+yarn dev
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;使用-npm-安裝&quot;&gt;使用 npm 安裝&lt;/h2&gt;
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Generate a new Project&lt;/span&gt;
 npx actionhero generate
 npm install
@@ -404,6 +476,8 @@ npm run build &lt;span class=&quot;c&quot;&gt;# &amp;lt;--- new! I compile the T
 npm run dev &lt;span class=&quot;c&quot;&gt;# &amp;lt;--- new! I use `ts-node` to let you develop on your ts files without compiling&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
+
+&lt;h2 id=&quot;啟動-actionhero-之後&quot;&gt;啟動 ActionHero 之後&lt;/h2&gt;
 
 &lt;p&gt;成功啟動會試著連 Redis, 連不上則啟動失敗，所以需要有 Redis 才能使用&lt;/p&gt;
 
@@ -421,7 +495,7 @@ npm run dev &lt;span class=&quot;c&quot;&gt;# &amp;lt;--- new! I use `ts-node` t
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-29/2020-02-29_22-07-50.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;接下來要研究一下可以用來玩些什麼&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="w3HexSchool" /><category term="ActionHero" /><summary type="html">安裝 ActionHero 官網：Actionhero 一開始先試著使用 yarn 安裝，但是一直卡住，最後退回官方教學 Quick start # Generate a new Project npx actionhero generate npm install npm run build # &amp;lt;--- new! I compile the TS to JS npm run dev # &amp;lt;--- new! I use `ts-node` to let you develop on your ts files without compiling 成功啟動會試著連 Redis, 連不上則啟動失敗，所以需要有 Redis 才能使用 info: Redis connection `client` reconnecting 需要有 Redis 才能順利動，啟動 Redis 之後終於順利啟動 Server 執行結果 範例內建 WebSocket 聊天室，可以直接使用 接下來要研究一下可以用來玩些什麼</summary></entry><entry><title type="html">當寬度不同的時候保持置中排版</title><link href="https://twblog.hongjianching.com/2020/02/22/keep-the-middle-item-centered-when-side-items-have-different-widths/" rel="alternate" type="text/html" title="當寬度不同的時候保持置中排版" /><published>2020-02-22T00:00:00+08:00</published><updated>2020-02-22T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/02/22/keep-the-middle-item-centered-when-side-items-have-different-widths</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/02/22/keep-the-middle-item-centered-when-side-items-have-different-widths/">&lt;h2 id=&quot;使用-layout-的好處&quot;&gt;使用 Layout 的好處&lt;/h2&gt;
+&lt;p&gt;接下來要研究一下可以用來玩些什麼&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="w3HexSchool" /><category term="ActionHero" /><summary type="html">安裝 ActionHero 官網：Actionhero Quick start 2020-03-28 更新：已成功使用 yarn 安裝 一開始先試著使用 yarn 安裝，但是一直卡住，最後退回官方教學* 使用 yarn 安裝 npx actionhero generate yarn install yarn dev 使用 npm 安裝 # Generate a new Project npx actionhero generate npm install npm run build # &amp;lt;--- new! I compile the TS to JS npm run dev # &amp;lt;--- new! I use `ts-node` to let you develop on your ts files without compiling 啟動 ActionHero 之後 成功啟動會試著連 Redis, 連不上則啟動失敗，所以需要有 Redis 才能使用 info: Redis connection `client` reconnecting 需要有 Redis 才能順利動，啟動 Redis 之後終於順利啟動 Server 執行結果 範例內建 WebSocket 聊天室，可以直接使用 接下來要研究一下可以用來玩些什麼</summary></entry><entry><title type="html">當寬度不同的時候保持置中排版</title><link href="https://twblog.hongjianching.com/2020/02/22/keep-the-middle-item-centered-when-side-items-have-different-widths/" rel="alternate" type="text/html" title="當寬度不同的時候保持置中排版" /><published>2020-02-22T00:00:00+08:00</published><updated>2020-02-22T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/02/22/keep-the-middle-item-centered-when-side-items-have-different-widths</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/02/22/keep-the-middle-item-centered-when-side-items-have-different-widths/">&lt;h2 id=&quot;使用-layout-的好處&quot;&gt;使用 Layout 的好處&lt;/h2&gt;
 
 &lt;p&gt;接著上一篇&lt;a href=&quot;https://twblog.hongjianching.com/2020/02/15/use-slot-in-vue-layout/&quot;&gt;在 Vue 專案使用 Slot 進行 Layout&lt;/a&gt;的內容，我們先加上一個置中對照組&lt;/p&gt;
 
@@ -694,46 +768,4 @@ yarn serve
 
 &lt;p&gt;因為後來集中在 Docker 跟 Jenkins 主題，所以只清理了 5 篇文章。部落格文章本來只有 22 篇，這次挑戰增加了 30 篇，足足多了一倍以上。&lt;/p&gt;
 
-&lt;p&gt;對於這次的挑戰覺得最有動力的是留言及訂閱通知以及 LIKE，讓我明白自己寫的文章真的有人在看，如果有幫到別人，花時間整理這些就值得了，謝謝大家。&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><summary type="html">第 30 天，很高興自己完成這個目標，一開始是想要有個經驗才臨時參賽的，不知道能不能順利完成，幸好有持續的堅持下去。</summary></entry><entry><title type="html">溝通，為什麼老闆聽不懂我說的</title><link href="https://twblog.hongjianching.com/2018/10/29/communication-why-the-boss-can't-understand-what-I-said/" rel="alternate" type="text/html" title="溝通，為什麼老闆聽不懂我說的" /><published>2018-10-29T00:00:00+08:00</published><updated>2018-10-29T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2018/10/29/communication-why-the-boss-can't-understand-what-I-said</id><content type="html" xml:base="https://twblog.hongjianching.com/2018/10/29/communication-why-the-boss-can't-understand-what-I-said/">&lt;p&gt;有一天，在路邊&lt;del&gt;發呆&lt;/del&gt;玩寶可夢的時候，聽到這樣的對話&lt;/p&gt;
-
-&lt;p&gt;小明：「跟你說喔，明明跟老闆說用這個方法比較好，但是他總是不同意」&lt;/p&gt;
-
-&lt;p&gt;小華：「會不會老闆不懂你說的方法是什麼」&lt;/p&gt;
-
-&lt;p&gt;小明：「對啊，我也想過這個可能，所以我有跟他說明這個方法如何如何」&lt;/p&gt;
-
-&lt;p&gt;小華：「你說的很清楚很詳細啊，跟著外行老闆真可憐，辛苦你了」&lt;/p&gt;
-
-&lt;p&gt;小明：「就是說啊，本來以為升職之後能夠大展身手的，沒想到反而受制連連，這個不好那個不行的」&lt;/p&gt;
-
-&lt;p&gt;小華：「這樣還不如回到之前單純當個工程師更好」&lt;/p&gt;
-
-&lt;p&gt;小明：「沒錯沒錯，可惜回不去了」&lt;/p&gt;
-
-&lt;p&gt;小華：「那個老闆明明沒能力還不授權，這公司我看前景堪慮啊」&lt;/p&gt;
-
-&lt;p&gt;小明：「唉，別提了，再講下去我都要哭了」&lt;/p&gt;
-
-&lt;p&gt;上述的例子，可能很多人都聽過類似的對話，真實世界中，這些「故事」幾乎天天上演，很多人都想問「為什麼老闆聽不懂我說的呢？」&lt;/p&gt;
-
-&lt;p&gt;這個劇情一再的上演，有些人可能會唉聲嘆氣，怨天尤人或者覺得老闆無所謂我又何必在乎。然後也有些人會自我檢討，開始研究如何訓練口才、製作簡報、提供專業能力，試著改善溝通能力。&lt;/p&gt;
-
-&lt;p&gt;前者就不提了，可惜的是，就算是後者，也常常是屢戰屢敗，熱情漸漸的消磨。這些行動之所以沒有作用，在自己的經驗中，慢慢的領會了其中盲點，&lt;/p&gt;
-
-&lt;p&gt;那就是「無效溝通」&lt;/p&gt;
-
-&lt;p&gt;以實際的例子來說，目前軟體開發顯學 DevOps，當開發者想導入時，往往要向老闆提出建議，主題會放在 DevOps 的解釋，CI / CD 的解釋，Jenkins 工具的運用，帶來的好處及成本。&lt;/p&gt;
-
-&lt;p&gt;如果得到的回覆是「需要更詳細的資訊」，或是「你說的很好，『但是』……」，「再考慮考慮」，雖然表面聽起來有機會，需要進一步努力，但其實代表著「無效溝通」。如果你的老闆夠「真實」的話，他會這麼回答你的「我對這個沒有興趣」，或者更直接的「這樣能夠幫公司賺錢嗎？」&lt;/p&gt;
-
-&lt;p&gt;雖然聽到後面的說法衝擊非常大，但是這是進入真實世界的一記猛擊，也真正的代表之前的都是「無效溝通」，無效溝通之所以會被我覺得可怕的一點，就是很難有自覺。&lt;/p&gt;
-
-&lt;p&gt;「無效溝通」常見的情況就是一昧的陳述自己想說的，而非理解對方的理念或處境。在無自覺的情況下，往往誤以為自己表達的能力不足，所以努力強化展示自己的意圖這個層面。&lt;/p&gt;
-
-&lt;p&gt;「無效溝通」常發現在專業領域及非專業領域的衝突上，專業領域的人會努力的用各種專業術語來表達自己的意圖，但往往收到的成效很低。用一種最簡單的方法比喻，好比兩個說著不同語言的人在溝通，一個說中文一個說英文，當說中文的人發現對方不理解自己意圖時，拼了命了在中文文法上、字詞選擇上作強化，但是卻沒有效果。我想這個比喻大家都能簡單的明白，應該努力的方向很明顯，就是學習英文，只有學習對方的語言，才能進行有效溝通。&lt;/p&gt;
-
-&lt;p&gt;從上面的比喻已經明白，要進行有效溝通，應該要學習「對方的語言」。有沒有想過，老闆的語言是什麼呢？如果你正面臨同樣的處境，身為專業的開發者，是否該跨出舒適圈，往外探索你所不曾踏入的區域呢？&lt;/p&gt;
-
-&lt;h1 id=&quot;延深閱讀&quot;&gt;延深閱讀&lt;/h1&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://www.projectup.net/article/view/id/5424&quot;&gt;向上管理的五個原則 - 專案管理生活思維&lt;/a&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><summary type="html">有一天，在路邊發呆玩寶可夢的時候，聽到這樣的對話</summary></entry></feed>
+&lt;p&gt;對於這次的挑戰覺得最有動力的是留言及訂閱通知以及 LIKE，讓我明白自己寫的文章真的有人在看，如果有幫到別人，花時間整理這些就值得了，謝謝大家。&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="2019-iT-邦幫忙鐵人賽" /><summary type="html">第 30 天，很高興自己完成這個目標，一開始是想要有個經驗才臨時參賽的，不知道能不能順利完成，幸好有持續的堅持下去。</summary></entry></feed>

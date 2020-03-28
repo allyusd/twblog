@@ -1,0 +1,538 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.2.2 by Michael Rose
+  Copyright 2017 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="zh" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>使用 VSCode Debug ActionHero (Nodejs) with TypeScript - Jian-Ching 記事本</title>
+
+
+
+
+<meta name="description" content="2020-03-19 第一次參加 Actionhero 的 Office Hours，詢問了如何使用 VSCode Debug ActionHero，實際上也是 Node.js with TypeScript 專案如何使用 VSCode Debug 的使用方案。會後 Evan Tahler 發了一個 Pull Request 新增了 Debug 相關的變更，同時也更新了官網的文件。VSCode Debug 設定因為原始碼會先建置後才執行，所以想要使用原始碼直接 Debug，就要靠 sourceMap 告訴 VSCode 對應執行中的程式碼及原始碼的關係，所以先確認專案中 TypeScript 的設定是否有開啟 sourceMap。tsconfig.json&quot;sourceMap&quot;: true另外在執行指令中加上--inspect參數，以 ActionHero 為例，dev 是原本的指令，debug 是新增的指令。package.json&quot;dev&quot;: &quot;ts-node-dev --no-deps --transpile-only ./src/server&quot;,&quot;debug&quot;: &quot;ts-node-dev --transpile-only --no-deps --inspect -- ./src/server &quot;,因為在設定中開啟了 sourceMap，所以修改 build 指令關閉 sourceMap。package.json&quot;build&quot;: &quot;rm -rf dist &amp;&amp; ./node_modules/.bin/tsc --sourceMap false --declaration&quot;,最後新增一個 VSCode 的 Debug launch 設定.vscode/launch.json{  &quot;version&quot;: &quot;0.2.0&quot;,  &quot;configurations&quot;: [    {      &quot;type&quot;: &quot;node&quot;,      &quot;request&quot;: &quot;attach&quot;,      &quot;name&quot;: &quot;Actionhero Debugger&quot;,      &quot;protocol&quot;: &quot;inspector&quot;,      &quot;port&quot;: 9229,      &quot;restart&quot;: true,      &quot;localRoot&quot;: &quot;${workspaceFolder}&quot;,      &quot;remoteRoot&quot;: &quot;.&quot;    }  ]}接著只要在第一次啟動 VSCode 時，先執行 VSCode 的 Actionhero Debugger，再執行 debug 指令，像是npm run debugoryarn debug就可以使用 VSCode 進行 Debug 了，而且因為有設定 &quot;restart&quot;: true 參數，就算結束程式，只要再次啟動，就會自動進入偵錯模式喔。">
+
+
+
+
+<meta name="author" content="洪健清">
+
+<meta property="og:locale" content="zh_TW">
+<meta property="og:site_name" content="Jian-Ching 記事本">
+<meta property="og:title" content="使用 VSCode Debug ActionHero (Nodejs) with TypeScript">
+
+
+  <link rel="canonical" href="https://twblog.HongJianChing.com/2020/03/28/actionhero-nodejs-debug-with-typescript-on-vscode/">
+  <meta property="og:url" content="https://twblog.HongJianChing.com/2020/03/28/actionhero-nodejs-debug-with-typescript-on-vscode/">
+
+
+
+  <meta property="og:description" content="2020-03-19 第一次參加 Actionhero 的 Office Hours，詢問了如何使用 VSCode Debug ActionHero，實際上也是 Node.js with TypeScript 專案如何使用 VSCode Debug 的使用方案。會後 Evan Tahler 發了一個 Pull Request 新增了 Debug 相關的變更，同時也更新了官網的文件。VSCode Debug 設定因為原始碼會先建置後才執行，所以想要使用原始碼直接 Debug，就要靠 sourceMap 告訴 VSCode 對應執行中的程式碼及原始碼的關係，所以先確認專案中 TypeScript 的設定是否有開啟 sourceMap。tsconfig.json&quot;sourceMap&quot;: true另外在執行指令中加上--inspect參數，以 ActionHero 為例，dev 是原本的指令，debug 是新增的指令。package.json&quot;dev&quot;: &quot;ts-node-dev --no-deps --transpile-only ./src/server&quot;,&quot;debug&quot;: &quot;ts-node-dev --transpile-only --no-deps --inspect -- ./src/server &quot;,因為在設定中開啟了 sourceMap，所以修改 build 指令關閉 sourceMap。package.json&quot;build&quot;: &quot;rm -rf dist &amp;&amp; ./node_modules/.bin/tsc --sourceMap false --declaration&quot;,最後新增一個 VSCode 的 Debug launch 設定.vscode/launch.json{  &quot;version&quot;: &quot;0.2.0&quot;,  &quot;configurations&quot;: [    {      &quot;type&quot;: &quot;node&quot;,      &quot;request&quot;: &quot;attach&quot;,      &quot;name&quot;: &quot;Actionhero Debugger&quot;,      &quot;protocol&quot;: &quot;inspector&quot;,      &quot;port&quot;: 9229,      &quot;restart&quot;: true,      &quot;localRoot&quot;: &quot;${workspaceFolder}&quot;,      &quot;remoteRoot&quot;: &quot;.&quot;    }  ]}接著只要在第一次啟動 VSCode 時，先執行 VSCode 的 Actionhero Debugger，再執行 debug 指令，像是npm run debugoryarn debug就可以使用 VSCode 進行 Debug 了，而且因為有設定 &quot;restart&quot;: true 參數，就算結束程式，只要再次啟動，就會自動進入偵錯模式喔。">
+
+
+
+
+
+  
+
+  
+
+
+
+
+
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2020-03-28T00:00:00+08:00">
+
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "洪健清",
+      "url" : "https://twblog.HongJianChing.com",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+  <meta name="google-site-verification" content="wjj5pJCiMFRllsWEU0WH3ofBhTmTmHLhm2nWgQo6XcY" />
+
+
+
+
+<!-- end SEO -->
+
+
+<link href="https://twblog.hongjianching.com/feed.xml" type="application/atom+xml" rel="alternate" title="Jian-Ching 記事本 Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+<meta http-equiv="cleartype" content="on">
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="https://twblog.hongjianching.com/">Jian-Ching 記事本</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item"><a href="https://twblog.HongJianChing.com/tags/">Tags</a></li>
+          
+        </ul>
+        <button><div class="navicon"></div></button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="https://en.gravatar.com/userimage/52239647/ccc888d68eb39b778b50b2032ee4c033.jpeg" alt="洪健清" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name" itemprop="name">洪健清</h3>
+    
+      <p class="author__bio" itemprop="description">
+        軟體程式工程師
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">追蹤</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> <span itemprop="name">台灣，台中市</span>
+        </li>
+      
+
+      
+        <li>
+          <a href="https://www.HongJianChing.com/" itemprop="url">
+            <i class="fa fa-fw fa-chain" aria-hidden="true"></i> 網站
+          </a>
+        </li>
+      
+
+      
+        <li>
+          <a href="mailto:allyusd yahoo com tw">
+            <meta itemprop="email" content="allyusd yahoo com tw" />
+            <i class="fa fa-fw fa-envelope-square" aria-hidden="true"></i> 電子信箱
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.facebook.com/jianching.hong" itemprop="sameAs">
+            <i class="fa fa-fw fa-facebook-square" aria-hidden="true"></i> Facebook
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://github.com/allyusd" itemprop="sameAs">
+            <i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </li>
+      
+
+      
+        <li>
+          <a href="https://www.stackoverflow.com/users/2613884/allyusd" itemprop="sameAs">
+            <i class="fa fa-fw fa-stack-overflow" aria-hidden="true"></i> Stackoverflow
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fa fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="使用 VSCode Debug ActionHero (Nodejs) with TypeScript">
+    <meta itemprop="description" content="2020-03-19 第一次參加 Actionhero 的 Office Hours，詢問了如何使用 VSCode Debug ActionHero，實際上也是 Node.js with TypeScript 專案如何使用 VSCode Debug 的使用方案。會後 Evan Tahler 發了一個 Pull Request 新增了 Debug 相關的變更，同時也更新了官網的文件。VSCode Debug 設定因為原始碼會先建置後才執行，所以想要使用原始碼直接 Debug，就要靠 sourceMap 告訴 VSCode 對應執行中的程式碼及原始碼的關係，所以先確認專案中 TypeScript 的設定是否有開啟 sourceMap。tsconfig.json&quot;sourceMap&quot;: true另外在執行指令中加上--inspect參數，以 ActionHero 為例，dev 是原本的指令，debug 是新增的指令。package.json&quot;dev&quot;: &quot;ts-node-dev --no-deps --transpile-only ./src/server&quot;,&quot;debug&quot;: &quot;ts-node-dev --transpile-only --no-deps --inspect -- ./src/server &quot;,因為在設定中開啟了 sourceMap，所以修改 build 指令關閉 sourceMap。package.json&quot;build&quot;: &quot;rm -rf dist &amp;&amp; ./node_modules/.bin/tsc --sourceMap false --declaration&quot;,最後新增一個 VSCode 的 Debug launch 設定.vscode/launch.json{  &quot;version&quot;: &quot;0.2.0&quot;,  &quot;configurations&quot;: [    {      &quot;type&quot;: &quot;node&quot;,      &quot;request&quot;: &quot;attach&quot;,      &quot;name&quot;: &quot;Actionhero Debugger&quot;,      &quot;protocol&quot;: &quot;inspector&quot;,      &quot;port&quot;: 9229,      &quot;restart&quot;: true,      &quot;localRoot&quot;: &quot;${workspaceFolder}&quot;,      &quot;remoteRoot&quot;: &quot;.&quot;    }  ]}接著只要在第一次啟動 VSCode 時，先執行 VSCode 的 Actionhero Debugger，再執行 debug 指令，像是npm run debugoryarn debug就可以使用 VSCode 進行 Debug 了，而且因為有設定 &quot;restart&quot;: true 參數，就算結束程式，只要再次啟動，就會自動進入偵錯模式喔。">
+    <meta itemprop="datePublished" content="March 28, 2020">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">使用 VSCode Debug ActionHero (Nodejs) with TypeScript
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        <p>2020-03-19 第一次參加 <a href="https://www.actionherojs.com/">Actionhero</a> 的 Office Hours，詢問了如何使用 VSCode Debug ActionHero，實際上也是 Node.js with TypeScript 專案如何使用 VSCode Debug 的使用方案。會後 <a href="https://www.evantahler.com/">Evan Tahler</a> 發了一個 <a href="https://github.com/actionhero/actionhero/pull/1428">Pull Request</a> 新增了 Debug 相關的變更，同時也更新了<a href="https://www.actionherojs.com/tutorials/repl-and-debugging">官網的文件</a>。</p>
+
+<h2 id="vscode-debug-設定">VSCode Debug 設定</h2>
+
+<p>因為原始碼會先建置後才執行，所以想要使用原始碼直接 Debug，就要靠 sourceMap 告訴 VSCode 對應執行中的程式碼及原始碼的關係，所以先確認專案中 TypeScript 的設定是否有開啟 sourceMap。</p>
+
+<p><code class="highlighter-rouge">tsconfig.json</code></p>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="s2">"sourceMap"</span><span class="err">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>另外在執行指令中加上<code class="highlighter-rouge">--inspect</code>參數，以 ActionHero 為例，dev 是原本的指令，debug 是新增的指令。</p>
+
+<p><code class="highlighter-rouge">package.json</code></p>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="s2">"dev"</span><span class="err">:</span><span class="w"> </span><span class="s2">"ts-node-dev --no-deps --transpile-only ./src/server"</span><span class="err">,</span><span class="w">
+</span><span class="s2">"debug"</span><span class="err">:</span><span class="w"> </span><span class="s2">"ts-node-dev --transpile-only --no-deps --inspect -- ./src/server "</span><span class="err">,</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>因為在設定中開啟了 sourceMap，所以修改 build 指令關閉 sourceMap。</p>
+
+<p><code class="highlighter-rouge">package.json</code></p>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="s2">"build"</span><span class="err">:</span><span class="w"> </span><span class="s2">"rm -rf dist &amp;&amp; ./node_modules/.bin/tsc --sourceMap false --declaration"</span><span class="err">,</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>最後新增一個 VSCode 的 Debug launch 設定</p>
+
+<p><code class="highlighter-rouge">.vscode/launch.json</code></p>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.2.0"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"configurations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"node"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"attach"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Actionhero Debugger"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"inspector"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"port"</span><span class="p">:</span><span class="w"> </span><span class="mi">9229</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"restart"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"localRoot"</span><span class="p">:</span><span class="w"> </span><span class="s2">"${workspaceFolder}"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"remoteRoot"</span><span class="p">:</span><span class="w"> </span><span class="s2">"."</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>接著只要在第一次啟動 VSCode 時，先執行 VSCode 的 Actionhero Debugger，再執行 debug 指令，像是</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>npm run debug
+
+or
+
+yarn debug
+</code></pre>
+</div>
+
+<p>就可以使用 VSCode 進行 Debug 了，而且因為有設定 <code class="highlighter-rouge">"restart": true</code> 參數，就算結束程式，只要再次啟動，就會自動進入偵錯模式喔。</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-tags" aria-hidden="true"></i> 標籤: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="https://twblog.hongjianching.com/tags/#actionhero" class="page__taxonomy-item" rel="tag">ActionHero</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://twblog.hongjianching.com/tags/#debug" class="page__taxonomy-item" rel="tag">Debug</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://twblog.hongjianching.com/tags/#nodejs" class="page__taxonomy-item" rel="tag">Nodejs</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://twblog.hongjianching.com/tags/#typescript" class="page__taxonomy-item" rel="tag">TypeScript</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://twblog.hongjianching.com/tags/#w3hexschool" class="page__taxonomy-item" rel="tag">w3HexSchool</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2020-03-28T00:00:00+08:00">March 28, 2020</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">分享到</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=使用 VSCode Debug ActionHero (Nodejs) with TypeScript https://twblog.hongjianching.com/2020/03/28/actionhero-nodejs-debug-with-typescript-on-vscode/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2020/03/28/actionhero-nodejs-debug-with-typescript-on-vscode/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2020/03/28/actionhero-nodejs-debug-with-typescript-on-vscode/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2020/03/28/actionhero-nodejs-debug-with-typescript-on-vscode/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="https://twblog.hongjianching.com/2020/03/21/install-nodejs-by-nvm-on-windows/" class="pagination--pager" title="在 Windows 透過 nvm 安裝 Node.js
+">較舊</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">較新</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+  
+    <h4 class="page__comments-title">留言</h4>
+    <section id="disqus_thread"></section>
+  
+</div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>追蹤:</strong></li>
+    
+    
+    
+    
+      <li><a href="http://github.com/allyusd"><i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    <li><a href="https://twblog.hongjianching.com/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> RSS Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 洪健清. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+      </footer>
+    </div>
+
+    <script src="/assets/js/main.min.js"></script>
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-9431648-15', 'auto');
+  ga('send', 'pageview');
+  
+  
+    ga('send', 'event', 'taggedPost', 'view', 'w3HexSchool');
+  
+    ga('send', 'event', 'taggedPost', 'view', 'ActionHero');
+  
+    ga('send', 'event', 'taggedPost', 'view', 'Nodejs');
+  
+    ga('send', 'event', 'taggedPost', 'view', 'Debug');
+  
+    ga('send', 'event', 'taggedPost', 'view', 'TypeScript');
+  
+  
+</script>
+
+
+
+
+
+
+
+  
+  <script type="text/javascript">
+  	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+  	var disqus_shortname = 'allyusd-twblog';
+
+  	/* * * DON'T EDIT BELOW THIS LINE * * */
+  	(function() {
+  		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  		dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  	})();
+
+  	/* * * DON'T EDIT BELOW THIS LINE * * */
+  	(function () {
+  		var s = document.createElement('script'); s.async = true;
+  		s.type = 'text/javascript';
+  		s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  		(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+  	}());
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+
+
+  </body>
+</html>

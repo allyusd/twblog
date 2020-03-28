@@ -24,7 +24,7 @@
 
 
 
-<meta name="description" content="安裝 ActionHero官網：Actionhero一開始先試著使用 yarn 安裝，但是一直卡住，最後退回官方教學Quick start# Generate a new Projectnpx actionhero generatenpm installnpm run build # &lt;--- new! I compile the TS to JSnpm run dev # &lt;--- new! I use `ts-node` to let you develop on your ts files without compiling成功啟動會試著連 Redis, 連不上則啟動失敗，所以需要有 Redis 才能使用info: Redis connection `client` reconnecting需要有 Redis 才能順利動，啟動 Redis 之後終於順利啟動 Server執行結果範例內建 WebSocket 聊天室，可以直接使用接下來要研究一下可以用來玩些什麼">
+<meta name="description" content="安裝 ActionHero官網：ActionheroQuick start2020-03-28 更新：已成功使用 yarn 安裝一開始先試著使用 yarn 安裝，但是一直卡住，最後退回官方教學*使用 yarn 安裝npx actionhero generateyarn installyarn dev使用 npm 安裝# Generate a new Projectnpx actionhero generatenpm installnpm run build # &lt;--- new! I compile the TS to JSnpm run dev # &lt;--- new! I use `ts-node` to let you develop on your ts files without compiling啟動 ActionHero 之後成功啟動會試著連 Redis, 連不上則啟動失敗，所以需要有 Redis 才能使用info: Redis connection `client` reconnecting需要有 Redis 才能順利動，啟動 Redis 之後終於順利啟動 Server執行結果範例內建 WebSocket 聊天室，可以直接使用接下來要研究一下可以用來玩些什麼">
 
 
 
@@ -41,7 +41,7 @@
 
 
 
-  <meta property="og:description" content="安裝 ActionHero官網：Actionhero一開始先試著使用 yarn 安裝，但是一直卡住，最後退回官方教學Quick start# Generate a new Projectnpx actionhero generatenpm installnpm run build # &lt;--- new! I compile the TS to JSnpm run dev # &lt;--- new! I use `ts-node` to let you develop on your ts files without compiling成功啟動會試著連 Redis, 連不上則啟動失敗，所以需要有 Redis 才能使用info: Redis connection `client` reconnecting需要有 Redis 才能順利動，啟動 Redis 之後終於順利啟動 Server執行結果範例內建 WebSocket 聊天室，可以直接使用接下來要研究一下可以用來玩些什麼">
+  <meta property="og:description" content="安裝 ActionHero官網：ActionheroQuick start2020-03-28 更新：已成功使用 yarn 安裝一開始先試著使用 yarn 安裝，但是一直卡住，最後退回官方教學*使用 yarn 安裝npx actionhero generateyarn installyarn dev使用 npm 安裝# Generate a new Projectnpx actionhero generatenpm installnpm run build # &lt;--- new! I compile the TS to JSnpm run dev # &lt;--- new! I use `ts-node` to let you develop on your ts files without compiling啟動 ActionHero 之後成功啟動會試著連 Redis, 連不上則啟動失敗，所以需要有 Redis 才能使用info: Redis connection `client` reconnecting需要有 Redis 才能順利動，啟動 Redis 之後終於順利啟動 Server執行結果範例內建 WebSocket 聊天室，可以直接使用接下來要研究一下可以用來玩些什麼">
 
 
 
@@ -279,7 +279,7 @@
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
     <meta itemprop="headline" content="安裝 ActionHero">
-    <meta itemprop="description" content="安裝 ActionHero官網：Actionhero一開始先試著使用 yarn 安裝，但是一直卡住，最後退回官方教學Quick start# Generate a new Projectnpx actionhero generatenpm installnpm run build # &lt;--- new! I compile the TS to JSnpm run dev # &lt;--- new! I use `ts-node` to let you develop on your ts files without compiling成功啟動會試著連 Redis, 連不上則啟動失敗，所以需要有 Redis 才能使用info: Redis connection `client` reconnecting需要有 Redis 才能順利動，啟動 Redis 之後終於順利啟動 Server執行結果範例內建 WebSocket 聊天室，可以直接使用接下來要研究一下可以用來玩些什麼">
+    <meta itemprop="description" content="安裝 ActionHero官網：ActionheroQuick start2020-03-28 更新：已成功使用 yarn 安裝一開始先試著使用 yarn 安裝，但是一直卡住，最後退回官方教學*使用 yarn 安裝npx actionhero generateyarn installyarn dev使用 npm 安裝# Generate a new Projectnpx actionhero generatenpm installnpm run build # &lt;--- new! I compile the TS to JSnpm run dev # &lt;--- new! I use `ts-node` to let you develop on your ts files without compiling啟動 ActionHero 之後成功啟動會試著連 Redis, 連不上則啟動失敗，所以需要有 Redis 才能使用info: Redis connection `client` reconnecting需要有 Redis 才能順利動，啟動 Redis 之後終於順利啟動 Server執行結果範例內建 WebSocket 聊天室，可以直接使用接下來要研究一下可以用來玩些什麼">
     <meta itemprop="datePublished" content="February 29, 2020">
     
 
@@ -297,9 +297,20 @@
 
 <p>官網：<a href="https://www.actionherojs.com/">Actionhero</a></p>
 
-<p>一開始先試著使用 yarn 安裝，但是一直卡住，最後退回官方教學</p>
+<h3 id="quick-start">Quick start</h3>
 
-<p>Quick start</p>
+<p>2020-03-28 更新：已成功使用 yarn 安裝
+<del>一開始先試著使用 yarn 安裝，但是一直卡住，最後退回官方教學*</del></p>
+
+<h2 id="使用-yarn-安裝">使用 yarn 安裝</h2>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>npx actionhero generate
+yarn install
+yarn dev
+</code></pre>
+</div>
+
+<h2 id="使用-npm-安裝">使用 npm 安裝</h2>
 <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="c"># Generate a new Project</span>
 npx actionhero generate
 npm install
@@ -307,6 +318,8 @@ npm run build <span class="c"># &lt;--- new! I compile the TS to JS</span>
 npm run dev <span class="c"># &lt;--- new! I use `ts-node` to let you develop on your ts files without compiling</span>
 </code></pre>
 </div>
+
+<h2 id="啟動-actionhero-之後">啟動 ActionHero 之後</h2>
 
 <p>成功啟動會試著連 Redis, 連不上則啟動失敗，所以需要有 Redis 才能使用</p>
 

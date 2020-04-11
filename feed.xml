@@ -1,4 +1,53 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2020-04-04T15:59:31+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">ActionHero 新增 action</title><link href="https://twblog.hongjianching.com/2020/04/04/actionhero-add-new-action/" rel="alternate" type="text/html" title="ActionHero 新增 action" /><published>2020-04-04T00:00:00+08:00</published><updated>2020-04-04T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/04/04/actionhero-add-new-action</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/04/04/actionhero-add-new-action/">&lt;p&gt;在 &lt;code class=&quot;highlighter-rouge&quot;&gt;src/actions&lt;/code&gt; 新增 &lt;code class=&quot;highlighter-rouge&quot;&gt;sum.ts&lt;/code&gt;，實作一個合計的 action&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2020-04-11T20:08:40+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">Run Gitlab Runner In A Container And Support Docker In Docker</title><link href="https://twblog.hongjianching.com/2020/04/11/run-gitlab-runner-in-a-container-and-support-docker-in-docker/" rel="alternate" type="text/html" title="Run Gitlab Runner In A Container And Support Docker In Docker" /><published>2020-04-11T00:00:00+08:00</published><updated>2020-04-11T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/04/11/run-gitlab-runner-in-a-container-and-support-docker-in-docker</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/04/11/run-gitlab-runner-in-a-container-and-support-docker-in-docker/">&lt;h1 id=&quot;run-gitlab-runner-in-a-container-and-support-docker-in-docker&quot;&gt;Run GitLab Runner in a container and support docker in docker&lt;/h1&gt;
+
+&lt;p&gt;使用 GitLab Runner，可以選擇直接安裝，或者使用 Docker Image，也是這次範例的方式。一般設定的話，不能在這個 Runner 執行 docker in docker 的操作，下面是需要的設定。&lt;/p&gt;
+
+&lt;h2 id=&quot;register&quot;&gt;Register&lt;/h2&gt;
+
+&lt;p&gt;首先是註冊 Runner，記得要準備好你的 TOKEN。&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run --rm -v /srv/gitlab-runner/runner-01/config:/etc/gitlab-runner gitlab/gitlab-runner register &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  --non-interactive &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  --executor &lt;span class=&quot;s2&quot;&gt;&quot;docker&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  --description &lt;span class=&quot;s2&quot;&gt;&quot;The runner support docker in docker&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  --docker-image alpine:latest &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  --url &lt;span class=&quot;s2&quot;&gt;&quot;https://gitlab.com/&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  --registration-token &lt;span class=&quot;s2&quot;&gt;&quot;YOUR_TOKEN&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  --tag-list &lt;span class=&quot;s2&quot;&gt;&quot;dind&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  --run-untagged&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  --locked&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;false&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  --access-level&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;not_protected&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  --docker-privileged &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  --docker-volumes &lt;span class=&quot;s2&quot;&gt;&quot;/certs/client&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;其中的重點在最後兩個參數，分別是 &lt;code class=&quot;highlighter-rouge&quot;&gt;--docker-privilleged&lt;/code&gt; 提供 docker in docker 的權限，另一個是 &lt;code class=&quot;highlighter-rouge&quot;&gt;--docker-volumes&lt;/code&gt; 設定 TLS 的憑證儲存位置&lt;/p&gt;
+
+&lt;p&gt;在指令一開始就有指定 &lt;code class=&quot;highlighter-rouge&quot;&gt;-v /srv/gitlab-runner/runner-01/config:/etc/gitlab-runner&lt;/code&gt; 所以註冊後的資料會保留在 host 的 &lt;code class=&quot;highlighter-rouge&quot;&gt;/srv/gitlab-runner/runner-01/config&lt;/code&gt; 位置&lt;/p&gt;
+
+&lt;h2 id=&quot;run&quot;&gt;Run&lt;/h2&gt;
+
+&lt;p&gt;有了註冊後的 config，就可以啟動 Runner 了，跟一般的啟動方式一樣。&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run -d --name gitlab-runner-runner-01 --restart always &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  -v /srv/gitlab-runner/runner-01/config:/etc/gitlab-runner &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  -v /var/run/docker.sock:/var/run/docker.sock &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  gitlab/gitlab-runner:latest
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;同樣因為有指定 &lt;code class=&quot;highlighter-rouge&quot;&gt;-v&lt;/code&gt; 參數，所以會從指定的 Host 路徑讀取設定檔執行 runner。&lt;/p&gt;
+
+&lt;h2 id=&quot;ref&quot;&gt;Ref&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://docs.gitlab.com/runner/register/index.html#docker&quot;&gt;Registering Runners | GitLab&lt;/a&gt;
+&lt;a href=&quot;https://docs.gitlab.com/runner/install/docker.html&quot;&gt;Run GitLab Runner in a container | GitLab&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;todo-如果有機會再補充的資料&quot;&gt;TODO 如果有機會再補充的資料&lt;/h2&gt;
+&lt;p&gt;.gitlab-ci-yml 範例
+配合的 .gitlab-ci-yml 範例
+真實的 gitlab project 範例？
+可能的錯誤訊息&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><summary type="html">Run GitLab Runner in a container and support docker in docker 使用 GitLab Runner，可以選擇直接安裝，或者使用 Docker Image，也是這次範例的方式。一般設定的話，不能在這個 Runner 執行 docker in docker 的操作，下面是需要的設定。 Register 首先是註冊 Runner，記得要準備好你的 TOKEN。 docker run --rm -v /srv/gitlab-runner/runner-01/config:/etc/gitlab-runner gitlab/gitlab-runner register \ --non-interactive \ --executor &quot;docker&quot; \ --description &quot;The runner support docker in docker&quot; \ --docker-image alpine:latest \ --url &quot;https://gitlab.com/&quot; \ --registration-token &quot;YOUR_TOKEN&quot; \ --tag-list &quot;dind&quot; \ --run-untagged=&quot;true&quot; \ --locked=&quot;false&quot; \ --access-level=&quot;not_protected&quot; \ --docker-privileged \ --docker-volumes &quot;/certs/client&quot; 其中的重點在最後兩個參數，分別是 --docker-privilleged 提供 docker in docker 的權限，另一個是 --docker-volumes 設定 TLS 的憑證儲存位置 在指令一開始就有指定 -v /srv/gitlab-runner/runner-01/config:/etc/gitlab-runner 所以註冊後的資料會保留在 host 的 /srv/gitlab-runner/runner-01/config 位置 Run 有了註冊後的 config，就可以啟動 Runner 了，跟一般的啟動方式一樣。 docker run -d --name gitlab-runner-runner-01 --restart always \ -v /srv/gitlab-runner/runner-01/config:/etc/gitlab-runner \ -v /var/run/docker.sock:/var/run/docker.sock \ gitlab/gitlab-runner:latest 同樣因為有指定 -v 參數，所以會從指定的 Host 路徑讀取設定檔執行 runner。 Ref Registering Runners | GitLab Run GitLab Runner in a container | GitLab TODO 如果有機會再補充的資料 .gitlab-ci-yml 範例 配合的 .gitlab-ci-yml 範例 真實的 gitlab project 範例？ 可能的錯誤訊息</summary></entry><entry><title type="html">ActionHero 新增 action</title><link href="https://twblog.hongjianching.com/2020/04/04/actionhero-add-new-action/" rel="alternate" type="text/html" title="ActionHero 新增 action" /><published>2020-04-04T00:00:00+08:00</published><updated>2020-04-04T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/04/04/actionhero-add-new-action</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/04/04/actionhero-add-new-action/">&lt;p&gt;在 &lt;code class=&quot;highlighter-rouge&quot;&gt;src/actions&lt;/code&gt; 新增 &lt;code class=&quot;highlighter-rouge&quot;&gt;sum.ts&lt;/code&gt;，實作一個合計的 action&lt;/p&gt;
 
 &lt;p&gt;這個 action 輸入 a, b 參數，回傳 sum 表示 a + b&lt;/p&gt;
 
@@ -799,16 +848,4 @@ yarn serve
 
 &lt;p&gt;接者開啟 http://localhost:8080/ 就可以看到網頁了&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-08-use-vue-cli-create-vuejs-project/2020-02-08_21-16-49.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="w3HexSchool" /><category term="Vue.js" /><category term="Vue-CLI" /><summary type="html">安裝 Vue CLI 假設已經安裝好 yarn 跟 Node.js，使用 yarn 安裝 Vue CLI</summary></entry><entry><title type="html">重新開張迎接新的挑戰</title><link href="https://twblog.hongjianching.com/2020/01/30/reopen-the-blog-for-new-challenge/" rel="alternate" type="text/html" title="重新開張迎接新的挑戰" /><published>2020-01-30T00:00:00+08:00</published><updated>2020-01-30T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/01/30/reopen-the-blog-for-new-challenge</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/01/30/reopen-the-blog-for-new-challenge/">&lt;p&gt;自從前年 30 天鐵人挑戰賽之後，一年沒有文章的地方，終於要重新開張啦。&lt;/p&gt;
-
-&lt;p&gt;這次參加的是 &lt;a href=&quot;https://www.hexschool.com/2019/11/14/2019-11-14-w3Hexschool-2020-challenge/&quot;&gt;六角學院舉辦的 - 鼠年全馬鐵人挑戰&lt;/a&gt; 活動，&lt;/p&gt;
-
-&lt;p&gt;每週一篇，長達一年的挑戰，相信會有不同的感受，&lt;/p&gt;
-
-&lt;p&gt;事實上，這一篇文章是用來場勘的，確認 CI / CD 是否正常，&lt;/p&gt;
-
-&lt;p&gt;免得臨時文章要上架時才發現要 debug 就麻煩了，&lt;/p&gt;
-
-&lt;p&gt;新的一年，希望挑戰成功。&lt;/p&gt;
-
-&lt;p&gt;註：絕對不是因為那個「實體獎座」才參加的喔~&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="w3HexSchool" /><summary type="html">自從前年 30 天鐵人挑戰賽之後，一年沒有文章的地方，終於要重新開張啦。</summary></entry></feed>
+&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-08-use-vue-cli-create-vuejs-project/2020-02-08_21-16-49.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="w3HexSchool" /><category term="Vue.js" /><category term="Vue-CLI" /><summary type="html">安裝 Vue CLI 假設已經安裝好 yarn 跟 Node.js，使用 yarn 安裝 Vue CLI</summary></entry></feed>

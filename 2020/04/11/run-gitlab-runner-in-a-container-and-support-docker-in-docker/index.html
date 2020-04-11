@@ -1,0 +1,479 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.2.2 by Michael Rose
+  Copyright 2017 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="zh" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>Run Gitlab Runner In A Container And Support Docker In Docker - Jian-Ching 記事本</title>
+
+
+
+
+<meta name="description" content="Run GitLab Runner in a container and support docker in docker使用 GitLab Runner，可以選擇直接安裝，或者使用 Docker Image，也是這次範例的方式。一般設定的話，不能在這個 Runner 執行 docker in docker 的操作，下面是需要的設定。Register首先是註冊 Runner，記得要準備好你的 TOKEN。docker run --rm -v /srv/gitlab-runner/runner-01/config:/etc/gitlab-runner gitlab/gitlab-runner register \  --non-interactive \  --executor &quot;docker&quot; \  --description &quot;The runner support docker in docker&quot; \  --docker-image alpine:latest \  --url &quot;https://gitlab.com/&quot; \  --registration-token &quot;YOUR_TOKEN&quot; \  --tag-list &quot;dind&quot; \  --run-untagged=&quot;true&quot; \  --locked=&quot;false&quot; \  --access-level=&quot;not_protected&quot; \  --docker-privileged \  --docker-volumes &quot;/certs/client&quot;其中的重點在最後兩個參數，分別是 --docker-privilleged 提供 docker in docker 的權限，另一個是 --docker-volumes 設定 TLS 的憑證儲存位置在指令一開始就有指定 -v /srv/gitlab-runner/runner-01/config:/etc/gitlab-runner 所以註冊後的資料會保留在 host 的 /srv/gitlab-runner/runner-01/config 位置Run有了註冊後的 config，就可以啟動 Runner 了，跟一般的啟動方式一樣。docker run -d --name gitlab-runner-runner-01 --restart always \  -v /srv/gitlab-runner/runner-01/config:/etc/gitlab-runner \  -v /var/run/docker.sock:/var/run/docker.sock \  gitlab/gitlab-runner:latest同樣因為有指定 -v 參數，所以會從指定的 Host 路徑讀取設定檔執行 runner。RefRegistering Runners | GitLabRun GitLab Runner in a container | GitLabTODO 如果有機會再補充的資料.gitlab-ci-yml 範例配合的 .gitlab-ci-yml 範例真實的 gitlab project 範例？可能的錯誤訊息">
+
+
+
+
+<meta name="author" content="洪健清">
+
+<meta property="og:locale" content="zh_TW">
+<meta property="og:site_name" content="Jian-Ching 記事本">
+<meta property="og:title" content="Run Gitlab Runner In A Container And Support Docker In Docker">
+
+
+  <link rel="canonical" href="https://twblog.HongJianChing.com/2020/04/11/run-gitlab-runner-in-a-container-and-support-docker-in-docker/">
+  <meta property="og:url" content="https://twblog.HongJianChing.com/2020/04/11/run-gitlab-runner-in-a-container-and-support-docker-in-docker/">
+
+
+
+  <meta property="og:description" content="Run GitLab Runner in a container and support docker in docker使用 GitLab Runner，可以選擇直接安裝，或者使用 Docker Image，也是這次範例的方式。一般設定的話，不能在這個 Runner 執行 docker in docker 的操作，下面是需要的設定。Register首先是註冊 Runner，記得要準備好你的 TOKEN。docker run --rm -v /srv/gitlab-runner/runner-01/config:/etc/gitlab-runner gitlab/gitlab-runner register \  --non-interactive \  --executor &quot;docker&quot; \  --description &quot;The runner support docker in docker&quot; \  --docker-image alpine:latest \  --url &quot;https://gitlab.com/&quot; \  --registration-token &quot;YOUR_TOKEN&quot; \  --tag-list &quot;dind&quot; \  --run-untagged=&quot;true&quot; \  --locked=&quot;false&quot; \  --access-level=&quot;not_protected&quot; \  --docker-privileged \  --docker-volumes &quot;/certs/client&quot;其中的重點在最後兩個參數，分別是 --docker-privilleged 提供 docker in docker 的權限，另一個是 --docker-volumes 設定 TLS 的憑證儲存位置在指令一開始就有指定 -v /srv/gitlab-runner/runner-01/config:/etc/gitlab-runner 所以註冊後的資料會保留在 host 的 /srv/gitlab-runner/runner-01/config 位置Run有了註冊後的 config，就可以啟動 Runner 了，跟一般的啟動方式一樣。docker run -d --name gitlab-runner-runner-01 --restart always \  -v /srv/gitlab-runner/runner-01/config:/etc/gitlab-runner \  -v /var/run/docker.sock:/var/run/docker.sock \  gitlab/gitlab-runner:latest同樣因為有指定 -v 參數，所以會從指定的 Host 路徑讀取設定檔執行 runner。RefRegistering Runners | GitLabRun GitLab Runner in a container | GitLabTODO 如果有機會再補充的資料.gitlab-ci-yml 範例配合的 .gitlab-ci-yml 範例真實的 gitlab project 範例？可能的錯誤訊息">
+
+
+
+
+
+  
+
+  
+
+
+
+
+
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2020-04-11T00:00:00+08:00">
+
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "洪健清",
+      "url" : "https://twblog.HongJianChing.com",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+  <meta name="google-site-verification" content="wjj5pJCiMFRllsWEU0WH3ofBhTmTmHLhm2nWgQo6XcY" />
+
+
+
+
+<!-- end SEO -->
+
+
+<link href="https://twblog.hongjianching.com/feed.xml" type="application/atom+xml" rel="alternate" title="Jian-Ching 記事本 Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+<meta http-equiv="cleartype" content="on">
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="https://twblog.hongjianching.com/">Jian-Ching 記事本</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item"><a href="https://twblog.HongJianChing.com/tags/">Tags</a></li>
+          
+        </ul>
+        <button><div class="navicon"></div></button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="https://en.gravatar.com/userimage/52239647/ccc888d68eb39b778b50b2032ee4c033.jpeg" alt="洪健清" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name" itemprop="name">洪健清</h3>
+    
+      <p class="author__bio" itemprop="description">
+        軟體程式工程師
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">追蹤</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> <span itemprop="name">台灣，台中市</span>
+        </li>
+      
+
+      
+        <li>
+          <a href="https://www.HongJianChing.com/" itemprop="url">
+            <i class="fa fa-fw fa-chain" aria-hidden="true"></i> 網站
+          </a>
+        </li>
+      
+
+      
+        <li>
+          <a href="mailto:allyusd yahoo com tw">
+            <meta itemprop="email" content="allyusd yahoo com tw" />
+            <i class="fa fa-fw fa-envelope-square" aria-hidden="true"></i> 電子信箱
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.facebook.com/jianching.hong" itemprop="sameAs">
+            <i class="fa fa-fw fa-facebook-square" aria-hidden="true"></i> Facebook
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://github.com/allyusd" itemprop="sameAs">
+            <i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </li>
+      
+
+      
+        <li>
+          <a href="https://www.stackoverflow.com/users/2613884/allyusd" itemprop="sameAs">
+            <i class="fa fa-fw fa-stack-overflow" aria-hidden="true"></i> Stackoverflow
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fa fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Run Gitlab Runner In A Container And Support Docker In Docker">
+    <meta itemprop="description" content="Run GitLab Runner in a container and support docker in docker使用 GitLab Runner，可以選擇直接安裝，或者使用 Docker Image，也是這次範例的方式。一般設定的話，不能在這個 Runner 執行 docker in docker 的操作，下面是需要的設定。Register首先是註冊 Runner，記得要準備好你的 TOKEN。docker run --rm -v /srv/gitlab-runner/runner-01/config:/etc/gitlab-runner gitlab/gitlab-runner register \  --non-interactive \  --executor &quot;docker&quot; \  --description &quot;The runner support docker in docker&quot; \  --docker-image alpine:latest \  --url &quot;https://gitlab.com/&quot; \  --registration-token &quot;YOUR_TOKEN&quot; \  --tag-list &quot;dind&quot; \  --run-untagged=&quot;true&quot; \  --locked=&quot;false&quot; \  --access-level=&quot;not_protected&quot; \  --docker-privileged \  --docker-volumes &quot;/certs/client&quot;其中的重點在最後兩個參數，分別是 --docker-privilleged 提供 docker in docker 的權限，另一個是 --docker-volumes 設定 TLS 的憑證儲存位置在指令一開始就有指定 -v /srv/gitlab-runner/runner-01/config:/etc/gitlab-runner 所以註冊後的資料會保留在 host 的 /srv/gitlab-runner/runner-01/config 位置Run有了註冊後的 config，就可以啟動 Runner 了，跟一般的啟動方式一樣。docker run -d --name gitlab-runner-runner-01 --restart always \  -v /srv/gitlab-runner/runner-01/config:/etc/gitlab-runner \  -v /var/run/docker.sock:/var/run/docker.sock \  gitlab/gitlab-runner:latest同樣因為有指定 -v 參數，所以會從指定的 Host 路徑讀取設定檔執行 runner。RefRegistering Runners | GitLabRun GitLab Runner in a container | GitLabTODO 如果有機會再補充的資料.gitlab-ci-yml 範例配合的 .gitlab-ci-yml 範例真實的 gitlab project 範例？可能的錯誤訊息">
+    <meta itemprop="datePublished" content="April 11, 2020">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">Run Gitlab Runner In A Container And Support Docker In Docker
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        <h1 id="run-gitlab-runner-in-a-container-and-support-docker-in-docker">Run GitLab Runner in a container and support docker in docker</h1>
+
+<p>使用 GitLab Runner，可以選擇直接安裝，或者使用 Docker Image，也是這次範例的方式。一般設定的話，不能在這個 Runner 執行 docker in docker 的操作，下面是需要的設定。</p>
+
+<h2 id="register">Register</h2>
+
+<p>首先是註冊 Runner，記得要準備好你的 TOKEN。</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>docker run --rm -v /srv/gitlab-runner/runner-01/config:/etc/gitlab-runner gitlab/gitlab-runner register <span class="se">\</span>
+  --non-interactive <span class="se">\</span>
+  --executor <span class="s2">"docker"</span> <span class="se">\</span>
+  --description <span class="s2">"The runner support docker in docker"</span> <span class="se">\</span>
+  --docker-image alpine:latest <span class="se">\</span>
+  --url <span class="s2">"https://gitlab.com/"</span> <span class="se">\</span>
+  --registration-token <span class="s2">"YOUR_TOKEN"</span> <span class="se">\</span>
+  --tag-list <span class="s2">"dind"</span> <span class="se">\</span>
+  --run-untagged<span class="o">=</span><span class="s2">"true"</span> <span class="se">\</span>
+  --locked<span class="o">=</span><span class="s2">"false"</span> <span class="se">\</span>
+  --access-level<span class="o">=</span><span class="s2">"not_protected"</span> <span class="se">\</span>
+  --docker-privileged <span class="se">\</span>
+  --docker-volumes <span class="s2">"/certs/client"</span>
+</code></pre>
+</div>
+
+<p>其中的重點在最後兩個參數，分別是 <code class="highlighter-rouge">--docker-privilleged</code> 提供 docker in docker 的權限，另一個是 <code class="highlighter-rouge">--docker-volumes</code> 設定 TLS 的憑證儲存位置</p>
+
+<p>在指令一開始就有指定 <code class="highlighter-rouge">-v /srv/gitlab-runner/runner-01/config:/etc/gitlab-runner</code> 所以註冊後的資料會保留在 host 的 <code class="highlighter-rouge">/srv/gitlab-runner/runner-01/config</code> 位置</p>
+
+<h2 id="run">Run</h2>
+
+<p>有了註冊後的 config，就可以啟動 Runner 了，跟一般的啟動方式一樣。</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>docker run -d --name gitlab-runner-runner-01 --restart always <span class="se">\</span>
+  -v /srv/gitlab-runner/runner-01/config:/etc/gitlab-runner <span class="se">\</span>
+  -v /var/run/docker.sock:/var/run/docker.sock <span class="se">\</span>
+  gitlab/gitlab-runner:latest
+</code></pre>
+</div>
+
+<p>同樣因為有指定 <code class="highlighter-rouge">-v</code> 參數，所以會從指定的 Host 路徑讀取設定檔執行 runner。</p>
+
+<h2 id="ref">Ref</h2>
+<p><a href="https://docs.gitlab.com/runner/register/index.html#docker">Registering Runners | GitLab</a>
+<a href="https://docs.gitlab.com/runner/install/docker.html">Run GitLab Runner in a container | GitLab</a></p>
+
+<h2 id="todo-如果有機會再補充的資料">TODO 如果有機會再補充的資料</h2>
+<p>.gitlab-ci-yml 範例
+配合的 .gitlab-ci-yml 範例
+真實的 gitlab project 範例？
+可能的錯誤訊息</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2020-04-11T00:00:00+08:00">April 11, 2020</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">分享到</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Run Gitlab Runner In A Container And Support Docker In Docker https://twblog.hongjianching.com/2020/04/11/run-gitlab-runner-in-a-container-and-support-docker-in-docker/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2020/04/11/run-gitlab-runner-in-a-container-and-support-docker-in-docker/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2020/04/11/run-gitlab-runner-in-a-container-and-support-docker-in-docker/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2020/04/11/run-gitlab-runner-in-a-container-and-support-docker-in-docker/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="https://twblog.hongjianching.com/2020/04/04/actionhero-add-new-action/" class="pagination--pager" title="ActionHero 新增 action
+">較舊</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">較新</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+  
+    <h4 class="page__comments-title">留言</h4>
+    <section id="disqus_thread"></section>
+  
+</div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>追蹤:</strong></li>
+    
+    
+    
+    
+      <li><a href="http://github.com/allyusd"><i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    <li><a href="https://twblog.hongjianching.com/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> RSS Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 洪健清. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+      </footer>
+    </div>
+
+    <script src="/assets/js/main.min.js"></script>
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-9431648-15', 'auto');
+  ga('send', 'pageview');
+  
+</script>
+
+
+
+
+
+
+
+  
+  <script type="text/javascript">
+  	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+  	var disqus_shortname = 'allyusd-twblog';
+
+  	/* * * DON'T EDIT BELOW THIS LINE * * */
+  	(function() {
+  		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  		dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  	})();
+
+  	/* * * DON'T EDIT BELOW THIS LINE * * */
+  	(function () {
+  		var s = document.createElement('script'); s.async = true;
+  		s.type = 'text/javascript';
+  		s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  		(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+  	}());
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+
+
+  </body>
+</html>

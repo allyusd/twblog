@@ -1,4 +1,37 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2020-04-25T20:05:12+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">Upgrading Actionhero From V21 To V22</title><link href="https://twblog.hongjianching.com/2020/04/18/upgrading-actionhero-from-v21-to-v22/" rel="alternate" type="text/html" title="Upgrading Actionhero From V21 To V22" /><published>2020-04-18T00:00:00+08:00</published><updated>2020-04-18T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/04/18/upgrading-actionhero-from-v21-to-v22</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/04/18/upgrading-actionhero-from-v21-to-v22/">&lt;h1 id=&quot;更新-actionhero-版本從-v21-到-v22&quot;&gt;更新 Actionhero 版本從 v21 到 v22&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2020-04-26T20:32:09+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">使用 VSCode Debug Actionhero version 22 on windows</title><link href="https://twblog.hongjianching.com/2020/04/26/actionhero-v22-debug-with-vscode-on-windows/" rel="alternate" type="text/html" title="使用 VSCode Debug Actionhero version 22 on windows" /><published>2020-04-26T00:00:00+08:00</published><updated>2020-04-26T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/04/26/actionhero-v22-debug-with-vscode-on-windows</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/04/26/actionhero-v22-debug-with-vscode-on-windows/">&lt;p&gt;在之前&lt;a href=&quot;https://twblog.hongjianching.com/2020/03/28/actionhero-nodejs-debug-with-typescript-on-vscode/&quot;&gt;使用 VSCode Debug ActionHero (Nodejs) with TypeScript&lt;/a&gt;文章中討論過如何使用 VSCode 對 Actionhero 專案進行 Debug，但是後來發現原本的方法失效了。&lt;/p&gt;
+
+&lt;p&gt;在 04-23 的 Office Hours 中，&lt;a href=&quot;https://github.com/evantahler&quot;&gt;Evan Tahler&lt;/a&gt; 及 &lt;a href=&quot;https://github.com/gcoonrod&quot;&gt;Greg Coonrod&lt;/a&gt; 提供了新的設定，相關的變更在 &lt;a href=&quot;https://github.com/actionhero/actionhero/pull/1439&quot;&gt;better debugging support by evantahler · Pull Request #1439 · actionhero/actionhero&lt;/a&gt; 之中。&lt;/p&gt;
+
+&lt;p&gt;會後，尤於環境不同(我想兩位作者都是使用 Mac 開發環境)，我在 Windows 使用新的設定時，遇到了一些問題，經過反覆嘗試，成功的使用 VSCode 進行 Debug。&lt;/p&gt;
+
+&lt;p&gt;其中是針對 &lt;code class=&quot;highlighter-rouge&quot;&gt;package.json&lt;/code&gt; 的 debug script 改為 node，而非使用 ts-node-dev，原因不明，但我使用原本 script 的 ts-node-dev 版本，會發生 breakpoint 跳動的情況，似乎是 sourcemap 無法正確對應。&lt;/p&gt;
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s2&quot;&gt;&quot;debug&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;tsc &amp;amp;&amp;amp; node --inspect -- ./dist/server&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;另一個是針對 &lt;code class=&quot;highlighter-rouge&quot;&gt;launch.json&lt;/code&gt; 的 remoteRoot 路徑改為跟 localRoot 一樣，完整的設定如下&lt;/p&gt;
+
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;version&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;0.2.0&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;configurations&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;node&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;request&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;attach&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Actionhero Debugger (attach)&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;protocol&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;inspector&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;port&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;9229&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;restart&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;localRoot&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;${workspaceFolder}&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;outFiles&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;${workspaceRoot}/dist/**/*.js&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;sourceMaps&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;remoteRoot&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;${workspaceFolder}&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;至於 Actionhero Debugger (launch) 則因為我在 Windows 下使用 bash 當指令操作介面，所以遇到了路徑問題，所以就忽略這個方式了，我期待等到 Windows 2004 版本 Release 之後，改用 WSL 2 當開發環境的時候，就能解決相關的問題。&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="w3HexSchool" /><category term="ActionHero" /><category term="Debug" /><summary type="html">在之前使用 VSCode Debug ActionHero (Nodejs) with TypeScript文章中討論過如何使用 VSCode 對 Actionhero 專案進行 Debug，但是後來發現原本的方法失效了。</summary></entry><entry><title type="html">Upgrading Actionhero From V21 To V22</title><link href="https://twblog.hongjianching.com/2020/04/18/upgrading-actionhero-from-v21-to-v22/" rel="alternate" type="text/html" title="Upgrading Actionhero From V21 To V22" /><published>2020-04-18T00:00:00+08:00</published><updated>2020-04-18T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/04/18/upgrading-actionhero-from-v21-to-v22</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/04/18/upgrading-actionhero-from-v21-to-v22/">&lt;h1 id=&quot;更新-actionhero-版本從-v21-到-v22&quot;&gt;更新 Actionhero 版本從 v21 到 v22&lt;/h1&gt;
 
 &lt;p&gt;一開始使用 Actionhero 的時候是 21 版，升級到 22 版的時候有一些變化，Actionhero 這次更新異動比較大的原因是，修改了啟動的機制, 接下來說明應該如何調整&lt;/p&gt;
 
@@ -812,66 +845,4 @@ npm run dev &lt;span class=&quot;c&quot;&gt;# &amp;lt;--- new! I use `ts-node` t
 &lt;h4 id=&quot;參考資料&quot;&gt;參考資料&lt;/h4&gt;
 &lt;p&gt;&lt;a href=&quot;https://stackoverflow.com/questions/32378953/keep-the-middle-item-centered-when-side-items-have-different-widths&quot;&gt;html - Keep the middle item centered when side items have different widths - Stack Overflow&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://stackoverflow.com/questions/32551291/in-css-flexbox-why-are-there-no-justify-items-and-justify-self-properties&quot;&gt;In CSS Flexbox, why are there no “justify-items” and “justify-self” properties? - Stack Overflow&lt;/a&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="w3HexSchool" /><category term="Vue.js" /><category term="CSS" /><summary type="html">使用 Layout 的好處</summary></entry><entry><title type="html">在 Vue 專案使用 Slot 進行 Layout</title><link href="https://twblog.hongjianching.com/2020/02/15/use-slot-in-vue-layout/" rel="alternate" type="text/html" title="在 Vue 專案使用 Slot 進行 Layout" /><published>2020-02-15T00:00:00+08:00</published><updated>2020-02-15T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/02/15/use-slot-in-vue-layout</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/02/15/use-slot-in-vue-layout/">&lt;h2 id=&quot;常見的-layout-排版範例&quot;&gt;常見的 Layout 排版範例&lt;/h2&gt;
-
-&lt;p&gt;這是常見的左中右的排版&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-02-15-use-slot-in-vue-layout/2020-02-15_11-43-27.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;其中的 template 如下&lt;/p&gt;
-
-&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;template&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;outside-box&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;box&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;item left&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;left&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;            
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;item center&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;center&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;item right&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;right&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/template&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;其中同時包含了排版 (Layout) 及內容 (Content)，如果要減少重覆的工作，我們可以將其中內容的部份抽離，留下單純的排版。&lt;/p&gt;
-
-&lt;h2 id=&quot;使用-slot&quot;&gt;使用 Slot&lt;/h2&gt;
-
-&lt;p&gt;透過 Vue 的 Slot 機制，將會變動的內容改用 slot 取代，建立 Layout.vue
-因為我們需要用到多個 slot，需要分別加上 name 用來代表不用的位置&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Layout.vue&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;template&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;box&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;slot&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;left&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/slot&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;slot&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;center&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/slot&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;slot&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;right&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/slot&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/template&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;接著將原本的 template 套上 Layout.vue&lt;/p&gt;
-&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;template&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;outside-box&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;Layout&amp;gt;&lt;/span&gt;
-      &lt;span class=&quot;nt&quot;&gt;&amp;lt;template&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v-slot:left&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;item left&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;left&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;            
-      &lt;span class=&quot;nt&quot;&gt;&amp;lt;/template&amp;gt;&lt;/span&gt;
-      &lt;span class=&quot;nt&quot;&gt;&amp;lt;template&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v-slot:center&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;item center&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;center&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-      &lt;span class=&quot;nt&quot;&gt;&amp;lt;/template&amp;gt;&lt;/span&gt;
-      &lt;span class=&quot;nt&quot;&gt;&amp;lt;template&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v-slot:right&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;item right&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;right&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-      &lt;span class=&quot;nt&quot;&gt;&amp;lt;/template&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/Layout&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/template&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;執行結果會跟原本的一樣喔！但是擁有一個 Layout.vue 可以重覆使用排版。&lt;/p&gt;
-
-&lt;p&gt;關於更多 Slot 資料可以參考官方文件 &lt;a href=&quot;https://vuejs.org/v2/guide/components-slots.html#Named-Slots-with-the-slot-Attribute&quot;&gt;Slots — Vue.js&lt;/a&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="w3HexSchool" /><category term="Vue.js" /><category term="Slot" /><summary type="html">常見的 Layout 排版範例</summary></entry></feed>
+&lt;p&gt;&lt;a href=&quot;https://stackoverflow.com/questions/32551291/in-css-flexbox-why-are-there-no-justify-items-and-justify-self-properties&quot;&gt;In CSS Flexbox, why are there no “justify-items” and “justify-self” properties? - Stack Overflow&lt;/a&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="w3HexSchool" /><category term="Vue.js" /><category term="CSS" /><summary type="html">使用 Layout 的好處</summary></entry></feed>

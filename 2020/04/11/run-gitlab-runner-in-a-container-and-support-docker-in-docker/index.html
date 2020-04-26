@@ -19,12 +19,12 @@
 
 
 
-<title>Run Gitlab Runner In A Container And Support Docker In Docker - Jian-Ching 記事本</title>
+<title>Run GitLab Runner in a container and support docker in docker - Jian-Ching 記事本</title>
 
 
 
 
-<meta name="description" content="Run GitLab Runner in a container and support docker in docker使用 GitLab Runner，可以選擇直接安裝，或者使用 Docker Image，也是這次範例的方式。一般設定的話，不能在這個 Runner 執行 docker in docker 的操作，下面是需要的設定。Register首先是註冊 Runner，記得要準備好你的 TOKEN。docker run --rm -v /srv/gitlab-runner/runner-01/config:/etc/gitlab-runner gitlab/gitlab-runner register \  --non-interactive \  --executor &quot;docker&quot; \  --description &quot;The runner support docker in docker&quot; \  --docker-image alpine:latest \  --url &quot;https://gitlab.com/&quot; \  --registration-token &quot;YOUR_TOKEN&quot; \  --tag-list &quot;dind&quot; \  --run-untagged=&quot;true&quot; \  --locked=&quot;false&quot; \  --access-level=&quot;not_protected&quot; \  --docker-privileged \  --docker-volumes &quot;/certs/client&quot;其中的重點在最後兩個參數，分別是 --docker-privilleged 提供 docker in docker 的權限，另一個是 --docker-volumes 設定 TLS 的憑證儲存位置在指令一開始就有指定 -v /srv/gitlab-runner/runner-01/config:/etc/gitlab-runner 所以註冊後的資料會保留在 host 的 /srv/gitlab-runner/runner-01/config 位置Run有了註冊後的 config，就可以啟動 Runner 了，跟一般的啟動方式一樣。docker run -d --name gitlab-runner-runner-01 --restart always \  -v /srv/gitlab-runner/runner-01/config:/etc/gitlab-runner \  -v /var/run/docker.sock:/var/run/docker.sock \  gitlab/gitlab-runner:latest同樣因為有指定 -v 參數，所以會從指定的 Host 路徑讀取設定檔執行 runner。RefRegistering Runners | GitLabRun GitLab Runner in a container | GitLabTODO 如果有機會再補充的資料.gitlab-ci-yml 範例配合的 .gitlab-ci-yml 範例真實的 gitlab project 範例？可能的錯誤訊息">
+<meta name="description" content="使用 GitLab Runner，可以選擇直接安裝，或者使用 Docker Image，也是這次範例的方式。一般設定的話，不能在這個 Runner 執行 docker in docker 的操作，下面是需要的設定。Register首先是註冊 Runner，記得要準備好你的 TOKEN。docker run --rm -v /srv/gitlab-runner/runner-01/config:/etc/gitlab-runner gitlab/gitlab-runner register \  --non-interactive \  --executor &quot;docker&quot; \  --description &quot;The runner support docker in docker&quot; \  --docker-image alpine:latest \  --url &quot;https://gitlab.com/&quot; \  --registration-token &quot;YOUR_TOKEN&quot; \  --tag-list &quot;dind&quot; \  --run-untagged=&quot;true&quot; \  --locked=&quot;false&quot; \  --access-level=&quot;not_protected&quot; \  --docker-privileged \  --docker-volumes &quot;/certs/client&quot;其中的重點在最後兩個參數，分別是 --docker-privilleged 提供 docker in docker 的權限，另一個是 --docker-volumes 設定 TLS 的憑證儲存位置在指令一開始就有指定 -v /srv/gitlab-runner/runner-01/config:/etc/gitlab-runner 所以註冊後的資料會保留在 host 的 /srv/gitlab-runner/runner-01/config 位置Run有了註冊後的 config，就可以啟動 Runner 了，跟一般的啟動方式一樣。docker run -d --name gitlab-runner-runner-01 --restart always \  -v /srv/gitlab-runner/runner-01/config:/etc/gitlab-runner \  -v /var/run/docker.sock:/var/run/docker.sock \  gitlab/gitlab-runner:latest同樣因為有指定 -v 參數，所以會從指定的 Host 路徑讀取設定檔執行 runner。RefRegistering Runners | GitLabRun GitLab Runner in a container | GitLabTODO 如果有機會再補充的資料.gitlab-ci-yml 範例配合的 .gitlab-ci-yml 範例真實的 gitlab project 範例？可能的錯誤訊息">
 
 
 
@@ -33,7 +33,7 @@
 
 <meta property="og:locale" content="zh_TW">
 <meta property="og:site_name" content="Jian-Ching 記事本">
-<meta property="og:title" content="Run Gitlab Runner In A Container And Support Docker In Docker">
+<meta property="og:title" content="Run GitLab Runner in a container and support docker in docker">
 
 
   <link rel="canonical" href="https://twblog.HongJianChing.com/2020/04/11/run-gitlab-runner-in-a-container-and-support-docker-in-docker/">
@@ -41,7 +41,7 @@
 
 
 
-  <meta property="og:description" content="Run GitLab Runner in a container and support docker in docker使用 GitLab Runner，可以選擇直接安裝，或者使用 Docker Image，也是這次範例的方式。一般設定的話，不能在這個 Runner 執行 docker in docker 的操作，下面是需要的設定。Register首先是註冊 Runner，記得要準備好你的 TOKEN。docker run --rm -v /srv/gitlab-runner/runner-01/config:/etc/gitlab-runner gitlab/gitlab-runner register \  --non-interactive \  --executor &quot;docker&quot; \  --description &quot;The runner support docker in docker&quot; \  --docker-image alpine:latest \  --url &quot;https://gitlab.com/&quot; \  --registration-token &quot;YOUR_TOKEN&quot; \  --tag-list &quot;dind&quot; \  --run-untagged=&quot;true&quot; \  --locked=&quot;false&quot; \  --access-level=&quot;not_protected&quot; \  --docker-privileged \  --docker-volumes &quot;/certs/client&quot;其中的重點在最後兩個參數，分別是 --docker-privilleged 提供 docker in docker 的權限，另一個是 --docker-volumes 設定 TLS 的憑證儲存位置在指令一開始就有指定 -v /srv/gitlab-runner/runner-01/config:/etc/gitlab-runner 所以註冊後的資料會保留在 host 的 /srv/gitlab-runner/runner-01/config 位置Run有了註冊後的 config，就可以啟動 Runner 了，跟一般的啟動方式一樣。docker run -d --name gitlab-runner-runner-01 --restart always \  -v /srv/gitlab-runner/runner-01/config:/etc/gitlab-runner \  -v /var/run/docker.sock:/var/run/docker.sock \  gitlab/gitlab-runner:latest同樣因為有指定 -v 參數，所以會從指定的 Host 路徑讀取設定檔執行 runner。RefRegistering Runners | GitLabRun GitLab Runner in a container | GitLabTODO 如果有機會再補充的資料.gitlab-ci-yml 範例配合的 .gitlab-ci-yml 範例真實的 gitlab project 範例？可能的錯誤訊息">
+  <meta property="og:description" content="使用 GitLab Runner，可以選擇直接安裝，或者使用 Docker Image，也是這次範例的方式。一般設定的話，不能在這個 Runner 執行 docker in docker 的操作，下面是需要的設定。Register首先是註冊 Runner，記得要準備好你的 TOKEN。docker run --rm -v /srv/gitlab-runner/runner-01/config:/etc/gitlab-runner gitlab/gitlab-runner register \  --non-interactive \  --executor &quot;docker&quot; \  --description &quot;The runner support docker in docker&quot; \  --docker-image alpine:latest \  --url &quot;https://gitlab.com/&quot; \  --registration-token &quot;YOUR_TOKEN&quot; \  --tag-list &quot;dind&quot; \  --run-untagged=&quot;true&quot; \  --locked=&quot;false&quot; \  --access-level=&quot;not_protected&quot; \  --docker-privileged \  --docker-volumes &quot;/certs/client&quot;其中的重點在最後兩個參數，分別是 --docker-privilleged 提供 docker in docker 的權限，另一個是 --docker-volumes 設定 TLS 的憑證儲存位置在指令一開始就有指定 -v /srv/gitlab-runner/runner-01/config:/etc/gitlab-runner 所以註冊後的資料會保留在 host 的 /srv/gitlab-runner/runner-01/config 位置Run有了註冊後的 config，就可以啟動 Runner 了，跟一般的啟動方式一樣。docker run -d --name gitlab-runner-runner-01 --restart always \  -v /srv/gitlab-runner/runner-01/config:/etc/gitlab-runner \  -v /var/run/docker.sock:/var/run/docker.sock \  gitlab/gitlab-runner:latest同樣因為有指定 -v 參數，所以會從指定的 Host 路徑讀取設定檔執行 runner。RefRegistering Runners | GitLabRun GitLab Runner in a container | GitLabTODO 如果有機會再補充的資料.gitlab-ci-yml 範例配合的 .gitlab-ci-yml 範例真實的 gitlab project 範例？可能的錯誤訊息">
 
 
 
@@ -278,24 +278,22 @@
 
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Run Gitlab Runner In A Container And Support Docker In Docker">
-    <meta itemprop="description" content="Run GitLab Runner in a container and support docker in docker使用 GitLab Runner，可以選擇直接安裝，或者使用 Docker Image，也是這次範例的方式。一般設定的話，不能在這個 Runner 執行 docker in docker 的操作，下面是需要的設定。Register首先是註冊 Runner，記得要準備好你的 TOKEN。docker run --rm -v /srv/gitlab-runner/runner-01/config:/etc/gitlab-runner gitlab/gitlab-runner register \  --non-interactive \  --executor &quot;docker&quot; \  --description &quot;The runner support docker in docker&quot; \  --docker-image alpine:latest \  --url &quot;https://gitlab.com/&quot; \  --registration-token &quot;YOUR_TOKEN&quot; \  --tag-list &quot;dind&quot; \  --run-untagged=&quot;true&quot; \  --locked=&quot;false&quot; \  --access-level=&quot;not_protected&quot; \  --docker-privileged \  --docker-volumes &quot;/certs/client&quot;其中的重點在最後兩個參數，分別是 --docker-privilleged 提供 docker in docker 的權限，另一個是 --docker-volumes 設定 TLS 的憑證儲存位置在指令一開始就有指定 -v /srv/gitlab-runner/runner-01/config:/etc/gitlab-runner 所以註冊後的資料會保留在 host 的 /srv/gitlab-runner/runner-01/config 位置Run有了註冊後的 config，就可以啟動 Runner 了，跟一般的啟動方式一樣。docker run -d --name gitlab-runner-runner-01 --restart always \  -v /srv/gitlab-runner/runner-01/config:/etc/gitlab-runner \  -v /var/run/docker.sock:/var/run/docker.sock \  gitlab/gitlab-runner:latest同樣因為有指定 -v 參數，所以會從指定的 Host 路徑讀取設定檔執行 runner。RefRegistering Runners | GitLabRun GitLab Runner in a container | GitLabTODO 如果有機會再補充的資料.gitlab-ci-yml 範例配合的 .gitlab-ci-yml 範例真實的 gitlab project 範例？可能的錯誤訊息">
+    <meta itemprop="headline" content="Run GitLab Runner in a container and support docker in docker">
+    <meta itemprop="description" content="使用 GitLab Runner，可以選擇直接安裝，或者使用 Docker Image，也是這次範例的方式。一般設定的話，不能在這個 Runner 執行 docker in docker 的操作，下面是需要的設定。Register首先是註冊 Runner，記得要準備好你的 TOKEN。docker run --rm -v /srv/gitlab-runner/runner-01/config:/etc/gitlab-runner gitlab/gitlab-runner register \  --non-interactive \  --executor &quot;docker&quot; \  --description &quot;The runner support docker in docker&quot; \  --docker-image alpine:latest \  --url &quot;https://gitlab.com/&quot; \  --registration-token &quot;YOUR_TOKEN&quot; \  --tag-list &quot;dind&quot; \  --run-untagged=&quot;true&quot; \  --locked=&quot;false&quot; \  --access-level=&quot;not_protected&quot; \  --docker-privileged \  --docker-volumes &quot;/certs/client&quot;其中的重點在最後兩個參數，分別是 --docker-privilleged 提供 docker in docker 的權限，另一個是 --docker-volumes 設定 TLS 的憑證儲存位置在指令一開始就有指定 -v /srv/gitlab-runner/runner-01/config:/etc/gitlab-runner 所以註冊後的資料會保留在 host 的 /srv/gitlab-runner/runner-01/config 位置Run有了註冊後的 config，就可以啟動 Runner 了，跟一般的啟動方式一樣。docker run -d --name gitlab-runner-runner-01 --restart always \  -v /srv/gitlab-runner/runner-01/config:/etc/gitlab-runner \  -v /var/run/docker.sock:/var/run/docker.sock \  gitlab/gitlab-runner:latest同樣因為有指定 -v 參數，所以會從指定的 Host 路徑讀取設定檔執行 runner。RefRegistering Runners | GitLabRun GitLab Runner in a container | GitLabTODO 如果有機會再補充的資料.gitlab-ci-yml 範例配合的 .gitlab-ci-yml 範例真實的 gitlab project 範例？可能的錯誤訊息">
     <meta itemprop="datePublished" content="April 11, 2020">
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 class="page__title" itemprop="headline">Run Gitlab Runner In A Container And Support Docker In Docker
+          <h1 class="page__title" itemprop="headline">Run GitLab Runner in a container and support docker in docker
 </h1>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        <h1 id="run-gitlab-runner-in-a-container-and-support-docker-in-docker">Run GitLab Runner in a container and support docker in docker</h1>
-
-<p>使用 GitLab Runner，可以選擇直接安裝，或者使用 Docker Image，也是這次範例的方式。一般設定的話，不能在這個 Runner 執行 docker in docker 的操作，下面是需要的設定。</p>
+        <p>使用 GitLab Runner，可以選擇直接安裝，或者使用 Docker Image，也是這次範例的方式。一般設定的話，不能在這個 Runner 執行 docker in docker 的操作，下面是需要的設定。</p>
 
 <h2 id="register">Register</h2>
 
@@ -350,6 +348,45 @@
       <footer class="page__meta">
         
         
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-tags" aria-hidden="true"></i> 標籤: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="https://twblog.hongjianching.com/tags/#cd" class="page__taxonomy-item" rel="tag">CD</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://twblog.hongjianching.com/tags/#ci" class="page__taxonomy-item" rel="tag">CI</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://twblog.hongjianching.com/tags/#devops" class="page__taxonomy-item" rel="tag">DevOps</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://twblog.hongjianching.com/tags/#docker" class="page__taxonomy-item" rel="tag">Docker</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://twblog.hongjianching.com/tags/#gitlab" class="page__taxonomy-item" rel="tag">GitLab</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://twblog.hongjianching.com/tags/#w3hexschool" class="page__taxonomy-item" rel="tag">w3HexSchool</a>
+    
+    </span>
+  </p>
+
+
 
 
         
@@ -362,7 +399,7 @@
     <h4 class="page__share-title">分享到</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=Run Gitlab Runner In A Container And Support Docker In Docker https://twblog.hongjianching.com/2020/04/11/run-gitlab-runner-in-a-container-and-support-docker-in-docker/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=Run GitLab Runner in a container and support docker in docker https://twblog.hongjianching.com/2020/04/11/run-gitlab-runner-in-a-container-and-support-docker-in-docker/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
   <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2020/04/11/run-gitlab-runner-in-a-container-and-support-docker-in-docker/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
@@ -379,7 +416,7 @@
 ">較舊</a>
     
     
-      <a href="https://twblog.hongjianching.com/2020/04/18/upgrading-actionhero-from-v21-to-v22/" class="pagination--pager" title="Upgrading Actionhero From V21 To V22
+      <a href="https://twblog.hongjianching.com/2020/04/18/upgrading-actionhero-from-v21-to-v22/" class="pagination--pager" title="更新 Actionhero 版本從 v21 到 v22
 ">較新</a>
     
   </nav>
@@ -440,6 +477,20 @@
 
   ga('create', 'UA-9431648-15', 'auto');
   ga('send', 'pageview');
+  
+  
+    ga('send', 'event', 'taggedPost', 'view', 'w3HexSchool');
+  
+    ga('send', 'event', 'taggedPost', 'view', 'GitLab');
+  
+    ga('send', 'event', 'taggedPost', 'view', 'CI');
+  
+    ga('send', 'event', 'taggedPost', 'view', 'CD');
+  
+    ga('send', 'event', 'taggedPost', 'view', 'DevOps');
+  
+    ga('send', 'event', 'taggedPost', 'view', 'Docker');
+  
   
 </script>
 

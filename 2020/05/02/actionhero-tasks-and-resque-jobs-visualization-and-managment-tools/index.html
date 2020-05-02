@@ -19,12 +19,12 @@
 
 
 
-<title>使用 VSCode debug Actionhero version 22 on windows - Jian-Ching 記事本</title>
+<title>ActionHero Tasks &amp; Resque Jobs 視覺化管理工具 - Jian-Ching 記事本</title>
 
 
 
 
-<meta name="description" content="在之前 使用 VSCode Debug ActionHero (Nodejs) with TypeScript 文章中討論過如何使用 VSCode 對 Actionhero 專案進行 Debug，但是後來發現原本的方法失效了。">
+<meta name="description" content="本篇介紹如何安裝 ah-resque-uiactionhero/ah-resque-ui: Visualization and Managment tools for Actionhero Tasks &amp; Resque Jobs">
 
 
 
@@ -33,15 +33,15 @@
 
 <meta property="og:locale" content="zh_TW">
 <meta property="og:site_name" content="Jian-Ching 記事本">
-<meta property="og:title" content="使用 VSCode debug Actionhero version 22 on windows">
+<meta property="og:title" content="ActionHero Tasks &amp; Resque Jobs 視覺化管理工具">
 
 
-  <link rel="canonical" href="https://twblog.HongJianChing.com/2020/04/26/actionhero-v22-debug-with-vscode-on-windows/">
-  <meta property="og:url" content="https://twblog.HongJianChing.com/2020/04/26/actionhero-v22-debug-with-vscode-on-windows/">
+  <link rel="canonical" href="https://twblog.HongJianChing.com/2020/05/02/actionhero-tasks-and-resque-jobs-visualization-and-managment-tools/">
+  <meta property="og:url" content="https://twblog.HongJianChing.com/2020/05/02/actionhero-tasks-and-resque-jobs-visualization-and-managment-tools/">
 
 
 
-  <meta property="og:description" content="在之前 使用 VSCode Debug ActionHero (Nodejs) with TypeScript 文章中討論過如何使用 VSCode 對 Actionhero 專案進行 Debug，但是後來發現原本的方法失效了。">
+  <meta property="og:description" content="本篇介紹如何安裝 ah-resque-uiactionhero/ah-resque-ui: Visualization and Managment tools for Actionhero Tasks &amp; Resque Jobs">
 
 
 
@@ -56,7 +56,7 @@
 
 
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2020-04-26T00:00:00+08:00">
+  <meta property="article:published_time" content="2020-05-02T00:00:00+08:00">
 
 
 
@@ -278,55 +278,73 @@
 
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
-    <meta itemprop="headline" content="使用 VSCode debug Actionhero version 22 on windows">
-    <meta itemprop="description" content="在之前 使用 VSCode Debug ActionHero (Nodejs) with TypeScript 文章中討論過如何使用 VSCode 對 Actionhero 專案進行 Debug，但是後來發現原本的方法失效了。">
-    <meta itemprop="datePublished" content="April 26, 2020">
+    <meta itemprop="headline" content="ActionHero Tasks &amp; Resque Jobs 視覺化管理工具">
+    <meta itemprop="description" content="本篇介紹如何安裝 ah-resque-uiactionhero/ah-resque-ui: Visualization and Managment tools for Actionhero Tasks &amp; Resque Jobs">
+    <meta itemprop="datePublished" content="May 02, 2020">
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 class="page__title" itemprop="headline">使用 VSCode debug Actionhero version 22 on windows
+          <h1 class="page__title" itemprop="headline">ActionHero Tasks &amp; Resque Jobs 視覺化管理工具
 </h1>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        <p>在之前 <a href="https://twblog.hongjianching.com/2020/03/28/actionhero-nodejs-debug-with-typescript-on-vscode/">使用 VSCode Debug ActionHero (Nodejs) with TypeScript</a> 文章中討論過如何使用 VSCode 對 Actionhero 專案進行 Debug，但是後來發現原本的方法失效了。</p>
+        <p>本篇介紹如何安裝 ah-resque-ui
+<a href="https://github.com/actionhero/ah-resque-ui">actionhero/ah-resque-ui: Visualization and Managment tools for Actionhero Tasks &amp; Resque Jobs</a></p>
 
-<p>在 04-23 的 Office Hours 中，<a href="https://github.com/evantahler">Evan Tahler</a> 及 <a href="https://github.com/gcoonrod">Greg Coonrod</a> 提供了新的設定，相關的變更在 <a href="https://github.com/actionhero/actionhero/pull/1439">better debugging support by evantahler · Pull Request #1439 · actionhero/actionhero</a> 之中。</p>
+<h2 id="建立-actionhero-專案">建立 actionhero 專案</h2>
 
-<p>會後，尤於環境不同(我想兩位作者都是使用 Mac 開發環境)，我在 Windows 使用新的設定時，遇到了一些問題，經過反覆嘗試，成功的使用 VSCode 進行 Debug。</p>
-
-<p>其中是針對 <code class="highlighter-rouge">package.json</code> 的 debug script 改為 node，而非使用 ts-node-dev，原因不明，但我使用原本 script 的 ts-node-dev 版本，會發生 breakpoint 跳動的情況，似乎是 sourcemap 無法正確對應。</p>
-<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="s2">"debug"</span><span class="err">:</span><span class="w"> </span><span class="s2">"tsc &amp;&amp; node --inspect -- ./dist/server"</span><span class="err">,</span><span class="w">
-</span></code></pre>
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>npx actionhero generate
+</code></pre>
 </div>
 
-<p>另一個是針對 <code class="highlighter-rouge">launch.json</code> 的 remoteRoot 路徑改為跟 localRoot 一樣，完整的設定如下</p>
+<h2 id="安裝-ah-resque-ui">安裝 ah-resque-ui</h2>
 
-<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.2.0"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"configurations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"node"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"attach"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Actionhero Debugger (attach)"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"inspector"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"port"</span><span class="p">:</span><span class="w"> </span><span class="mi">9229</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"restart"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"localRoot"</span><span class="p">:</span><span class="w"> </span><span class="s2">"${workspaceFolder}"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"outFiles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"${workspaceRoot}/dist/**/*.js"</span><span class="p">],</span><span class="w">
-      </span><span class="nt">"sourceMaps"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"remoteRoot"</span><span class="p">:</span><span class="w"> </span><span class="s2">"${workspaceFolder}"</span><span class="p">,</span><span class="w">
-    </span><span class="err">}</span><span class="p">,</span><span class="w">
-  </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>yarn add ah-resque-ui
+</code></pre>
 </div>
 
-<p>至於 Actionhero Debugger (launch) 則因為我在 Windows 下使用 bash 當指令操作介面，所以遇到了路徑問題，所以就忽略這個方式了，我期待等到 Windows 2004 版本 Release 之後，改用 WSL 2 當開發環境的時候，就能解決相關的問題。</p>
+<p>設定 plugin</p>
+
+<p>修改 <code class="highlighter-rouge">./config/plugins.ts</code></p>
+
+<div class="language-ts highlighter-rouge"><pre class="highlight"><code><span class="k">export</span> <span class="kd">const</span> <span class="nx">DEFAULT</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">plugins</span><span class="p">:</span> <span class="p">(</span><span class="nx">config</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="s2">"ah-resque-ui"</span><span class="p">:</span> <span class="p">{</span> <span class="na">path</span><span class="p">:</span> <span class="nx">__dirname</span> <span class="o">+</span> <span class="s2">"/../../node_modules/ah-resque-ui"</span> <span class="p">},</span>
+    <span class="p">};</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+</code></pre>
+</div>
+
+<p>新增 <code class="highlighter-rouge">./src/config/ah-resque-ui.ts</code></p>
+
+<div class="language-ts highlighter-rouge"><pre class="highlight"><code><span class="k">export</span> <span class="kd">const</span> <span class="nx">DEFAULT</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">"ah-resque-ui"</span><span class="p">:</span> <span class="p">(</span><span class="nx">config</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="c1">// the name of the middleware(s) which will protect all actions in this plugin</span>
+      <span class="c1">// ie middleware: ['logged-in-session', 'role-admin']</span>
+      <span class="na">middleware</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="p">};</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+</code></pre>
+</div>
+
+<p>輸入 <code class="highlighter-rouge">yarn dev</code> 啟動後，連到 <code class="highlighter-rouge">http://localhost:8080/resque#/</code> 即可看到畫面</p>
+
+<p><img src="/assets/images/2020-05-02/0001.png" alt="" /></p>
+
+<p>要注意兩點</p>
+
+<p>一、當沒有任何一個 Queue 的情況下，Overview 的圖會一直處於 loading 狀態</p>
+
+<p>二、UI 的資料是保留在 Client 當下，也就是只要切換頁面不會保留過去的資料，Overview 的圖會清空</p>
 
         
       </section>
@@ -351,7 +369,7 @@
     
       
       
-      <a href="https://twblog.hongjianching.com/tags/#debug" class="page__taxonomy-item" rel="tag">Debug</a><span class="sep">, </span>
+      <a href="https://twblog.hongjianching.com/tags/#ah-resque-ui" class="page__taxonomy-item" rel="tag">ah-resque-ui</a><span class="sep">, </span>
     
       
       
@@ -364,7 +382,7 @@
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2020-04-26T00:00:00+08:00">April 26, 2020</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2020-05-02T00:00:00+08:00">May 02, 2020</time></p>
         
       </footer>
 
@@ -373,25 +391,24 @@
     <h4 class="page__share-title">分享到</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=使用 VSCode debug Actionhero version 22 on windows https://twblog.hongjianching.com/2020/04/26/actionhero-v22-debug-with-vscode-on-windows/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=ActionHero Tasks & Resque Jobs 視覺化管理工具 https://twblog.hongjianching.com/2020/05/02/actionhero-tasks-and-resque-jobs-visualization-and-managment-tools/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2020/04/26/actionhero-v22-debug-with-vscode-on-windows/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2020/05/02/actionhero-tasks-and-resque-jobs-visualization-and-managment-tools/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2020/04/26/actionhero-v22-debug-with-vscode-on-windows/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2020/05/02/actionhero-tasks-and-resque-jobs-visualization-and-managment-tools/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2020/04/26/actionhero-v22-debug-with-vscode-on-windows/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2020/05/02/actionhero-tasks-and-resque-jobs-visualization-and-managment-tools/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="https://twblog.hongjianching.com/2020/04/18/upgrading-actionhero-from-v21-to-v22/" class="pagination--pager" title="更新 Actionhero 版本從 v21 到 v22
+      <a href="https://twblog.hongjianching.com/2020/04/26/actionhero-v22-debug-with-vscode-on-windows/" class="pagination--pager" title="使用 VSCode debug Actionhero version 22 on windows
 ">較舊</a>
     
     
-      <a href="https://twblog.hongjianching.com/2020/05/02/actionhero-tasks-and-resque-jobs-visualization-and-managment-tools/" class="pagination--pager" title="ActionHero Tasks &amp; Resque Jobs 視覺化管理工具
-">較新</a>
+      <a href="#" class="pagination--pager disabled">較新</a>
     
   </nav>
 
@@ -457,7 +474,7 @@
   
     ga('send', 'event', 'taggedPost', 'view', 'ActionHero');
   
-    ga('send', 'event', 'taggedPost', 'view', 'Debug');
+    ga('send', 'event', 'taggedPost', 'view', 'ah-resque-ui');
   
   
 </script>

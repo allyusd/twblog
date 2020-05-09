@@ -24,7 +24,7 @@
 
 
 
-<meta name="description" content="簡答">
+<meta name="description" content="cache 跟 artifacts 字面上都有保存檔案供以後使用的意思，在 GitLab 使用要特別留意他們的定義">
 
 
 
@@ -41,7 +41,7 @@
 
 
 
-  <meta property="og:description" content="簡答">
+  <meta property="og:description" content="cache 跟 artifacts 字面上都有保存檔案供以後使用的意思，在 GitLab 使用要特別留意他們的定義">
 
 
 
@@ -279,7 +279,7 @@
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
     <meta itemprop="headline" content="GitLab CI/CD 使用 Cache 和 artifacts">
-    <meta itemprop="description" content="簡答">
+    <meta itemprop="description" content="cache 跟 artifacts 字面上都有保存檔案供以後使用的意思，在 GitLab 使用要特別留意他們的定義">
     <meta itemprop="datePublished" content="May 09, 2020">
     
 
@@ -293,13 +293,13 @@
       
 
       <section class="page__content" itemprop="text">
-        <h2 id="簡答">簡答</h2>
+        <p>cache 跟 artifacts 字面上都有保存檔案供以後使用的意思，在 GitLab 使用要特別留意他們的定義</p>
+
+<h2 id="簡答">簡答</h2>
 
 <p>跨 pipeline 時使用 cache，同 pipeline 跨 job 時使用 artifacts</p>
 
 <h2 id="介紹">介紹</h2>
-
-<p>cache 跟 artifacts 字面上都有保存檔案供以後使用的意思，在 GitLab 使用要特別留意他們的定義</p>
 
 <p>提醒一點，當你同時使用 caches 和 artifacts 在同一個路徑時，會被覆蓋</p>
 
@@ -331,6 +331,27 @@
     <span class="pi">-</span> <span class="s">dist/</span>
 </code></pre>
 </div>
+
+<table>
+  <tbody>
+    <tr>
+      <td>[Cache dependencies in GitLab CI/CD</td>
+      <td>GitLab](https://docs.gitlab.com/ee/ci/caching/)</td>
+    </tr>
+    <tr>
+      <td>[Predefined environment variables reference</td>
+      <td>GitLab](https://docs.gitlab.com/ee/ci/variables/predefined_variables.html)</td>
+    </tr>
+    <tr>
+      <td>[cache - GitLab CI/CD Pipeline Configuration Reference</td>
+      <td>GitLab](https://docs.gitlab.com/ee/ci/yaml/README.html#cache)</td>
+    </tr>
+    <tr>
+      <td>[artifacts - GitLab CI/CD Pipeline Configuration Reference</td>
+      <td>GitLab](https://docs.gitlab.com/ee/ci/yaml/README.html#artifacts)</td>
+    </tr>
+  </tbody>
+</table>
 
         
       </section>

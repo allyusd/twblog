@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2020-05-09T22:50:06+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">GitLab CI/CD 使用 Cache 和 artifacts</title><link href="https://twblog.hongjianching.com/2020/05/09/GitLab-CI-CD-use-cache-and-artifacts/" rel="alternate" type="text/html" title="GitLab CI/CD 使用 Cache 和 artifacts" /><published>2020-05-09T00:00:00+08:00</published><updated>2020-05-09T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/05/09/GitLab-CI-CD-use-cache-and-artifacts</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/05/09/GitLab-CI-CD-use-cache-and-artifacts/">&lt;h2 id=&quot;簡答&quot;&gt;簡答&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2020-05-09T23:02:12+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">GitLab CI/CD 使用 Cache 和 artifacts</title><link href="https://twblog.hongjianching.com/2020/05/09/GitLab-CI-CD-use-cache-and-artifacts/" rel="alternate" type="text/html" title="GitLab CI/CD 使用 Cache 和 artifacts" /><published>2020-05-09T00:00:00+08:00</published><updated>2020-05-09T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/05/09/GitLab-CI-CD-use-cache-and-artifacts</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/05/09/GitLab-CI-CD-use-cache-and-artifacts/">&lt;p&gt;cache 跟 artifacts 字面上都有保存檔案供以後使用的意思，在 GitLab 使用要特別留意他們的定義&lt;/p&gt;
+
+&lt;h2 id=&quot;簡答&quot;&gt;簡答&lt;/h2&gt;
 
 &lt;p&gt;跨 pipeline 時使用 cache，同 pipeline 跨 job 時使用 artifacts&lt;/p&gt;
 
 &lt;h2 id=&quot;介紹&quot;&gt;介紹&lt;/h2&gt;
-
-&lt;p&gt;cache 跟 artifacts 字面上都有保存檔案供以後使用的意思，在 GitLab 使用要特別留意他們的定義&lt;/p&gt;
 
 &lt;p&gt;提醒一點，當你同時使用 caches 和 artifacts 在同一個路徑時，會被覆蓋&lt;/p&gt;
 
@@ -35,7 +35,28 @@
   &lt;span class=&quot;s&quot;&gt;paths&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
     &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;dist/&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="w3HexSchool" /><category term="GitLabCI" /><category term="CD" /><category term="DevOps" /><summary type="html">簡答</summary></entry><entry><title type="html">ActionHero Tasks &amp;amp; Resque Jobs 視覺化管理工具</title><link href="https://twblog.hongjianching.com/2020/05/02/actionhero-tasks-and-resque-jobs-visualization-and-managment-tools/" rel="alternate" type="text/html" title="ActionHero Tasks &amp; Resque Jobs 視覺化管理工具" /><published>2020-05-02T00:00:00+08:00</published><updated>2020-05-02T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/05/02/actionhero-tasks-and-resque-jobs-visualization-and-managment-tools</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/05/02/actionhero-tasks-and-resque-jobs-visualization-and-managment-tools/">&lt;p&gt;本篇介紹如何安裝 ah-resque-ui
+&lt;/div&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;[Cache dependencies in GitLab CI/CD&lt;/td&gt;
+      &lt;td&gt;GitLab](https://docs.gitlab.com/ee/ci/caching/)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;[Predefined environment variables reference&lt;/td&gt;
+      &lt;td&gt;GitLab](https://docs.gitlab.com/ee/ci/variables/predefined_variables.html)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;[cache - GitLab CI/CD Pipeline Configuration Reference&lt;/td&gt;
+      &lt;td&gt;GitLab](https://docs.gitlab.com/ee/ci/yaml/README.html#cache)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;[artifacts - GitLab CI/CD Pipeline Configuration Reference&lt;/td&gt;
+      &lt;td&gt;GitLab](https://docs.gitlab.com/ee/ci/yaml/README.html#artifacts)&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="w3HexSchool" /><category term="GitLabCI" /><category term="CD" /><category term="DevOps" /><summary type="html">cache 跟 artifacts 字面上都有保存檔案供以後使用的意思，在 GitLab 使用要特別留意他們的定義</summary></entry><entry><title type="html">ActionHero Tasks &amp;amp; Resque Jobs 視覺化管理工具</title><link href="https://twblog.hongjianching.com/2020/05/02/actionhero-tasks-and-resque-jobs-visualization-and-managment-tools/" rel="alternate" type="text/html" title="ActionHero Tasks &amp; Resque Jobs 視覺化管理工具" /><published>2020-05-02T00:00:00+08:00</published><updated>2020-05-02T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/05/02/actionhero-tasks-and-resque-jobs-visualization-and-managment-tools</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/05/02/actionhero-tasks-and-resque-jobs-visualization-and-managment-tools/">&lt;p&gt;本篇介紹如何安裝 ah-resque-ui
 &lt;a href=&quot;https://github.com/actionhero/ah-resque-ui&quot;&gt;actionhero/ah-resque-ui: Visualization and Managment tools for Actionhero Tasks &amp;amp; Resque Jobs&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;建立-actionhero-專案&quot;&gt;建立 actionhero 專案&lt;/h2&gt;

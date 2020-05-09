@@ -304,9 +304,11 @@ yarn add @types/ioredis --dev
 yarn add ts-node-dev --dev
 </code></pre>
 </div>
+
 <p>刪除 <code class="highlighter-rouge">/boot.js</code> 檔案</p>
 
 <p>新增 <code class="highlighter-rouge">/src/server.ts</code></p>
+
 <div class="language-ts highlighter-rouge"><pre class="highlight"><code><span class="cp">#!/usr/bin/env node
 </span><span class="k">import</span> <span class="p">{</span> <span class="nx">Process</span> <span class="p">}</span> <span class="k">from</span> <span class="s2">"actionhero"</span><span class="p">;</span>
 
@@ -331,6 +333,7 @@ yarn add ts-node-dev --dev
 </div>
 
 <p>接著更新 <code class="highlighter-rouge">package.json</code> 關於 scripts 的部份</p>
+
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="s2">"scripts"</span><span class="err">:</span><span class="w"> </span><span class="p">{</span><span class="w">
   </span><span class="nt">"postinstall"</span><span class="p">:</span><span class="w"> </span><span class="s2">"npm run build"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"dev"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ts-node-dev --no-deps --transpile-only ./src/server.ts"</span><span class="p">,</span><span class="w">
@@ -375,6 +378,7 @@ yarn add ws
 </div>
 
 <h2 id="ref">Ref</h2>
+
 <p><a href="https://www.actionherojs.com/tutorials/upgrade-path#Upgrading%20from%20v21%20to%20v22">Upgrading from v21 to v22 - Actionhero</a></p>
 
         

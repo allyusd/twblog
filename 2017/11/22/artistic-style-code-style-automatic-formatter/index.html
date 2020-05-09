@@ -308,21 +308,25 @@
 <div class="highlighter-rouge"><pre class="highlight"><code>--style=allman
 </code></pre>
 </div>
+
 <p>大括號都在新的一行</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>--exclue=####
 </code></pre>
 </div>
+
 <p>排除特定檔案或目標</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>--ignore-exclude-errors-x / -xi
 </code></pre>
 </div>
+
 <p>忽略且不顯示被排除的項目</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>--suffix=none / -n
 </code></pre>
 </div>
+
 <p>不保留原始檔的備份</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>--recursive / -r / -R
@@ -334,14 +338,17 @@
 <div class="highlighter-rouge"><pre class="highlight"><code>--quiet / -q
 </code></pre>
 </div>
+
 <p>不會有任何的訊息</p>
 
 <p>將上面的選項組合起來，對這一層開始包含所有子目錄的 .cpp 及 .h 檔案進行格式化，但是排除 depend 目錄，範例：</p>
+
 <div class="language-bash highlighter-rouge"><pre class="highlight"><code>astyle --style<span class="o">=</span>allman --exclude<span class="o">=</span>depend --ignore-exclude-errors-x --suffix<span class="o">=</span>none --recursive --quiet <span class="k">*</span>.cpp <span class="k">*</span>.h
 </code></pre>
 </div>
 
 <p>太長了，改用短指令</p>
+
 <div class="language-bash highlighter-rouge"><pre class="highlight"><code>astyle --style<span class="o">=</span>allman --exclude<span class="o">=</span>depend -A1xinrq <span class="k">*</span>.cpp <span class="k">*</span>.h
 </code></pre>
 </div>
@@ -351,85 +358,102 @@
 <div class="highlighter-rouge"><pre class="highlight"><code>--style=allman / --style=bsd / --style=break / -A1
 </code></pre>
 </div>
+
 <p>大括號都在新的一行</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>--indent-switches / -S
 </code></pre>
 </div>
+
 <p>switch 內縮排</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>--indent-namespaces / -N
 </code></pre>
 </div>
+
 <p>namespaces 內縮排</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>--indent-after-parens / -xU
 </code></pre>
 </div>
+
 <p>多行的參數縮排</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>--indent-preproc-block / -xW
 </code></pre>
 </div>
+
 <p>預處理器內縮排，像是 #ifdef … #endif 之間</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>--indent-col1-comments / -Y
 </code></pre>
 </div>
+
 <p>註解跟著程式碼一起縮排</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>--pad-oper / -p
 </code></pre>
 </div>
+
 <p>操作符號前後空白，像是 1+1 會變成 1 + 1</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>--pad-header / -H
 </code></pre>
 </div>
+
 <p>在 if, while, for 之後加上空白</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>--align-pointer=type   / -k1
 </code></pre>
 </div>
+
 <p>將指標或參考符號靠近型別，像是 string&amp; my_name;</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>--add-braces / -j 
+<div class="highlighter-rouge"><pre class="highlight"><code>--add-braces / -j
 </code></pre>
 </div>
+
 <p>只有一行的 if 也加上大括號</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>--close-templates / -xy
 </code></pre>
 </div>
+
 <p>消除連續模板間的空白</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>--mode=c
 </code></pre>
 </div>
+
 <p>指定為 C, C++, C++/CLI, and Objective-C 程式語言</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>--delete-empty-lines / -xe
 </code></pre>
 </div>
+
 <p>本來想用結果發現他會砍過頭，先不使用</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>--max-code-length=#   / -xC#
 --break-after-logical / -xL
 </code></pre>
 </div>
+
 <p>每行字元上限，目前覺得不需要處理</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>--indent=tab / --indent=tab=# / -t / -t#
 </code></pre>
 </div>
+
 <p>取代 tab 為空白字元，跟 IDE 預設值衝突，先不使用</p>
 
 <p>長指令範示：</p>
+
 <div class="highlighter-rouge"><pre class="highlight"><code>astyle --style=allman --indent=tab --indent-switches --indent-namespaces --indent-after-parens --indent-preproc-block --indent-col1-comments --pad-oper --pad-header --align-pointer=type --add-braces --close-templates --mode=c --exclude=depend -xinrq *.cpp *.h
 </code></pre>
 </div>
 
 <p>短指令範例：</p>
+
 <div class="highlighter-rouge"><pre class="highlight"><code>astyle -A1SNxUxWYpHk1jxy --mode=c --exclude=depend -xinrq *.cpp *.h
 </code></pre>
 </div>

@@ -24,7 +24,7 @@
 
 
 
-<meta name="description" content="Precompiled Headers最近發現專案使用的 Precompiled Headers 設定錯誤，增加了 94% 的建置時間。">
+<meta name="description" content="Precompiled Headers">
 
 
 
@@ -41,7 +41,7 @@
 
 
 
-  <meta property="og:description" content="Precompiled Headers最近發現專案使用的 Precompiled Headers 設定錯誤，增加了 94% 的建置時間。">
+  <meta property="og:description" content="Precompiled Headers">
 
 
 
@@ -279,7 +279,7 @@
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
     <meta itemprop="headline" content="Visual Studio Precompiled Headers setting issues">
-    <meta itemprop="description" content="Precompiled Headers最近發現專案使用的 Precompiled Headers 設定錯誤，增加了 94% 的建置時間。">
+    <meta itemprop="description" content="Precompiled Headers">
     <meta itemprop="datePublished" content="September 12, 2018">
     
 
@@ -294,12 +294,14 @@
 
       <section class="page__content" itemprop="text">
         <h2 id="precompiled-headers">Precompiled Headers</h2>
+
 <p>最近發現專案使用的 Precompiled Headers 設定錯誤，增加了 94% 的建置時間。</p>
 
 <p>以下是錯誤的專案設定
 <img src="/assets/images/2018-09-12-visual-studio-precompiled-headers-setting-issues/2018-09-12_20-24-11.png" alt="" /></p>
 
 <p>在專案中的 Precompiled Headers 設定選項雖然有三個，分別是</p>
+
 <ul>
   <li>Create(/Yc)</li>
   <li>Use(/Yu)</li>
@@ -310,18 +312,20 @@
 如果這個專案要啟用 Precompiled Headers 就選 Use(/Yu)，
 不啟用就選 Not Using Precompiled Headers。</p>
 
-<p>因為這個專案要啟用，所以改為  Use(/Yu)
+<p>因為這個專案要啟用，所以改為 Use(/Yu)
 <img src="/assets/images/2018-09-12-visual-studio-precompiled-headers-setting-issues/2018-09-12_20-25-12.png" alt="" /></p>
 
 <p>就是這個小小的設定，原本要編譯 100 秒的專案，只需要 5.8 秒，足足降低了 94% 的建置時間。</p>
 
 <h2 id="multi-processor-compilation">Multi-processor Compilation</h2>
+
 <p>因為目前的電腦都有多核的設計，再啟用多核心編譯功能，設定 Multi-processor Compilation 為 Yes (/MP)
 <img src="/assets/images/2018-09-12-visual-studio-precompiled-headers-setting-issues/2018-09-12_20-32-50.png" alt="" /></p>
 
 <p>啟用後建置時間只需要 3.5 秒，再節省 60% 的建置時間。</p>
 
 <h2 id="結論">結論</h2>
+
 <p>正確設定 Precompiled Headers 加上 Multi-processor Compilation，從原本的 100 秒 縮短為 3.5 秒，等於加速了 28 倍，可以大幅減少等待時間。</p>
 
         

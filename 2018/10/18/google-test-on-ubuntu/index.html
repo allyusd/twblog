@@ -308,11 +308,13 @@
 </div>
 
 <p>透過 cmake 進行建置設定，產生 makefile</p>
+
 <div class="language-bash highlighter-rouge"><pre class="highlight"><code>cmake CMakeLists.txt
 </code></pre>
 </div>
 
 <p>最後進行建置</p>
+
 <div class="language-bash highlighter-rouge"><pre class="highlight"><code>make
 </code></pre>
 </div>
@@ -322,11 +324,12 @@
 <p>接著建立一個檔案測試一下</p>
 
 <p>unittest.cpp</p>
+
 <div class="language-cpp highlighter-rouge"><pre class="highlight"><code><span class="cp">#include &lt;gtest/gtest.h&gt;
 </span>
 <span class="cp">#define HELLOWORLD "Hello World"
-</span> 
-<span class="n">TEST</span><span class="p">(</span><span class="n">GoogleTest</span><span class="p">,</span> <span class="n">HelloWorld</span><span class="p">)</span> <span class="p">{</span> 
+</span>
+<span class="n">TEST</span><span class="p">(</span><span class="n">GoogleTest</span><span class="p">,</span> <span class="n">HelloWorld</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">ASSERT_EQ</span><span class="p">(</span><span class="s">"Hello World"</span><span class="p">,</span> <span class="n">HELLOWORLD</span><span class="p">);</span>
 <span class="p">}</span>
 
@@ -350,6 +353,7 @@
 </div>
 
 <p>建置成功後，執行測試程式</p>
+
 <div class="language-bash highlighter-rouge"><pre class="highlight"><code>./unittest
 </code></pre>
 </div>

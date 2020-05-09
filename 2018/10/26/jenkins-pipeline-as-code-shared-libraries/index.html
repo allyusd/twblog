@@ -312,6 +312,7 @@
 </div>
 
 <p>接著要把 shared libraries 註冊到 Jenkins，在主頁 &gt; 管理 Jenkins &gt; 設定系統 &gt; Global Pipeline Libraries 新增一組 libary，設定如下</p>
+
 <ul>
   <li>Name: pipeline-library</li>
   <li>Default version: shared-libraries</li>
@@ -333,6 +334,7 @@ commonPipeline()
 <p>這麼一來，所有的專案的 Jenkinsfile 就只是轉呼叫 commonPipeline，之後只要修改 commonPipeline，所有的專案都會一起更新的，因為他們使用同一份 libary</p>
 
 <h1 id="ref">ref</h1>
+
 <p><a href="https://jenkins.io/doc/book/pipeline/shared-libraries/">Extending with Shared Libraries</a></p>
 
 <p><a href="https://jenkins.io/blog/2017/10/02/pipeline-templates-with-shared-libraries/">Share a standard Pipeline across multiple projects with Shared Libraries</a></p>

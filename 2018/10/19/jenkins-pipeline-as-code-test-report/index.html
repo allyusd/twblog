@@ -296,25 +296,35 @@
         <p>這篇的主題是測試報告，接續 <a href="https://twblog.hongjianching.com/2018/10/17/jenkins-pipeline-as-code-artifacts/">Jenkins - Pipeline as Code - 封存檔案</a>及<a href="https://twblog.hongjianching.com/2018/10/18/google-test-on-ubuntu/">在 Ubuntu 使用 Google Test</a>兩篇文章，這篇要整合起來</p>
 
 <h1 id="build">Build</h1>
+
 <p>首先，原本的 C++ 專案，新增 Google Test 在 git branch <code class="highlighter-rouge">gtest</code>，所以要修改原本 Jenkinsfile 指定 branch</p>
+
 <div class="highlighter-rouge"><pre class="highlight"><code>git branch: 'gtest', url: 'https://github.com/allyusd/helloworld.cpp.git'
 </code></pre>
 </div>
+
 <p>同時新增建置 unit test 的部份</p>
+
 <div class="highlighter-rouge"><pre class="highlight"><code>sh 'g++ unittest.cpp -o unittest -Igtest/include -Lgtest/lib -lgtest -lpthread'
 </code></pre>
 </div>
+
 <p>別忘了也要封裝 unittest 檔案，才能在另一個 agent 中執行</p>
+
 <div class="highlighter-rouge"><pre class="highlight"><code>archiveArtifacts artifacts: 'helloworld,unittest'
 </code></pre>
 </div>
 
 <h1 id="test">Test</h1>
-<p>接著修改 Test 階段，將原本執行 helloworld 換成 unittest，並且加上參數  –gtest_output=”xml:report.xml” 產生測試報告</p>
+
+<p>接著修改 Test 階段，將原本執行 helloworld 換成 unittest，並且加上參數 –gtest_output=”xml:report.xml” 產生測試報告</p>
+
 <div class="highlighter-rouge"><pre class="highlight"><code>./unittest --gtest_output="xml:report.xml"
 </code></pre>
 </div>
+
 <p>接著就要將測試報告上傳到 Jenkins，才能在 Web UI 出現結果</p>
+
 <div class="highlighter-rouge"><pre class="highlight"><code>post {
     always {
         junit '*.xml'
@@ -324,7 +334,9 @@
 </div>
 
 <h1 id="結果">結果</h1>
+
 <p>完整修改後的內容如下</p>
+
 <div class="highlighter-rouge"><pre class="highlight"><code>pipeline {
     agent none
     stages {
@@ -371,6 +383,7 @@
 }
 </code></pre>
 </div>
+
 <p>如果要使用已建立好的檔案，同樣在 <code class="highlighter-rouge">https://github.com/allyusd/jenkins-pipeline.git</code>，這次是 <code class="highlighter-rouge">test-report</code> branch</p>
 
 <p>執行後，在專案主頁會出現<code class="highlighter-rouge">測試結果趨勢</code>圖</p>

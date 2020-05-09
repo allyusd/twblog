@@ -298,24 +298,30 @@
 <p><img src="/assets/images/2018-08-13-qt-using-logger-in-unit-test/2018-08-13_20-07-59.png" alt="" /></p>
 
 <h2 id="legacy-code">Legacy Code</h2>
+
 <p>開始主題前，先來聊一聊 Legacy Code，</p>
 
 <p>在 <a href="https://www.amazon.com/Working-Effectively-Legacy-Michael-Feathers/dp/0131177052">Working Effectively with Legacy Code</a> 中，作者對於 Legacy Code 的定義為，沒有測試的程式碼。因為缺乏測試，所以害怕去修改現有的程式碼。久而久之，就越來越不敢修改了，因為你不知道改了之後會弄壞了什麼。</p>
 
 <h3 id="高偶合">高偶合</h3>
+
 <p>在實際案例上，往往 Legacy Code 又有各種疊床架屋的情況，常常會牽一髮而動全身。
 所以要處理 Legacy Code，基本的動作是加上單元測試 (Unit Test)。</p>
 
 <h3 id="缺乏可測試性">缺乏可測試性</h3>
+
 <p>要加上單元測試，就不可避免會遇到程式缺乏可測試性的問題，偏偏 Legacy Code 往往欠缺可測試性。</p>
 
 <h3 id="重構">重構</h3>
+
 <p>想要擁有可測試性，就要將程式改寫，需要進行重構。然而，重構是有風險的，建議先寫測試再開始重構。</p>
 
 <h3 id="先有雞先有蛋">先有雞？先有蛋？</h3>
+
 <p>很好，我們已經陷入了無窮迴圈，可能有人耐不住決定打掉重練了。別急，讓我們回到主題。</p>
 
 <h2 id="利用-logger-協助-unit-test">利用 Logger 協助 Unit Test</h2>
+
 <p>存活下來的 Legacy Code 專案，通常埋有不少 Log，就算沒有，補上新的 Log 也是很輕易的，我們可以利用這些 Log 進行 Unit Test。</p>
 
 <p>以 Qt 來說，這是一段產品代碼，範例中很簡單，你可以想像他是一個 1000 行中的某段函式。</p>
@@ -323,7 +329,7 @@
 <div class="language-cpp highlighter-rouge"><pre class="highlight"><code><span class="n">QString</span> <span class="n">Logic</span><span class="o">::</span><span class="n">getHelloMessage</span><span class="p">(</span><span class="n">QString</span> <span class="n">name</span><span class="p">)</span>
 <span class="p">{</span>
 	<span class="k">auto</span> <span class="n">helloMessage</span> <span class="o">=</span> <span class="n">QString</span><span class="p">(</span><span class="s">"Hello "</span><span class="p">).</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
-		 
+
 	<span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">helloMessage</span><span class="p">.</span><span class="n">toStdString</span><span class="p">().</span><span class="n">data</span><span class="p">();</span>
 
 	<span class="k">return</span> <span class="n">helloMessage</span><span class="p">;</span>

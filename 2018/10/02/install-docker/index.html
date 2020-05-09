@@ -24,7 +24,7 @@
 
 
 
-<meta name="description" content="Docker 的優勢Docker 的介紹就跳過了，因為我也不懂">
+<meta name="description" content="Docker 的優勢">
 
 
 
@@ -41,7 +41,7 @@
 
 
 
-  <meta property="og:description" content="Docker 的優勢Docker 的介紹就跳過了，因為我也不懂">
+  <meta property="og:description" content="Docker 的優勢">
 
 
 
@@ -279,7 +279,7 @@
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
     <meta itemprop="headline" content="安裝 Docker">
-    <meta itemprop="description" content="Docker 的優勢Docker 的介紹就跳過了，因為我也不懂">
+    <meta itemprop="description" content="Docker 的優勢">
     <meta itemprop="datePublished" content="October 02, 2018">
     
 
@@ -294,6 +294,7 @@
 
       <section class="page__content" itemprop="text">
         <h1 id="docker-的優勢">Docker 的優勢</h1>
+
 <p>Docker 的介紹就跳過了，<del>因為我也不懂</del></p>
 
 <p>不只常聽到的 DevOps 還是 CI / CD 會用到 Docker，平常拿來玩一些有的沒的東西時也很好用。不像 VM 還要作快照跟還原，用 docker 可以做完實驗後直接登出就消失，不留痕跡。</p>
@@ -319,13 +320,16 @@
 <p>別人建好的 Image 可以直接繼承使用，或者自己建立 Base Image，然後一直疊加上去。</p>
 
 <h1 id="安裝-docker">安裝 Docker</h1>
+
 <p>環境我選擇最新的 Ubuntu LTS 18.04 來當 Host，如果手邊沒有多的電腦安裝的話可以用 VirtualBox 裝起來跑。</p>
 
 <p>透過懶人指令安裝 Docker</p>
+
 <div class="language-bash highlighter-rouge"><pre class="highlight"><code>sudo sh -c <span class="s2">"</span><span class="k">$(</span>curl -fsSL https://get.docker.com<span class="k">)</span><span class="s2">"</span>
 sudo usermod -aG docker <span class="nv">$USER</span>
 </code></pre>
 </div>
+
 <p><a href="https://github.com/allyusd/script/blob/master/docker.sh">script/docker.sh at master · allyusd/script</a></p>
 
 <p>第一行用 docker 官方提供的 script 快速安裝</p>
@@ -335,6 +339,7 @@ sudo usermod -aG docker <span class="nv">$USER</span>
 <p>ref: <a href="https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-using-the-convenience-script">Get Docker CE for Ubuntu - Docker Documentation</a></p>
 
 <p>記得重新登入取得新的權限，然後接著執行一下 hello world</p>
+
 <div class="language-bash highlighter-rouge"><pre class="highlight"><code>docker run hello-world
 </code></pre>
 </div>

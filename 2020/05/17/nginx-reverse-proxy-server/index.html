@@ -19,12 +19,12 @@
 
 
 
-<title>GitLab CI/CD 使用 Cache 和 artifacts - Jian-Ching 記事本</title>
+<title>使用 Nginx 建立 Reverse Proxy Server - Jian-Ching 記事本</title>
 
 
 
 
-<meta name="description" content="cache 跟 artifacts 字面上都有保存檔案供以後使用的意思，在 GitLab 使用要特別留意他們的定義">
+<meta name="description" content="使用 Nginx 建立一個反向代理伺服器">
 
 
 
@@ -33,15 +33,15 @@
 
 <meta property="og:locale" content="zh_TW">
 <meta property="og:site_name" content="Jian-Ching 記事本">
-<meta property="og:title" content="GitLab CI/CD 使用 Cache 和 artifacts">
+<meta property="og:title" content="使用 Nginx 建立 Reverse Proxy Server">
 
 
-  <link rel="canonical" href="https://twblog.HongJianChing.com/2020/05/09/GitLab-CI-CD-use-cache-and-artifacts/">
-  <meta property="og:url" content="https://twblog.HongJianChing.com/2020/05/09/GitLab-CI-CD-use-cache-and-artifacts/">
+  <link rel="canonical" href="https://twblog.HongJianChing.com/2020/05/17/nginx-reverse-proxy-server/">
+  <meta property="og:url" content="https://twblog.HongJianChing.com/2020/05/17/nginx-reverse-proxy-server/">
 
 
 
-  <meta property="og:description" content="cache 跟 artifacts 字面上都有保存檔案供以後使用的意思，在 GitLab 使用要特別留意他們的定義">
+  <meta property="og:description" content="使用 Nginx 建立一個反向代理伺服器">
 
 
 
@@ -56,7 +56,7 @@
 
 
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2020-05-09T00:00:00+08:00">
+  <meta property="article:published_time" content="2020-05-17T00:00:00+08:00">
 
 
 
@@ -278,66 +278,84 @@
 
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
-    <meta itemprop="headline" content="GitLab CI/CD 使用 Cache 和 artifacts">
-    <meta itemprop="description" content="cache 跟 artifacts 字面上都有保存檔案供以後使用的意思，在 GitLab 使用要特別留意他們的定義">
-    <meta itemprop="datePublished" content="May 09, 2020">
+    <meta itemprop="headline" content="使用 Nginx 建立 Reverse Proxy Server">
+    <meta itemprop="description" content="使用 Nginx 建立一個反向代理伺服器">
+    <meta itemprop="datePublished" content="May 17, 2020">
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 class="page__title" itemprop="headline">GitLab CI/CD 使用 Cache 和 artifacts
+          <h1 class="page__title" itemprop="headline">使用 Nginx 建立 Reverse Proxy Server
 </h1>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        <p>cache 跟 artifacts 字面上都有保存檔案供以後使用的意思，在 GitLab 使用要特別留意他們的定義</p>
+        <p>使用 Nginx 建立一個反向代理伺服器</p>
 
-<h2 id="簡答">簡答</h2>
+<p>以前使用 Web Server，同一個 VM 需要多個網域對應的時候，在 Apache 會使用 VirtualHost 設定，而 Nginx 實現的功能叫 Server Blocks，詳細可以參考<a href="https://www.nginx.com/resources/wiki/start/topics/examples/server_blocks/">官網範例</a></p>
 
-<p>跨 pipeline 時使用 cache，同 pipeline 跨 job 時使用 artifacts</p>
+<h2 id="使用-server-blocks-的問題">使用 Server Blocks 的問題</h2>
 
-<h2 id="介紹">介紹</h2>
+<p>其實單純使用 Nginx 的 Server Blocks 是沒有問題的，但是在使用 Docker 時，就會出現多個網站使用同一個容器的情況，失去容器化的優勢。</p>
 
-<p>提醒一點，當你同時使用 caches 和 artifacts 在同一個路徑時，會被覆蓋</p>
+<h2 id="reverse-proxy-server">Reverse Proxy Server</h2>
 
-<p>不要使用 caches 在一個 pipeline 中不同的 job 之間傳遞檔案</p>
+<p>解決的方法很簡單，就是建立反向代理伺服器 (Reverse Proxy Server)</p>
 
-<h3 id="caches">Caches</h3>
+<p>原本的 WebSite A 獨立運作在一個容器 A</p>
 
-<p>caches 是設計來保存編譯或建置用所需要的依賴庫或第三方工具，像是 npm package 之類的，只要下載過一次，就可以保存，加速下次的 pipeline。</p>
+<p>另外的 WebSite B 獨立運作在一個容器 B</p>
 
-<p>專案需要使用獨立的 caches 時，可以使用 <code class="highlighter-rouge">key</code>，利用像是環境變數 <code class="highlighter-rouge">CI_COMMIT_REF_SLUG</code> 是 branch / tag 名稱，取 63 長度，全小寫，而且只保留英數其它換成<code class="highlighter-rouge">-</code>，可以用在 domain 等其它地方。</p>
+<p>最後建立一個 Reverse Proxy Server 運作在 容器 C，負責將各自的流量導到容器 A 跟 B。</p>
 
-<p>舉例：</p>
+<h2 id="實作">實作</h2>
 
-<div class="language-yml highlighter-rouge"><pre class="highlight"><code><span class="s">cache</span><span class="pi">:</span>
-  <span class="s">key</span><span class="pi">:</span> <span class="s">${CI_COMMIT_REF_SLUG}</span>
-  <span class="s">paths</span><span class="pi">:</span>
-    <span class="pi">-</span> <span class="s">node_modules/</span>
+<p>事實上透過 Nginx 建立 Reverse Proxy 非常簡單，首先透過 nginx docker 複製一份預設的設定檔</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>docker run --name tmp-nginx-container -d nginx
+docker cp tmp-nginx-container:/etc/nginx/nginx.conf nginx.conf
+docker rm -f tmp-nginx-container
 </code></pre>
 </div>
 
-<h3 id="artifacts">Artifacts</h3>
+<p>修改 config，在 http 中加上</p>
 
-<p>如果是要用在同一個 pipeline, 不同 stage / job 之間傳遞的檔案，則應該使用 artifacts。使用 artifacts 時，會自動把檔案傳遞到後續的 job。</p>
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="w">    </span><span class="err">server</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="err">listen</span><span class="w">       </span><span class="err">80;</span><span class="w">
+      </span><span class="err">server_name</span><span class="w">  </span><span class="err">domain1.com;</span><span class="w">
 
-<p>關於 cache，可以指定 <code class="highlighter-rouge">key</code> 讓每個 branch 有各自的 cache。</p>
+      </span><span class="err">location</span><span class="w"> </span><span class="err">/</span><span class="w"> </span><span class="err">{</span><span class="w">
+        </span><span class="err">proxy_pass</span><span class="w">      </span><span class="err">http://127.0.0.1:8080;</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="err">}</span><span class="w">
 
-<div class="language-yml highlighter-rouge"><pre class="highlight"><code><span class="s">artifacts</span><span class="pi">:</span>
-  <span class="s">paths</span><span class="pi">:</span>
-    <span class="pi">-</span> <span class="s">dist/</span>
+    </span><span class="err">server</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="err">listen</span><span class="w">       </span><span class="err">80;</span><span class="w">
+      </span><span class="err">server_name</span><span class="w">  </span><span class="err">domain2.com;</span><span class="w">
+
+      </span><span class="err">location</span><span class="w"> </span><span class="err">/</span><span class="w"> </span><span class="err">{</span><span class="w">
+        </span><span class="err">proxy_pass</span><span class="w">      </span><span class="err">http://127.0.0.1:8081;</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="err">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>修改 config 之後，使用自定義的 config 啟動 nginx</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>docker run --name proxy-server -v /host/path/nginx.conf:/etc/nginx/nginx.conf:ro -d -p 80:80 nginx
 </code></pre>
 </div>
+
+<p>這麼一來，當使用者透過 domain1.com 及 domain2.com 存取網站時，就會分別導到不同的地方嘍。
+即可以在同一個 VM 中使用同一個 port 處理不同的網站，又不會失去容器化的功能。</p>
 
 <h3 id="ref">Ref</h3>
 
-<p><a href="https://docs.gitlab.com/ee/ci/caching/">Cache dependencies in GitLab CI/CD - GitLab</a>
-<a href="https://docs.gitlab.com/ee/ci/variables/predefined_variables.html">Predefined environment variables reference - GitLab</a>
-<a href="https://docs.gitlab.com/ee/ci/yaml/README.html#cache">cache - GitLab CI/CD Pipeline Configuration Reference - GitLab</a>
-<a href="https://docs.gitlab.com/ee/ci/yaml/README.html#artifacts">artifacts - GitLab CI/CD Pipeline Configuration Reference - GitLab</a></p>
+<p><a href="https://hub.docker.com/_/nginx">nginx - Docker Hub</a>
+<a href="https://www.nginx.com/resources/wiki/start/topics/examples/full/">Full Example Configuration | NGINX</a></p>
 
         
       </section>
@@ -358,15 +376,7 @@
     
       
       
-      <a href="https://twblog.hongjianching.com/tags/#cd" class="page__taxonomy-item" rel="tag">CD</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://twblog.hongjianching.com/tags/#devops" class="page__taxonomy-item" rel="tag">DevOps</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://twblog.hongjianching.com/tags/#gitlabci" class="page__taxonomy-item" rel="tag">GitLabCI</a><span class="sep">, </span>
+      <a href="https://twblog.hongjianching.com/tags/#nginx" class="page__taxonomy-item" rel="tag">Nginx</a><span class="sep">, </span>
     
       
       
@@ -379,7 +389,7 @@
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2020-05-09T00:00:00+08:00">May 09, 2020</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2020-05-17T00:00:00+08:00">May 17, 2020</time></p>
         
       </footer>
 
@@ -388,25 +398,24 @@
     <h4 class="page__share-title">分享到</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=GitLab CI/CD 使用 Cache 和 artifacts https://twblog.hongjianching.com/2020/05/09/GitLab-CI-CD-use-cache-and-artifacts/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=使用 Nginx 建立 Reverse Proxy Server https://twblog.hongjianching.com/2020/05/17/nginx-reverse-proxy-server/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2020/05/09/GitLab-CI-CD-use-cache-and-artifacts/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2020/05/17/nginx-reverse-proxy-server/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2020/05/09/GitLab-CI-CD-use-cache-and-artifacts/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2020/05/17/nginx-reverse-proxy-server/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2020/05/09/GitLab-CI-CD-use-cache-and-artifacts/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2020/05/17/nginx-reverse-proxy-server/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="https://twblog.hongjianching.com/2020/05/02/actionhero-tasks-and-resque-jobs-visualization-and-managment-tools/" class="pagination--pager" title="ActionHero Tasks &amp; Resque Jobs 視覺化管理工具
+      <a href="https://twblog.hongjianching.com/2020/05/09/GitLab-CI-CD-use-cache-and-artifacts/" class="pagination--pager" title="GitLab CI/CD 使用 Cache 和 artifacts
 ">較舊</a>
     
     
-      <a href="https://twblog.hongjianching.com/2020/05/17/nginx-reverse-proxy-server/" class="pagination--pager" title="使用 Nginx 建立 Reverse Proxy Server
-">較新</a>
+      <a href="#" class="pagination--pager disabled">較新</a>
     
   </nav>
 
@@ -470,11 +479,7 @@
   
     ga('send', 'event', 'taggedPost', 'view', 'w3HexSchool');
   
-    ga('send', 'event', 'taggedPost', 'view', 'GitLabCI');
-  
-    ga('send', 'event', 'taggedPost', 'view', 'CD');
-  
-    ga('send', 'event', 'taggedPost', 'view', 'DevOps');
+    ga('send', 'event', 'taggedPost', 'view', 'Nginx');
   
   
 </script>

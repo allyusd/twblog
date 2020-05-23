@@ -1,0 +1,611 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.2.2 by Michael Rose
+  Copyright 2017 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="zh" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>使用 Grafana Influxdb Telegraf 監控系統 - Jian-Ching 記事本</title>
+
+
+
+
+<meta name="description" content="系統運作一段時間之後，想要知道最近狀況是否正常，卻沒有紀錄可以查詢跟比較。為了解決這個情況，需要一套監控系統，這裡使用 Grafana Influxdb Telegraf 解決方案。成果擁有一個可以查詢系統狀態的儀表板GrafanaGrafana 主要的 Web UI 介面，透過 Influxdb 讀取紀錄資料畫出各種視覺化圖表顯示在 Web 上。docker run -d --name=grafana -p 3000:3000 grafana/grafana啟動後使用 chrome 連到該主機的 3000 port，即可看到 Grafana 畫面http://ip:3000/第一次登入預設帳號密碼是 admin / admin，登入後會要求設定新密碼，記得存起來Note: 這個設定缺少 Grafana 的資料保存，當容器刪除後，相關資料將會遺失InfluxdbInfluxdb 主要是時間序的資料庫，用來存放 Telegraf 收集的紀錄，提供給 Grafana 查詢。docker run -d --name=influxdb -p 8086:8086 \      -e INFLUXDB_DB=defaultdb \      -e INFLUXDB_ADMIN_USER=admin \      -e INFLUXDB_ADMIN_PASSWORD=adminpass \      -e INFLUXDB_USER=user \      -e INFLUXDB_USER_PASSWORD=userpass \      -v /data/influxdb:/var/lib/influxdb \      influxdb:latestTelegrafTelegraf 用來收集相關資料，傳送給 Influxdb。如果是第一次設定，可以從 docker image 取得預設設定檔docker run --rm telegraf telegraf config &gt; telegraf.conf接著修改設定檔，其中 influxdb 的 urls 跟 hostname 要修改，hostname 預設會取 VM 名稱，但是因為跑在容器內，會取到容器的名稱，識別性太低，所以記得設定。[agent]  ...  hostname = &quot;sgp1&quot;[[outputs.influxdb]]  urls = [&quot;http://127.0.0.1:8086&quot;]  ...除了預設的 cpu, mem 之後，也把一些預設關閉的功能開啟[[inputs.interrupts]]  # no configuration  [[inputs.linux_sysctl_fs]]  # no configuration[[inputs.net]]  # collect data only about specific interfaces  # interfaces = [&quot;eth0&quot;][[inputs.netstat]]  # no configuration接著使用 docker 啟動docker run -d --name=telegraf \  --network host \	-v /:/hostfs:ro \	-v /etc:/hostfs/etc:ro \	-v /proc:/hostfs/proc:ro \	-v /sys:/hostfs/sys:ro \	-v /var:/hostfs/var:ro \	-v /run:/hostfs/run:ro \	-e HOST_ETC=/hostfs/etc \	-e HOST_PROC=/hostfs/proc \	-e HOST_SYS=/hostfs/sys \	-e HOST_VAR=/hostfs/var \	-e HOST_RUN=/hostfs/run \	-e HOST_MOUNT_PREFIX=/hostfs \  -v /data/telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro \  telegrafNote: 為了收集網路資料，使用 host mode 網路模式，需要注意相關安全性問題新增 DataSourceDataSource 選擇 InfluxDBHTTP 的 URL 記得設定能從容器中連的到的 InfluxDB IPInfluxDB Details 輸入 telegraf最後按下 Save &amp; Test出現綠底白字表示設定成功新增 Dashboard在 Dashboard 管理頁面，選擇右上角的 Import然後使用 grafana.com 上建好的設定，輸入 928這麼一來就有一些基本的資料可以查詢啦Refgrafana/grafana - Docker HubLaunching a InfluxDB container in docker with a default database name - Stack Overflowtelegraf - Docker Hubtelegraf/FAQ.md at master · influxdata/telegraf · GitHub">
+
+
+
+
+<meta name="author" content="洪健清">
+
+<meta property="og:locale" content="zh_TW">
+<meta property="og:site_name" content="Jian-Ching 記事本">
+<meta property="og:title" content="使用 Grafana Influxdb Telegraf 監控系統">
+
+
+  <link rel="canonical" href="https://twblog.HongJianChing.com/2020/05/23/grafana-influxdb-telegraf-system-monitor/">
+  <meta property="og:url" content="https://twblog.HongJianChing.com/2020/05/23/grafana-influxdb-telegraf-system-monitor/">
+
+
+
+  <meta property="og:description" content="系統運作一段時間之後，想要知道最近狀況是否正常，卻沒有紀錄可以查詢跟比較。為了解決這個情況，需要一套監控系統，這裡使用 Grafana Influxdb Telegraf 解決方案。成果擁有一個可以查詢系統狀態的儀表板GrafanaGrafana 主要的 Web UI 介面，透過 Influxdb 讀取紀錄資料畫出各種視覺化圖表顯示在 Web 上。docker run -d --name=grafana -p 3000:3000 grafana/grafana啟動後使用 chrome 連到該主機的 3000 port，即可看到 Grafana 畫面http://ip:3000/第一次登入預設帳號密碼是 admin / admin，登入後會要求設定新密碼，記得存起來Note: 這個設定缺少 Grafana 的資料保存，當容器刪除後，相關資料將會遺失InfluxdbInfluxdb 主要是時間序的資料庫，用來存放 Telegraf 收集的紀錄，提供給 Grafana 查詢。docker run -d --name=influxdb -p 8086:8086 \      -e INFLUXDB_DB=defaultdb \      -e INFLUXDB_ADMIN_USER=admin \      -e INFLUXDB_ADMIN_PASSWORD=adminpass \      -e INFLUXDB_USER=user \      -e INFLUXDB_USER_PASSWORD=userpass \      -v /data/influxdb:/var/lib/influxdb \      influxdb:latestTelegrafTelegraf 用來收集相關資料，傳送給 Influxdb。如果是第一次設定，可以從 docker image 取得預設設定檔docker run --rm telegraf telegraf config &gt; telegraf.conf接著修改設定檔，其中 influxdb 的 urls 跟 hostname 要修改，hostname 預設會取 VM 名稱，但是因為跑在容器內，會取到容器的名稱，識別性太低，所以記得設定。[agent]  ...  hostname = &quot;sgp1&quot;[[outputs.influxdb]]  urls = [&quot;http://127.0.0.1:8086&quot;]  ...除了預設的 cpu, mem 之後，也把一些預設關閉的功能開啟[[inputs.interrupts]]  # no configuration  [[inputs.linux_sysctl_fs]]  # no configuration[[inputs.net]]  # collect data only about specific interfaces  # interfaces = [&quot;eth0&quot;][[inputs.netstat]]  # no configuration接著使用 docker 啟動docker run -d --name=telegraf \  --network host \	-v /:/hostfs:ro \	-v /etc:/hostfs/etc:ro \	-v /proc:/hostfs/proc:ro \	-v /sys:/hostfs/sys:ro \	-v /var:/hostfs/var:ro \	-v /run:/hostfs/run:ro \	-e HOST_ETC=/hostfs/etc \	-e HOST_PROC=/hostfs/proc \	-e HOST_SYS=/hostfs/sys \	-e HOST_VAR=/hostfs/var \	-e HOST_RUN=/hostfs/run \	-e HOST_MOUNT_PREFIX=/hostfs \  -v /data/telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro \  telegrafNote: 為了收集網路資料，使用 host mode 網路模式，需要注意相關安全性問題新增 DataSourceDataSource 選擇 InfluxDBHTTP 的 URL 記得設定能從容器中連的到的 InfluxDB IPInfluxDB Details 輸入 telegraf最後按下 Save &amp; Test出現綠底白字表示設定成功新增 Dashboard在 Dashboard 管理頁面，選擇右上角的 Import然後使用 grafana.com 上建好的設定，輸入 928這麼一來就有一些基本的資料可以查詢啦Refgrafana/grafana - Docker HubLaunching a InfluxDB container in docker with a default database name - Stack Overflowtelegraf - Docker Hubtelegraf/FAQ.md at master · influxdata/telegraf · GitHub">
+
+
+
+
+
+  
+
+  
+
+
+
+
+
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2020-05-23T00:00:00+08:00">
+
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "洪健清",
+      "url" : "https://twblog.HongJianChing.com",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+  <meta name="google-site-verification" content="wjj5pJCiMFRllsWEU0WH3ofBhTmTmHLhm2nWgQo6XcY" />
+
+
+
+
+<!-- end SEO -->
+
+
+<link href="https://twblog.hongjianching.com/feed.xml" type="application/atom+xml" rel="alternate" title="Jian-Ching 記事本 Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+<meta http-equiv="cleartype" content="on">
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="https://twblog.hongjianching.com/">Jian-Ching 記事本</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item"><a href="https://twblog.HongJianChing.com/tags/">Tags</a></li>
+          
+        </ul>
+        <button><div class="navicon"></div></button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="https://en.gravatar.com/userimage/52239647/ccc888d68eb39b778b50b2032ee4c033.jpeg" alt="洪健清" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name" itemprop="name">洪健清</h3>
+    
+      <p class="author__bio" itemprop="description">
+        軟體程式工程師
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">追蹤</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> <span itemprop="name">台灣，台中市</span>
+        </li>
+      
+
+      
+        <li>
+          <a href="https://www.HongJianChing.com/" itemprop="url">
+            <i class="fa fa-fw fa-chain" aria-hidden="true"></i> 網站
+          </a>
+        </li>
+      
+
+      
+        <li>
+          <a href="mailto:allyusd yahoo com tw">
+            <meta itemprop="email" content="allyusd yahoo com tw" />
+            <i class="fa fa-fw fa-envelope-square" aria-hidden="true"></i> 電子信箱
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.facebook.com/jianching.hong" itemprop="sameAs">
+            <i class="fa fa-fw fa-facebook-square" aria-hidden="true"></i> Facebook
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://github.com/allyusd" itemprop="sameAs">
+            <i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </li>
+      
+
+      
+        <li>
+          <a href="https://www.stackoverflow.com/users/2613884/allyusd" itemprop="sameAs">
+            <i class="fa fa-fw fa-stack-overflow" aria-hidden="true"></i> Stackoverflow
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fa fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="使用 Grafana Influxdb Telegraf 監控系統">
+    <meta itemprop="description" content="系統運作一段時間之後，想要知道最近狀況是否正常，卻沒有紀錄可以查詢跟比較。為了解決這個情況，需要一套監控系統，這裡使用 Grafana Influxdb Telegraf 解決方案。成果擁有一個可以查詢系統狀態的儀表板GrafanaGrafana 主要的 Web UI 介面，透過 Influxdb 讀取紀錄資料畫出各種視覺化圖表顯示在 Web 上。docker run -d --name=grafana -p 3000:3000 grafana/grafana啟動後使用 chrome 連到該主機的 3000 port，即可看到 Grafana 畫面http://ip:3000/第一次登入預設帳號密碼是 admin / admin，登入後會要求設定新密碼，記得存起來Note: 這個設定缺少 Grafana 的資料保存，當容器刪除後，相關資料將會遺失InfluxdbInfluxdb 主要是時間序的資料庫，用來存放 Telegraf 收集的紀錄，提供給 Grafana 查詢。docker run -d --name=influxdb -p 8086:8086 \      -e INFLUXDB_DB=defaultdb \      -e INFLUXDB_ADMIN_USER=admin \      -e INFLUXDB_ADMIN_PASSWORD=adminpass \      -e INFLUXDB_USER=user \      -e INFLUXDB_USER_PASSWORD=userpass \      -v /data/influxdb:/var/lib/influxdb \      influxdb:latestTelegrafTelegraf 用來收集相關資料，傳送給 Influxdb。如果是第一次設定，可以從 docker image 取得預設設定檔docker run --rm telegraf telegraf config &gt; telegraf.conf接著修改設定檔，其中 influxdb 的 urls 跟 hostname 要修改，hostname 預設會取 VM 名稱，但是因為跑在容器內，會取到容器的名稱，識別性太低，所以記得設定。[agent]  ...  hostname = &quot;sgp1&quot;[[outputs.influxdb]]  urls = [&quot;http://127.0.0.1:8086&quot;]  ...除了預設的 cpu, mem 之後，也把一些預設關閉的功能開啟[[inputs.interrupts]]  # no configuration  [[inputs.linux_sysctl_fs]]  # no configuration[[inputs.net]]  # collect data only about specific interfaces  # interfaces = [&quot;eth0&quot;][[inputs.netstat]]  # no configuration接著使用 docker 啟動docker run -d --name=telegraf \  --network host \	-v /:/hostfs:ro \	-v /etc:/hostfs/etc:ro \	-v /proc:/hostfs/proc:ro \	-v /sys:/hostfs/sys:ro \	-v /var:/hostfs/var:ro \	-v /run:/hostfs/run:ro \	-e HOST_ETC=/hostfs/etc \	-e HOST_PROC=/hostfs/proc \	-e HOST_SYS=/hostfs/sys \	-e HOST_VAR=/hostfs/var \	-e HOST_RUN=/hostfs/run \	-e HOST_MOUNT_PREFIX=/hostfs \  -v /data/telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro \  telegrafNote: 為了收集網路資料，使用 host mode 網路模式，需要注意相關安全性問題新增 DataSourceDataSource 選擇 InfluxDBHTTP 的 URL 記得設定能從容器中連的到的 InfluxDB IPInfluxDB Details 輸入 telegraf最後按下 Save &amp; Test出現綠底白字表示設定成功新增 Dashboard在 Dashboard 管理頁面，選擇右上角的 Import然後使用 grafana.com 上建好的設定，輸入 928這麼一來就有一些基本的資料可以查詢啦Refgrafana/grafana - Docker HubLaunching a InfluxDB container in docker with a default database name - Stack Overflowtelegraf - Docker Hubtelegraf/FAQ.md at master · influxdata/telegraf · GitHub">
+    <meta itemprop="datePublished" content="May 23, 2020">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">使用 Grafana Influxdb Telegraf 監控系統
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        <p>系統運作一段時間之後，想要知道最近狀況是否正常，卻沒有紀錄可以查詢跟比較。為了解決這個情況，需要一套監控系統，這裡使用 Grafana Influxdb Telegraf 解決方案。</p>
+
+<h2 id="成果">成果</h2>
+
+<p>擁有一個可以查詢系統狀態的儀表板</p>
+
+<p><img src="/assets/images/2020-05-23/2020-05-23_23-53-18.png" alt="" />
+<img src="/assets/images/2020-05-23/2020-05-23_23-53-41.png" alt="" /></p>
+
+<h2 id="grafana">Grafana</h2>
+
+<p>Grafana 主要的 Web UI 介面，透過 Influxdb 讀取紀錄資料畫出各種視覺化圖表顯示在 Web 上。</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>docker run -d --name<span class="o">=</span>grafana -p 3000:3000 grafana/grafana
+</code></pre>
+</div>
+
+<p>啟動後使用 chrome 連到該主機的 3000 port，即可看到 Grafana 畫面
+http://ip:3000/</p>
+
+<p><img src="/assets/images/2020-05-23/2020-05-23_22-21-25.png" alt="" /></p>
+
+<p>第一次登入預設帳號密碼是 admin / admin，登入後會要求設定新密碼，記得存起來</p>
+
+<p>Note: 這個設定缺少 Grafana 的資料保存，當容器刪除後，相關資料將會遺失</p>
+
+<h2 id="influxdb">Influxdb</h2>
+
+<p>Influxdb 主要是時間序的資料庫，用來存放 Telegraf 收集的紀錄，提供給 Grafana 查詢。</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>docker run -d --name<span class="o">=</span>influxdb -p 8086:8086 <span class="se">\</span>
+      -e <span class="nv">INFLUXDB_DB</span><span class="o">=</span>defaultdb <span class="se">\</span>
+      -e <span class="nv">INFLUXDB_ADMIN_USER</span><span class="o">=</span>admin <span class="se">\</span>
+      -e <span class="nv">INFLUXDB_ADMIN_PASSWORD</span><span class="o">=</span>adminpass <span class="se">\</span>
+      -e <span class="nv">INFLUXDB_USER</span><span class="o">=</span>user <span class="se">\</span>
+      -e <span class="nv">INFLUXDB_USER_PASSWORD</span><span class="o">=</span>userpass <span class="se">\</span>
+      -v /data/influxdb:/var/lib/influxdb <span class="se">\</span>
+      influxdb:latest
+</code></pre>
+</div>
+
+<h2 id="telegraf">Telegraf</h2>
+
+<p>Telegraf 用來收集相關資料，傳送給 Influxdb。</p>
+
+<p>如果是第一次設定，可以從 docker image 取得預設設定檔</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>docker run --rm telegraf telegraf config &gt; telegraf.conf
+</code></pre>
+</div>
+
+<p>接著修改設定檔，其中 influxdb 的 urls 跟 hostname 要修改，hostname 預設會取 VM 名稱，但是因為跑在容器內，會取到容器的名稱，識別性太低，所以記得設定。</p>
+
+<div class="language-conf highlighter-rouge"><pre class="highlight"><code>[<span class="n">agent</span>]
+  ...
+  <span class="n">hostname</span> = <span class="s2">"sgp1"</span>
+
+[[<span class="n">outputs</span>.<span class="n">influxdb</span>]]
+  <span class="n">urls</span> = [<span class="s2">"http://127.0.0.1:8086"</span>]
+  ...
+</code></pre>
+</div>
+
+<p>除了預設的 cpu, mem 之後，也把一些預設關閉的功能開啟</p>
+
+<div class="language-conf highlighter-rouge"><pre class="highlight"><code>[[<span class="n">inputs</span>.<span class="n">interrupts</span>]]
+  <span class="c"># no configuration
+</span>  
+[[<span class="n">inputs</span>.<span class="n">linux_sysctl_fs</span>]]
+  <span class="c"># no configuration
+</span>
+[[<span class="n">inputs</span>.<span class="n">net</span>]]
+  <span class="c"># collect data only about specific interfaces
+</span>  <span class="c"># interfaces = ["eth0"]
+</span>
+[[<span class="n">inputs</span>.<span class="n">netstat</span>]]
+  <span class="c"># no configuration
+</span></code></pre>
+</div>
+
+<p>接著使用 docker 啟動</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>docker run -d --name<span class="o">=</span>telegraf <span class="se">\</span>
+  --network host <span class="se">\</span>
+	-v /:/hostfs:ro <span class="se">\</span>
+	-v /etc:/hostfs/etc:ro <span class="se">\</span>
+	-v /proc:/hostfs/proc:ro <span class="se">\</span>
+	-v /sys:/hostfs/sys:ro <span class="se">\</span>
+	-v /var:/hostfs/var:ro <span class="se">\</span>
+	-v /run:/hostfs/run:ro <span class="se">\</span>
+	-e <span class="nv">HOST_ETC</span><span class="o">=</span>/hostfs/etc <span class="se">\</span>
+	-e <span class="nv">HOST_PROC</span><span class="o">=</span>/hostfs/proc <span class="se">\</span>
+	-e <span class="nv">HOST_SYS</span><span class="o">=</span>/hostfs/sys <span class="se">\</span>
+	-e <span class="nv">HOST_VAR</span><span class="o">=</span>/hostfs/var <span class="se">\</span>
+	-e <span class="nv">HOST_RUN</span><span class="o">=</span>/hostfs/run <span class="se">\</span>
+	-e <span class="nv">HOST_MOUNT_PREFIX</span><span class="o">=</span>/hostfs <span class="se">\</span>
+  -v /data/telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro <span class="se">\</span>
+  telegraf
+</code></pre>
+</div>
+
+<p>Note: 為了收集網路資料，使用 host mode 網路模式，需要注意相關安全性問題</p>
+
+<h2 id="新增-datasource">新增 DataSource</h2>
+
+<p>DataSource 選擇 InfluxDB</p>
+
+<p>HTTP 的 URL 記得設定能從容器中連的到的 InfluxDB IP</p>
+
+<p>InfluxDB Details 輸入 telegraf</p>
+
+<p>最後按下 Save &amp; Test</p>
+
+<p>出現綠底白字表示設定成功</p>
+
+<p><img src="/assets/images/2020-05-23/2020-05-23_23-44-10.png" alt="" /></p>
+
+<h2 id="新增-dashboard">新增 Dashboard</h2>
+
+<p>在 Dashboard 管理頁面，選擇右上角的 Import</p>
+
+<p><img src="/assets/images/2020-05-23/2020-05-23_23-46-18.png" alt="" /></p>
+
+<p>然後使用 grafana.com 上建好的設定，輸入 928</p>
+
+<p><img src="/assets/images/2020-05-23/2020-05-23_23-47-15.png" alt="" /></p>
+
+<p>這麼一來就有一些基本的資料可以查詢啦</p>
+
+<h3 id="ref">Ref</h3>
+
+<p><a href="https://hub.docker.com/r/grafana/grafana">grafana/grafana - Docker Hub</a>
+<a href="https://stackoverflow.com/questions/49066607/launching-a-influxdb-container-in-docker-with-a-default-database-name">Launching a InfluxDB container in docker with a default database name - Stack Overflow</a>
+<a href="https://hub.docker.com/_/telegraf">telegraf - Docker Hub</a>
+<a href="https://github.com/influxdata/telegraf/blob/master/docs/FAQ.md#q-how-can-i-monitor-the-docker-engine-host-from-within-a-container">telegraf/FAQ.md at master · influxdata/telegraf · GitHub</a></p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-tags" aria-hidden="true"></i> 標籤: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="https://twblog.hongjianching.com/tags/#grafana" class="page__taxonomy-item" rel="tag">Grafana</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://twblog.hongjianching.com/tags/#influxdb" class="page__taxonomy-item" rel="tag">Influxdb</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://twblog.hongjianching.com/tags/#monitor" class="page__taxonomy-item" rel="tag">monitor</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://twblog.hongjianching.com/tags/#telegraf" class="page__taxonomy-item" rel="tag">Telegraf</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://twblog.hongjianching.com/tags/#w3hexschool" class="page__taxonomy-item" rel="tag">w3HexSchool</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2020-05-23T00:00:00+08:00">May 23, 2020</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">分享到</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=使用 Grafana Influxdb Telegraf 監控系統 https://twblog.hongjianching.com/2020/05/23/grafana-influxdb-telegraf-system-monitor/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2020/05/23/grafana-influxdb-telegraf-system-monitor/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2020/05/23/grafana-influxdb-telegraf-system-monitor/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2020/05/23/grafana-influxdb-telegraf-system-monitor/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="https://twblog.hongjianching.com/2020/05/17/nginx-reverse-proxy-server/" class="pagination--pager" title="使用 Nginx 建立 Reverse Proxy Server
+">較舊</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">較新</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+  
+    <h4 class="page__comments-title">留言</h4>
+    <section id="disqus_thread"></section>
+  
+</div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>追蹤:</strong></li>
+    
+    
+    
+    
+      <li><a href="http://github.com/allyusd"><i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    <li><a href="https://twblog.hongjianching.com/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> RSS Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 洪健清. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+      </footer>
+    </div>
+
+    <script src="/assets/js/main.min.js"></script>
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-9431648-15', 'auto');
+  ga('send', 'pageview');
+  
+  
+    ga('send', 'event', 'taggedPost', 'view', 'w3HexSchool');
+  
+    ga('send', 'event', 'taggedPost', 'view', 'Grafana');
+  
+    ga('send', 'event', 'taggedPost', 'view', 'Influxdb');
+  
+    ga('send', 'event', 'taggedPost', 'view', 'Telegraf');
+  
+    ga('send', 'event', 'taggedPost', 'view', 'monitor');
+  
+  
+</script>
+
+
+
+
+
+
+
+  
+  <script type="text/javascript">
+  	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+  	var disqus_shortname = 'allyusd-twblog';
+
+  	/* * * DON'T EDIT BELOW THIS LINE * * */
+  	(function() {
+  		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  		dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  	})();
+
+  	/* * * DON'T EDIT BELOW THIS LINE * * */
+  	(function () {
+  		var s = document.createElement('script'); s.async = true;
+  		s.type = 'text/javascript';
+  		s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  		(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+  	}());
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+
+
+  </body>
+</html>

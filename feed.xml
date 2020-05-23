@@ -1,4 +1,138 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2020-05-17T22:49:30+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">使用 Nginx 建立 Reverse Proxy Server</title><link href="https://twblog.hongjianching.com/2020/05/17/nginx-reverse-proxy-server/" rel="alternate" type="text/html" title="使用 Nginx 建立 Reverse Proxy Server" /><published>2020-05-17T00:00:00+08:00</published><updated>2020-05-17T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/05/17/nginx-reverse-proxy-server</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/05/17/nginx-reverse-proxy-server/">&lt;p&gt;使用 Nginx 建立一個反向代理伺服器&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2020-05-23T23:57:45+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">使用 Grafana Influxdb Telegraf 監控系統</title><link href="https://twblog.hongjianching.com/2020/05/23/grafana-influxdb-telegraf-system-monitor/" rel="alternate" type="text/html" title="使用 Grafana Influxdb Telegraf 監控系統" /><published>2020-05-23T00:00:00+08:00</published><updated>2020-05-23T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/05/23/grafana-influxdb-telegraf-system-monitor</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/05/23/grafana-influxdb-telegraf-system-monitor/">&lt;p&gt;系統運作一段時間之後，想要知道最近狀況是否正常，卻沒有紀錄可以查詢跟比較。為了解決這個情況，需要一套監控系統，這裡使用 Grafana Influxdb Telegraf 解決方案。&lt;/p&gt;
+
+&lt;h2 id=&quot;成果&quot;&gt;成果&lt;/h2&gt;
+
+&lt;p&gt;擁有一個可以查詢系統狀態的儀表板&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2020-05-23/2020-05-23_23-53-18.png&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;/assets/images/2020-05-23/2020-05-23_23-53-41.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;grafana&quot;&gt;Grafana&lt;/h2&gt;
+
+&lt;p&gt;Grafana 主要的 Web UI 介面，透過 Influxdb 讀取紀錄資料畫出各種視覺化圖表顯示在 Web 上。&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run -d --name&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;grafana -p 3000:3000 grafana/grafana
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;啟動後使用 chrome 連到該主機的 3000 port，即可看到 Grafana 畫面
+http://ip:3000/&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2020-05-23/2020-05-23_22-21-25.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;第一次登入預設帳號密碼是 admin / admin，登入後會要求設定新密碼，記得存起來&lt;/p&gt;
+
+&lt;p&gt;Note: 這個設定缺少 Grafana 的資料保存，當容器刪除後，相關資料將會遺失&lt;/p&gt;
+
+&lt;h2 id=&quot;influxdb&quot;&gt;Influxdb&lt;/h2&gt;
+
+&lt;p&gt;Influxdb 主要是時間序的資料庫，用來存放 Telegraf 收集的紀錄，提供給 Grafana 查詢。&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run -d --name&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;influxdb -p 8086:8086 &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+      -e &lt;span class=&quot;nv&quot;&gt;INFLUXDB_DB&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;defaultdb &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+      -e &lt;span class=&quot;nv&quot;&gt;INFLUXDB_ADMIN_USER&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;admin &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+      -e &lt;span class=&quot;nv&quot;&gt;INFLUXDB_ADMIN_PASSWORD&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;adminpass &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+      -e &lt;span class=&quot;nv&quot;&gt;INFLUXDB_USER&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;user &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+      -e &lt;span class=&quot;nv&quot;&gt;INFLUXDB_USER_PASSWORD&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;userpass &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+      -v /data/influxdb:/var/lib/influxdb &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+      influxdb:latest
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;telegraf&quot;&gt;Telegraf&lt;/h2&gt;
+
+&lt;p&gt;Telegraf 用來收集相關資料，傳送給 Influxdb。&lt;/p&gt;
+
+&lt;p&gt;如果是第一次設定，可以從 docker image 取得預設設定檔&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run --rm telegraf telegraf config &amp;gt; telegraf.conf
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;接著修改設定檔，其中 influxdb 的 urls 跟 hostname 要修改，hostname 預設會取 VM 名稱，但是因為跑在容器內，會取到容器的名稱，識別性太低，所以記得設定。&lt;/p&gt;
+
+&lt;div class=&quot;language-conf highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[&lt;span class=&quot;n&quot;&gt;agent&lt;/span&gt;]
+  ...
+  &lt;span class=&quot;n&quot;&gt;hostname&lt;/span&gt; = &lt;span class=&quot;s2&quot;&gt;&quot;sgp1&quot;&lt;/span&gt;
+
+[[&lt;span class=&quot;n&quot;&gt;outputs&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;influxdb&lt;/span&gt;]]
+  &lt;span class=&quot;n&quot;&gt;urls&lt;/span&gt; = [&lt;span class=&quot;s2&quot;&gt;&quot;http://127.0.0.1:8086&quot;&lt;/span&gt;]
+  ...
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;除了預設的 cpu, mem 之後，也把一些預設關閉的功能開啟&lt;/p&gt;
+
+&lt;div class=&quot;language-conf highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[[&lt;span class=&quot;n&quot;&gt;inputs&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;interrupts&lt;/span&gt;]]
+  &lt;span class=&quot;c&quot;&gt;# no configuration
+&lt;/span&gt;  
+[[&lt;span class=&quot;n&quot;&gt;inputs&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;linux_sysctl_fs&lt;/span&gt;]]
+  &lt;span class=&quot;c&quot;&gt;# no configuration
+&lt;/span&gt;
+[[&lt;span class=&quot;n&quot;&gt;inputs&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;net&lt;/span&gt;]]
+  &lt;span class=&quot;c&quot;&gt;# collect data only about specific interfaces
+&lt;/span&gt;  &lt;span class=&quot;c&quot;&gt;# interfaces = [&quot;eth0&quot;]
+&lt;/span&gt;
+[[&lt;span class=&quot;n&quot;&gt;inputs&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;netstat&lt;/span&gt;]]
+  &lt;span class=&quot;c&quot;&gt;# no configuration
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;接著使用 docker 啟動&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run -d --name&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;telegraf &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  --network host &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+	-v /:/hostfs:ro &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+	-v /etc:/hostfs/etc:ro &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+	-v /proc:/hostfs/proc:ro &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+	-v /sys:/hostfs/sys:ro &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+	-v /var:/hostfs/var:ro &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+	-v /run:/hostfs/run:ro &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+	-e &lt;span class=&quot;nv&quot;&gt;HOST_ETC&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/hostfs/etc &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+	-e &lt;span class=&quot;nv&quot;&gt;HOST_PROC&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/hostfs/proc &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+	-e &lt;span class=&quot;nv&quot;&gt;HOST_SYS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/hostfs/sys &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+	-e &lt;span class=&quot;nv&quot;&gt;HOST_VAR&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/hostfs/var &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+	-e &lt;span class=&quot;nv&quot;&gt;HOST_RUN&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/hostfs/run &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+	-e &lt;span class=&quot;nv&quot;&gt;HOST_MOUNT_PREFIX&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/hostfs &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  -v /data/telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  telegraf
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Note: 為了收集網路資料，使用 host mode 網路模式，需要注意相關安全性問題&lt;/p&gt;
+
+&lt;h2 id=&quot;新增-datasource&quot;&gt;新增 DataSource&lt;/h2&gt;
+
+&lt;p&gt;DataSource 選擇 InfluxDB&lt;/p&gt;
+
+&lt;p&gt;HTTP 的 URL 記得設定能從容器中連的到的 InfluxDB IP&lt;/p&gt;
+
+&lt;p&gt;InfluxDB Details 輸入 telegraf&lt;/p&gt;
+
+&lt;p&gt;最後按下 Save &amp;amp; Test&lt;/p&gt;
+
+&lt;p&gt;出現綠底白字表示設定成功&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2020-05-23/2020-05-23_23-44-10.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;新增-dashboard&quot;&gt;新增 Dashboard&lt;/h2&gt;
+
+&lt;p&gt;在 Dashboard 管理頁面，選擇右上角的 Import&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2020-05-23/2020-05-23_23-46-18.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;然後使用 grafana.com 上建好的設定，輸入 928&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2020-05-23/2020-05-23_23-47-15.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;這麼一來就有一些基本的資料可以查詢啦&lt;/p&gt;
+
+&lt;h3 id=&quot;ref&quot;&gt;Ref&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://hub.docker.com/r/grafana/grafana&quot;&gt;grafana/grafana - Docker Hub&lt;/a&gt;
+&lt;a href=&quot;https://stackoverflow.com/questions/49066607/launching-a-influxdb-container-in-docker-with-a-default-database-name&quot;&gt;Launching a InfluxDB container in docker with a default database name - Stack Overflow&lt;/a&gt;
+&lt;a href=&quot;https://hub.docker.com/_/telegraf&quot;&gt;telegraf - Docker Hub&lt;/a&gt;
+&lt;a href=&quot;https://github.com/influxdata/telegraf/blob/master/docs/FAQ.md#q-how-can-i-monitor-the-docker-engine-host-from-within-a-container&quot;&gt;telegraf/FAQ.md at master · influxdata/telegraf · GitHub&lt;/a&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="w3HexSchool" /><category term="Grafana" /><category term="Influxdb" /><category term="Telegraf" /><category term="monitor" /><summary type="html">系統運作一段時間之後，想要知道最近狀況是否正常，卻沒有紀錄可以查詢跟比較。為了解決這個情況，需要一套監控系統，這裡使用 Grafana Influxdb Telegraf 解決方案。 成果 擁有一個可以查詢系統狀態的儀表板 Grafana Grafana 主要的 Web UI 介面，透過 Influxdb 讀取紀錄資料畫出各種視覺化圖表顯示在 Web 上。 docker run -d --name=grafana -p 3000:3000 grafana/grafana 啟動後使用 chrome 連到該主機的 3000 port，即可看到 Grafana 畫面 http://ip:3000/ 第一次登入預設帳號密碼是 admin / admin，登入後會要求設定新密碼，記得存起來 Note: 這個設定缺少 Grafana 的資料保存，當容器刪除後，相關資料將會遺失 Influxdb Influxdb 主要是時間序的資料庫，用來存放 Telegraf 收集的紀錄，提供給 Grafana 查詢。 docker run -d --name=influxdb -p 8086:8086 \ -e INFLUXDB_DB=defaultdb \ -e INFLUXDB_ADMIN_USER=admin \ -e INFLUXDB_ADMIN_PASSWORD=adminpass \ -e INFLUXDB_USER=user \ -e INFLUXDB_USER_PASSWORD=userpass \ -v /data/influxdb:/var/lib/influxdb \ influxdb:latest Telegraf Telegraf 用來收集相關資料，傳送給 Influxdb。 如果是第一次設定，可以從 docker image 取得預設設定檔 docker run --rm telegraf telegraf config &amp;gt; telegraf.conf 接著修改設定檔，其中 influxdb 的 urls 跟 hostname 要修改，hostname 預設會取 VM 名稱，但是因為跑在容器內，會取到容器的名稱，識別性太低，所以記得設定。 [agent] ... hostname = &quot;sgp1&quot; [[outputs.influxdb]] urls = [&quot;http://127.0.0.1:8086&quot;] ... 除了預設的 cpu, mem 之後，也把一些預設關閉的功能開啟 [[inputs.interrupts]] # no configuration [[inputs.linux_sysctl_fs]] # no configuration [[inputs.net]] # collect data only about specific interfaces # interfaces = [&quot;eth0&quot;] [[inputs.netstat]] # no configuration 接著使用 docker 啟動 docker run -d --name=telegraf \ --network host \ -v /:/hostfs:ro \ -v /etc:/hostfs/etc:ro \ -v /proc:/hostfs/proc:ro \ -v /sys:/hostfs/sys:ro \ -v /var:/hostfs/var:ro \ -v /run:/hostfs/run:ro \ -e HOST_ETC=/hostfs/etc \ -e HOST_PROC=/hostfs/proc \ -e HOST_SYS=/hostfs/sys \ -e HOST_VAR=/hostfs/var \ -e HOST_RUN=/hostfs/run \ -e HOST_MOUNT_PREFIX=/hostfs \ -v /data/telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro \ telegraf Note: 為了收集網路資料，使用 host mode 網路模式，需要注意相關安全性問題 新增 DataSource DataSource 選擇 InfluxDB HTTP 的 URL 記得設定能從容器中連的到的 InfluxDB IP InfluxDB Details 輸入 telegraf 最後按下 Save &amp;amp; Test 出現綠底白字表示設定成功 新增 Dashboard 在 Dashboard 管理頁面，選擇右上角的 Import 然後使用 grafana.com 上建好的設定，輸入 928 這麼一來就有一些基本的資料可以查詢啦 Ref grafana/grafana - Docker Hub Launching a InfluxDB container in docker with a default database name - Stack Overflow telegraf - Docker Hub telegraf/FAQ.md at master · influxdata/telegraf · GitHub</summary></entry><entry><title type="html">使用 Nginx 建立 Reverse Proxy Server</title><link href="https://twblog.hongjianching.com/2020/05/17/nginx-reverse-proxy-server/" rel="alternate" type="text/html" title="使用 Nginx 建立 Reverse Proxy Server" /><published>2020-05-17T00:00:00+08:00</published><updated>2020-05-17T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/05/17/nginx-reverse-proxy-server</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/05/17/nginx-reverse-proxy-server/">&lt;p&gt;使用 Nginx 建立一個反向代理伺服器&lt;/p&gt;
 
 &lt;p&gt;以前使用 Web Server，同一個 VM 需要多個網域對應的時候，在 Apache 會使用 VirtualHost 設定，而 Nginx 實現的功能叫 Server Blocks，詳細可以參考&lt;a href=&quot;https://www.nginx.com/resources/wiki/start/topics/examples/server_blocks/&quot;&gt;官網範例&lt;/a&gt;&lt;/p&gt;
 
@@ -532,235 +666,4 @@ yarn debug
 
 &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;node -v
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="w3HexSchool" /><category term="Node.js" /><category term="nvm" /><category term="Windows" /><summary type="html">nvm 是 Node Version Manager，用來管理各種不同的 Node.js 版本的工具， 當各種專案需要使用不同版本的 Node.js 時，透過 nvm 可以快速切換版本 安裝 nvm 透過 Chocolatey 安裝 choco install nvm 手動安裝 coreybutler/nvm-windows: A node.js version management utility for Windows. Ironically written in Go. 到 Release 頁面，下載 nvm-setup.zip 並安裝 安裝 Node.js nvm install 12.13.1 使用指定版本 nvm use 12.13.1 確定 Node.js 版本 node -v</summary></entry><entry><title type="html">ActionHero 使用 MySQL 及 Vue 範例</title><link href="https://twblog.hongjianching.com/2020/03/14/actionhero-with-mysql-and-vue-example/" rel="alternate" type="text/html" title="ActionHero 使用 MySQL 及 Vue 範例" /><published>2020-03-14T00:00:00+08:00</published><updated>2020-03-14T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/03/14/actionhero-with-mysql-and-vue-example</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/03/14/actionhero-with-mysql-and-vue-example/">&lt;p&gt;這個範例是新增使用者到 MySQL&lt;/p&gt;
-
-&lt;h2 id=&quot;migrations&quot;&gt;Migrations&lt;/h2&gt;
-
-&lt;p&gt;首先建立一個 Migration 幫助新增資料表，新增 &lt;code class=&quot;highlighter-rouge&quot;&gt;from ./src/migrations/0000001-createUsersTable.js&lt;/code&gt; 檔案&lt;/p&gt;
-
-&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exports&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;up&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;migration&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;DataTypes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;migration&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;createTable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-      &lt;span class=&quot;s2&quot;&gt;&quot;users&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;guid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;DataTypes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;UUID&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;defaultValue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;DataTypes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;UUIDV4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;primaryKey&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-
-        &lt;span class=&quot;na&quot;&gt;firstName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;DataTypes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;STRING&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;191&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;allowNull&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-
-        &lt;span class=&quot;na&quot;&gt;lastName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;DataTypes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;STRING&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;191&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;allowNull&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-
-        &lt;span class=&quot;na&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;DataTypes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;STRING&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;191&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;allowNull&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-
-        &lt;span class=&quot;na&quot;&gt;passwordHash&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;DataTypes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;TEXT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;allowNull&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-
-        &lt;span class=&quot;na&quot;&gt;lastLoginAt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;DataTypes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;DATE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;allowNull&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-
-        &lt;span class=&quot;na&quot;&gt;createdAt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;DataTypes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;DATE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;updatedAt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;DataTypes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;DATE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;deletedAt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;DataTypes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;DATE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;charset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;utf8mb4&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-    &lt;span class=&quot;nx&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;migration&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;addIndex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;users&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;email&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;unique&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;fields&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;email&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-
-  &lt;span class=&quot;na&quot;&gt;down&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;migration&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;migration&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;dropTable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;users&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h2 id=&quot;models&quot;&gt;Models&lt;/h2&gt;
-
-&lt;p&gt;接著新增 User Model，新增 &lt;code class=&quot;highlighter-rouge&quot;&gt;src/models/User.ts&lt;/code&gt;檔案到專案中&lt;/p&gt;
-
-&lt;div class=&quot;language-ts highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;bcrypt&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;bcrypt&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;Model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;Table&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;Column&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;AllowNull&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;IsEmail&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;BeforeCreate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;HasMany&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;sequelize-typescript&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;uuid&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;uuid/v4&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Table&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;tableName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;users&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;paranoid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;saltRounds&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-  &lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Column&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;primaryKey&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;guid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-  &lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;AllowNull&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Column&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;firstName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-  &lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;AllowNull&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Column&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;lastName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-  &lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;AllowNull&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;IsEmail&lt;/span&gt;
-  &lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Column&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-  &lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Column&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;passwordHash&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-  &lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;BeforeCreate&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;generateGuid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;instance&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;instance&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;guid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;nx&quot;&gt;instance&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;guid&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;uuid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-  &lt;span class=&quot;k&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;updatePassword&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;password&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;passwordHash&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;bcrypt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;hash&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;password&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;saltRounds&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;save&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-  &lt;span class=&quot;k&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;checkPassword&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;password&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;passwordHash&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;password not set for this team member&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;match&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;bcrypt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;compare&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;password&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;passwordHash&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;match&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;在處理使用者密碼的部份，有使用&lt;code class=&quot;highlighter-rouge&quot;&gt;bcrypt&lt;/code&gt;，記得要安裝套件&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;npm install bcrypt --save
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h2 id=&quot;action&quot;&gt;Action&lt;/h2&gt;
-
-&lt;p&gt;將資料庫相關都處理好之後，就是 Action 啦，新增 &lt;code class=&quot;highlighter-rouge&quot;&gt;./src/actions/user.ts&lt;/code&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-ts highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Action&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;actionhero&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;../models/User&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;UserCreate&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Action&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;constructor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;user:create&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;description&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;create a new user&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;outputExample&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{};&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;inputs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;firstName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;required&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;lastName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;required&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;password&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;required&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;required&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-  &lt;span class=&quot;k&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;response&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;user&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;firstName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;firstName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;lastName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;lastName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;save&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;updatePassword&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;password&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;userGuid&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;guid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h2 id=&quot;vuejs-範例&quot;&gt;Vue.js 範例&lt;/h2&gt;
-
-&lt;p&gt;記得先修改 ActionHero 專案中的&lt;code class=&quot;highlighter-rouge&quot;&gt;src\config\servers\web.ts&lt;/code&gt;，將 port 從 8080 改為 8081，避免跟 Vue 專案衝突&lt;/p&gt;
-
-&lt;div class=&quot;language-ts highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Port or Socket Path&lt;/span&gt;
-&lt;span class=&quot;nl&quot;&gt;port&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;process&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;PORT&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8081&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;在 Vue 專案中的 component 新增 data&lt;/p&gt;
-
-&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;firstName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;''&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;lastName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;''&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;password&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;''&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;''&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;接著新增 template 的部份&lt;/p&gt;
-
-&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;firstName: &lt;span class=&quot;nt&quot;&gt;&amp;lt;input&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v-model=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;user.firstName&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&amp;lt;br&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-lastName: &lt;span class=&quot;nt&quot;&gt;&amp;lt;input&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v-model=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;user.lastName&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&amp;lt;br&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-password: &lt;span class=&quot;nt&quot;&gt;&amp;lt;input&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v-model=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;user.password&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&amp;lt;br&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-email: &lt;span class=&quot;nt&quot;&gt;&amp;lt;input&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v-model=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;user.email&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&amp;lt;br&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;button&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;click=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;addUser&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Add User&lt;span class=&quot;nt&quot;&gt;&amp;lt;/button&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;最後是 javascript 的部份&lt;/p&gt;
-
-&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;addUser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;axios&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;post&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'http://localhost:8081/api/user:create?apiVersion=1'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;res&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h2 id=&quot;完成結果&quot;&gt;完成結果&lt;/h2&gt;
-
-&lt;p&gt;透過這些已經可以新增使用者&lt;/p&gt;
-
-&lt;p&gt;Vue 使用畫面&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-03-14/2020-03-08_14-32-02.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Console 回傳結果&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-03-14/2020-03-08_14-32-42.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;SQL 查詢結果&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-03-14/2020-03-08_14-33-02.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;參考資料&quot;&gt;參考資料&lt;/h4&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/actionhero/ah-sequelize-plugin&quot;&gt;actionhero/ah-sequelize-plugin: sequelize plugin for actionhero&lt;/a&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="w3HexSchool" /><category term="ActionHero" /><category term="MySQL" /><category term="Vue.js" /><summary type="html">這個範例是新增使用者到 MySQL Migrations 首先建立一個 Migration 幫助新增資料表，新增 from ./src/migrations/0000001-createUsersTable.js 檔案 module.exports = { up: async function (migration, DataTypes) { await migration.createTable( &quot;users&quot;, { guid: { type: DataTypes.UUID, defaultValue: DataTypes.UUIDV4, primaryKey: true, }, firstName: { type: DataTypes.STRING(191), allowNull: false, }, lastName: { type: DataTypes.STRING(191), allowNull: false, }, email: { type: DataTypes.STRING(191), allowNull: false, }, passwordHash: { type: DataTypes.TEXT, allowNull: true, }, lastLoginAt: { type: DataTypes.DATE, allowNull: true, }, createdAt: DataTypes.DATE, updatedAt: DataTypes.DATE, deletedAt: DataTypes.DATE, }, { charset: &quot;utf8mb4&quot;, } ); await migration.addIndex(&quot;users&quot;, [&quot;email&quot;], { unique: true, fields: &quot;email&quot;, }); }, down: async function (migration) { await migration.dropTable(&quot;users&quot;); }, }; Models 接著新增 User Model，新增 src/models/User.ts檔案到專案中 import * as bcrypt from &quot;bcrypt&quot;; import { Model, Table, Column, AllowNull, IsEmail, BeforeCreate, HasMany, } from &quot;sequelize-typescript&quot;; import * as uuid from &quot;uuid/v4&quot;; @Table({ tableName: &quot;users&quot;, paranoid: true }) export class User extends Model&amp;lt;User&amp;gt; { saltRounds = 10; @Column({ primaryKey: true }) guid: string; @AllowNull(false) @Column firstName: string; @AllowNull(false) @Column lastName: string; @AllowNull(false) @IsEmail @Column email: string; @Column passwordHash: string; @BeforeCreate static generateGuid(instance) { if (!instance.guid) { instance.guid = uuid(); } } async updatePassword(password: string) { this.passwordHash = await bcrypt.hash(password, this.saltRounds); await this.save(); } async checkPassword(password: string) { if (!this.passwordHash) { throw new Error(&quot;password not set for this team member&quot;); } const match = await bcrypt.compare(password, this.passwordHash); return match; } } 在處理使用者密碼的部份，有使用bcrypt，記得要安裝套件 npm install bcrypt --save Action 將資料庫相關都處理好之後，就是 Action 啦，新增 ./src/actions/user.ts import { Action } from &quot;actionhero&quot;; import { User } from &quot;../models/User&quot;; export class UserCreate extends Action { constructor() { super(); this.name = &quot;user:create&quot;; this.description = &quot;create a new user&quot;; this.outputExample = {}; this.inputs = { firstName: { required: true }, lastName: { required: true }, password: { required: true }, email: { required: true }, }; } async run({ params, response }) { const user = new User({ firstName: params.firstName, lastName: params.lastName, email: params.email, }); await user.save(); await user.updatePassword(params.password); response.userGuid = user.guid; } } Vue.js 範例 記得先修改 ActionHero 專案中的src\config\servers\web.ts，將 port 從 8080 改為 8081，避免跟 Vue 專案衝突 // Port or Socket Path port: process.env.PORT || 8081, 在 Vue 專案中的 component 新增 data data() { return { user: { firstName: '', lastName: '', password: '', email: '', }, } }, 接著新增 template 的部份 firstName: &amp;lt;input v-model=&quot;user.firstName&quot; /&amp;gt;&amp;lt;br /&amp;gt; lastName: &amp;lt;input v-model=&quot;user.lastName&quot; /&amp;gt;&amp;lt;br /&amp;gt; password: &amp;lt;input v-model=&quot;user.password&quot; /&amp;gt;&amp;lt;br /&amp;gt; email: &amp;lt;input v-model=&quot;user.email&quot; /&amp;gt;&amp;lt;br /&amp;gt; &amp;lt;button @click=&quot;addUser&quot;&amp;gt;Add User&amp;lt;/button&amp;gt; 最後是 javascript 的部份 addUser() { console.log(this.user); axios.post('http://localhost:8081/api/user:create?apiVersion=1', this.user).then(res =&amp;gt; { console.log(res.data); }); } 完成結果 透過這些已經可以新增使用者 Vue 使用畫面 Console 回傳結果 SQL 查詢結果 參考資料 actionhero/ah-sequelize-plugin: sequelize plugin for actionhero</summary></entry></feed>
+&lt;/div&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="w3HexSchool" /><category term="Node.js" /><category term="nvm" /><category term="Windows" /><summary type="html">nvm 是 Node Version Manager，用來管理各種不同的 Node.js 版本的工具， 當各種專案需要使用不同版本的 Node.js 時，透過 nvm 可以快速切換版本 安裝 nvm 透過 Chocolatey 安裝 choco install nvm 手動安裝 coreybutler/nvm-windows: A node.js version management utility for Windows. Ironically written in Go. 到 Release 頁面，下載 nvm-setup.zip 並安裝 安裝 Node.js nvm install 12.13.1 使用指定版本 nvm use 12.13.1 確定 Node.js 版本 node -v</summary></entry></feed>

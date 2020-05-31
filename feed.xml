@@ -1,4 +1,102 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2020-05-23T23:57:45+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">使用 Grafana Influxdb Telegraf 監控系統</title><link href="https://twblog.hongjianching.com/2020/05/23/grafana-influxdb-telegraf-system-monitor/" rel="alternate" type="text/html" title="使用 Grafana Influxdb Telegraf 監控系統" /><published>2020-05-23T00:00:00+08:00</published><updated>2020-05-23T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/05/23/grafana-influxdb-telegraf-system-monitor</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/05/23/grafana-influxdb-telegraf-system-monitor/">&lt;p&gt;系統運作一段時間之後，想要知道最近狀況是否正常，卻沒有紀錄可以查詢跟比較。為了解決這個情況，需要一套監控系統，這裡使用 Grafana Influxdb Telegraf 解決方案。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2020-05-31T11:31:37+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">Sequelize 進行 Raw Query 遇到 SQL Injection 問題</title><link href="https://twblog.hongjianching.com/2020/05/31/sequelize-raw-query-meet-sql-injection-issue/" rel="alternate" type="text/html" title="Sequelize 進行 Raw Query 遇到 SQL Injection 問題" /><published>2020-05-31T00:00:00+08:00</published><updated>2020-05-31T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/05/31/sequelize-raw-query-meet-sql-injection-issue</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/05/31/sequelize-raw-query-meet-sql-injection-issue/">&lt;p&gt;Sequelize 除了使用 Model Query 之外，還可以透過 SQL 語法直接進行 Raw Query，但是會碰上 SQL Injection 問題&lt;/p&gt;
+
+&lt;h2 id=&quot;model-query&quot;&gt;Model Query&lt;/h2&gt;
+
+&lt;p&gt;這是使用 Model Query 方法的範例&lt;/p&gt;
+
+&lt;div class=&quot;language-ts highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Model Query&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;way1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;account&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;logs&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ShoppingLog&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ShoppingLog&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;findOne&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ShoppingLog&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;where&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;account&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;account&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;source&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'TW'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;price&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Op&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;gt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;order&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'createTime'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'DESC'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;logs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;raw-queries---sql-injection&quot;&gt;Raw Queries - SQL Injection&lt;/h2&gt;
+
+&lt;p&gt;這是直接使用 SQL 語法進行查詢，但是會造成 SQL Injection 的範例&lt;/p&gt;
+
+&lt;div class=&quot;language-ts highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;way2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;account&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sequelize&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Sequelize&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;api&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;sequelize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sql&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;`&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ShoppingLog&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sl&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;where&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;account&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;account&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;source&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'TW'&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;price&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;order&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;createTime&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;desc&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;limit&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;logs&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ShoppingLog&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sequelize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;query&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ShoppingLog&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;sql&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ShoppingLog&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;mapToModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// pass true here if you have any mapped fields&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;logs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;logs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;raw-queries&quot;&gt;Raw Queries&lt;/h2&gt;
+
+&lt;p&gt;這是把參數安全替換，解決 SQL Injection 的範例&lt;/p&gt;
+
+&lt;div class=&quot;language-ts highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;way3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;account&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sequelize&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Sequelize&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;api&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;sequelize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sql&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;`&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ShoppingLog&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sl&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;where&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;account&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;account&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;source&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'TW'&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;price&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;order&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;createTime&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;desc&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;limit&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;replacements&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;account&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;account&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;logs&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ShoppingLog&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sequelize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;query&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ShoppingLog&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;sql&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ShoppingLog&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;replacements&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;replacements&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;mapToModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// pass true here if you have any mapped fields&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;logs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;logs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;ref&quot;&gt;Ref&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;[Manual&lt;/td&gt;
+      &lt;td&gt;Sequelize](https://sequelize.org/master/manual/raw-queries.html)&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="w3HexSchool" /><category term="Sequelize" /><category term="SQL-Injection" /><summary type="html">Sequelize 除了使用 Model Query 之外，還可以透過 SQL 語法直接進行 Raw Query，但是會碰上 SQL Injection 問題</summary></entry><entry><title type="html">使用 Grafana Influxdb Telegraf 監控系統</title><link href="https://twblog.hongjianching.com/2020/05/23/grafana-influxdb-telegraf-system-monitor/" rel="alternate" type="text/html" title="使用 Grafana Influxdb Telegraf 監控系統" /><published>2020-05-23T00:00:00+08:00</published><updated>2020-05-23T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/05/23/grafana-influxdb-telegraf-system-monitor</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/05/23/grafana-influxdb-telegraf-system-monitor/">&lt;p&gt;系統運作一段時間之後，想要知道最近狀況是否正常，卻沒有紀錄可以查詢跟比較。為了解決這個情況，需要一套監控系統，這裡使用 Grafana Influxdb Telegraf 解決方案。&lt;/p&gt;
 
 &lt;h2 id=&quot;成果&quot;&gt;成果&lt;/h2&gt;
 
@@ -631,39 +729,4 @@ yarn debug
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;就可以使用 VSCode 進行 Debug 了，而且因為有設定 &lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;restart&quot;: true&lt;/code&gt; 參數，就算結束程式，只要再次啟動，就會自動進入偵錯模式喔。&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="w3HexSchool" /><category term="ActionHero" /><category term="Nodejs" /><category term="Debug" /><category term="TypeScript" /><summary type="html">2020-04-26 Update 發現不明原因導致本文方法失效，新的方法已更新在這 使用 VSCode Debug Actionhero version 22 on windows 前言 2020-03-19 第一次參加 Actionhero 的 Office Hours，詢問了如何使用 VSCode Debug ActionHero，實際上也是 Node.js with TypeScript 專案如何使用 VSCode Debug 的使用方案。會後 Evan Tahler 發了一個 Pull Request 新增了 Debug 相關的變更，同時也更新了官網的文件。 VSCode Debug 設定 因為原始碼會先建置後才執行，所以想要使用原始碼直接 Debug，就要靠 sourceMap 告訴 VSCode 對應執行中的程式碼及原始碼的關係，所以先確認專案中 TypeScript 的設定是否有開啟 sourceMap。 tsconfig.json &quot;sourceMap&quot;: true 另外在執行指令中加上--inspect參數，以 ActionHero 為例，dev 是原本的指令，debug 是新增的指令。 package.json &quot;dev&quot;: &quot;ts-node-dev --no-deps --transpile-only ./src/server&quot;, &quot;debug&quot;: &quot;ts-node-dev --transpile-only --no-deps --inspect -- ./src/server &quot;, 因為在設定中開啟了 sourceMap，所以修改 build 指令關閉 sourceMap。 package.json &quot;build&quot;: &quot;rm -rf dist &amp;amp;&amp;amp; ./node_modules/.bin/tsc --sourceMap false --declaration&quot;, 最後新增一個 VSCode 的 Debug launch 設定 .vscode/launch.json { &quot;version&quot;: &quot;0.2.0&quot;, &quot;configurations&quot;: [ { &quot;type&quot;: &quot;node&quot;, &quot;request&quot;: &quot;attach&quot;, &quot;name&quot;: &quot;Actionhero Debugger&quot;, &quot;protocol&quot;: &quot;inspector&quot;, &quot;port&quot;: 9229, &quot;restart&quot;: true, &quot;localRoot&quot;: &quot;${workspaceFolder}&quot;, &quot;remoteRoot&quot;: &quot;.&quot; } ] } 接著只要在第一次啟動 VSCode 時，先執行 VSCode 的 Actionhero Debugger，再執行 debug 指令，像是 npm run debug or yarn debug 就可以使用 VSCode 進行 Debug 了，而且因為有設定 &quot;restart&quot;: true 參數，就算結束程式，只要再次啟動，就會自動進入偵錯模式喔。</summary></entry><entry><title type="html">在 Windows 透過 nvm 安裝 Node.js</title><link href="https://twblog.hongjianching.com/2020/03/21/install-nodejs-by-nvm-on-windows/" rel="alternate" type="text/html" title="在 Windows 透過 nvm 安裝 Node.js" /><published>2020-03-21T00:00:00+08:00</published><updated>2020-03-21T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/03/21/install-nodejs-by-nvm-on-windows</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/03/21/install-nodejs-by-nvm-on-windows/">&lt;p&gt;nvm 是 Node Version Manager，用來管理各種不同的 Node.js 版本的工具，
-當各種專案需要使用不同版本的 Node.js 時，透過 nvm 可以快速切換版本&lt;/p&gt;
-
-&lt;h2 id=&quot;安裝-nvm&quot;&gt;安裝 nvm&lt;/h2&gt;
-
-&lt;h3 id=&quot;透過-chocolatey-安裝&quot;&gt;透過 Chocolatey 安裝&lt;/h3&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;choco install nvm
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;手動安裝&quot;&gt;手動安裝&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/coreybutler/nvm-windows&quot;&gt;coreybutler/nvm-windows: A node.js version management utility for Windows. Ironically written in Go.&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;到 Release 頁面，下載 &lt;code class=&quot;highlighter-rouge&quot;&gt;nvm-setup.zip&lt;/code&gt; 並安裝&lt;/p&gt;
-
-&lt;h2 id=&quot;安裝-nodejs&quot;&gt;安裝 Node.js&lt;/h2&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;nvm install 12.13.1
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;使用指定版本&quot;&gt;使用指定版本&lt;/h3&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;nvm use 12.13.1
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-03-21/2020-03-09_14-20-05.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;確定-nodejs-版本&quot;&gt;確定 Node.js 版本&lt;/h3&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;node -v
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="w3HexSchool" /><category term="Node.js" /><category term="nvm" /><category term="Windows" /><summary type="html">nvm 是 Node Version Manager，用來管理各種不同的 Node.js 版本的工具， 當各種專案需要使用不同版本的 Node.js 時，透過 nvm 可以快速切換版本 安裝 nvm 透過 Chocolatey 安裝 choco install nvm 手動安裝 coreybutler/nvm-windows: A node.js version management utility for Windows. Ironically written in Go. 到 Release 頁面，下載 nvm-setup.zip 並安裝 安裝 Node.js nvm install 12.13.1 使用指定版本 nvm use 12.13.1 確定 Node.js 版本 node -v</summary></entry></feed>
+&lt;p&gt;就可以使用 VSCode 進行 Debug 了，而且因為有設定 &lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;restart&quot;: true&lt;/code&gt; 參數，就算結束程式，只要再次啟動，就會自動進入偵錯模式喔。&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="w3HexSchool" /><category term="ActionHero" /><category term="Nodejs" /><category term="Debug" /><category term="TypeScript" /><summary type="html">2020-04-26 Update 發現不明原因導致本文方法失效，新的方法已更新在這 使用 VSCode Debug Actionhero version 22 on windows 前言 2020-03-19 第一次參加 Actionhero 的 Office Hours，詢問了如何使用 VSCode Debug ActionHero，實際上也是 Node.js with TypeScript 專案如何使用 VSCode Debug 的使用方案。會後 Evan Tahler 發了一個 Pull Request 新增了 Debug 相關的變更，同時也更新了官網的文件。 VSCode Debug 設定 因為原始碼會先建置後才執行，所以想要使用原始碼直接 Debug，就要靠 sourceMap 告訴 VSCode 對應執行中的程式碼及原始碼的關係，所以先確認專案中 TypeScript 的設定是否有開啟 sourceMap。 tsconfig.json &quot;sourceMap&quot;: true 另外在執行指令中加上--inspect參數，以 ActionHero 為例，dev 是原本的指令，debug 是新增的指令。 package.json &quot;dev&quot;: &quot;ts-node-dev --no-deps --transpile-only ./src/server&quot;, &quot;debug&quot;: &quot;ts-node-dev --transpile-only --no-deps --inspect -- ./src/server &quot;, 因為在設定中開啟了 sourceMap，所以修改 build 指令關閉 sourceMap。 package.json &quot;build&quot;: &quot;rm -rf dist &amp;amp;&amp;amp; ./node_modules/.bin/tsc --sourceMap false --declaration&quot;, 最後新增一個 VSCode 的 Debug launch 設定 .vscode/launch.json { &quot;version&quot;: &quot;0.2.0&quot;, &quot;configurations&quot;: [ { &quot;type&quot;: &quot;node&quot;, &quot;request&quot;: &quot;attach&quot;, &quot;name&quot;: &quot;Actionhero Debugger&quot;, &quot;protocol&quot;: &quot;inspector&quot;, &quot;port&quot;: 9229, &quot;restart&quot;: true, &quot;localRoot&quot;: &quot;${workspaceFolder}&quot;, &quot;remoteRoot&quot;: &quot;.&quot; } ] } 接著只要在第一次啟動 VSCode 時，先執行 VSCode 的 Actionhero Debugger，再執行 debug 指令，像是 npm run debug or yarn debug 就可以使用 VSCode 進行 Debug 了，而且因為有設定 &quot;restart&quot;: true 參數，就算結束程式，只要再次啟動，就會自動進入偵錯模式喔。</summary></entry></feed>

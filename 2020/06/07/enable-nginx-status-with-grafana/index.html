@@ -19,12 +19,12 @@
 
 
 
-<title>Jian-Ching 記事本 - 頁面 8</title>
+<title>啟用 Nginx 狀態功能並且使用 Grafana - Jian-Ching 記事本</title>
 
 
 
 
-<meta name="description" content="An notebook website.">
+<meta name="description" content="從 Grafana 看到的結果">
 
 
 
@@ -33,13 +33,15 @@
 
 <meta property="og:locale" content="zh_TW">
 <meta property="og:site_name" content="Jian-Ching 記事本">
-<meta property="og:title" content="Jian-Ching 記事本">
+<meta property="og:title" content="啟用 Nginx 狀態功能並且使用 Grafana">
 
 
-  <link rel="canonical" href="https://twblog.HongJianChing.com/page8/">
-  <meta property="og:url" content="https://twblog.HongJianChing.com/page8/">
+  <link rel="canonical" href="https://twblog.HongJianChing.com/2020/06/07/enable-nginx-status-with-grafana/">
+  <meta property="og:url" content="https://twblog.HongJianChing.com/2020/06/07/enable-nginx-status-with-grafana/">
 
 
+
+  <meta property="og:description" content="從 Grafana 看到的結果">
 
 
 
@@ -53,12 +55,11 @@
 
 
 
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2020-06-07T00:00:00+08:00">
 
 
-  <link rel="prev" href="https://twblog.HongJianChing.com/page7/">
 
-
-  <link rel="next" href="https://twblog.HongJianChing.com/page9/">
 
 
 
@@ -122,7 +123,7 @@
 <!-- end custom head snippets -->
   </head>
 
-  <body class="layout--home">
+  <body class="layout--single">
 
     <!--[if lt IE 9]>
 <div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
@@ -276,195 +277,133 @@
   </div>
 
 
-  <div class="archive">
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="啟用 Nginx 狀態功能並且使用 Grafana">
+    <meta itemprop="description" content="從 Grafana 看到的結果">
+    <meta itemprop="datePublished" content="June 07, 2020">
     
-      <h1 class="page__title"></h1>
-    
-    <h3 class="archive__subtitle">最新文章</h3>
 
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">啟用 Nginx 狀態功能並且使用 Grafana
+</h1>
+          
+        </header>
+      
 
+      <section class="page__content" itemprop="text">
+        <p>從 Grafana 看到的結果</p>
+
+<p><img src="/assets/images/2020-06-07/2020-06-07_20-13-21.png" alt="" /></p>
+
+<h2 id="開啟-nginx-狀態">開啟 Nginx 狀態</h2>
+
+<p>預設的 docker image 已經有內建 ngx_http_stub_status_module，
+可以透過設定檔開啟這個功能</p>
+
+<p>nginx.conf</p>
+
+<div class="language-conf highlighter-rouge"><pre class="highlight"><code><span class="n">server</span> {
+  <span class="n">location</span> = /<span class="n">basic_status</span> {
+    <span class="n">stub_status</span>;
+  }
+}
+</code></pre>
+</div>
+
+<p>可以查詢目前的狀態</p>
+
+<p><img src="/assets/images/2020-06-07/2020-06-07_20-12-48.png" alt="" /></p>
+
+<h3 id="ref">Ref</h3>
+
+<p><a href="http://nginx.org/en/docs/http/ngx_http_stub_status_module.html">Module ngx_http_stub_status_module</a></p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
   
 
 
+  
+  
+  
 
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-tags" aria-hidden="true"></i> 標籤: </strong>
+    <span itemprop="keywords">
     
-    <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://twblog.hongjianching.com/2018/10/14/jenkins-pipeline-as-code-introduction/" rel="permalink">Jenkins - Pipeline as Code - 簡介
-</a>
       
-    </h2>
+      <a href="https://twblog.hongjianching.com/tags/#grafana" class="page__taxonomy-item" rel="tag">Grafana</a><span class="sep">, </span>
     
-    <p class="archive__item-excerpt" itemprop="description">Jenkins 是個歷史悠久的 CI / CD 工具，從 Jenkins 2.0 開始正式推展 Pipeline，有別於以往使用 Web UI 操作的特性，導向 Pipeline as Code 的實踐。透過在原始碼專案新增一個 Jenkinsfile 的檔案，將 Pipeline 的流程都寫在檔案內。
+      
+      
+      <a href="https://twblog.hongjianching.com/tags/#nginx" class="page__taxonomy-item" rel="tag">Nginx</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://twblog.hongjianching.com/tags/#w3hexschool" class="page__taxonomy-item" rel="tag">w3HexSchool</a>
+    
+    </span>
+  </p>
 
-</p>
+
+
+
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2020-06-07T00:00:00+08:00">June 07, 2020</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">分享到</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=啟用 Nginx 狀態功能並且使用 Grafana https://twblog.hongjianching.com/2020/06/07/enable-nginx-status-with-grafana/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2020/06/07/enable-nginx-status-with-grafana/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2020/06/07/enable-nginx-status-with-grafana/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2020/06/07/enable-nginx-status-with-grafana/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="https://twblog.hongjianching.com/2020/05/31/sequelize-raw-query-meet-sql-injection-issue/" class="pagination--pager" title="Sequelize 進行 Raw Query 遇到 SQL Injection 問題
+">較舊</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">較新</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+  
+    <h4 class="page__comments-title">留言</h4>
+    <section id="disqus_thread"></section>
+  
+</div>
+
+    
   </article>
-</div>
 
   
-
-
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="https://twblog.hongjianching.com/2018/10/13/create-cpp-compiler-with-jenkins-agent-docker-image-part-2/" rel="permalink">建立擁有 C++ 編譯環境及 Jenkins Agent 的 Docker Image - Part 2
-</a>
-      
-    </h2>
-    
-    <p class="archive__item-excerpt" itemprop="description">前一篇發現預設的 Jenkins Agent 沒有 C++ 編譯環境，所以我們要來解決這個問題。
-
-</p>
-  </article>
-</div>
-
   
-
-
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="https://twblog.hongjianching.com/2018/10/12/create-cpp-compiler-with-jenkins-agent-docker-image-part-1/" rel="permalink">建立擁有 C++ 編譯環境及 Jenkins Agent 的 Docker Image - Part 1
-</a>
-      
-    </h2>
-    
-    <p class="archive__item-excerpt" itemprop="description">介紹如何建立一個有 C++ 編譯環境及 Jenkins Agent 的 Docker Image。
-
-</p>
-  </article>
 </div>
 
-  
-
-
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="https://twblog.hongjianching.com/2018/10/11/install-cpp-compiler-on-ubuntu/" rel="permalink">在 Ubuntu 安裝 C++ 編譯環境
-</a>
-      
-    </h2>
-    
-    <p class="archive__item-excerpt" itemprop="description">Ubuntu 預設沒有 C++ 編譯環境，但是可以自己安裝
-
-</p>
-  </article>
-</div>
-
-  
-
-
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="https://twblog.hongjianching.com/2018/10/10/install-jenkins-agent-with-docker/" rel="permalink">使用 Docker 安裝 Jenkins Agent
-</a>
-      
-    </h2>
-    
-    <p class="archive__item-excerpt" itemprop="description">讓 Jenkins Master 專心在 CI Server 的任務，剩下的工作交給 Jenkins Agent 處理，這樣可以降低環境的複雜度，也可以增加維護的方便性。
-
-</p>
-  </article>
-</div>
-
-
-
-<nav class="pagination">
-  
-  <ul>
-    
-    
-      
-        <li><a href="https://twblog.hongjianching.com/page7/">較舊</a></li>
-      
-    
-
-    
-    
-      <li><a href="https://twblog.hongjianching.com/">1</a></li>
-    
-
-    
-    
-      
-      
-      <li><a href="#" class="disabled">&hellip;</a></li>
-    
-
-    
-    
-    
-
-    
-      
-        
-        
-        
-        <li><a href="https://twblog.hongjianching.com/page6/">6</a></li>
-      
-    
-      
-        
-        
-        
-        <li><a href="https://twblog.hongjianching.com/page7/">7</a></li>
-      
-    
-      
-        <li><a href="https://twblog.hongjianching.com/page8/" class="disabled current">8</a></li>
-      
-    
-      
-        
-        
-        
-        <li><a href="https://twblog.hongjianching.com/page9/">9</a></li>
-      
-    
-      
-        
-        
-        
-        <li><a href="https://twblog.hongjianching.com/page10/">10</a></li>
-      
-    
-
-    
-    
-      <li><a href="#" class="disabled">&hellip;</a></li>
-    
-
-    
-      <li><a href="https://twblog.hongjianching.com/page14/">14</a></li>
-    
-
-    
-    
-      <li><a href="https://twblog.hongjianching.com/page9/">較新</a></li></a></li>
-    
-  </ul>
-</nav>
-
-
-
-  </div>
-</div>
 
     <div class="page__footer">
       <footer>
@@ -504,8 +443,43 @@
   ga('create', 'UA-9431648-15', 'auto');
   ga('send', 'pageview');
   
+  
+    ga('send', 'event', 'taggedPost', 'view', 'w3HexSchool');
+  
+    ga('send', 'event', 'taggedPost', 'view', 'Nginx');
+  
+    ga('send', 'event', 'taggedPost', 'view', 'Grafana');
+  
+  
 </script>
 
+
+
+
+
+
+
+  
+  <script type="text/javascript">
+  	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+  	var disqus_shortname = 'allyusd-twblog';
+
+  	/* * * DON'T EDIT BELOW THIS LINE * * */
+  	(function() {
+  		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  		dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  	})();
+
+  	/* * * DON'T EDIT BELOW THIS LINE * * */
+  	(function () {
+  		var s = document.createElement('script'); s.async = true;
+  		s.type = 'text/javascript';
+  		s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  		(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+  	}());
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
 
 

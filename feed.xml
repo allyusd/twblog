@@ -1,4 +1,29 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2020-05-31T11:34:12+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">Sequelize 進行 Raw Query 遇到 SQL Injection 問題</title><link href="https://twblog.hongjianching.com/2020/05/31/sequelize-raw-query-meet-sql-injection-issue/" rel="alternate" type="text/html" title="Sequelize 進行 Raw Query 遇到 SQL Injection 問題" /><published>2020-05-31T00:00:00+08:00</published><updated>2020-05-31T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/05/31/sequelize-raw-query-meet-sql-injection-issue</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/05/31/sequelize-raw-query-meet-sql-injection-issue/">&lt;p&gt;Sequelize 除了使用 Model Query 之外，還可以透過 SQL 語法直接進行 Raw Query，但是會碰上 SQL Injection 問題&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2020-06-07T20:16:45+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">啟用 Nginx 狀態功能並且使用 Grafana</title><link href="https://twblog.hongjianching.com/2020/06/07/enable-nginx-status-with-grafana/" rel="alternate" type="text/html" title="啟用 Nginx 狀態功能並且使用 Grafana" /><published>2020-06-07T00:00:00+08:00</published><updated>2020-06-07T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/06/07/enable-nginx-status-with-grafana</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/06/07/enable-nginx-status-with-grafana/">&lt;p&gt;從 Grafana 看到的結果&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2020-06-07/2020-06-07_20-13-21.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;開啟-nginx-狀態&quot;&gt;開啟 Nginx 狀態&lt;/h2&gt;
+
+&lt;p&gt;預設的 docker image 已經有內建 ngx_http_stub_status_module，
+可以透過設定檔開啟這個功能&lt;/p&gt;
+
+&lt;p&gt;nginx.conf&lt;/p&gt;
+
+&lt;div class=&quot;language-conf highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;server&lt;/span&gt; {
+  &lt;span class=&quot;n&quot;&gt;location&lt;/span&gt; = /&lt;span class=&quot;n&quot;&gt;basic_status&lt;/span&gt; {
+    &lt;span class=&quot;n&quot;&gt;stub_status&lt;/span&gt;;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;可以查詢目前的狀態&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2020-06-07/2020-06-07_20-12-48.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;ref&quot;&gt;Ref&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://nginx.org/en/docs/http/ngx_http_stub_status_module.html&quot;&gt;Module ngx_http_stub_status_module&lt;/a&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="w3HexSchool" /><category term="Nginx" /><category term="Grafana" /><summary type="html">從 Grafana 看到的結果</summary></entry><entry><title type="html">Sequelize 進行 Raw Query 遇到 SQL Injection 問題</title><link href="https://twblog.hongjianching.com/2020/05/31/sequelize-raw-query-meet-sql-injection-issue/" rel="alternate" type="text/html" title="Sequelize 進行 Raw Query 遇到 SQL Injection 問題" /><published>2020-05-31T00:00:00+08:00</published><updated>2020-05-31T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/05/31/sequelize-raw-query-meet-sql-injection-issue</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/05/31/sequelize-raw-query-meet-sql-injection-issue/">&lt;p&gt;Sequelize 除了使用 Model Query 之外，還可以透過 SQL 語法直接進行 Raw Query，但是會碰上 SQL Injection 問題&lt;/p&gt;
 
 &lt;h2 id=&quot;model-query&quot;&gt;Model Query&lt;/h2&gt;
 
@@ -655,71 +680,4 @@ yarn add ws
 
 &lt;p&gt;connection: 使用者相關資訊&lt;/p&gt;
 
-&lt;p&gt;這個範例中，從 &lt;code class=&quot;highlighter-rouge&quot;&gt;params&lt;/code&gt; 取得輸入參數 &lt;code class=&quot;highlighter-rouge&quot;&gt;a&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;b&lt;/code&gt; 轉換為 number 後相加，存到 &lt;code class=&quot;highlighter-rouge&quot;&gt;sum&lt;/code&gt; 之後透過 &lt;code class=&quot;highlighter-rouge&quot;&gt;response&lt;/code&gt; 回傳&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="w3HexSchool" /><category term="ActionHero" /><summary type="html">在 src/actions 新增 sum.ts，實作一個合計的 action 這個 action 輸入 a, b 參數，回傳 sum 表示 a + b 成果 程式碼 import { Action } from &quot;actionhero&quot;; export class SumAction extends Action { constructor() { super(); this.name = &quot;sum&quot;; this.description = &quot;return sum of a and b&quot;; this.outputExample = { sum: 3 }; this.inputs = { a: { required: true, }, b: { required: true, }, }; } async run({ params, response }) { let sum: number = 0; sum = Number.parseInt(params.a) + Number.parseInt(params.b); response.sum = sum; return response; } } 使用 在網址列輸入 http://localhost:8081/api/sum?a=100&amp;amp;b=23，回傳結果 { &quot;sum&quot;: 123, &quot;serverInformation&quot;: { &quot;serverName&quot;: &quot;my_actionhero_project&quot;, &quot;apiVersion&quot;: &quot;0.1.0&quot;, &quot;requestDuration&quot;: 2, &quot;currentTime&quot;: 1585985448163 }, &quot;requesterInformation&quot;: { &quot;id&quot;: &quot;15065e43d00dbe702ef96bfed4dc6d884367f0ab-f351e412-d6ea-48f4-b5ef-46edb155fe13&quot;, &quot;fingerprint&quot;: &quot;15065e43d00dbe702ef96bfed4dc6d884367f0ab&quot;, &quot;messageId&quot;: &quot;f351e412-d6ea-48f4-b5ef-46edb155fe13&quot;, &quot;remoteIP&quot;: &quot;127.0.0.1&quot;, &quot;receivedParams&quot;: { &quot;a&quot;: &quot;100&quot;, &quot;b&quot;: &quot;23&quot;, &quot;action&quot;: &quot;sum&quot; } } } 第一行 sum 即為實作回傳結果 說明 首先從 actionhere import Action class 接著擴展宣告實作的 SumAction construction() 在 建構式 constructor 先呼叫 super() 執行 Action 的建構式 接著設定 action 相關的參數 name: 表示 action 的名稱外，同時代表 api 名稱 description: 描述 action 的用途，給人類閱讀用的 outputExample: 描述 action 的回傳參數的範例，也是給人類看的 inputs: 表示 action 的輸入參數，沒有宣告的參數會被忽略，可以透過required宣告參數為必需，如果缺少會直接拒絕執行 action run() 當 api 呼叫後，會觸發 run() 函數進行處理，常用參數 params: 會帶入輸入參數 response: 會回傳輸出參數 connection: 使用者相關資訊 這個範例中，從 params 取得輸入參數 a, b 轉換為 number 後相加，存到 sum 之後透過 response 回傳</summary></entry><entry><title type="html">使用 VSCode Debug ActionHero (Nodejs) with TypeScript</title><link href="https://twblog.hongjianching.com/2020/03/28/actionhero-nodejs-debug-with-typescript-on-vscode/" rel="alternate" type="text/html" title="使用 VSCode Debug ActionHero (Nodejs) with TypeScript" /><published>2020-03-28T00:00:00+08:00</published><updated>2020-03-28T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/03/28/actionhero-nodejs-debug-with-typescript-on-vscode</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/03/28/actionhero-nodejs-debug-with-typescript-on-vscode/">&lt;h2 id=&quot;2020-04-26-update&quot;&gt;2020-04-26 Update&lt;/h2&gt;
-
-&lt;p&gt;發現不明原因導致本文方法失效，新的方法已更新在這 &lt;a href=&quot;https://twblog.hongjianching.com/2020/04/26/actionhero-v22-debug-with-vscode-on-windows/&quot;&gt;使用 VSCode Debug Actionhero version 22 on windows&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;前言&quot;&gt;前言&lt;/h2&gt;
-
-&lt;p&gt;2020-03-19 第一次參加 &lt;a href=&quot;https://www.actionherojs.com/&quot;&gt;Actionhero&lt;/a&gt; 的 Office Hours，詢問了如何使用 VSCode Debug ActionHero，實際上也是 Node.js with TypeScript 專案如何使用 VSCode Debug 的使用方案。會後 &lt;a href=&quot;https://www.evantahler.com/&quot;&gt;Evan Tahler&lt;/a&gt; 發了一個 &lt;a href=&quot;https://github.com/actionhero/actionhero/pull/1428&quot;&gt;Pull Request&lt;/a&gt; 新增了 Debug 相關的變更，同時也更新了&lt;a href=&quot;https://www.actionherojs.com/tutorials/repl-and-debugging&quot;&gt;官網的文件&lt;/a&gt;。&lt;/p&gt;
-
-&lt;h2 id=&quot;vscode-debug-設定&quot;&gt;VSCode Debug 設定&lt;/h2&gt;
-
-&lt;p&gt;因為原始碼會先建置後才執行，所以想要使用原始碼直接 Debug，就要靠 sourceMap 告訴 VSCode 對應執行中的程式碼及原始碼的關係，所以先確認專案中 TypeScript 的設定是否有開啟 sourceMap。&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;tsconfig.json&lt;/code&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s2&quot;&gt;&quot;sourceMap&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;另外在執行指令中加上&lt;code class=&quot;highlighter-rouge&quot;&gt;--inspect&lt;/code&gt;參數，以 ActionHero 為例，dev 是原本的指令，debug 是新增的指令。&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;package.json&lt;/code&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s2&quot;&gt;&quot;dev&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;ts-node-dev --no-deps --transpile-only ./src/server&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;debug&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;ts-node-dev --transpile-only --no-deps --inspect -- ./src/server &quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;因為在設定中開啟了 sourceMap，所以修改 build 指令關閉 sourceMap。&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;package.json&lt;/code&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s2&quot;&gt;&quot;build&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;rm -rf dist &amp;amp;&amp;amp; ./node_modules/.bin/tsc --sourceMap false --declaration&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;最後新增一個 VSCode 的 Debug launch 設定&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;.vscode/launch.json&lt;/code&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;version&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;0.2.0&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;configurations&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;node&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;request&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;attach&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Actionhero Debugger&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;protocol&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;inspector&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;port&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;9229&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;restart&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;localRoot&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;${workspaceFolder}&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;remoteRoot&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;.&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;接著只要在第一次啟動 VSCode 時，先執行 VSCode 的 Actionhero Debugger，再執行 debug 指令，像是&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;npm run debug
-
-or
-
-yarn debug
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;就可以使用 VSCode 進行 Debug 了，而且因為有設定 &lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;restart&quot;: true&lt;/code&gt; 參數，就算結束程式，只要再次啟動，就會自動進入偵錯模式喔。&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="w3HexSchool" /><category term="ActionHero" /><category term="Nodejs" /><category term="Debug" /><category term="TypeScript" /><summary type="html">2020-04-26 Update 發現不明原因導致本文方法失效，新的方法已更新在這 使用 VSCode Debug Actionhero version 22 on windows 前言 2020-03-19 第一次參加 Actionhero 的 Office Hours，詢問了如何使用 VSCode Debug ActionHero，實際上也是 Node.js with TypeScript 專案如何使用 VSCode Debug 的使用方案。會後 Evan Tahler 發了一個 Pull Request 新增了 Debug 相關的變更，同時也更新了官網的文件。 VSCode Debug 設定 因為原始碼會先建置後才執行，所以想要使用原始碼直接 Debug，就要靠 sourceMap 告訴 VSCode 對應執行中的程式碼及原始碼的關係，所以先確認專案中 TypeScript 的設定是否有開啟 sourceMap。 tsconfig.json &quot;sourceMap&quot;: true 另外在執行指令中加上--inspect參數，以 ActionHero 為例，dev 是原本的指令，debug 是新增的指令。 package.json &quot;dev&quot;: &quot;ts-node-dev --no-deps --transpile-only ./src/server&quot;, &quot;debug&quot;: &quot;ts-node-dev --transpile-only --no-deps --inspect -- ./src/server &quot;, 因為在設定中開啟了 sourceMap，所以修改 build 指令關閉 sourceMap。 package.json &quot;build&quot;: &quot;rm -rf dist &amp;amp;&amp;amp; ./node_modules/.bin/tsc --sourceMap false --declaration&quot;, 最後新增一個 VSCode 的 Debug launch 設定 .vscode/launch.json { &quot;version&quot;: &quot;0.2.0&quot;, &quot;configurations&quot;: [ { &quot;type&quot;: &quot;node&quot;, &quot;request&quot;: &quot;attach&quot;, &quot;name&quot;: &quot;Actionhero Debugger&quot;, &quot;protocol&quot;: &quot;inspector&quot;, &quot;port&quot;: 9229, &quot;restart&quot;: true, &quot;localRoot&quot;: &quot;${workspaceFolder}&quot;, &quot;remoteRoot&quot;: &quot;.&quot; } ] } 接著只要在第一次啟動 VSCode 時，先執行 VSCode 的 Actionhero Debugger，再執行 debug 指令，像是 npm run debug or yarn debug 就可以使用 VSCode 進行 Debug 了，而且因為有設定 &quot;restart&quot;: true 參數，就算結束程式，只要再次啟動，就會自動進入偵錯模式喔。</summary></entry></feed>
+&lt;p&gt;這個範例中，從 &lt;code class=&quot;highlighter-rouge&quot;&gt;params&lt;/code&gt; 取得輸入參數 &lt;code class=&quot;highlighter-rouge&quot;&gt;a&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;b&lt;/code&gt; 轉換為 number 後相加，存到 &lt;code class=&quot;highlighter-rouge&quot;&gt;sum&lt;/code&gt; 之後透過 &lt;code class=&quot;highlighter-rouge&quot;&gt;response&lt;/code&gt; 回傳&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="w3HexSchool" /><category term="ActionHero" /><summary type="html">在 src/actions 新增 sum.ts，實作一個合計的 action 這個 action 輸入 a, b 參數，回傳 sum 表示 a + b 成果 程式碼 import { Action } from &quot;actionhero&quot;; export class SumAction extends Action { constructor() { super(); this.name = &quot;sum&quot;; this.description = &quot;return sum of a and b&quot;; this.outputExample = { sum: 3 }; this.inputs = { a: { required: true, }, b: { required: true, }, }; } async run({ params, response }) { let sum: number = 0; sum = Number.parseInt(params.a) + Number.parseInt(params.b); response.sum = sum; return response; } } 使用 在網址列輸入 http://localhost:8081/api/sum?a=100&amp;amp;b=23，回傳結果 { &quot;sum&quot;: 123, &quot;serverInformation&quot;: { &quot;serverName&quot;: &quot;my_actionhero_project&quot;, &quot;apiVersion&quot;: &quot;0.1.0&quot;, &quot;requestDuration&quot;: 2, &quot;currentTime&quot;: 1585985448163 }, &quot;requesterInformation&quot;: { &quot;id&quot;: &quot;15065e43d00dbe702ef96bfed4dc6d884367f0ab-f351e412-d6ea-48f4-b5ef-46edb155fe13&quot;, &quot;fingerprint&quot;: &quot;15065e43d00dbe702ef96bfed4dc6d884367f0ab&quot;, &quot;messageId&quot;: &quot;f351e412-d6ea-48f4-b5ef-46edb155fe13&quot;, &quot;remoteIP&quot;: &quot;127.0.0.1&quot;, &quot;receivedParams&quot;: { &quot;a&quot;: &quot;100&quot;, &quot;b&quot;: &quot;23&quot;, &quot;action&quot;: &quot;sum&quot; } } } 第一行 sum 即為實作回傳結果 說明 首先從 actionhere import Action class 接著擴展宣告實作的 SumAction construction() 在 建構式 constructor 先呼叫 super() 執行 Action 的建構式 接著設定 action 相關的參數 name: 表示 action 的名稱外，同時代表 api 名稱 description: 描述 action 的用途，給人類閱讀用的 outputExample: 描述 action 的回傳參數的範例，也是給人類看的 inputs: 表示 action 的輸入參數，沒有宣告的參數會被忽略，可以透過required宣告參數為必需，如果缺少會直接拒絕執行 action run() 當 api 呼叫後，會觸發 run() 函數進行處理，常用參數 params: 會帶入輸入參數 response: 會回傳輸出參數 connection: 使用者相關資訊 這個範例中，從 params 取得輸入參數 a, b 轉換為 number 後相加，存到 sum 之後透過 response 回傳</summary></entry></feed>

@@ -1,4 +1,35 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2020-06-07T20:16:45+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">啟用 Nginx 狀態功能並且使用 Grafana</title><link href="https://twblog.hongjianching.com/2020/06/07/enable-nginx-status-with-grafana/" rel="alternate" type="text/html" title="啟用 Nginx 狀態功能並且使用 Grafana" /><published>2020-06-07T00:00:00+08:00</published><updated>2020-06-07T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/06/07/enable-nginx-status-with-grafana</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/06/07/enable-nginx-status-with-grafana/">&lt;p&gt;從 Grafana 看到的結果&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2020-06-15T00:18:36+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">使用 yarn install 指令安裝套件時鎖定 yarn.lock 版本</title><link href="https://twblog.hongjianching.com/2020/06/14/yarn-install-lock-version-by-yarn.lock/" rel="alternate" type="text/html" title="使用 yarn install 指令安裝套件時鎖定 yarn.lock 版本" /><published>2020-06-14T00:00:00+08:00</published><updated>2020-06-14T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/06/14/yarn-install-lock-version-by-yarn.lock</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/06/14/yarn-install-lock-version-by-yarn.lock/">&lt;h2 id=&quot;--frozen-lockfile-參數&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--frozen-lockfile&lt;/code&gt; 參數&lt;/h2&gt;
+
+&lt;p&gt;當想要完全依照 yarn.lock 中指定版本安裝時，像是 CI 的時候，使用 &lt;code class=&quot;highlighter-rouge&quot;&gt;--frozen-lockfile&lt;/code&gt; 參數&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;yarn install --frozen-lockfile
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;指定-cache-目錄&quot;&gt;指定 cache 目錄&lt;/h2&gt;
+
+&lt;p&gt;在 CI 使用的時候，可能會需要指定 yarn 的 cache 目錄，可以透過 &lt;code class=&quot;highlighter-rouge&quot;&gt;--cache-folder&lt;/code&gt; 參數&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;yarn &amp;lt;&lt;span class=&quot;nb&quot;&gt;command&lt;/span&gt;&amp;gt; --cache-folder &amp;lt;path&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;從-npm-轉為-yarn&quot;&gt;從 npm 轉為 yarn&lt;/h2&gt;
+
+&lt;p&gt;如果本來專案使用的是 npm，要改為 yarn 的話，必需將 package-lock.json 轉為 yarn.lock&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;yarn import
+rm -rf node_modules
+yarn install
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;ref&quot;&gt;Ref&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://classic.yarnpkg.com/en/docs/cli/install/&quot;&gt;yarn install | Yarn&lt;/a&gt;
+&lt;a href=&quot;https://classic.yarnpkg.com/en/docs/cli/cache&quot;&gt;yarn cache | Yarn&lt;/a&gt;
+&lt;a href=&quot;https://github.com/yarnpkg/yarn/issues/4379&quot;&gt;yarn install changes yarn.lock file · Issue #4379 · yarnpkg/yarn&lt;/a&gt;
+&lt;a href=&quot;https://github.com/yarnpkg/yarn/issues/4147&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;yarn install --frozen-lockfile&lt;/code&gt; should be the default behavior · Issue #4147 · yarnpkg/yarn&lt;/a&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="w3HexSchool" /><category term="yarn" /><summary type="html">--frozen-lockfile 參數</summary></entry><entry><title type="html">啟用 Nginx 狀態功能並且使用 Grafana</title><link href="https://twblog.hongjianching.com/2020/06/07/enable-nginx-status-with-grafana/" rel="alternate" type="text/html" title="啟用 Nginx 狀態功能並且使用 Grafana" /><published>2020-06-07T00:00:00+08:00</published><updated>2020-06-07T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/06/07/enable-nginx-status-with-grafana</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/06/07/enable-nginx-status-with-grafana/">&lt;p&gt;從 Grafana 看到的結果&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/2020-06-07/2020-06-07_20-13-21.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
@@ -584,100 +615,4 @@ yarn add ws
 &lt;p&gt;.gitlab-ci-yml 範例
 配合的 .gitlab-ci-yml 範例
 真實的 gitlab project 範例？
-可能的錯誤訊息&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="w3HexSchool" /><category term="GitLab" /><category term="CI" /><category term="CD" /><category term="DevOps" /><category term="Docker" /><summary type="html">使用 GitLab Runner，可以選擇直接安裝，或者使用 Docker Image，也是這次範例的方式。一般設定的話，不能在這個 Runner 執行 docker in docker 的操作，下面是需要的設定。 Register 首先是註冊 Runner，記得要準備好你的 TOKEN。 docker run --rm -v /srv/gitlab-runner/runner-01/config:/etc/gitlab-runner gitlab/gitlab-runner register \ --non-interactive \ --executor &quot;docker&quot; \ --description &quot;The runner support docker in docker&quot; \ --docker-image alpine:latest \ --url &quot;https://gitlab.com/&quot; \ --registration-token &quot;YOUR_TOKEN&quot; \ --tag-list &quot;dind&quot; \ --run-untagged=&quot;true&quot; \ --locked=&quot;false&quot; \ --access-level=&quot;not_protected&quot; \ --docker-privileged \ --docker-volumes &quot;/certs/client&quot; 其中的重點在最後兩個參數，分別是 --docker-privilleged 提供 docker in docker 的權限，另一個是 --docker-volumes 設定 TLS 的憑證儲存位置 在指令一開始就有指定 -v /srv/gitlab-runner/runner-01/config:/etc/gitlab-runner 所以註冊後的資料會保留在 host 的 /srv/gitlab-runner/runner-01/config 位置 Run 有了註冊後的 config，就可以啟動 Runner 了，跟一般的啟動方式一樣。 docker run -d --name gitlab-runner-runner-01 --restart always \ -v /srv/gitlab-runner/runner-01/config:/etc/gitlab-runner \ -v /var/run/docker.sock:/var/run/docker.sock \ gitlab/gitlab-runner:latest 同樣因為有指定 -v 參數，所以會從指定的 Host 路徑讀取設定檔執行 runner。 Ref [Registering Runners GitLab](https://docs.gitlab.com/runner/register/index.html#docker) [Run GitLab Runner in a container GitLab](https://docs.gitlab.com/runner/install/docker.html) TODO 如果有機會再補充的資料 .gitlab-ci-yml 範例 配合的 .gitlab-ci-yml 範例 真實的 gitlab project 範例？ 可能的錯誤訊息</summary></entry><entry><title type="html">ActionHero 新增 action</title><link href="https://twblog.hongjianching.com/2020/04/04/actionhero-add-new-action/" rel="alternate" type="text/html" title="ActionHero 新增 action" /><published>2020-04-04T00:00:00+08:00</published><updated>2020-04-04T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/04/04/actionhero-add-new-action</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/04/04/actionhero-add-new-action/">&lt;p&gt;在 &lt;code class=&quot;highlighter-rouge&quot;&gt;src/actions&lt;/code&gt; 新增 &lt;code class=&quot;highlighter-rouge&quot;&gt;sum.ts&lt;/code&gt;，實作一個合計的 action&lt;/p&gt;
-
-&lt;p&gt;這個 action 輸入 a, b 參數，回傳 sum 表示 a + b&lt;/p&gt;
-
-&lt;h2 id=&quot;成果&quot;&gt;成果&lt;/h2&gt;
-
-&lt;h3 id=&quot;程式碼&quot;&gt;程式碼&lt;/h3&gt;
-
-&lt;div class=&quot;language-ts highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Action&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;actionhero&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;SumAction&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Action&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;constructor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;sum&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;description&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;return sum of a and b&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;outputExample&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;inputs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;required&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;required&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-  &lt;span class=&quot;k&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;response&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;sum&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;parseInt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;parseInt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-    &lt;span class=&quot;nx&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;sum&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;使用&quot;&gt;使用&lt;/h3&gt;
-
-&lt;p&gt;在網址列輸入 &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:8081/api/sum?a=100&amp;amp;b=23&lt;/code&gt;，回傳結果&lt;/p&gt;
-
-&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;sum&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;123&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;serverInformation&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;serverName&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;my_actionhero_project&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;apiVersion&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;0.1.0&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;requestDuration&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;currentTime&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1585985448163&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;requesterInformation&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;id&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;15065e43d00dbe702ef96bfed4dc6d884367f0ab-f351e412-d6ea-48f4-b5ef-46edb155fe13&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;fingerprint&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;15065e43d00dbe702ef96bfed4dc6d884367f0ab&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;messageId&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;f351e412-d6ea-48f4-b5ef-46edb155fe13&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;remoteIP&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;127.0.0.1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;receivedParams&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;a&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;100&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;b&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;23&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;action&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;sum&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;第一行 &lt;code class=&quot;highlighter-rouge&quot;&gt;sum&lt;/code&gt; 即為實作回傳結果&lt;/p&gt;
-
-&lt;h2 id=&quot;說明&quot;&gt;說明&lt;/h2&gt;
-
-&lt;p&gt;首先從 actionhere import &lt;code class=&quot;highlighter-rouge&quot;&gt;Action&lt;/code&gt; class&lt;/p&gt;
-
-&lt;p&gt;接著擴展宣告實作的 &lt;code class=&quot;highlighter-rouge&quot;&gt;SumAction&lt;/code&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;construction&quot;&gt;construction()&lt;/h3&gt;
-
-&lt;p&gt;在 建構式 &lt;code class=&quot;highlighter-rouge&quot;&gt;constructor&lt;/code&gt; 先呼叫 &lt;code class=&quot;highlighter-rouge&quot;&gt;super()&lt;/code&gt; 執行 &lt;code class=&quot;highlighter-rouge&quot;&gt;Action&lt;/code&gt; 的建構式&lt;/p&gt;
-
-&lt;p&gt;接著設定 action 相關的參數&lt;/p&gt;
-
-&lt;p&gt;name: 表示 action 的名稱外，同時代表 api 名稱&lt;/p&gt;
-
-&lt;p&gt;description: 描述 action 的用途，給人類閱讀用的&lt;/p&gt;
-
-&lt;p&gt;outputExample: 描述 action 的回傳參數的範例，也是給人類看的&lt;/p&gt;
-
-&lt;p&gt;inputs: 表示 action 的輸入參數，沒有宣告的參數會被忽略，可以透過&lt;code class=&quot;highlighter-rouge&quot;&gt;required&lt;/code&gt;宣告參數為必需，如果缺少會直接拒絕執行 action&lt;/p&gt;
-
-&lt;h3 id=&quot;run&quot;&gt;run()&lt;/h3&gt;
-
-&lt;p&gt;當 api 呼叫後，會觸發 &lt;code class=&quot;highlighter-rouge&quot;&gt;run()&lt;/code&gt; 函數進行處理，常用參數&lt;/p&gt;
-
-&lt;p&gt;params: 會帶入輸入參數&lt;/p&gt;
-
-&lt;p&gt;response: 會回傳輸出參數&lt;/p&gt;
-
-&lt;p&gt;connection: 使用者相關資訊&lt;/p&gt;
-
-&lt;p&gt;這個範例中，從 &lt;code class=&quot;highlighter-rouge&quot;&gt;params&lt;/code&gt; 取得輸入參數 &lt;code class=&quot;highlighter-rouge&quot;&gt;a&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;b&lt;/code&gt; 轉換為 number 後相加，存到 &lt;code class=&quot;highlighter-rouge&quot;&gt;sum&lt;/code&gt; 之後透過 &lt;code class=&quot;highlighter-rouge&quot;&gt;response&lt;/code&gt; 回傳&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="w3HexSchool" /><category term="ActionHero" /><summary type="html">在 src/actions 新增 sum.ts，實作一個合計的 action 這個 action 輸入 a, b 參數，回傳 sum 表示 a + b 成果 程式碼 import { Action } from &quot;actionhero&quot;; export class SumAction extends Action { constructor() { super(); this.name = &quot;sum&quot;; this.description = &quot;return sum of a and b&quot;; this.outputExample = { sum: 3 }; this.inputs = { a: { required: true, }, b: { required: true, }, }; } async run({ params, response }) { let sum: number = 0; sum = Number.parseInt(params.a) + Number.parseInt(params.b); response.sum = sum; return response; } } 使用 在網址列輸入 http://localhost:8081/api/sum?a=100&amp;amp;b=23，回傳結果 { &quot;sum&quot;: 123, &quot;serverInformation&quot;: { &quot;serverName&quot;: &quot;my_actionhero_project&quot;, &quot;apiVersion&quot;: &quot;0.1.0&quot;, &quot;requestDuration&quot;: 2, &quot;currentTime&quot;: 1585985448163 }, &quot;requesterInformation&quot;: { &quot;id&quot;: &quot;15065e43d00dbe702ef96bfed4dc6d884367f0ab-f351e412-d6ea-48f4-b5ef-46edb155fe13&quot;, &quot;fingerprint&quot;: &quot;15065e43d00dbe702ef96bfed4dc6d884367f0ab&quot;, &quot;messageId&quot;: &quot;f351e412-d6ea-48f4-b5ef-46edb155fe13&quot;, &quot;remoteIP&quot;: &quot;127.0.0.1&quot;, &quot;receivedParams&quot;: { &quot;a&quot;: &quot;100&quot;, &quot;b&quot;: &quot;23&quot;, &quot;action&quot;: &quot;sum&quot; } } } 第一行 sum 即為實作回傳結果 說明 首先從 actionhere import Action class 接著擴展宣告實作的 SumAction construction() 在 建構式 constructor 先呼叫 super() 執行 Action 的建構式 接著設定 action 相關的參數 name: 表示 action 的名稱外，同時代表 api 名稱 description: 描述 action 的用途，給人類閱讀用的 outputExample: 描述 action 的回傳參數的範例，也是給人類看的 inputs: 表示 action 的輸入參數，沒有宣告的參數會被忽略，可以透過required宣告參數為必需，如果缺少會直接拒絕執行 action run() 當 api 呼叫後，會觸發 run() 函數進行處理，常用參數 params: 會帶入輸入參數 response: 會回傳輸出參數 connection: 使用者相關資訊 這個範例中，從 params 取得輸入參數 a, b 轉換為 number 後相加，存到 sum 之後透過 response 回傳</summary></entry></feed>
+可能的錯誤訊息&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="w3HexSchool" /><category term="GitLab" /><category term="CI" /><category term="CD" /><category term="DevOps" /><category term="Docker" /><summary type="html">使用 GitLab Runner，可以選擇直接安裝，或者使用 Docker Image，也是這次範例的方式。一般設定的話，不能在這個 Runner 執行 docker in docker 的操作，下面是需要的設定。 Register 首先是註冊 Runner，記得要準備好你的 TOKEN。 docker run --rm -v /srv/gitlab-runner/runner-01/config:/etc/gitlab-runner gitlab/gitlab-runner register \ --non-interactive \ --executor &quot;docker&quot; \ --description &quot;The runner support docker in docker&quot; \ --docker-image alpine:latest \ --url &quot;https://gitlab.com/&quot; \ --registration-token &quot;YOUR_TOKEN&quot; \ --tag-list &quot;dind&quot; \ --run-untagged=&quot;true&quot; \ --locked=&quot;false&quot; \ --access-level=&quot;not_protected&quot; \ --docker-privileged \ --docker-volumes &quot;/certs/client&quot; 其中的重點在最後兩個參數，分別是 --docker-privilleged 提供 docker in docker 的權限，另一個是 --docker-volumes 設定 TLS 的憑證儲存位置 在指令一開始就有指定 -v /srv/gitlab-runner/runner-01/config:/etc/gitlab-runner 所以註冊後的資料會保留在 host 的 /srv/gitlab-runner/runner-01/config 位置 Run 有了註冊後的 config，就可以啟動 Runner 了，跟一般的啟動方式一樣。 docker run -d --name gitlab-runner-runner-01 --restart always \ -v /srv/gitlab-runner/runner-01/config:/etc/gitlab-runner \ -v /var/run/docker.sock:/var/run/docker.sock \ gitlab/gitlab-runner:latest 同樣因為有指定 -v 參數，所以會從指定的 Host 路徑讀取設定檔執行 runner。 Ref [Registering Runners GitLab](https://docs.gitlab.com/runner/register/index.html#docker) [Run GitLab Runner in a container GitLab](https://docs.gitlab.com/runner/install/docker.html) TODO 如果有機會再補充的資料 .gitlab-ci-yml 範例 配合的 .gitlab-ci-yml 範例 真實的 gitlab project 範例？ 可能的錯誤訊息</summary></entry></feed>

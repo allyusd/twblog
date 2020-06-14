@@ -19,12 +19,12 @@
 
 
 
-<title>Jian-Ching 記事本 - 頁面 3</title>
+<title>使用 yarn install 指令安裝套件時鎖定 yarn.lock 版本 - Jian-Ching 記事本</title>
 
 
 
 
-<meta name="description" content="An notebook website.">
+<meta name="description" content="--frozen-lockfile 參數">
 
 
 
@@ -33,13 +33,15 @@
 
 <meta property="og:locale" content="zh_TW">
 <meta property="og:site_name" content="Jian-Ching 記事本">
-<meta property="og:title" content="Jian-Ching 記事本">
+<meta property="og:title" content="使用 yarn install 指令安裝套件時鎖定 yarn.lock 版本">
 
 
-  <link rel="canonical" href="https://twblog.HongJianChing.com/page3/">
-  <meta property="og:url" content="https://twblog.HongJianChing.com/page3/">
+  <link rel="canonical" href="https://twblog.HongJianChing.com/2020/06/14/yarn-install-lock-version-by-yarn.lock/">
+  <meta property="og:url" content="https://twblog.HongJianChing.com/2020/06/14/yarn-install-lock-version-by-yarn.lock/">
 
 
+
+  <meta property="og:description" content="--frozen-lockfile 參數">
 
 
 
@@ -53,12 +55,11 @@
 
 
 
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2020-06-14T00:00:00+08:00">
 
 
-  <link rel="prev" href="https://twblog.HongJianChing.com/page2/">
 
-
-  <link rel="next" href="https://twblog.HongJianChing.com/page4/">
 
 
 
@@ -122,7 +123,7 @@
 <!-- end custom head snippets -->
   </head>
 
-  <body class="layout--home">
+  <body class="layout--single">
 
     <!--[if lt IE 9]>
 <div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
@@ -276,222 +277,135 @@
   </div>
 
 
-  <div class="archive">
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="使用 yarn install 指令安裝套件時鎖定 yarn.lock 版本">
+    <meta itemprop="description" content="--frozen-lockfile 參數">
+    <meta itemprop="datePublished" content="June 14, 2020">
     
-      <h1 class="page__title"></h1>
-    
-    <h3 class="archive__subtitle">最新文章</h3>
 
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">使用 yarn install 指令安裝套件時鎖定 yarn.lock 版本
+</h1>
+          
+        </header>
+      
 
+      <section class="page__content" itemprop="text">
+        <h2 id="--frozen-lockfile-參數"><code class="highlighter-rouge">--frozen-lockfile</code> 參數</h2>
+
+<p>當想要完全依照 yarn.lock 中指定版本安裝時，像是 CI 的時候，使用 <code class="highlighter-rouge">--frozen-lockfile</code> 參數</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>yarn install --frozen-lockfile
+</code></pre>
+</div>
+
+<h2 id="指定-cache-目錄">指定 cache 目錄</h2>
+
+<p>在 CI 使用的時候，可能會需要指定 yarn 的 cache 目錄，可以透過 <code class="highlighter-rouge">--cache-folder</code> 參數</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>yarn &lt;<span class="nb">command</span>&gt; --cache-folder &lt;path&gt;
+</code></pre>
+</div>
+
+<h2 id="從-npm-轉為-yarn">從 npm 轉為 yarn</h2>
+
+<p>如果本來專案使用的是 npm，要改為 yarn 的話，必需將 package-lock.json 轉為 yarn.lock</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>yarn import
+rm -rf node_modules
+yarn install
+</code></pre>
+</div>
+
+<h3 id="ref">Ref</h3>
+
+<p><a href="https://classic.yarnpkg.com/en/docs/cli/install/">yarn install | Yarn</a>
+<a href="https://classic.yarnpkg.com/en/docs/cli/cache">yarn cache | Yarn</a>
+<a href="https://github.com/yarnpkg/yarn/issues/4379">yarn install changes yarn.lock file · Issue #4379 · yarnpkg/yarn</a>
+<a href="https://github.com/yarnpkg/yarn/issues/4147"><code class="highlighter-rouge">yarn install --frozen-lockfile</code> should be the default behavior · Issue #4147 · yarnpkg/yarn</a></p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
   
 
 
+  
+  
+  
 
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-tags" aria-hidden="true"></i> 標籤: </strong>
+    <span itemprop="keywords">
     
-    <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://twblog.hongjianching.com/2020/04/04/actionhero-add-new-action/" rel="permalink">ActionHero 新增 action
-</a>
       
-    </h2>
+      <a href="https://twblog.hongjianching.com/tags/#w3hexschool" class="page__taxonomy-item" rel="tag">w3HexSchool</a><span class="sep">, </span>
     
-    <p class="archive__item-excerpt" itemprop="description">在 src/actions 新增 sum.ts，實作一個合計的 action
+      
+      
+      <a href="https://twblog.hongjianching.com/tags/#yarn" class="page__taxonomy-item" rel="tag">yarn</a>
+    
+    </span>
+  </p>
 
-這個 action 輸入 a, b 參數，回傳 sum 表示 a + b
 
-成果
 
-程式碼
 
-import { Action } from "actionhero";
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2020-06-14T00:00:00+08:00">June 14, 2020</time></p>
+        
+      </footer>
 
-export class SumAction extends A...</p>
+      <section class="page__share">
+  
+    <h4 class="page__share-title">分享到</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=使用 yarn install 指令安裝套件時鎖定 yarn.lock 版本 https://twblog.hongjianching.com/2020/06/14/yarn-install-lock-version-by-yarn.lock/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2020/06/14/yarn-install-lock-version-by-yarn.lock/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2020/06/14/yarn-install-lock-version-by-yarn.lock/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2020/06/14/yarn-install-lock-version-by-yarn.lock/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="https://twblog.hongjianching.com/2020/06/07/enable-nginx-status-with-grafana/" class="pagination--pager" title="啟用 Nginx 狀態功能並且使用 Grafana
+">較舊</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">較新</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+  
+    <h4 class="page__comments-title">留言</h4>
+    <section id="disqus_thread"></section>
+  
+</div>
+
+    
   </article>
-</div>
 
   
-
-
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="https://twblog.hongjianching.com/2020/03/28/actionhero-nodejs-debug-with-typescript-on-vscode/" rel="permalink">使用 VSCode Debug ActionHero (Nodejs) with TypeScript
-</a>
-      
-    </h2>
-    
-    <p class="archive__item-excerpt" itemprop="description">2020-04-26 Update
-
-發現不明原因導致本文方法失效，新的方法已更新在這 使用 VSCode Debug Actionhero version 22 on windows
-
-前言
-
-2020-03-19 第一次參加 Actionhero 的 Office Hours，詢問了如何使用 VSCode D...</p>
-  </article>
-</div>
-
   
-
-
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="https://twblog.hongjianching.com/2020/03/21/install-nodejs-by-nvm-on-windows/" rel="permalink">在 Windows 透過 nvm 安裝 Node.js
-</a>
-      
-    </h2>
-    
-    <p class="archive__item-excerpt" itemprop="description">nvm 是 Node Version Manager，用來管理各種不同的 Node.js 版本的工具，
-當各種專案需要使用不同版本的 Node.js 時，透過 nvm 可以快速切換版本
-
-安裝 nvm
-
-透過 Chocolatey 安裝
-
-choco install nvm
-
-
-
-手動安裝
-
-coreybutle...</p>
-  </article>
 </div>
 
-  
-
-
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="https://twblog.hongjianching.com/2020/03/14/actionhero-with-mysql-and-vue-example/" rel="permalink">ActionHero 使用 MySQL 及 Vue 範例
-</a>
-      
-    </h2>
-    
-    <p class="archive__item-excerpt" itemprop="description">這個範例是新增使用者到 MySQL
-
-Migrations
-
-首先建立一個 Migration 幫助新增資料表，新增 from ./src/migrations/0000001-createUsersTable.js 檔案
-
-module.exports = {
-  up: async function (mig...</p>
-  </article>
-</div>
-
-  
-
-
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="https://twblog.hongjianching.com/2020/03/07/actionhero-with-mysql/" rel="permalink">ActionHero 使用 MySQL
-</a>
-      
-    </h2>
-    
-    <p class="archive__item-excerpt" itemprop="description">失敗的嘗試
-
-上週試了一下網路找到的 config
-
-Actionhero + MySQL
-
-但是失敗了，後來從作者的 github 找到 plugin
-
-actionhero/ah-sequelize-plugin: sequelize plugin for actionhero
-
-安裝 Plugin
-
-ah-...</p>
-  </article>
-</div>
-
-
-
-<nav class="pagination">
-  
-  <ul>
-    
-    
-      
-        <li><a href="https://twblog.hongjianching.com/page2/">較舊</a></li>
-      
-    
-
-    
-    
-      <li><a href="https://twblog.hongjianching.com/">1</a></li>
-    
-
-    
-    
-
-    
-    
-    
-
-    
-      
-        
-        
-        
-        <li><a href="https://twblog.hongjianching.com/page2/">2</a></li>
-      
-    
-      
-        <li><a href="https://twblog.hongjianching.com/page3/" class="disabled current">3</a></li>
-      
-    
-      
-        
-        
-        
-        <li><a href="https://twblog.hongjianching.com/page4/">4</a></li>
-      
-    
-      
-        
-        
-        
-        <li><a href="https://twblog.hongjianching.com/page5/">5</a></li>
-      
-    
-
-    
-    
-      <li><a href="#" class="disabled">&hellip;</a></li>
-    
-
-    
-      <li><a href="https://twblog.hongjianching.com/page15/">15</a></li>
-    
-
-    
-    
-      <li><a href="https://twblog.hongjianching.com/page4/">較新</a></li></a></li>
-    
-  </ul>
-</nav>
-
-
-
-  </div>
-</div>
 
     <div class="page__footer">
       <footer>
@@ -531,8 +445,41 @@ ah-...</p>
   ga('create', 'UA-9431648-15', 'auto');
   ga('send', 'pageview');
   
+  
+    ga('send', 'event', 'taggedPost', 'view', 'w3HexSchool');
+  
+    ga('send', 'event', 'taggedPost', 'view', 'yarn');
+  
+  
 </script>
 
+
+
+
+
+
+
+  
+  <script type="text/javascript">
+  	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+  	var disqus_shortname = 'allyusd-twblog';
+
+  	/* * * DON'T EDIT BELOW THIS LINE * * */
+  	(function() {
+  		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  		dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  	})();
+
+  	/* * * DON'T EDIT BELOW THIS LINE * * */
+  	(function () {
+  		var s = document.createElement('script'); s.async = true;
+  		s.type = 'text/javascript';
+  		s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  		(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+  	}());
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
 
 

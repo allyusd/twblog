@@ -19,7 +19,7 @@
 
 
 
-<title>Actionhero 在 action 的 inputs 使用系統保留字 - Jian-Ching 記事本</title>
+<title>解決 Puppeteer 在 Github Action 失敗的問題 - Jian-Ching 記事本</title>
 
 
 
@@ -33,11 +33,11 @@
 
 <meta property="og:locale" content="zh_TW">
 <meta property="og:site_name" content="Jian-Ching 記事本">
-<meta property="og:title" content="Actionhero 在 action 的 inputs 使用系統保留字">
+<meta property="og:title" content="解決 Puppeteer 在 Github Action 失敗的問題">
 
 
-  <link rel="canonical" href="https://twblog.HongJianChing.com/2020/06/21/actionhero-action-inputs-using-reserved-params/">
-  <meta property="og:url" content="https://twblog.HongJianChing.com/2020/06/21/actionhero-action-inputs-using-reserved-params/">
+  <link rel="canonical" href="https://twblog.HongJianChing.com/2020/11/29/fix-puppeteer-fail-in-github-action/">
+  <meta property="og:url" content="https://twblog.HongJianChing.com/2020/11/29/fix-puppeteer-fail-in-github-action/">
 
 
 
@@ -56,7 +56,7 @@
 
 
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2020-06-21T00:00:00+08:00">
+  <meta property="article:published_time" content="2020-11-29T00:00:00+08:00">
 
 
 
@@ -278,15 +278,15 @@
 
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Actionhero 在 action 的 inputs 使用系統保留字">
+    <meta itemprop="headline" content="解決 Puppeteer 在 Github Action 失敗的問題">
     <meta itemprop="description" content="問題">
-    <meta itemprop="datePublished" content="June 21, 2020">
+    <meta itemprop="datePublished" content="November 29, 2020">
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 class="page__title" itemprop="headline">Actionhero 在 action 的 inputs 使用系統保留字
+          <h1 class="page__title" itemprop="headline">解決 Puppeteer 在 Github Action 失敗的問題
 </h1>
           
         </header>
@@ -295,37 +295,42 @@
       <section class="page__content" itemprop="text">
         <h2 id="問題">問題</h2>
 
-<p>Actionhero 中每個 action 都可以透過定義 inputs，當 action 呼叫時的傳入參考，
-但是當使用到 Actionhero 本身的保留字時，就會發生不明的錯誤。</p>
+<p>Actionhero 發了一個 PR，將 Puppeteer 當作 Web 測試工具，雖然在他開發環境上可以正常執行，但是在Github Action 卻無法通過。</p>
 
-<h2 id="問題範例">問題範例</h2>
+<p><a href="https://github.com/actionhero/actionhero/pull/1562">Browser tests with Puppeteer rather than Selenium by evantahler · Pull Request #1562 · actionhero/actionhero</a></p>
 
-<p>像是在 inputs 中定義了 <code class="highlighter-rouge">action</code>、<code class="highlighter-rouge">apiVersion</code> 的話。</p>
+<h2 id="結果">結果</h2>
 
-<div class="language-ts highlighter-rouge"><pre class="highlight"><code><span class="k">this</span><span class="p">.</span><span class="nx">inputs</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">apiVersion</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">required</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-  <span class="p">},</span>
-<span class="p">};</span>
-</code></pre>
-</div>
+<p><img src="/assets/images/2020-11-29/2020-11-29-144029.png" alt="" /></p>
 
-<p>完整範例請點 <a href="https://github.com/allyusd/actionhero-action-inputs-using-reserved-params/blob/master/src/actions/usingReservedParams.ts">這裡</a></p>
+<h2 id="問題分析">問題分析</h2>
 
-<p>呼叫 action 的時候，會一直得到錯誤 <code class="highlighter-rouge">"error": "unknown action or invalid apiVersion"</code></p>
+<p>從環境不同導致結果不同來看，很可能是相依性造成的，在透過 google 查詢關鍵字之後，發現很有用的文章，尤其是這篇關於 puppeteer 3 以上 在 Ubuntu 的回應。</p>
+
+<p><a href="https://github.com/puppeteer/puppeteer/issues/3443#issuecomment-629662626">Ubuntu 18.04 Headless Chrome Node API - Puppeteer - Installation Guide · Issue #3443 · puppeteer/puppeteer</a></p>
 
 <h2 id="修改原始碼">修改原始碼</h2>
 
-<p>在跟作者討論後，試著在 <code class="highlighter-rouge">classes/action.ts</code> 的 <code class="highlighter-rouge">validate()</code> 加上驗證，
-所有 action 的 inputs 不能包含 <code class="highlighter-rouge">initializers/params.ts</code> 定義的 <code class="highlighter-rouge">api.params.globalSafeParams</code>。</p>
+<p>在找到問題的解決方案後，在 ci 的 yaml 上加上相依套件的安裝</p>
 
-<p>但是發現 <code class="highlighter-rouge">validate()</code> 是在 <code class="highlighter-rouge">initializers/actions.ts</code> 中呼叫的，而且 <code class="highlighter-rouge">loadPriority</code> 高於 params，
-試著調整 priority 後才發現，原來 params 中有使用到 <code class="highlighter-rouge">api.actions</code>，這下 deadlock……</p>
+<div class="language-yml highlighter-rouge"><pre class="highlight"><code><span class="s">sudo apt-get update &amp;&amp; apt-get install -y libgtk2.0-0 libgtk-3-0 libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb libgbm-dev</span>
+</code></pre>
+</div>
 
-<h3 id="ref">Ref</h3>
+<p>以及在 puppeteer.launch 時加上 <code class="highlighter-rouge">no-sandbox</code> 參數</p>
 
-<p><a href="https://github.com/actionhero/actionhero/blob/master/src/classes/action.ts#L77-L95">actionhero/action.ts at master · actionhero/actionhero</a>
-<a href="https://github.com/actionhero/actionhero/blob/master/src/initializers/params.ts#L25-L31">actionhero/params.ts at master · actionhero/actionhero</a></p>
+<div class="language-ts highlighter-rouge"><pre class="highlight"><code><span class="nx">browser</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">puppeteer</span><span class="p">.</span><span class="nx">launch</span><span class="p">({</span>
+  <span class="na">headless</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="na">args</span><span class="p">:</span> <span class="p">[</span><span class="s2">"--no-sandbox"</span><span class="p">],</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+<p>最後完整的修改紀錄</p>
+
+<p><a href="https://github.com/actionhero/actionhero/pull/1654">fixed ci fail for puppeteer by allyusd · Pull Request #1654 · actionhero/actionhero</a>)</p>
+
+<p>這是第二次在 Actionhero 發的 PR，但是第一個在 Actionhero 被接受合併的 PR，留個紀錄紀念一下</p>
 
         
       </section>
@@ -346,7 +351,15 @@
     
       
       
-      <a href="https://twblog.hongjianching.com/tags/#actionhero" class="page__taxonomy-item" rel="tag">ActionHero</a><span class="sep">, </span>
+      <a href="https://twblog.hongjianching.com/tags/#devops" class="page__taxonomy-item" rel="tag">DevOps</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://twblog.hongjianching.com/tags/#github-action" class="page__taxonomy-item" rel="tag">Github-Action</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://twblog.hongjianching.com/tags/#puppeteer" class="page__taxonomy-item" rel="tag">Puppeteer</a><span class="sep">, </span>
     
       
       
@@ -359,7 +372,7 @@
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2020-06-21T00:00:00+08:00">June 21, 2020</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2020-11-29T00:00:00+08:00">November 29, 2020</time></p>
         
       </footer>
 
@@ -368,25 +381,24 @@
     <h4 class="page__share-title">分享到</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=Actionhero 在 action 的 inputs 使用系統保留字 https://twblog.hongjianching.com/2020/06/21/actionhero-action-inputs-using-reserved-params/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=解決 Puppeteer 在 Github Action 失敗的問題 https://twblog.hongjianching.com/2020/11/29/fix-puppeteer-fail-in-github-action/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2020/06/21/actionhero-action-inputs-using-reserved-params/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2020/11/29/fix-puppeteer-fail-in-github-action/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2020/06/21/actionhero-action-inputs-using-reserved-params/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2020/11/29/fix-puppeteer-fail-in-github-action/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2020/06/21/actionhero-action-inputs-using-reserved-params/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2020/11/29/fix-puppeteer-fail-in-github-action/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="https://twblog.hongjianching.com/2020/06/14/yarn-install-lock-version-by-yarn.lock/" class="pagination--pager" title="使用 yarn install 指令安裝套件時鎖定 yarn.lock 版本
+      <a href="https://twblog.hongjianching.com/2020/06/21/actionhero-action-inputs-using-reserved-params/" class="pagination--pager" title="Actionhero 在 action 的 inputs 使用系統保留字
 ">較舊</a>
     
     
-      <a href="https://twblog.hongjianching.com/2020/11/29/fix-puppeteer-fail-in-github-action/" class="pagination--pager" title="解決 Puppeteer 在 Github Action 失敗的問題
-">較新</a>
+      <a href="#" class="pagination--pager disabled">較新</a>
     
   </nav>
 
@@ -450,7 +462,11 @@
   
     ga('send', 'event', 'taggedPost', 'view', 'w3HexSchool');
   
-    ga('send', 'event', 'taggedPost', 'view', 'ActionHero');
+    ga('send', 'event', 'taggedPost', 'view', 'Puppeteer');
+  
+    ga('send', 'event', 'taggedPost', 'view', 'Github-Action');
+  
+    ga('send', 'event', 'taggedPost', 'view', 'DevOps');
   
   
 </script>

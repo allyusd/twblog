@@ -1,4 +1,51 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2020-11-29T15:01:58+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">解決 Puppeteer 在 Github Action 失敗的問題</title><link href="https://twblog.hongjianching.com/2020/11/29/fix-puppeteer-fail-in-github-action/" rel="alternate" type="text/html" title="解決 Puppeteer 在 Github Action 失敗的問題" /><published>2020-11-29T00:00:00+08:00</published><updated>2020-11-29T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/11/29/fix-puppeteer-fail-in-github-action</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/11/29/fix-puppeteer-fail-in-github-action/">&lt;h2 id=&quot;問題&quot;&gt;問題&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2020-12-13T00:27:13+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">在 GitLab 不使用 Docker-in-Docker 模式建立 Docker Image</title><link href="https://twblog.hongjianching.com/2020/12/12/build-docker-image-without-docker-in-docker-on-gitlab/" rel="alternate" type="text/html" title="在 GitLab 不使用 Docker-in-Docker 模式建立 Docker Image" /><published>2020-12-12T00:00:00+08:00</published><updated>2020-12-12T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/12/12/build-docker-image-without-docker-in-docker-on-gitlab</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/12/12/build-docker-image-without-docker-in-docker-on-gitlab/">&lt;h2 id=&quot;問題&quot;&gt;問題&lt;/h2&gt;
+
+&lt;p&gt;當需要在 docker 中使用 docker 指令，像是建立 image 時，就會碰到 Docker-in-Docker 模式。
+但是 Docekr-in-Docker 有兩個主要問題：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;需要 privileged 權限，這會帶來安全性問題&lt;/li&gt;
+  &lt;li&gt;效能下降&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;結果&quot;&gt;結果&lt;/h2&gt;
+
+&lt;p&gt;透過 GitLab 執行，成功&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2020-12-12/2020-12-13-001210.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;使用-kaniko&quot;&gt;使用 kaniko&lt;/h2&gt;
+
+&lt;p&gt;kaniko 是 google 開發用來在 Kubernets 下建立 image 的工具。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/GoogleContainerTools/kaniko&quot;&gt;GoogleContainerTools/kaniko: Build Container Images In Kubernetes&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;在-gitlab-中的使用&quot;&gt;在 GitLab 中的使用&lt;/h2&gt;
+
+&lt;p&gt;GitLab 提供了整合範例，這個例子會依照該專案下的 Dockerfile 建立 Image 並且上傳到 GitLab 的 Container Registry。&lt;/p&gt;
+
+&lt;div class=&quot;language-yml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;stage&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;build&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;gcr.io/kaniko-project/executor:debug&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;entrypoint&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;script&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;mkdir -p /kaniko/.docker&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;echo &quot;{\&quot;auths\&quot;:{\&quot;$CI_REGISTRY\&quot;:{\&quot;username\&quot;:\&quot;$CI_REGISTRY_USER\&quot;,\&quot;password\&quot;:\&quot;$CI_REGISTRY_PASSWORD\&quot;}}}&quot; &amp;gt; /kaniko/.docker/config.json&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination $CI_REGISTRY_IMAGE:$CI_COMMIT_TAG&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;rules&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$CI_COMMIT_TAG&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;[Building images with kaniko and GitLab CI/CD&lt;/td&gt;
+      &lt;td&gt;GitLab](https://docs.gitlab.com/ee/ci/docker/using_kaniko.html)&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="w3HexSchool" /><category term="GitLab" /><category term="Docker" /><summary type="html">問題</summary></entry><entry><title type="html">解決 Puppeteer 在 Github Action 失敗的問題</title><link href="https://twblog.hongjianching.com/2020/11/29/fix-puppeteer-fail-in-github-action/" rel="alternate" type="text/html" title="解決 Puppeteer 在 Github Action 失敗的問題" /><published>2020-11-29T00:00:00+08:00</published><updated>2020-11-29T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/11/29/fix-puppeteer-fail-in-github-action</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/11/29/fix-puppeteer-fail-in-github-action/">&lt;h2 id=&quot;問題&quot;&gt;問題&lt;/h2&gt;
 
 &lt;p&gt;Actionhero 發了一個 PR，將 Puppeteer 當作 Web 測試工具，雖然在他開發環境上可以正常執行，但是在Github Action 卻無法通過。&lt;/p&gt;
 
@@ -505,38 +552,4 @@ docker rm -f tmp-nginx-container
 
 &lt;p&gt;一、當沒有任何一個 Queue 的情況下，Overview 的圖會一直處於 loading 狀態&lt;/p&gt;
 
-&lt;p&gt;二、UI 的資料是保留在 Client 當下，也就是只要切換頁面不會保留過去的資料，Overview 的圖會清空&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="w3HexSchool" /><category term="ActionHero" /><category term="ah-resque-ui" /><summary type="html">本篇介紹如何安裝 ah-resque-ui actionhero/ah-resque-ui: Visualization and Managment tools for Actionhero Tasks &amp;amp; Resque Jobs</summary></entry><entry><title type="html">使用 VSCode debug Actionhero version 22 on windows</title><link href="https://twblog.hongjianching.com/2020/04/26/actionhero-v22-debug-with-vscode-on-windows/" rel="alternate" type="text/html" title="使用 VSCode debug Actionhero version 22 on windows" /><published>2020-04-26T00:00:00+08:00</published><updated>2020-04-26T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/04/26/actionhero-v22-debug-with-vscode-on-windows</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/04/26/actionhero-v22-debug-with-vscode-on-windows/">&lt;p&gt;在之前 &lt;a href=&quot;https://twblog.hongjianching.com/2020/03/28/actionhero-nodejs-debug-with-typescript-on-vscode/&quot;&gt;使用 VSCode Debug ActionHero (Nodejs) with TypeScript&lt;/a&gt; 文章中討論過如何使用 VSCode 對 Actionhero 專案進行 Debug，但是後來發現原本的方法失效了。&lt;/p&gt;
-
-&lt;p&gt;在 04-23 的 Office Hours 中，&lt;a href=&quot;https://github.com/evantahler&quot;&gt;Evan Tahler&lt;/a&gt; 及 &lt;a href=&quot;https://github.com/gcoonrod&quot;&gt;Greg Coonrod&lt;/a&gt; 提供了新的設定，相關的變更在 &lt;a href=&quot;https://github.com/actionhero/actionhero/pull/1439&quot;&gt;better debugging support by evantahler · Pull Request #1439 · actionhero/actionhero&lt;/a&gt; 之中。&lt;/p&gt;
-
-&lt;p&gt;會後，尤於環境不同(我想兩位作者都是使用 Mac 開發環境)，我在 Windows 使用新的設定時，遇到了一些問題，經過反覆嘗試，成功的使用 VSCode 進行 Debug。&lt;/p&gt;
-
-&lt;p&gt;其中是針對 &lt;code class=&quot;highlighter-rouge&quot;&gt;package.json&lt;/code&gt; 的 debug script 改為 node，而非使用 ts-node-dev，原因不明，但我使用原本 script 的 ts-node-dev 版本，會發生 breakpoint 跳動的情況，似乎是 sourcemap 無法正確對應。&lt;/p&gt;
-
-&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s2&quot;&gt;&quot;debug&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;tsc &amp;amp;&amp;amp; node --inspect -- ./dist/server&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;另一個是針對 &lt;code class=&quot;highlighter-rouge&quot;&gt;launch.json&lt;/code&gt; 的 remoteRoot 路徑改為跟 localRoot 一樣，完整的設定如下&lt;/p&gt;
-
-&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;version&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;0.2.0&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;configurations&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;node&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;request&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;attach&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Actionhero Debugger (attach)&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;protocol&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;inspector&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;port&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;9229&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;restart&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;localRoot&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;${workspaceFolder}&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;outFiles&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;${workspaceRoot}/dist/**/*.js&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;sourceMaps&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;remoteRoot&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;${workspaceFolder}&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;至於 Actionhero Debugger (launch) 則因為我在 Windows 下使用 bash 當指令操作介面，所以遇到了路徑問題，所以就忽略這個方式了，我期待等到 Windows 2004 版本 Release 之後，改用 WSL 2 當開發環境的時候，就能解決相關的問題。&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="w3HexSchool" /><category term="ActionHero" /><category term="Debug" /><summary type="html">在之前 使用 VSCode Debug ActionHero (Nodejs) with TypeScript 文章中討論過如何使用 VSCode 對 Actionhero 專案進行 Debug，但是後來發現原本的方法失效了。</summary></entry></feed>
+&lt;p&gt;二、UI 的資料是保留在 Client 當下，也就是只要切換頁面不會保留過去的資料，Overview 的圖會清空&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="w3HexSchool" /><category term="ActionHero" /><category term="ah-resque-ui" /><summary type="html">本篇介紹如何安裝 ah-resque-ui actionhero/ah-resque-ui: Visualization and Managment tools for Actionhero Tasks &amp;amp; Resque Jobs</summary></entry></feed>

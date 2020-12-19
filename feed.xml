@@ -1,4 +1,94 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2020-12-13T00:27:13+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">在 GitLab 不使用 Docker-in-Docker 模式建立 Docker Image</title><link href="https://twblog.hongjianching.com/2020/12/12/build-docker-image-without-docker-in-docker-on-gitlab/" rel="alternate" type="text/html" title="在 GitLab 不使用 Docker-in-Docker 模式建立 Docker Image" /><published>2020-12-12T00:00:00+08:00</published><updated>2020-12-12T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/12/12/build-docker-image-without-docker-in-docker-on-gitlab</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/12/12/build-docker-image-without-docker-in-docker-on-gitlab/">&lt;h2 id=&quot;問題&quot;&gt;問題&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2020-12-19T22:34:15+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">在 GitLab Piepeline 使用 TypeScript 當 script 使用</title><link href="https://twblog.hongjianching.com/2020/12/19/run-typescript-as-script-in-gitlab-pipeline/" rel="alternate" type="text/html" title="在 GitLab Piepeline 使用 TypeScript 當 script 使用" /><published>2020-12-19T00:00:00+08:00</published><updated>2020-12-19T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/12/19/run-typescript-as-script-in-gitlab-pipeline</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/12/19/run-typescript-as-script-in-gitlab-pipeline/">&lt;h2 id=&quot;問題&quot;&gt;問題&lt;/h2&gt;
+
+&lt;p&gt;本來在 GitLab Piepeline 主要使用 bash 寫 script，
+簡單的還好處理，稍微複雜一點的邏輯，可讀性跟維護性都不高。
+加上目前開發主要使用 TypeScript，所以就興起把 TypeScript 當 script 使用，取代 bash 的想法。&lt;/p&gt;
+
+&lt;h2 id=&quot;結果&quot;&gt;結果&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2020-12-19/2020-12-19-222427.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;gitlab-pipleline-yaml-示範&quot;&gt;GitLab Pipleline YAML 示範&lt;/h2&gt;
+
+&lt;p&gt;使用 node.js image，不然要先安裝 node.js 相關的套件&lt;/p&gt;
+
+&lt;div class=&quot;language-yml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;node:12.16.1&lt;/span&gt;
+
+&lt;span class=&quot;s&quot;&gt;stages&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;run-script&lt;/span&gt;
+
+&lt;span class=&quot;s&quot;&gt;run-script&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;stage&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;run-script&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;before_script&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;yarn global add typescript&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;yarn global add ts-node&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;yarn&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;script&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ts-node helloworld.ts&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;說明&quot;&gt;說明&lt;/h2&gt;
+
+&lt;p&gt;想要把 typescript 當 script，要安裝 typescript 及 ts-node
+為了避免影響 local project 的 package.json，所以使用 global 安裝
+為了區隔，在 yml 使用 &lt;code class=&quot;highlighter-rouge&quot;&gt;before_script&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;前置準備&quot;&gt;前置準備&lt;/h3&gt;
+
+&lt;div class=&quot;language-yml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s&quot;&gt;before_script&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;yarn global add typescript&lt;/span&gt;
+  &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;yarn global add ts-node&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;執行&quot;&gt;執行&lt;/h3&gt;
+
+&lt;div class=&quot;language-yml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s&quot;&gt;script&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ts-node helloworld.ts&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;其它套件&quot;&gt;其它套件&lt;/h2&gt;
+
+&lt;p&gt;如果要使用 fs 之類 node.js 的函式庫，需要安裝 &lt;code class=&quot;highlighter-rouge&quot;&gt;@types/node&lt;/code&gt;，所以需要 &lt;code class=&quot;highlighter-rouge&quot;&gt;package.json&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;dependencies&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;@types/node&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;^14.11.1&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;似乎因為 ts 會去找 &lt;code class=&quot;highlighter-rouge&quot;&gt;tsconfig.json&lt;/code&gt; 檔案，所以同層給一個檔案才不會跑掉
+可以透過 &lt;code class=&quot;highlighter-rouge&quot;&gt;tsc --init&lt;/code&gt; 產生檔案&lt;/p&gt;
+
+&lt;h2 id=&quot;檔案夾隔離&quot;&gt;檔案夾隔離&lt;/h2&gt;
+
+&lt;p&gt;因為本身已經是 TypeScript 專案，所以相關的 script 放在獨立資料夾 &lt;code class=&quot;highlighter-rouge&quot;&gt;ci&lt;/code&gt; 下。&lt;/p&gt;
+
+&lt;h2 id=&quot;完整版的-yaml&quot;&gt;完整版的 YAML&lt;/h2&gt;
+
+&lt;div class=&quot;language-yml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;node:12.16.1&lt;/span&gt;
+
+&lt;span class=&quot;s&quot;&gt;stages&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;run-script&lt;/span&gt;
+
+&lt;span class=&quot;s&quot;&gt;run-script&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;stage&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;run-script&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;before_script&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;yarn global add typescript&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;yarn global add ts-node&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;cd ci&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;yarn&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;cd ..&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;script&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;cd ci&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ts-node main.ts&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;cd ..&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="w3HexSchool" /><category term="GitLab" /><category term="TypeScript" /><summary type="html">問題</summary></entry><entry><title type="html">在 GitLab 不使用 Docker-in-Docker 模式建立 Docker Image</title><link href="https://twblog.hongjianching.com/2020/12/12/build-docker-image-without-docker-in-docker-on-gitlab/" rel="alternate" type="text/html" title="在 GitLab 不使用 Docker-in-Docker 模式建立 Docker Image" /><published>2020-12-12T00:00:00+08:00</published><updated>2020-12-12T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/12/12/build-docker-image-without-docker-in-docker-on-gitlab</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/12/12/build-docker-image-without-docker-in-docker-on-gitlab/">&lt;h2 id=&quot;問題&quot;&gt;問題&lt;/h2&gt;
 
 &lt;p&gt;當需要在 docker 中使用 docker 指令，像是建立 image 時，就會碰到 Docker-in-Docker 模式。
 但是 Docekr-in-Docker 有兩個主要問題：&lt;/p&gt;
@@ -38,14 +128,7 @@
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;table&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;[Building images with kaniko and GitLab CI/CD&lt;/td&gt;
-      &lt;td&gt;GitLab](https://docs.gitlab.com/ee/ci/docker/using_kaniko.html)&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="w3HexSchool" /><category term="GitLab" /><category term="Docker" /><summary type="html">問題</summary></entry><entry><title type="html">解決 Puppeteer 在 Github Action 失敗的問題</title><link href="https://twblog.hongjianching.com/2020/11/29/fix-puppeteer-fail-in-github-action/" rel="alternate" type="text/html" title="解決 Puppeteer 在 Github Action 失敗的問題" /><published>2020-11-29T00:00:00+08:00</published><updated>2020-11-29T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/11/29/fix-puppeteer-fail-in-github-action</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/11/29/fix-puppeteer-fail-in-github-action/">&lt;h2 id=&quot;問題&quot;&gt;問題&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://docs.gitlab.com/ee/ci/docker/using_kaniko.html&quot;&gt;Building images with kaniko and GitLab CI/CD - GitLab&lt;/a&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="w3HexSchool" /><category term="GitLab" /><category term="Docker" /><summary type="html">問題</summary></entry><entry><title type="html">解決 Puppeteer 在 Github Action 失敗的問題</title><link href="https://twblog.hongjianching.com/2020/11/29/fix-puppeteer-fail-in-github-action/" rel="alternate" type="text/html" title="解決 Puppeteer 在 Github Action 失敗的問題" /><published>2020-11-29T00:00:00+08:00</published><updated>2020-11-29T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/11/29/fix-puppeteer-fail-in-github-action</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/11/29/fix-puppeteer-fail-in-github-action/">&lt;h2 id=&quot;問題&quot;&gt;問題&lt;/h2&gt;
 
 &lt;p&gt;Actionhero 發了一個 PR，將 Puppeteer 當作 Web 測試工具，雖然在他開發環境上可以正常執行，但是在Github Action 卻無法通過。&lt;/p&gt;
 
@@ -142,8 +225,8 @@ yarn install
 
 &lt;h3 id=&quot;ref&quot;&gt;Ref&lt;/h3&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://classic.yarnpkg.com/en/docs/cli/install/&quot;&gt;yarn install | Yarn&lt;/a&gt;
-&lt;a href=&quot;https://classic.yarnpkg.com/en/docs/cli/cache&quot;&gt;yarn cache | Yarn&lt;/a&gt;
+&lt;p&gt;&lt;a href=&quot;https://classic.yarnpkg.com/en/docs/cli/install/&quot;&gt;yarn install - Yarn&lt;/a&gt;
+&lt;a href=&quot;https://classic.yarnpkg.com/en/docs/cli/cache&quot;&gt;yarn cache - Yarn&lt;/a&gt;
 &lt;a href=&quot;https://github.com/yarnpkg/yarn/issues/4379&quot;&gt;yarn install changes yarn.lock file · Issue #4379 · yarnpkg/yarn&lt;/a&gt;
 &lt;a href=&quot;https://github.com/yarnpkg/yarn/issues/4147&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;yarn install --frozen-lockfile&lt;/code&gt; should be the default behavior · Issue #4147 · yarnpkg/yarn&lt;/a&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="w3HexSchool" /><category term="yarn" /><summary type="html">--frozen-lockfile 參數</summary></entry><entry><title type="html">啟用 Nginx 狀態功能並且使用 Grafana</title><link href="https://twblog.hongjianching.com/2020/06/07/enable-nginx-status-with-grafana/" rel="alternate" type="text/html" title="啟用 Nginx 狀態功能並且使用 Grafana" /><published>2020-06-07T00:00:00+08:00</published><updated>2020-06-07T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/06/07/enable-nginx-status-with-grafana</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/06/07/enable-nginx-status-with-grafana/">&lt;p&gt;從 Grafana 看到的結果&lt;/p&gt;
 
@@ -501,55 +584,4 @@ docker rm -f tmp-nginx-container
 &lt;p&gt;&lt;a href=&quot;https://docs.gitlab.com/ee/ci/caching/&quot;&gt;Cache dependencies in GitLab CI/CD - GitLab&lt;/a&gt;
 &lt;a href=&quot;https://docs.gitlab.com/ee/ci/variables/predefined_variables.html&quot;&gt;Predefined environment variables reference - GitLab&lt;/a&gt;
 &lt;a href=&quot;https://docs.gitlab.com/ee/ci/yaml/README.html#cache&quot;&gt;cache - GitLab CI/CD Pipeline Configuration Reference - GitLab&lt;/a&gt;
-&lt;a href=&quot;https://docs.gitlab.com/ee/ci/yaml/README.html#artifacts&quot;&gt;artifacts - GitLab CI/CD Pipeline Configuration Reference - GitLab&lt;/a&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="w3HexSchool" /><category term="GitLabCI" /><category term="CD" /><category term="DevOps" /><summary type="html">cache 跟 artifacts 字面上都有保存檔案供以後使用的意思，在 GitLab 使用要特別留意他們的定義</summary></entry><entry><title type="html">ActionHero Tasks &amp;amp; Resque Jobs 視覺化管理工具</title><link href="https://twblog.hongjianching.com/2020/05/02/actionhero-tasks-and-resque-jobs-visualization-and-managment-tools/" rel="alternate" type="text/html" title="ActionHero Tasks &amp; Resque Jobs 視覺化管理工具" /><published>2020-05-02T00:00:00+08:00</published><updated>2020-05-02T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/05/02/actionhero-tasks-and-resque-jobs-visualization-and-managment-tools</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/05/02/actionhero-tasks-and-resque-jobs-visualization-and-managment-tools/">&lt;p&gt;本篇介紹如何安裝 ah-resque-ui
-&lt;a href=&quot;https://github.com/actionhero/ah-resque-ui&quot;&gt;actionhero/ah-resque-ui: Visualization and Managment tools for Actionhero Tasks &amp;amp; Resque Jobs&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;建立-actionhero-專案&quot;&gt;建立 actionhero 專案&lt;/h2&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;npx actionhero generate
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h2 id=&quot;安裝-ah-resque-ui&quot;&gt;安裝 ah-resque-ui&lt;/h2&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;yarn add ah-resque-ui
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;設定 plugin&lt;/p&gt;
-
-&lt;p&gt;修改 &lt;code class=&quot;highlighter-rouge&quot;&gt;./config/plugins.ts&lt;/code&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-ts highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;DEFAULT&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;plugins&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;s2&quot;&gt;&quot;ah-resque-ui&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;__dirname&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;/../../node_modules/ah-resque-ui&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;新增 &lt;code class=&quot;highlighter-rouge&quot;&gt;./src/config/ah-resque-ui.ts&lt;/code&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-ts highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;DEFAULT&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;s2&quot;&gt;&quot;ah-resque-ui&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;c1&quot;&gt;// the name of the middleware(s) which will protect all actions in this plugin&lt;/span&gt;
-      &lt;span class=&quot;c1&quot;&gt;// ie middleware: ['logged-in-session', 'role-admin']&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;middleware&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;輸入 &lt;code class=&quot;highlighter-rouge&quot;&gt;yarn dev&lt;/code&gt; 啟動後，連到 &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:8080/resque#/&lt;/code&gt; 即可看到畫面&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/2020-05-02/0001.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;要注意兩點&lt;/p&gt;
-
-&lt;p&gt;一、當沒有任何一個 Queue 的情況下，Overview 的圖會一直處於 loading 狀態&lt;/p&gt;
-
-&lt;p&gt;二、UI 的資料是保留在 Client 當下，也就是只要切換頁面不會保留過去的資料，Overview 的圖會清空&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="w3HexSchool" /><category term="ActionHero" /><category term="ah-resque-ui" /><summary type="html">本篇介紹如何安裝 ah-resque-ui actionhero/ah-resque-ui: Visualization and Managment tools for Actionhero Tasks &amp;amp; Resque Jobs</summary></entry></feed>
+&lt;a href=&quot;https://docs.gitlab.com/ee/ci/yaml/README.html#artifacts&quot;&gt;artifacts - GitLab CI/CD Pipeline Configuration Reference - GitLab&lt;/a&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="w3HexSchool" /><category term="GitLabCI" /><category term="CD" /><category term="DevOps" /><summary type="html">cache 跟 artifacts 字面上都有保存檔案供以後使用的意思，在 GitLab 使用要特別留意他們的定義</summary></entry></feed>

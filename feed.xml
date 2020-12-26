@@ -1,4 +1,52 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2020-12-19T22:34:15+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">在 GitLab Piepeline 使用 TypeScript 當 script 使用</title><link href="https://twblog.hongjianching.com/2020/12/19/run-typescript-as-script-in-gitlab-pipeline/" rel="alternate" type="text/html" title="在 GitLab Piepeline 使用 TypeScript 當 script 使用" /><published>2020-12-19T00:00:00+08:00</published><updated>2020-12-19T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/12/19/run-typescript-as-script-in-gitlab-pipeline</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/12/19/run-typescript-as-script-in-gitlab-pipeline/">&lt;h2 id=&quot;問題&quot;&gt;問題&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2020-12-26T20:54:47+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">減少 Node.Js Docker image 容量大小</title><link href="https://twblog.hongjianching.com/2020/12/26/reduce-node-js-docker-image-size/" rel="alternate" type="text/html" title="減少 Node.Js Docker image 容量大小" /><published>2020-12-26T00:00:00+08:00</published><updated>2020-12-26T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/12/26/reduce-node-js-docker-image-size</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/12/26/reduce-node-js-docker-image-size/">&lt;h2 id=&quot;改用-alpine-系列-image&quot;&gt;改用 alpine 系列 image&lt;/h2&gt;
+
+&lt;p&gt;第一點可以修改的是 base image 改用 alpine，這點很多地方都有提到，不多說。&lt;/p&gt;
+
+&lt;h2 id=&quot;yarn-install-production&quot;&gt;yarn install –production&lt;/h2&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--production&lt;/code&gt; 參數表示只安裝 package.json 裡面 dependencies 的套件，
+不安裝 devDependencies 的套件，devDependencies 表示開發才需要的套件。&lt;/p&gt;
+
+&lt;p&gt;ps 1：在 CI 安裝後，通常會加上 &lt;code class=&quot;highlighter-rouge&quot;&gt;--frozen-lockfile&lt;/code&gt; 讓 yarn 完全依照 &lt;code class=&quot;highlighter-rouge&quot;&gt;yarn.lock&lt;/code&gt; 安裝
+確保 CI 跟開發環境一致，完整指令：&lt;code class=&quot;highlighter-rouge&quot;&gt;yarn install --production --frozen-lockfile&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;ps 2：&lt;code class=&quot;highlighter-rouge&quot;&gt;yarn add&lt;/code&gt; 指令會讓所有套件都安裝，包含 devDependencies，
+不要在 CI 過程中使用 &lt;code class=&quot;highlighter-rouge&quot;&gt;yarn add&lt;/code&gt; 指令，會破壞這個原則。&lt;/p&gt;
+
+&lt;h2 id=&quot;yarn-cache-clean&quot;&gt;yarn cache clean&lt;/h2&gt;
+
+&lt;p&gt;yarn 為了加速套件安裝，會在本地暫存一份 cache，但是在 image 不需要這個，
+原理跟 &lt;code class=&quot;highlighter-rouge&quot;&gt;apt install&lt;/code&gt; 一樣，在安裝套件後清除本地快取，
+完整指令：&lt;code class=&quot;highlighter-rouge&quot;&gt;yarn install --production --frozen-lockfile &amp;amp;&amp;amp; yarn cache clean&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;完整-dockerfile&quot;&gt;完整 Dockerfile&lt;/h2&gt;
+
+&lt;p&gt;以 Actionhero 為範例&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-Dockerfile&quot;&gt;FROM node:12.19.1-alpine
+
+WORKDIR /app
+
+# 需要 packagejson 跟 yarn.lock 提供版本資訊
+COPY package.json yarn.lock ./
+
+# --production 不安裝 dev 相關套件
+# --frozen-lockfile 強制安裝 yarn.lock 套件
+# NOYARNPOSTINSTALL=1 跳過 postinstall
+RUN NOYARNPOSTINSTALL=1 yarn --production --frozen-lockfile &amp;amp;&amp;amp; yarn cache clean
+
+# actionhero 會在這個目錄建立 websocker js file
+RUN mkdir -p public/javascript/
+
+# backend
+COPY dist dist
+
+# frontend
+COPY public public
+
+EXPOSE 8080
+CMD [ &quot;node&quot;, &quot;dist/server.js&quot; ]
+&lt;/code&gt;&lt;/pre&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="w3HexSchool" /><category term="Docker" /><category term="Dockerfile" /><summary type="html">改用 alpine 系列 image</summary></entry><entry><title type="html">在 GitLab Piepeline 使用 TypeScript 當 script 使用</title><link href="https://twblog.hongjianching.com/2020/12/19/run-typescript-as-script-in-gitlab-pipeline/" rel="alternate" type="text/html" title="在 GitLab Piepeline 使用 TypeScript 當 script 使用" /><published>2020-12-19T00:00:00+08:00</published><updated>2020-12-19T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/12/19/run-typescript-as-script-in-gitlab-pipeline</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/12/19/run-typescript-as-script-in-gitlab-pipeline/">&lt;h2 id=&quot;問題&quot;&gt;問題&lt;/h2&gt;
 
 &lt;p&gt;本來在 GitLab Piepeline 主要使用 bash 寫 script，
 簡單的還好處理，稍微複雜一點的邏輯，可讀性跟維護性都不高。
@@ -540,48 +588,4 @@ docker rm -f tmp-nginx-container
 &lt;h3 id=&quot;ref&quot;&gt;Ref&lt;/h3&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://hub.docker.com/_/nginx&quot;&gt;nginx - Docker Hub&lt;/a&gt;
-&lt;a href=&quot;https://www.nginx.com/resources/wiki/start/topics/examples/full/&quot;&gt;Full Example Configuration | NGINX&lt;/a&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="w3HexSchool" /><category term="Nginx" /><summary type="html">使用 Nginx 建立一個反向代理伺服器</summary></entry><entry><title type="html">GitLab CI/CD 使用 Cache 和 artifacts</title><link href="https://twblog.hongjianching.com/2020/05/09/GitLab-CI-CD-use-cache-and-artifacts/" rel="alternate" type="text/html" title="GitLab CI/CD 使用 Cache 和 artifacts" /><published>2020-05-09T00:00:00+08:00</published><updated>2020-05-09T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/05/09/GitLab-CI-CD-use-cache-and-artifacts</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/05/09/GitLab-CI-CD-use-cache-and-artifacts/">&lt;p&gt;cache 跟 artifacts 字面上都有保存檔案供以後使用的意思，在 GitLab 使用要特別留意他們的定義&lt;/p&gt;
-
-&lt;h2 id=&quot;簡答&quot;&gt;簡答&lt;/h2&gt;
-
-&lt;p&gt;跨 pipeline 時使用 cache，同 pipeline 跨 job 時使用 artifacts&lt;/p&gt;
-
-&lt;h2 id=&quot;介紹&quot;&gt;介紹&lt;/h2&gt;
-
-&lt;p&gt;提醒一點，當你同時使用 caches 和 artifacts 在同一個路徑時，會被覆蓋&lt;/p&gt;
-
-&lt;p&gt;不要使用 caches 在一個 pipeline 中不同的 job 之間傳遞檔案&lt;/p&gt;
-
-&lt;h3 id=&quot;caches&quot;&gt;Caches&lt;/h3&gt;
-
-&lt;p&gt;caches 是設計來保存編譯或建置用所需要的依賴庫或第三方工具，像是 npm package 之類的，只要下載過一次，就可以保存，加速下次的 pipeline。&lt;/p&gt;
-
-&lt;p&gt;專案需要使用獨立的 caches 時，可以使用 &lt;code class=&quot;highlighter-rouge&quot;&gt;key&lt;/code&gt;，利用像是環境變數 &lt;code class=&quot;highlighter-rouge&quot;&gt;CI_COMMIT_REF_SLUG&lt;/code&gt; 是 branch / tag 名稱，取 63 長度，全小寫，而且只保留英數其它換成&lt;code class=&quot;highlighter-rouge&quot;&gt;-&lt;/code&gt;，可以用在 domain 等其它地方。&lt;/p&gt;
-
-&lt;p&gt;舉例：&lt;/p&gt;
-
-&lt;div class=&quot;language-yml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s&quot;&gt;cache&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;s&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;${CI_COMMIT_REF_SLUG}&lt;/span&gt;
-  &lt;span class=&quot;s&quot;&gt;paths&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;node_modules/&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;artifacts&quot;&gt;Artifacts&lt;/h3&gt;
-
-&lt;p&gt;如果是要用在同一個 pipeline, 不同 stage / job 之間傳遞的檔案，則應該使用 artifacts。使用 artifacts 時，會自動把檔案傳遞到後續的 job。&lt;/p&gt;
-
-&lt;p&gt;關於 cache，可以指定 &lt;code class=&quot;highlighter-rouge&quot;&gt;key&lt;/code&gt; 讓每個 branch 有各自的 cache。&lt;/p&gt;
-
-&lt;div class=&quot;language-yml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s&quot;&gt;artifacts&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;s&quot;&gt;paths&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;dist/&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;ref&quot;&gt;Ref&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://docs.gitlab.com/ee/ci/caching/&quot;&gt;Cache dependencies in GitLab CI/CD - GitLab&lt;/a&gt;
-&lt;a href=&quot;https://docs.gitlab.com/ee/ci/variables/predefined_variables.html&quot;&gt;Predefined environment variables reference - GitLab&lt;/a&gt;
-&lt;a href=&quot;https://docs.gitlab.com/ee/ci/yaml/README.html#cache&quot;&gt;cache - GitLab CI/CD Pipeline Configuration Reference - GitLab&lt;/a&gt;
-&lt;a href=&quot;https://docs.gitlab.com/ee/ci/yaml/README.html#artifacts&quot;&gt;artifacts - GitLab CI/CD Pipeline Configuration Reference - GitLab&lt;/a&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="w3HexSchool" /><category term="GitLabCI" /><category term="CD" /><category term="DevOps" /><summary type="html">cache 跟 artifacts 字面上都有保存檔案供以後使用的意思，在 GitLab 使用要特別留意他們的定義</summary></entry></feed>
+&lt;a href=&quot;https://www.nginx.com/resources/wiki/start/topics/examples/full/&quot;&gt;Full Example Configuration | NGINX&lt;/a&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="w3HexSchool" /><category term="Nginx" /><summary type="html">使用 Nginx 建立一個反向代理伺服器</summary></entry></feed>

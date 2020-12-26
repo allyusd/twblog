@@ -19,12 +19,12 @@
 
 
 
-<title>在 GitLab Piepeline 使用 TypeScript 當 script 使用 - Jian-Ching 記事本</title>
+<title>減少 Node.Js Docker image 容量大小 - Jian-Ching 記事本</title>
 
 
 
 
-<meta name="description" content="問題">
+<meta name="description" content="改用 alpine 系列 image">
 
 
 
@@ -33,15 +33,15 @@
 
 <meta property="og:locale" content="zh_TW">
 <meta property="og:site_name" content="Jian-Ching 記事本">
-<meta property="og:title" content="在 GitLab Piepeline 使用 TypeScript 當 script 使用">
+<meta property="og:title" content="減少 Node.Js Docker image 容量大小">
 
 
-  <link rel="canonical" href="https://twblog.HongJianChing.com/2020/12/19/run-typescript-as-script-in-gitlab-pipeline/">
-  <meta property="og:url" content="https://twblog.HongJianChing.com/2020/12/19/run-typescript-as-script-in-gitlab-pipeline/">
+  <link rel="canonical" href="https://twblog.HongJianChing.com/2020/12/26/reduce-node-js-docker-image-size/">
+  <meta property="og:url" content="https://twblog.HongJianChing.com/2020/12/26/reduce-node-js-docker-image-size/">
 
 
 
-  <meta property="og:description" content="問題">
+  <meta property="og:description" content="改用 alpine 系列 image">
 
 
 
@@ -56,7 +56,7 @@
 
 
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2020-12-19T00:00:00+08:00">
+  <meta property="article:published_time" content="2020-12-26T00:00:00+08:00">
 
 
 
@@ -278,112 +278,70 @@
 
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
-    <meta itemprop="headline" content="在 GitLab Piepeline 使用 TypeScript 當 script 使用">
-    <meta itemprop="description" content="問題">
-    <meta itemprop="datePublished" content="December 19, 2020">
+    <meta itemprop="headline" content="減少 Node.Js Docker image 容量大小">
+    <meta itemprop="description" content="改用 alpine 系列 image">
+    <meta itemprop="datePublished" content="December 26, 2020">
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 class="page__title" itemprop="headline">在 GitLab Piepeline 使用 TypeScript 當 script 使用
+          <h1 class="page__title" itemprop="headline">減少 Node.Js Docker image 容量大小
 </h1>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        <h2 id="問題">問題</h2>
+        <h2 id="改用-alpine-系列-image">改用 alpine 系列 image</h2>
 
-<p>本來在 GitLab Piepeline 主要使用 bash 寫 script，
-簡單的還好處理，稍微複雜一點的邏輯，可讀性跟維護性都不高。
-加上目前開發主要使用 TypeScript，所以就興起把 TypeScript 當 script 使用，取代 bash 的想法。</p>
+<p>第一點可以修改的是 base image 改用 alpine，這點很多地方都有提到，不多說。</p>
 
-<h2 id="結果">結果</h2>
+<h2 id="yarn-install-production">yarn install –production</h2>
 
-<p><img src="/assets/images/2020-12-19/2020-12-19-222427.png" alt="" /></p>
+<p><code class="highlighter-rouge">--production</code> 參數表示只安裝 package.json 裡面 dependencies 的套件，
+不安裝 devDependencies 的套件，devDependencies 表示開發才需要的套件。</p>
 
-<h2 id="gitlab-pipleline-yaml-示範">GitLab Pipleline YAML 示範</h2>
+<p>ps 1：在 CI 安裝後，通常會加上 <code class="highlighter-rouge">--frozen-lockfile</code> 讓 yarn 完全依照 <code class="highlighter-rouge">yarn.lock</code> 安裝
+確保 CI 跟開發環境一致，完整指令：<code class="highlighter-rouge">yarn install --production --frozen-lockfile</code></p>
 
-<p>使用 node.js image，不然要先安裝 node.js 相關的套件</p>
+<p>ps 2：<code class="highlighter-rouge">yarn add</code> 指令會讓所有套件都安裝，包含 devDependencies，
+不要在 CI 過程中使用 <code class="highlighter-rouge">yarn add</code> 指令，會破壞這個原則。</p>
 
-<div class="language-yml highlighter-rouge"><pre class="highlight"><code><span class="s">image</span><span class="pi">:</span> <span class="s">node:12.16.1</span>
+<h2 id="yarn-cache-clean">yarn cache clean</h2>
 
-<span class="s">stages</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="s">run-script</span>
+<p>yarn 為了加速套件安裝，會在本地暫存一份 cache，但是在 image 不需要這個，
+原理跟 <code class="highlighter-rouge">apt install</code> 一樣，在安裝套件後清除本地快取，
+完整指令：<code class="highlighter-rouge">yarn install --production --frozen-lockfile &amp;&amp; yarn cache clean</code></p>
 
-<span class="s">run-script</span><span class="pi">:</span>
-  <span class="s">stage</span><span class="pi">:</span> <span class="s">run-script</span>
-  <span class="s">before_script</span><span class="pi">:</span>
-    <span class="pi">-</span> <span class="s">yarn global add typescript</span>
-    <span class="pi">-</span> <span class="s">yarn global add ts-node</span>
-    <span class="pi">-</span> <span class="s">yarn</span>
-  <span class="s">script</span><span class="pi">:</span>
-    <span class="pi">-</span> <span class="s">ts-node helloworld.ts</span>
+<h2 id="完整-dockerfile">完整 Dockerfile</h2>
+
+<p>以 Actionhero 為範例</p>
+
+<pre><code class="language-Dockerfile">FROM node:12.19.1-alpine
+
+WORKDIR /app
+
+# 需要 packagejson 跟 yarn.lock 提供版本資訊
+COPY package.json yarn.lock ./
+
+# --production 不安裝 dev 相關套件
+# --frozen-lockfile 強制安裝 yarn.lock 套件
+# NOYARNPOSTINSTALL=1 跳過 postinstall
+RUN NOYARNPOSTINSTALL=1 yarn --production --frozen-lockfile &amp;&amp; yarn cache clean
+
+# actionhero 會在這個目錄建立 websocker js file
+RUN mkdir -p public/javascript/
+
+# backend
+COPY dist dist
+
+# frontend
+COPY public public
+
+EXPOSE 8080
+CMD [ "node", "dist/server.js" ]
 </code></pre>
-</div>
-
-<h2 id="說明">說明</h2>
-
-<p>想要把 typescript 當 script，要安裝 typescript 及 ts-node
-為了避免影響 local project 的 package.json，所以使用 global 安裝
-為了區隔，在 yml 使用 <code class="highlighter-rouge">before_script</code></p>
-
-<h3 id="前置準備">前置準備</h3>
-
-<div class="language-yml highlighter-rouge"><pre class="highlight"><code><span class="s">before_script</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="s">yarn global add typescript</span>
-  <span class="pi">-</span> <span class="s">yarn global add ts-node</span>
-</code></pre>
-</div>
-
-<h3 id="執行">執行</h3>
-
-<div class="language-yml highlighter-rouge"><pre class="highlight"><code><span class="s">script</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="s">ts-node helloworld.ts</span>
-</code></pre>
-</div>
-
-<h2 id="其它套件">其它套件</h2>
-
-<p>如果要使用 fs 之類 node.js 的函式庫，需要安裝 <code class="highlighter-rouge">@types/node</code>，所以需要 <code class="highlighter-rouge">package.json</code></p>
-
-<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"dependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"@types/node"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^14.11.1"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
-
-<p>似乎因為 ts 會去找 <code class="highlighter-rouge">tsconfig.json</code> 檔案，所以同層給一個檔案才不會跑掉
-可以透過 <code class="highlighter-rouge">tsc --init</code> 產生檔案</p>
-
-<h2 id="檔案夾隔離">檔案夾隔離</h2>
-
-<p>因為本身已經是 TypeScript 專案，所以相關的 script 放在獨立資料夾 <code class="highlighter-rouge">ci</code> 下。</p>
-
-<h2 id="完整版的-yaml">完整版的 YAML</h2>
-
-<div class="language-yml highlighter-rouge"><pre class="highlight"><code><span class="s">image</span><span class="pi">:</span> <span class="s">node:12.16.1</span>
-
-<span class="s">stages</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="s">run-script</span>
-
-<span class="s">run-script</span><span class="pi">:</span>
-  <span class="s">stage</span><span class="pi">:</span> <span class="s">run-script</span>
-  <span class="s">before_script</span><span class="pi">:</span>
-    <span class="pi">-</span> <span class="s">yarn global add typescript</span>
-    <span class="pi">-</span> <span class="s">yarn global add ts-node</span>
-    <span class="pi">-</span> <span class="s">cd ci</span>
-    <span class="pi">-</span> <span class="s">yarn</span>
-    <span class="pi">-</span> <span class="s">cd ..</span>
-  <span class="s">script</span><span class="pi">:</span>
-    <span class="pi">-</span> <span class="s">cd ci</span>
-    <span class="pi">-</span> <span class="s">ts-node main.ts</span>
-    <span class="pi">-</span> <span class="s">cd ..</span>
-</code></pre>
-</div>
 
         
       </section>
@@ -404,11 +362,11 @@
     
       
       
-      <a href="https://twblog.hongjianching.com/tags/#gitlab" class="page__taxonomy-item" rel="tag">GitLab</a><span class="sep">, </span>
+      <a href="https://twblog.hongjianching.com/tags/#docker" class="page__taxonomy-item" rel="tag">Docker</a><span class="sep">, </span>
     
       
       
-      <a href="https://twblog.hongjianching.com/tags/#typescript" class="page__taxonomy-item" rel="tag">TypeScript</a><span class="sep">, </span>
+      <a href="https://twblog.hongjianching.com/tags/#dockerfile" class="page__taxonomy-item" rel="tag">Dockerfile</a><span class="sep">, </span>
     
       
       
@@ -421,7 +379,7 @@
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2020-12-19T00:00:00+08:00">December 19, 2020</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2020-12-26T00:00:00+08:00">December 26, 2020</time></p>
         
       </footer>
 
@@ -430,25 +388,24 @@
     <h4 class="page__share-title">分享到</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=在 GitLab Piepeline 使用 TypeScript 當 script 使用 https://twblog.hongjianching.com/2020/12/19/run-typescript-as-script-in-gitlab-pipeline/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=減少 Node.Js Docker image 容量大小 https://twblog.hongjianching.com/2020/12/26/reduce-node-js-docker-image-size/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2020/12/19/run-typescript-as-script-in-gitlab-pipeline/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2020/12/26/reduce-node-js-docker-image-size/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2020/12/19/run-typescript-as-script-in-gitlab-pipeline/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2020/12/26/reduce-node-js-docker-image-size/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2020/12/19/run-typescript-as-script-in-gitlab-pipeline/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2020/12/26/reduce-node-js-docker-image-size/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="https://twblog.hongjianching.com/2020/12/12/build-docker-image-without-docker-in-docker-on-gitlab/" class="pagination--pager" title="在 GitLab 不使用 Docker-in-Docker 模式建立 Docker Image
+      <a href="https://twblog.hongjianching.com/2020/12/19/run-typescript-as-script-in-gitlab-pipeline/" class="pagination--pager" title="在 GitLab Piepeline 使用 TypeScript 當 script 使用
 ">較舊</a>
     
     
-      <a href="https://twblog.hongjianching.com/2020/12/26/reduce-node-js-docker-image-size/" class="pagination--pager" title="減少 Node.Js Docker image 容量大小
-">較新</a>
+      <a href="#" class="pagination--pager disabled">較新</a>
     
   </nav>
 
@@ -512,9 +469,9 @@
   
     ga('send', 'event', 'taggedPost', 'view', 'w3HexSchool');
   
-    ga('send', 'event', 'taggedPost', 'view', 'GitLab');
+    ga('send', 'event', 'taggedPost', 'view', 'Docker');
   
-    ga('send', 'event', 'taggedPost', 'view', 'TypeScript');
+    ga('send', 'event', 'taggedPost', 'view', 'Dockerfile');
   
   
 </script>

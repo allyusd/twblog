@@ -19,12 +19,12 @@
 
 
 
-<title>減少 Node.Js Docker image 容量大小 - Jian-Ching 記事本</title>
+<title>Sequelize migrations typescript 版本 - Jian-Ching 記事本</title>
 
 
 
 
-<meta name="description" content="改用 alpine 系列 image">
+<meta name="description" content="Sequelize 官方是使用 JavaScript，Migrations 也是使用 js，這篇介紹 TypeScript 版本的 Sequelize Migrations，透過 actionhero/ah-sequelize-plugin 使用，有可能跟原生 Sequelize 有差異。">
 
 
 
@@ -33,15 +33,15 @@
 
 <meta property="og:locale" content="zh_TW">
 <meta property="og:site_name" content="Jian-Ching 記事本">
-<meta property="og:title" content="減少 Node.Js Docker image 容量大小">
+<meta property="og:title" content="Sequelize migrations typescript 版本">
 
 
-  <link rel="canonical" href="https://twblog.HongJianChing.com/2020/12/26/reduce-node-js-docker-image-size/">
-  <meta property="og:url" content="https://twblog.HongJianChing.com/2020/12/26/reduce-node-js-docker-image-size/">
+  <link rel="canonical" href="https://twblog.HongJianChing.com/2020/12/27/sequelize-migrations-with-typescript/">
+  <meta property="og:url" content="https://twblog.HongJianChing.com/2020/12/27/sequelize-migrations-with-typescript/">
 
 
 
-  <meta property="og:description" content="改用 alpine 系列 image">
+  <meta property="og:description" content="Sequelize 官方是使用 JavaScript，Migrations 也是使用 js，這篇介紹 TypeScript 版本的 Sequelize Migrations，透過 actionhero/ah-sequelize-plugin 使用，有可能跟原生 Sequelize 有差異。">
 
 
 
@@ -56,7 +56,7 @@
 
 
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2020-12-26T00:00:00+08:00">
+  <meta property="article:published_time" content="2020-12-27T00:00:00+08:00">
 
 
 
@@ -278,70 +278,72 @@
 
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
-    <meta itemprop="headline" content="減少 Node.Js Docker image 容量大小">
-    <meta itemprop="description" content="改用 alpine 系列 image">
-    <meta itemprop="datePublished" content="December 26, 2020">
+    <meta itemprop="headline" content="Sequelize migrations typescript 版本">
+    <meta itemprop="description" content="Sequelize 官方是使用 JavaScript，Migrations 也是使用 js，這篇介紹 TypeScript 版本的 Sequelize Migrations，透過 actionhero/ah-sequelize-plugin 使用，有可能跟原生 Sequelize 有差異。">
+    <meta itemprop="datePublished" content="December 27, 2020">
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 class="page__title" itemprop="headline">減少 Node.Js Docker image 容量大小
+          <h1 class="page__title" itemprop="headline">Sequelize migrations typescript 版本
 </h1>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        <h2 id="改用-alpine-系列-image">改用 alpine 系列 image</h2>
+        <p>Sequelize 官方是使用 JavaScript，<a href="https://sequelize.org/master/manual/migrations.html">Migrations</a> 也是使用 js，
+這篇介紹 TypeScript 版本的 Sequelize Migrations，
+透過 <a href="https://github.com/actionhero/ah-sequelize-plugin">actionhero/ah-sequelize-plugin</a> 使用，有可能跟原生 Sequelize 有差異。</p>
 
-<p>第一點可以修改的是 base image 改用 alpine，這點很多地方都有提到，不多說。</p>
+<h2 id="migrations-with-typescript">Migrations with typescript</h2>
 
-<h2 id="yarn-install-production">yarn install –production</h2>
+<p>基本的範例，使用 QueryInterface 型別加上 DataTypes 定義，支援 async / await。</p>
 
-<p><code class="highlighter-rouge">--production</code> 參數表示只安裝 package.json 裡面 dependencies 的套件，
-不安裝 devDependencies 的套件，devDependencies 表示開發才需要的套件。</p>
+<div class="language-ts highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">QueryInterface</span><span class="p">,</span> <span class="nx">DataTypes</span> <span class="p">}</span> <span class="k">from</span> <span class="s2">"sequelize"</span><span class="p">;</span>
 
-<p>ps 1：在 CI 安裝後，通常會加上 <code class="highlighter-rouge">--frozen-lockfile</code> 讓 yarn 完全依照 <code class="highlighter-rouge">yarn.lock</code> 安裝
-確保 CI 跟開發環境一致，完整指令：<code class="highlighter-rouge">yarn install --production --frozen-lockfile</code></p>
+<span class="kd">const</span> <span class="nx">tableName</span> <span class="o">=</span> <span class="s2">"customer"</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">columnName</span> <span class="o">=</span> <span class="s2">"email"</span><span class="p">;</span>
 
-<p>ps 2：<code class="highlighter-rouge">yarn add</code> 指令會讓所有套件都安裝，包含 devDependencies，
-不要在 CI 過程中使用 <code class="highlighter-rouge">yarn add</code> 指令，會破壞這個原則。</p>
+<span class="kr">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">up</span><span class="p">:</span> <span class="k">async</span> <span class="p">(</span><span class="na">queryInterface</span><span class="p">:</span> <span class="nx">QueryInterface</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">await</span> <span class="nx">queryInterface</span><span class="p">.</span><span class="nx">addColumn</span><span class="p">(</span><span class="nx">tableName</span><span class="p">,</span> <span class="nx">columnName</span><span class="p">,</span> <span class="p">{</span>
+      <span class="na">allowNull</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="na">type</span><span class="p">:</span> <span class="nx">DataTypes</span><span class="p">.</span><span class="nx">STRING</span><span class="p">,</span>
+    <span class="p">});</span>
+  <span class="p">},</span>
 
-<h2 id="yarn-cache-clean">yarn cache clean</h2>
+  <span class="na">down</span><span class="p">:</span> <span class="k">async</span> <span class="p">(</span><span class="na">queryInterface</span><span class="p">:</span> <span class="nx">QueryInterface</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">queryInterface</span><span class="p">.</span><span class="nx">removeColumn</span><span class="p">(</span><span class="nx">tableName</span><span class="p">,</span> <span class="nx">columnName</span><span class="p">);</span>
+  <span class="p">},</span>
+<span class="p">};</span>
 
-<p>yarn 為了加速套件安裝，會在本地暫存一份 cache，但是在 image 不需要這個，
-原理跟 <code class="highlighter-rouge">apt install</code> 一樣，在安裝套件後清除本地快取，
-完整指令：<code class="highlighter-rouge">yarn install --production --frozen-lockfile &amp;&amp; yarn cache clean</code></p>
-
-<h2 id="完整-dockerfile">完整 Dockerfile</h2>
-
-<p>以 Actionhero 為範例</p>
-
-<pre><code class="language-Dockerfile">FROM node:12.19.1-alpine
-
-WORKDIR /app
-
-# 需要 packagejson 跟 yarn.lock 提供版本資訊
-COPY package.json yarn.lock ./
-
-# --production 不安裝 dev 相關套件
-# --frozen-lockfile 強制安裝 yarn.lock 套件
-# NOYARNPOSTINSTALL=1 跳過 postinstall
-RUN NOYARNPOSTINSTALL=1 yarn --production --frozen-lockfile &amp;&amp; yarn cache clean
-
-# actionhero 會在這個目錄建立 websocker js file
-RUN mkdir -p public/javascript/
-
-# backend
-COPY dist dist
-
-# frontend
-COPY public public
-
-EXPOSE 8080
-CMD [ "node", "dist/server.js" ]
 </code></pre>
+</div>
+
+<h3 id="raw-query">Raw query</h3>
+
+<p>在 migrations 也可以使用 Raw query，透過 QueryInterface 取得 sequelize 即可。</p>
+
+<div class="language-ts highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">QueryInterface</span><span class="p">,</span> <span class="nx">DataTypes</span> <span class="p">}</span> <span class="k">from</span> <span class="s2">"sequelize"</span><span class="p">;</span>
+
+<span class="kr">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">up</span><span class="p">:</span> <span class="k">async</span> <span class="p">(</span><span class="na">queryInterface</span><span class="p">:</span> <span class="nx">QueryInterface</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+
+    <span class="kd">const</span> <span class="nx">sql</span> <span class="o">=</span> <span class="err">`</span>
+<span class="nx">UPDATE</span> <span class="nx">customer</span>
+  <span class="nx">SET</span> <span class="nx">email</span><span class="o">=</span><span class="s2">"abc@test.com"</span>
+  <span class="nx">WHERE</span> <span class="nx">customer_id</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+<span class="err">`</span><span class="p">;</span>
+
+    <span class="nx">queryInterface</span><span class="p">.</span><span class="nx">sequelize</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="nx">sql</span><span class="p">);</span>
+  <span class="p">},</span>
+
+  <span class="p">...</span>
+<span class="p">};</span>
+</code></pre>
+</div>
 
         
       </section>
@@ -362,11 +364,15 @@ CMD [ "node", "dist/server.js" ]
     
       
       
-      <a href="https://twblog.hongjianching.com/tags/#docker" class="page__taxonomy-item" rel="tag">Docker</a><span class="sep">, </span>
+      <a href="https://twblog.hongjianching.com/tags/#migrations" class="page__taxonomy-item" rel="tag">Migrations</a><span class="sep">, </span>
     
       
       
-      <a href="https://twblog.hongjianching.com/tags/#dockerfile" class="page__taxonomy-item" rel="tag">Dockerfile</a><span class="sep">, </span>
+      <a href="https://twblog.hongjianching.com/tags/#sequelize" class="page__taxonomy-item" rel="tag">Sequelize</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://twblog.hongjianching.com/tags/#typescript" class="page__taxonomy-item" rel="tag">TypeScript</a><span class="sep">, </span>
     
       
       
@@ -379,7 +385,7 @@ CMD [ "node", "dist/server.js" ]
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2020-12-26T00:00:00+08:00">December 26, 2020</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> 更新時間:</strong> <time datetime="2020-12-27T00:00:00+08:00">December 27, 2020</time></p>
         
       </footer>
 
@@ -388,25 +394,24 @@ CMD [ "node", "dist/server.js" ]
     <h4 class="page__share-title">分享到</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=減少 Node.Js Docker image 容量大小 https://twblog.hongjianching.com/2020/12/26/reduce-node-js-docker-image-size/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=Sequelize migrations typescript 版本 https://twblog.hongjianching.com/2020/12/27/sequelize-migrations-with-typescript/" class="btn btn--twitter" title="分享到 Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2020/12/26/reduce-node-js-docker-image-size/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://twblog.hongjianching.com/2020/12/27/sequelize-migrations-with-typescript/" class="btn btn--facebook" title="分享到 Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2020/12/26/reduce-node-js-docker-image-size/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+  <a href="https://plus.google.com/share?url=https://twblog.hongjianching.com/2020/12/27/sequelize-migrations-with-typescript/" class="btn btn--google-plus" title="分享到 Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2020/12/26/reduce-node-js-docker-image-size/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://twblog.hongjianching.com/2020/12/27/sequelize-migrations-with-typescript/" class="btn btn--linkedin" title="分享到 LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="https://twblog.hongjianching.com/2020/12/19/run-typescript-as-script-in-gitlab-pipeline/" class="pagination--pager" title="在 GitLab Piepeline 使用 TypeScript 當 script 使用
+      <a href="https://twblog.hongjianching.com/2020/12/26/reduce-node-js-docker-image-size/" class="pagination--pager" title="減少 Node.Js Docker image 容量大小
 ">較舊</a>
     
     
-      <a href="https://twblog.hongjianching.com/2020/12/27/sequelize-migrations-with-typescript/" class="pagination--pager" title="Sequelize migrations typescript 版本
-">較新</a>
+      <a href="#" class="pagination--pager disabled">較新</a>
     
   </nav>
 
@@ -470,9 +475,11 @@ CMD [ "node", "dist/server.js" ]
   
     ga('send', 'event', 'taggedPost', 'view', 'w3HexSchool');
   
-    ga('send', 'event', 'taggedPost', 'view', 'Docker');
+    ga('send', 'event', 'taggedPost', 'view', 'Sequelize');
   
-    ga('send', 'event', 'taggedPost', 'view', 'Dockerfile');
+    ga('send', 'event', 'taggedPost', 'view', 'Migrations');
+  
+    ga('send', 'event', 'taggedPost', 'view', 'TypeScript');
   
   
 </script>

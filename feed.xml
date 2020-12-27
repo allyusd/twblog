@@ -1,4 +1,54 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2020-12-26T20:54:47+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">減少 Node.Js Docker image 容量大小</title><link href="https://twblog.hongjianching.com/2020/12/26/reduce-node-js-docker-image-size/" rel="alternate" type="text/html" title="減少 Node.Js Docker image 容量大小" /><published>2020-12-26T00:00:00+08:00</published><updated>2020-12-26T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/12/26/reduce-node-js-docker-image-size</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/12/26/reduce-node-js-docker-image-size/">&lt;h2 id=&quot;改用-alpine-系列-image&quot;&gt;改用 alpine 系列 image&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="http://jekyllrb.com" version="3.4.2">Jekyll</generator><link href="https://twblog.hongjianching.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://twblog.hongjianching.com/" rel="alternate" type="text/html" /><updated>2020-12-27T16:27:04+08:00</updated><id>https://twblog.hongjianching.com/</id><title type="html">Jian-Ching 記事本</title><subtitle>An notebook website.</subtitle><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><entry><title type="html">Sequelize migrations typescript 版本</title><link href="https://twblog.hongjianching.com/2020/12/27/sequelize-migrations-with-typescript/" rel="alternate" type="text/html" title="Sequelize migrations typescript 版本" /><published>2020-12-27T00:00:00+08:00</published><updated>2020-12-27T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/12/27/sequelize-migrations-with-typescript</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/12/27/sequelize-migrations-with-typescript/">&lt;p&gt;Sequelize 官方是使用 JavaScript，&lt;a href=&quot;https://sequelize.org/master/manual/migrations.html&quot;&gt;Migrations&lt;/a&gt; 也是使用 js，
+這篇介紹 TypeScript 版本的 Sequelize Migrations，
+透過 &lt;a href=&quot;https://github.com/actionhero/ah-sequelize-plugin&quot;&gt;actionhero/ah-sequelize-plugin&lt;/a&gt; 使用，有可能跟原生 Sequelize 有差異。&lt;/p&gt;
+
+&lt;h2 id=&quot;migrations-with-typescript&quot;&gt;Migrations with typescript&lt;/h2&gt;
+
+&lt;p&gt;基本的範例，使用 QueryInterface 型別加上 DataTypes 定義，支援 async / await。&lt;/p&gt;
+
+&lt;div class=&quot;language-ts highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;QueryInterface&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;DataTypes&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;sequelize&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;tableName&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;customer&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;columnName&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;email&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kr&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exports&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;up&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;queryInterface&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;QueryInterface&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;queryInterface&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;addColumn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;tableName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;columnName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;allowNull&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;DataTypes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;STRING&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+
+  &lt;span class=&quot;na&quot;&gt;down&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;queryInterface&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;QueryInterface&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;queryInterface&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;removeColumn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;tableName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;columnName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;raw-query&quot;&gt;Raw query&lt;/h3&gt;
+
+&lt;p&gt;在 migrations 也可以使用 Raw query，透過 QueryInterface 取得 sequelize 即可。&lt;/p&gt;
+
+&lt;div class=&quot;language-ts highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;QueryInterface&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;DataTypes&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;sequelize&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kr&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exports&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;up&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;queryInterface&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;QueryInterface&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sql&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;`&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;UPDATE&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;customer&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;SET&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;abc@test.com&quot;&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;WHERE&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;customer_id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;nx&quot;&gt;queryInterface&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;sequelize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;query&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;sql&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+
+  &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="w3HexSchool" /><category term="Sequelize" /><category term="Migrations" /><category term="TypeScript" /><summary type="html">Sequelize 官方是使用 JavaScript，Migrations 也是使用 js， 這篇介紹 TypeScript 版本的 Sequelize Migrations， 透過 actionhero/ah-sequelize-plugin 使用，有可能跟原生 Sequelize 有差異。</summary></entry><entry><title type="html">減少 Node.Js Docker image 容量大小</title><link href="https://twblog.hongjianching.com/2020/12/26/reduce-node-js-docker-image-size/" rel="alternate" type="text/html" title="減少 Node.Js Docker image 容量大小" /><published>2020-12-26T00:00:00+08:00</published><updated>2020-12-26T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/12/26/reduce-node-js-docker-image-size</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/12/26/reduce-node-js-docker-image-size/">&lt;h2 id=&quot;改用-alpine-系列-image&quot;&gt;改用 alpine 系列 image&lt;/h2&gt;
 
 &lt;p&gt;第一點可以修改的是 base image 改用 alpine，這點很多地方都有提到，不多說。&lt;/p&gt;
 
@@ -526,66 +576,4 @@ http://ip:3000/&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://hub.docker.com/r/grafana/grafana&quot;&gt;grafana/grafana - Docker Hub&lt;/a&gt;
 &lt;a href=&quot;https://stackoverflow.com/questions/49066607/launching-a-influxdb-container-in-docker-with-a-default-database-name&quot;&gt;Launching a InfluxDB container in docker with a default database name - Stack Overflow&lt;/a&gt;
 &lt;a href=&quot;https://hub.docker.com/_/telegraf&quot;&gt;telegraf - Docker Hub&lt;/a&gt;
-&lt;a href=&quot;https://github.com/influxdata/telegraf/blob/master/docs/FAQ.md#q-how-can-i-monitor-the-docker-engine-host-from-within-a-container&quot;&gt;telegraf/FAQ.md at master · influxdata/telegraf · GitHub&lt;/a&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="w3HexSchool" /><category term="Grafana" /><category term="Influxdb" /><category term="Telegraf" /><category term="monitor" /><summary type="html">系統運作一段時間之後，想要知道最近狀況是否正常，卻沒有紀錄可以查詢跟比較。為了解決這個情況，需要一套監控系統，這裡使用 Grafana Influxdb Telegraf 解決方案。 成果 擁有一個可以查詢系統狀態的儀表板 Grafana Grafana 主要的 Web UI 介面，透過 Influxdb 讀取紀錄資料畫出各種視覺化圖表顯示在 Web 上。 docker run -d --name=grafana -p 3000:3000 grafana/grafana 啟動後使用 chrome 連到該主機的 3000 port，即可看到 Grafana 畫面 http://ip:3000/ 第一次登入預設帳號密碼是 admin / admin，登入後會要求設定新密碼，記得存起來 Note: 這個設定缺少 Grafana 的資料保存，當容器刪除後，相關資料將會遺失 Influxdb Influxdb 主要是時間序的資料庫，用來存放 Telegraf 收集的紀錄，提供給 Grafana 查詢。 docker run -d --name=influxdb -p 8086:8086 \ -e INFLUXDB_DB=defaultdb \ -e INFLUXDB_ADMIN_USER=admin \ -e INFLUXDB_ADMIN_PASSWORD=adminpass \ -e INFLUXDB_USER=user \ -e INFLUXDB_USER_PASSWORD=userpass \ -v /data/influxdb:/var/lib/influxdb \ influxdb:latest Telegraf Telegraf 用來收集相關資料，傳送給 Influxdb。 如果是第一次設定，可以從 docker image 取得預設設定檔 docker run --rm telegraf telegraf config &amp;gt; telegraf.conf 接著修改設定檔，其中 influxdb 的 urls 跟 hostname 要修改，hostname 預設會取 VM 名稱，但是因為跑在容器內，會取到容器的名稱，識別性太低，所以記得設定。 [agent] ... hostname = &quot;sgp1&quot; [[outputs.influxdb]] urls = [&quot;http://127.0.0.1:8086&quot;] ... 除了預設的 cpu, mem 之後，也把一些預設關閉的功能開啟 [[inputs.interrupts]] # no configuration [[inputs.linux_sysctl_fs]] # no configuration [[inputs.net]] # collect data only about specific interfaces # interfaces = [&quot;eth0&quot;] [[inputs.netstat]] # no configuration 接著使用 docker 啟動 docker run -d --name=telegraf \ --network host \ -v /:/hostfs:ro \ -v /etc:/hostfs/etc:ro \ -v /proc:/hostfs/proc:ro \ -v /sys:/hostfs/sys:ro \ -v /var:/hostfs/var:ro \ -v /run:/hostfs/run:ro \ -e HOST_ETC=/hostfs/etc \ -e HOST_PROC=/hostfs/proc \ -e HOST_SYS=/hostfs/sys \ -e HOST_VAR=/hostfs/var \ -e HOST_RUN=/hostfs/run \ -e HOST_MOUNT_PREFIX=/hostfs \ -v /data/telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro \ telegraf Note: 為了收集網路資料，使用 host mode 網路模式，需要注意相關安全性問題 新增 DataSource DataSource 選擇 InfluxDB HTTP 的 URL 記得設定能從容器中連的到的 InfluxDB IP InfluxDB Details 輸入 telegraf 最後按下 Save &amp;amp; Test 出現綠底白字表示設定成功 新增 Dashboard 在 Dashboard 管理頁面，選擇右上角的 Import 然後使用 grafana.com 上建好的設定，輸入 928 這麼一來就有一些基本的資料可以查詢啦 Ref grafana/grafana - Docker Hub Launching a InfluxDB container in docker with a default database name - Stack Overflow telegraf - Docker Hub telegraf/FAQ.md at master · influxdata/telegraf · GitHub</summary></entry><entry><title type="html">使用 Nginx 建立 Reverse Proxy Server</title><link href="https://twblog.hongjianching.com/2020/05/17/nginx-reverse-proxy-server/" rel="alternate" type="text/html" title="使用 Nginx 建立 Reverse Proxy Server" /><published>2020-05-17T00:00:00+08:00</published><updated>2020-05-17T00:00:00+08:00</updated><id>https://twblog.hongjianching.com/2020/05/17/nginx-reverse-proxy-server</id><content type="html" xml:base="https://twblog.hongjianching.com/2020/05/17/nginx-reverse-proxy-server/">&lt;p&gt;使用 Nginx 建立一個反向代理伺服器&lt;/p&gt;
-
-&lt;p&gt;以前使用 Web Server，同一個 VM 需要多個網域對應的時候，在 Apache 會使用 VirtualHost 設定，而 Nginx 實現的功能叫 Server Blocks，詳細可以參考&lt;a href=&quot;https://www.nginx.com/resources/wiki/start/topics/examples/server_blocks/&quot;&gt;官網範例&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;使用-server-blocks-的問題&quot;&gt;使用 Server Blocks 的問題&lt;/h2&gt;
-
-&lt;p&gt;其實單純使用 Nginx 的 Server Blocks 是沒有問題的，但是在使用 Docker 時，就會出現多個網站使用同一個容器的情況，失去容器化的優勢。&lt;/p&gt;
-
-&lt;h2 id=&quot;reverse-proxy-server&quot;&gt;Reverse Proxy Server&lt;/h2&gt;
-
-&lt;p&gt;解決的方法很簡單，就是建立反向代理伺服器 (Reverse Proxy Server)&lt;/p&gt;
-
-&lt;p&gt;原本的 WebSite A 獨立運作在一個容器 A&lt;/p&gt;
-
-&lt;p&gt;另外的 WebSite B 獨立運作在一個容器 B&lt;/p&gt;
-
-&lt;p&gt;最後建立一個 Reverse Proxy Server 運作在 容器 C，負責將各自的流量導到容器 A 跟 B。&lt;/p&gt;
-
-&lt;h2 id=&quot;實作&quot;&gt;實作&lt;/h2&gt;
-
-&lt;p&gt;事實上透過 Nginx 建立 Reverse Proxy 非常簡單，首先透過 nginx docker 複製一份預設的設定檔&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run --name tmp-nginx-container -d nginx
-docker cp tmp-nginx-container:/etc/nginx/nginx.conf nginx.conf
-docker rm -f tmp-nginx-container
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;修改 config，在 http 中加上&lt;/p&gt;
-
-&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;w&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;server&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;listen&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;       &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;80;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;server_name&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;domain1.com;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-
-      &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;location&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-        &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;proxy_pass&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;      &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;http://127.0.0.1:8080;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-
-    &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;server&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;listen&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;       &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;80;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;server_name&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;domain2.com;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-
-      &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;location&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-        &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;proxy_pass&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;      &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;http://127.0.0.1:8081;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;修改 config 之後，使用自定義的 config 啟動 nginx&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run --name proxy-server -v /host/path/nginx.conf:/etc/nginx/nginx.conf:ro -d -p 80:80 nginx
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;這麼一來，當使用者透過 domain1.com 及 domain2.com 存取網站時，就會分別導到不同的地方嘍。
-即可以在同一個 VM 中使用同一個 port 處理不同的網站，又不會失去容器化的功能。&lt;/p&gt;
-
-&lt;h3 id=&quot;ref&quot;&gt;Ref&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://hub.docker.com/_/nginx&quot;&gt;nginx - Docker Hub&lt;/a&gt;
-&lt;a href=&quot;https://www.nginx.com/resources/wiki/start/topics/examples/full/&quot;&gt;Full Example Configuration | NGINX&lt;/a&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="w3HexSchool" /><category term="Nginx" /><summary type="html">使用 Nginx 建立一個反向代理伺服器</summary></entry></feed>
+&lt;a href=&quot;https://github.com/influxdata/telegraf/blob/master/docs/FAQ.md#q-how-can-i-monitor-the-docker-engine-host-from-within-a-container&quot;&gt;telegraf/FAQ.md at master · influxdata/telegraf · GitHub&lt;/a&gt;&lt;/p&gt;</content><author><name>洪健清</name><email>allyusd yahoo com tw</email><uri>https://www.HongJianChing.com/</uri></author><category term="w3HexSchool" /><category term="Grafana" /><category term="Influxdb" /><category term="Telegraf" /><category term="monitor" /><summary type="html">系統運作一段時間之後，想要知道最近狀況是否正常，卻沒有紀錄可以查詢跟比較。為了解決這個情況，需要一套監控系統，這裡使用 Grafana Influxdb Telegraf 解決方案。 成果 擁有一個可以查詢系統狀態的儀表板 Grafana Grafana 主要的 Web UI 介面，透過 Influxdb 讀取紀錄資料畫出各種視覺化圖表顯示在 Web 上。 docker run -d --name=grafana -p 3000:3000 grafana/grafana 啟動後使用 chrome 連到該主機的 3000 port，即可看到 Grafana 畫面 http://ip:3000/ 第一次登入預設帳號密碼是 admin / admin，登入後會要求設定新密碼，記得存起來 Note: 這個設定缺少 Grafana 的資料保存，當容器刪除後，相關資料將會遺失 Influxdb Influxdb 主要是時間序的資料庫，用來存放 Telegraf 收集的紀錄，提供給 Grafana 查詢。 docker run -d --name=influxdb -p 8086:8086 \ -e INFLUXDB_DB=defaultdb \ -e INFLUXDB_ADMIN_USER=admin \ -e INFLUXDB_ADMIN_PASSWORD=adminpass \ -e INFLUXDB_USER=user \ -e INFLUXDB_USER_PASSWORD=userpass \ -v /data/influxdb:/var/lib/influxdb \ influxdb:latest Telegraf Telegraf 用來收集相關資料，傳送給 Influxdb。 如果是第一次設定，可以從 docker image 取得預設設定檔 docker run --rm telegraf telegraf config &amp;gt; telegraf.conf 接著修改設定檔，其中 influxdb 的 urls 跟 hostname 要修改，hostname 預設會取 VM 名稱，但是因為跑在容器內，會取到容器的名稱，識別性太低，所以記得設定。 [agent] ... hostname = &quot;sgp1&quot; [[outputs.influxdb]] urls = [&quot;http://127.0.0.1:8086&quot;] ... 除了預設的 cpu, mem 之後，也把一些預設關閉的功能開啟 [[inputs.interrupts]] # no configuration [[inputs.linux_sysctl_fs]] # no configuration [[inputs.net]] # collect data only about specific interfaces # interfaces = [&quot;eth0&quot;] [[inputs.netstat]] # no configuration 接著使用 docker 啟動 docker run -d --name=telegraf \ --network host \ -v /:/hostfs:ro \ -v /etc:/hostfs/etc:ro \ -v /proc:/hostfs/proc:ro \ -v /sys:/hostfs/sys:ro \ -v /var:/hostfs/var:ro \ -v /run:/hostfs/run:ro \ -e HOST_ETC=/hostfs/etc \ -e HOST_PROC=/hostfs/proc \ -e HOST_SYS=/hostfs/sys \ -e HOST_VAR=/hostfs/var \ -e HOST_RUN=/hostfs/run \ -e HOST_MOUNT_PREFIX=/hostfs \ -v /data/telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro \ telegraf Note: 為了收集網路資料，使用 host mode 網路模式，需要注意相關安全性問題 新增 DataSource DataSource 選擇 InfluxDB HTTP 的 URL 記得設定能從容器中連的到的 InfluxDB IP InfluxDB Details 輸入 telegraf 最後按下 Save &amp;amp; Test 出現綠底白字表示設定成功 新增 Dashboard 在 Dashboard 管理頁面，選擇右上角的 Import 然後使用 grafana.com 上建好的設定，輸入 928 這麼一來就有一些基本的資料可以查詢啦 Ref grafana/grafana - Docker Hub Launching a InfluxDB container in docker with a default database name - Stack Overflow telegraf - Docker Hub telegraf/FAQ.md at master · influxdata/telegraf · GitHub</summary></entry></feed>
